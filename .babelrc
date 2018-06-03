@@ -1,0 +1,34 @@
+{
+  "presets": [
+    "react",
+    "es2015"
+  ],
+  "plugins": [
+    "transform-decorators-legacy",
+    "transform-class-properties"
+  ],
+  "env": {
+    "development": {
+      "presets": [
+        "react-hmre"
+      ]
+    },
+    "test": {
+      "presets": [
+        "env",
+        "react",
+        "es2015"
+      ],
+      "plugins": [
+        [
+          "transform-decorators-legacy",
+          "transform-class-properties",
+          "babel-plugin-webpack-alias",
+          {
+            "config": "${PWD}/scripts/webpack.config.js"
+          }
+        ]
+      ]
+    }
+  }
+}

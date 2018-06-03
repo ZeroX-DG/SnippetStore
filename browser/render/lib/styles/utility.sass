@@ -1,0 +1,77 @@
+// ==================
+// PADDING
+
+@for $i from 1 through 100
+  .#{pp}-#{$i}
+    padding: $i#{'%'}
+  .#{pp-l}-#{$i}
+    padding-left: $i#{'%'}
+  .#{pp-r}-#{$i}
+    padding-right: $i#{'%'}
+  .#{pp-t}-#{$i}
+    padding-top: $i#{'%'}
+  .#{pp-b}-#{$i}
+    padding-bottom: $i#{'%'}
+
+@for $i from 1 through 50
+  .#{p}-#{$i}
+    padding: $i#{'px'}
+  .#{p-l}-#{$i}
+    padding-left: $i#{'px'}
+  .#{p-r}-#{$i}
+    padding-right: $i#{'px'}
+  .#{p-t}-#{$i}
+    padding-top: $i#{'px'}
+  .#{p-b}-#{$i}
+    padding-bottom: $i#{'px'}
+
+// ==================
+// MARGIN
+
+@for $i from 1 through 100
+  .#{mp}-#{$i}
+    margin: $i#{'%'}
+  .#{mp-l}-#{$i}
+    margin-left: $i#{'%'}
+  .#{mp-r}-#{$i}
+    margin-right: $i#{'%'}
+  .#{mp-t}-#{$i}
+    margin-top: $i#{'%'}
+  .#{mp-b}-#{$i}
+    margin-bottom: $i#{'%'}
+
+@for $i from 1 through 200
+  .#{m}-#{$i}
+    margin: $i#{'px'}
+  .#{m-l}-#{$i}
+    margin-left: $i#{'px'}
+  .#{m-r}-#{$i}
+    margin-right: $i#{'px'}
+  .#{m-t}-#{$i}
+    margin-top: $i#{'px'}
+  .#{m-b}-#{$i}
+    margin-bottom: $i#{'px'}
+
+// ==================
+// FONTS
+
+.f-b
+  font-weight: bold
+.f-i
+  font-style: italic
+
+// ==================
+// OTHERS
+
+.circle
+  border-radius: 50%
+
+.c-p
+  cursor: pointer
+
+// ==================
+// FORM
+
+.il-control
+  display: inline-flex
+  margin-right: 10px
