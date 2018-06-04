@@ -12,3 +12,15 @@ body[data-theme='dark']
     color: $language-list-label-foreground--dark
   .languages li:hover
     color: lighten($sidebar-foreground--dark, 20)
+
+body[data-theme='dark']
+  .snippet-list
+    .search-bar
+      input[type='text']
+        background: $sidebar-background--dark
+        color: white
+      .create-btn
+        background: $snippet-list-create-button-background--dark
+        color: $snippet-list-create-button-foreground--dark
+    .snippet-item
+      background: $snippet-item-background--dark

@@ -19,6 +19,8 @@
     "@fortawesome/fontawesome": "^1.1.7",
     "@fortawesome/fontawesome-free-solid": "^5.0.12",
     "@fortawesome/react-fontawesome": "0.0.19",
+    "codemirror": "^5.38.0",
+    "dateformat": "^3.0.3",
     "devicon": "^2.0.0",
     "electron-store": "^1.3.0",
     "lodash": "^4.17.10",
@@ -27,6 +29,7 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-router-dom": "^4.2.2",
+    "react-tooltip": "^3.6.0",
     "react-transition-group": "^2.3.1",
     "sander": "^0.6.0"
   },
