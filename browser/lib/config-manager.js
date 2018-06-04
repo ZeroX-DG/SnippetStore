@@ -1,19 +1,18 @@
 import eventEmiter from './event-emitter'
 import _ from 'lodash'
 const Store = require('electron-store')
-const store = new Store()
+const store = new Store({ name: 'SnippetStoreConf' })
 
 const DEFAULT_CONFIG = {
   ui: {
-    dateFormat: 'dd/mm',
+    dateFormat: 'dd/mm/yyyy',
     theme: 'dark'
   },
   editor: {
-    showLineNumber: true
+    showLineNumber: true,
+    theme: 'seti'
   }
 }
-
-const isTest = process.env.NODE_ENV === 'test'
 
 function get (option) {
   let config = store.get('config')
@@ -37,7 +36,7 @@ function get (option) {
 }
 
 function set (config) {
-  eventEmiter.emit('config:set')
+  eventEmiter.emit('config:set', config)
   persistConfig(config)
 }
 
