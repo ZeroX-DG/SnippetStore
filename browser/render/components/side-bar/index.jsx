@@ -12,7 +12,7 @@ export default class SideBar extends React.Component {
     return (
       <div className='sidebar' ref='root'>
         <SideBarToolBox />
-        <LanguageList />
+        <LanguageList store={this.props.store} />
       </div>
     )
   }
