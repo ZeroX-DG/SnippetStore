@@ -35,6 +35,10 @@ var config = Object.assign({}, skeleton, {
       {
         test: /\.(ttf|woff2|eot|woff)$/,
         loader: 'file-loader'
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
       }
     ]
   },

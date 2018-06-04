@@ -5,6 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import './render/lib/styles/reset'
 import './render/lib/styles/utility'
 import './render/lib/icons'
+import './render/lib/styles/theme'
 
 import Main from './render/main'
 
