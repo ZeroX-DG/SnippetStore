@@ -35,7 +35,8 @@ export default class SnippetList extends React.Component {
                 <li key={snippet.key}>
                   <SnippetItem
                     snippet={snippet}
-                    config={config} />
+                    config={config}
+                    store={store}/>
                 </li>
               ))
             }

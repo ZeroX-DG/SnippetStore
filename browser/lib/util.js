@@ -10,9 +10,22 @@ export function findObject (array, property, value) {
       return array[i]
     }
   }
+
+  return null
+}
+
+export function findIndexObject (array, property, value) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i][property] === value) {
+      return i
+    }
+  }
+
+  return -1
 }
 
 export default {
   generateKey,
-  findObject
+  findObject,
+  findIndexObject
 }

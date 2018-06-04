@@ -8,7 +8,13 @@ import 'codemirror/mode/meta'
 import './snippet-item'
 
 export default class SnippetItem extends React.Component {
-
+  constructor (props) {
+    super(props)
+    this.state = {
+      isEditing: false
+    }
+  }
+  
   componentDidMount () {
     const { snippet, config } = this.props
     const { theme, showLineNumber } = config.editor
@@ -33,8 +39,24 @@ export default class SnippetItem extends React.Component {
     toast.info('Copied to clipboard', { autoClose: 2000 })
   }
 
+  handleEditButtonClick () {
+    this.setState({ isEditing: true })
+    this.editor.setOption('readOnly', false)
+  }
+
+  handleSaveChangesClick () {
+    const newSnippet = Object.assign({}, this.props.snippet)
+    newSnippet.value = this.editor.getValue()
+
+    this.props.store.updateSnippet(newSnippet)
+
+    this.setState({ isEditing: false })
+    this.editor.setOption('readOnly', true)
+  }
+
   render () {
     const { snippet } = this.props
+    const { isEditing } = this.state
     const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
     return (
       <div className='snippet-item'>
@@ -46,9 +68,23 @@ export default class SnippetItem extends React.Component {
           </div>
           <div className='tools'>
             <ReactTooltip place='bottom' effect='solid' />
-            <div className='edit-btn' data-tip='edit'>
-              <FAIcon icon='edit'/>
-            </div>
+            {
+              isEditing
+              ? 
+              <div
+                className='save-btn'
+                data-tip='save changes'
+                onClick={this.handleSaveChangesClick.bind(this)}>
+                <FAIcon icon='check'/>
+              </div>
+              :
+              <div
+                className='edit-btn'
+                data-tip='edit'
+                onClick={this.handleEditButtonClick.bind(this)}>
+                <FAIcon icon='edit'/>
+              </div>
+            }
             <div className='copy-btn' data-tip='copy' onClick={this.copySnippet.bind(this)}>
               <FAIcon icon='copy'/>
             </div>

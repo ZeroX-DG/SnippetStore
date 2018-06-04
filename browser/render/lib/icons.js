@@ -6,6 +6,7 @@ import faTimes from '@fortawesome/fontawesome-free-solid/faTimes'
 import faCog from '@fortawesome/fontawesome-free-solid/faCog'
 import faSearch from '@fortawesome/fontawesome-free-solid/faSearch'
 import faCopy from '@fortawesome/fontawesome-free-solid/faCopy'
+import faCheck from '@fortawesome/fontawesome-free-solid/faCheck'
 
 fontawesome.library.add(
   faEdit,
@@ -13,5 +14,6 @@ fontawesome.library.add(
   faTimes,
   faCog,
   faSearch,
-  faCopy
+  faCopy,
+  faCheck
 )

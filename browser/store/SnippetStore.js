@@ -33,6 +33,14 @@ class SnippetStore {
     const newSnippet = SnippetAPI.createSnippet(snippet)
     this.raw_snippets.push(newSnippet)
   }
+  
+  updateSnippet (snippet) {
+    // update additional properties
+    snippet.updateAt = (new Date()).getTime()
+    // update using the snippet API
+    const snippetIndex = SnippetAPI.updateSnippet(snippet)
+    this.raw_snippets[snippetIndex] = snippet
+  }
 }
 
 let store = window.store = new SnippetStore()
