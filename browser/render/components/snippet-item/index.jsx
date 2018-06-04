@@ -1,8 +1,10 @@
 import React from 'react'
-import CodeMirror from 'codemirror'
-import 'codemirror/mode/meta'
 import FAIcon from '@fortawesome/react-fontawesome'
 import ReactTooltip from 'react-tooltip'
+import { toast } from 'react-toastify'
+import Clipboard from 'core/functions/clipboard'
+import CodeMirror from 'codemirror'
+import 'codemirror/mode/meta'
 import './snippet-item'
 
 export default class SnippetItem extends React.Component {
@@ -26,6 +28,11 @@ export default class SnippetItem extends React.Component {
     this.editor.setSize('100%', '100%')
   }
 
+  copySnippet () {
+    Clipboard.set(this.props.snippet.value)
+    toast.info('Copied to clipboard', { autoClose: 2000 })
+  }
+
   render () {
     const { snippet } = this.props
     const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
@@ -42,7 +49,7 @@ export default class SnippetItem extends React.Component {
             <div className='edit-btn' data-tip='edit'>
               <FAIcon icon='edit'/>
             </div>
-            <div className='copy-btn' data-tip='copy'>
+            <div className='copy-btn' data-tip='copy' onClick={this.copySnippet.bind(this)}>
               <FAIcon icon='copy'/>
             </div>
           </div>

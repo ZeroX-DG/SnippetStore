@@ -1,4 +1,5 @@
 import React from 'react'
+import { ToastContainer } from 'react-toastify'
 import SideBar from './components/side-bar'
 import SnippetList from './components/snippet-list'
 import ModalList from './modals/modal-list'
@@ -26,6 +27,7 @@ export default class Main extends React.Component {
   render () {
     return (
       <div className='wrapper'>
+        <ToastContainer />
         <ModalList store={SnippetStore} config={this.state.config} />
         <SideBar store={SnippetStore} />
         <SnippetList store={SnippetStore} config={this.state.config} />

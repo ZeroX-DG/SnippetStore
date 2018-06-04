@@ -19,6 +19,8 @@ import 'codemirror/addon/fold/indent-fold'
 import 'codemirror/addon/fold/markdown-fold'
 import 'codemirror/theme/seti.css'
 
+import 'react-toastify/dist/ReactToastify.css'
+
 import Main from './render/main'
 
 ReactDOM.render(
