@@ -17,24 +17,32 @@ body[data-theme='dark']
   .snippet-list
     .search-bar
       input[type='text']
-        background: $sidebar-background--dark
-        color: white
+        background: $input-tag-background--dark
+        color: $input-tag-foreground--dark
       .create-btn
         background: $snippet-list-create-button-background--dark
         color: $snippet-list-create-button-foreground--dark
     .snippet-item
       background: $snippet-item-background--dark
+      .mode-indicator
+        background: $snippet-item-mode-indicator-background--dark
+        color: $snippet-item-mode-indicator-foreground--dark
+      .delete-btn
+        color: $snippet-item-delete-button-foreground--dark
+      select
+        background: $input-tag-background--dark
+        color: $input-tag-foreground--dark
 
 body[data-theme='dark']
   .modal
     background: $body-background--dark
     color: white
     input[type='text']
-      background: $sidebar-background--dark
-      color: white
+      background: $input-tag-background--dark
+      color: $input-tag-foreground--dark
     select
-      background: $sidebar-background--dark
-      color: white
+      background: $input-tag-background--dark
+      color: $input-tag-foreground--dark
     button
       border: none
       background: $snippet-list-create-button-background--dark

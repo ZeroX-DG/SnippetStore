@@ -12,12 +12,10 @@ var config = {
       'render': path.join(__dirname, '..', 'browser', 'render'),
       'core': path.join(__dirname, '..', 'browser', 'core'),
       'store': path.join(__dirname, '..', 'browser', 'store'),
-      'lib': path.join(__dirname, '..', 'browser', 'lib')
+      'lib': path.join(__dirname, '..', 'browser', 'lib'),
+      'resources': path.join(__dirname, '..', 'resources')
     }
-  },
-  externals: [
-    'lodash'
-  ]
+  }
 }
 
 module.exports = config

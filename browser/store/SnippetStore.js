@@ -1,16 +1,11 @@
 import { observable, computed } from 'mobx'
-import formatDate from 'lib/date-format'
 import SnippetAPI from 'core/API/snippet'
 
 class SnippetStore {
   @observable raw_snippets = []
 
   @computed get snippets () {
-    return this.raw_snippets.map(snippet => {
-      snippet.createAt = formatDate(snippet.createAt)
-      snippet.updateAt = formatDate(snippet.updateAt)
-      return snippet
-    })
+    return this.raw_snippets
   }
 
   @computed get languages () {
@@ -35,11 +30,19 @@ class SnippetStore {
   }
   
   updateSnippet (snippet) {
-    // update additional properties
-    snippet.updateAt = (new Date()).getTime()
     // update using the snippet API
     const snippetIndex = SnippetAPI.updateSnippet(snippet)
     this.raw_snippets[snippetIndex] = snippet
+  }
+
+  increaseCopyTime (snippet) {
+    snippet.copy += 1
+    this.updateSnippet(snippet)
+  }
+
+  deleteSnippet (snippet) {
+    const snippetIndex = SnippetAPI.deleteSnippet(snippet)
+    this.raw_snippets.splice(snippetIndex, 1)
   }
 }
 

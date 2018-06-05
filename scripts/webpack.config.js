@@ -51,6 +51,7 @@ var config = Object.assign({}, skeleton, {
   plugins: [
     new NodeTargetPlugin()
   ],
+  devtool: 'eval-source-map',
   target: 'electron-renderer'
 })
 

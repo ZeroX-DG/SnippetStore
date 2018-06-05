@@ -4,8 +4,20 @@
   .language-list-label
     font-size: 15px
     margin: 5px 20px
-    margin-bottom: 20px
+    margin-bottom: 30px
     font-weight: bold
+    width: 100%
+    padding-right: 30px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    .badge
+      padding: 5px 10px
+      background: rgba(0, 0, 0, 0.26)
+      display: inline
+      float: right
+      font-size: 15px
+      border-radius: 5px
   .languages
     margin-top: 10px
     font-size: 20px
@@ -14,6 +26,7 @@
       width: 100%
       cursor: pointer
       padding-left: 20px
+      margin-bottom: 10px
       .badge
         padding: 5px 10px
         background: rgba(0, 0, 0, 0.26)
@@ -28,5 +41,7 @@
         vertical-align: middle
         margin-right: 10px
         display: inline
+        .lang-icon
+          height: 25px
         i
           font-size: 25px

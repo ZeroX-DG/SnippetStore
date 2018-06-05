@@ -1,19 +1,22 @@
 import { generateKey } from 'lib/util'
 import { SNIPPET_INFO_FILE } from '../config'
+import _ from 'lodash'
 const sander = require('sander')
 
 function createSnippet (snippet) {
   const key      = generateKey()
-  const createAt = (new Date()).getTime()
-  const updateAt = createAt
+  const time     = (new Date()).getTime()
+  const createAt = time
+  const updateAt = time
   const copy     = 0
 
-  snippet = Object.assign({}, { key, createAt, updateAt, copy }, snippet)
+  snippet = _.merge({ key, createAt, updateAt, copy }, snippet)
 
   let snippets = []
 
   if (sander.existsSync(SNIPPET_INFO_FILE)) {
-    snippets = JSON.parse(sander.readFileSync(SNIPPET_INFO_FILE, { encoding: 'utf-8' }))
+    const fileData = sander.readFileSync(SNIPPET_INFO_FILE, { encoding: 'utf-8' })
+    snippets = JSON.parse(fileData)
   }
 
   snippets.push(snippet)

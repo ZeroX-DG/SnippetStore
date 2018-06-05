@@ -63,7 +63,9 @@ var config = Object.assign({}, skeleton, {
       }
     })
   ],
-  mode: 'production'
+  devtool: 'source-map',
+  mode: 'production',
+  target: 'electron-renderer'
 })
 
 module.exports = config

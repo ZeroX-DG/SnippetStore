@@ -35,8 +35,14 @@ export default class CreateSnippetModal extends React.Component {
       lang: snippetLang,
       value: snippetCode
     })
-
+    this.reset()
     eventEmitter.emit('modal:close', 'createSnippetModal')
+  }
+
+  reset () {
+    this.refs.snippetName.value = ''
+    this.refs.lang.value = ''
+    this.editor.setValue('')
   }
 
   render () {

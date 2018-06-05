@@ -5,14 +5,15 @@
   "main": "index.js",
   "productName": "SnippetStore",
   "scripts": {
-    "start": "electron ./index.js --hot",
+    "start-dev": "electron ./index.js --hot",
+    "start": "electron ./index.js",
     "webpack": "webpack-dev-server --hot --inline --config scripts/webpack.config.js --mode development --port 8000",
     "fix": "eslint . --fix",
     "lint": "eslint .",
     "build": "node scripts/build.js",
     "pack": "node scripts/pack.js",
     "prod": "npm run build && npm run pack",
-    "dev": "NODE_ENV=dev concurrently --success first --kill-others \"npm run webpack\" \"npm run start\"",
+    "dev": "NODE_ENV=dev concurrently --success first --kill-others \"npm run webpack\" \"npm run start-dev\"",
     "test": "NODE_ENV=test BABEL_ENV=test jest"
   },
   "dependencies": {

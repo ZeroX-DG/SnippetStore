@@ -7,6 +7,7 @@ import faCog from '@fortawesome/fontawesome-free-solid/faCog'
 import faSearch from '@fortawesome/fontawesome-free-solid/faSearch'
 import faCopy from '@fortawesome/fontawesome-free-solid/faCopy'
 import faCheck from '@fortawesome/fontawesome-free-solid/faCheck'
+import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt'
 
 fontawesome.library.add(
   faEdit,
@@ -15,5 +16,6 @@ fontawesome.library.add(
   faCog,
   faSearch,
   faCopy,
-  faCheck
+  faCheck,
+  faTrashAlt
 )

@@ -2,7 +2,7 @@ import { findIndexObject } from 'lib/util'
 import { SNIPPET_INFO_FILE } from '../config'
 const sander = require('sander')
 
-function updateSnippet (snippet) {
+function deleteSnippet (snippet) {
   let snippets = []
 
   if (sander.existsSync(SNIPPET_INFO_FILE)) {
@@ -16,11 +16,10 @@ function updateSnippet (snippet) {
     return
   }
 
-  snippet.updateAt = (new Date()).getTime()
-  snippets[snippetIndex] = snippet
+  snippets.splice(snippetIndex, 1)
   sander.writeFileSync(SNIPPET_INFO_FILE, JSON.stringify(snippets), { encoding: 'utf-8' })
 
   return snippetIndex
 }
 
-module.exports = updateSnippet
+module.exports = deleteSnippet
