@@ -77,7 +77,9 @@ export default class SnippetItem extends React.Component {
 
   copySnippet () {
     Clipboard.set(this.props.snippet.value)
-    toast.info('Copied to clipboard', { autoClose: 2000 })
+    if (this.props.config.ui.showCopyNoti) {
+      toast.info('Copied to clipboard', { autoClose: 2000 })
+    }
     const newSnippet = _.clone(this.props.snippet)
     this.props.store.increaseCopyTime(newSnippet)
   }

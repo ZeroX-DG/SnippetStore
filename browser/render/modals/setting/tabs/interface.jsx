@@ -1,5 +1,6 @@
 import React from 'react'
 import { getLanguages } from 'render/lib/languages'
+import ConfigManager from 'lib/config-manager'
 
 export default class InterfaceTab extends React.Component {
   saveSetting () {
@@ -42,7 +43,10 @@ export default class InterfaceTab extends React.Component {
             <label>Language</label>
             <select ref='language' defaultValue={config.ui.language}>
               {
-                languages.map(language => <option value={language.code}>{language.name}</option>)
+                languages.map(
+                  language => 
+                    <option value={language.code} key={language.code}>{language.name}</option>
+                )
               }
             </select>
           </div>
@@ -97,8 +101,10 @@ export default class InterfaceTab extends React.Component {
           </div>
         </div>
         <div className='bottom-tool'>
-          <label className='message success hide'>Interface setting saved</label>
-          <button>Save</button>
+          <label className='message success hide' ref='message'>
+            Interface setting saved
+          </label>
+          <button onClick={this.saveSetting.bind(this)}>Save</button>
         </div>
       </div>
     )
