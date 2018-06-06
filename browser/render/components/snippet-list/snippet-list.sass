@@ -31,13 +31,12 @@
       .icon
         margin-right: 10px
         display: inline
-  &::-webkit-scrollbar-track
-    border-radius: 10px
+  .snippets
+    width: 100%
+    height: calc(100% - 120px)
+    overflow-y: scroll
+    &::-webkit-scrollbar
+      width: 12px
 
-  &::-webkit-scrollbar
-    width: 12px
-
-  &::-webkit-scrollbar-thumb
-    border-radius: 10px
-    box-shadow: inset 0 0 6px rgba(0,0,0,.3)
-    background-color: #555
+    &::-webkit-scrollbar-thumb
+      background-color: rgba(0, 0, 0, 0.5)

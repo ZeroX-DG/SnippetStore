@@ -7,6 +7,13 @@ import 'codemirror/addon/display/autorefresh'
 const sander = require('sander')
 
 export default class CreateSnippetModal extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      error: ''
+    }
+  }
+
   componentDidMount () {
     const { config } = this.props
     this.editor = CodeMirror(this.refs.editor, {
@@ -30,7 +37,8 @@ export default class CreateSnippetModal extends React.Component {
     const snippetLang = this.refs.lang.value
     const snippetCode = this.editor.getValue()
 
-    if (!snippetName || !snippetLang || !snippetCode) {
+    if (!snippetName || !snippetLang) {
+      this.setState({ error: 'Please specify at least snippet name and language' })
       return
     }
 
@@ -54,7 +62,7 @@ export default class CreateSnippetModal extends React.Component {
       <ModalSkeleton name='createSnippetModal'>
         <h2 className='modal-title'>Create snippet</h2>
         <div className='modal-content'>
-          <p></p>
+          <p className='error'>{this.state.error}</p>
           <div className='input-group'>
             <label>Snippet name</label>
             <input type='text' ref='snippetName' />
