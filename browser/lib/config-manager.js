@@ -6,7 +6,13 @@ const store = new Store({ name: 'SnippetStoreConf' })
 const DEFAULT_CONFIG = {
   ui: {
     dateFormat: 'dd/mm/yyyy',
-    theme: 'dark'
+    theme: 'dark',
+    language: 'en',
+    showCopyNoti: true,
+    showDeleteConfirmDialog: true,
+    showSnippetCreateTime: true,
+    showSnippetUpdateTime: true,
+    showSnippetCopyCount: true
   },
   editor: {
     showLineNumber: true,
