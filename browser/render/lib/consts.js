@@ -11,7 +11,6 @@ const themes = sander.readdirSync(themePath)
     return themePath.substring(0, themePath.lastIndexOf('.'))
   })
 
-
 export default {
   EDITOR_THEMES: themes
 }

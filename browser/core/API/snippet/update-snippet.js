@@ -12,8 +12,7 @@ function updateSnippet (snippet) {
   const snippetIndex = findIndexObject(snippets, 'key', snippet.key)
 
   if (snippetIndex === -1) {
-    throw new Error(`Can\'t find a snippet with key: ${snippets.key}`)
-    return
+    throw new Error(`Can't find a snippet with key: ${snippets.key}`)
   }
 
   snippet.updateAt = (new Date()).getTime()

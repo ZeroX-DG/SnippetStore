@@ -4,11 +4,11 @@ import _ from 'lodash'
 const sander = require('sander')
 
 function createSnippet (snippet) {
-  const key      = generateKey()
-  const time     = (new Date()).getTime()
+  const key = generateKey()
+  const time = (new Date()).getTime()
   const createAt = time
   const updateAt = time
-  const copy     = 0
+  const copy = 0
 
   snippet = _.merge({ key, createAt, updateAt, copy }, snippet)
 
