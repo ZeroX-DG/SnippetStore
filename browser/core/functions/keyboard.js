@@ -10,6 +10,12 @@ const actions = [
     action: () => {
       eventEmitter.emit('modal:open', 'createSnippetModal')
     }
+  },
+  {
+    name: 'openSetting',
+    action: () => {
+      eventEmitter.emit('modal:open', 'settingModal')
+    }
   }
 ]
 

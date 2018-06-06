@@ -5,6 +5,7 @@ import './setting'
 
 import InterfaceTab from './tabs/interface'
 import EditorTab from './tabs/editor'
+import HotKeysTab from './tabs/hotkeys'
 
 export default class SettingModal extends React.Component {
   constructor (props) {
@@ -25,6 +26,8 @@ export default class SettingModal extends React.Component {
         return <InterfaceTab config={config} />
       case 'editor':
         return <EditorTab config={config} />
+      case 'hotkeys':
+        return <HotKeysTab config={config} />
     }
   }
 
@@ -45,6 +48,11 @@ export default class SettingModal extends React.Component {
           onClick={() => this.switchTab('editor')}
           className={tab === 'editor' ? 'active' : ''}>
           <div className='tab'>Editor</div>
+        </li>
+        <li
+          onClick={() => this.switchTab('hotkeys')}
+          className={tab === 'hotkeys' ? 'active' : ''}>
+          <div className='tab'>Hotkeys</div>
         </li>
         <li
           onClick={() => this.switchTab('about')}

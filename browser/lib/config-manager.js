@@ -25,7 +25,8 @@ const DEFAULT_CONFIG = {
     tabSize: 2
   },
   keyboard: {
-    createSnippet: OSX ? 'Cmd + N' : 'Ctrl + N'
+    createSnippet: OSX ? 'Cmd + N' : 'Ctrl + N',
+    openSetting: OSX ? 'Cmd + ,' : 'Ctrl + ,'
   }
 }
 

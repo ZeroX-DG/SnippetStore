@@ -34,9 +34,10 @@ export default class SnippetList extends React.Component {
   }
 
   renderEmptyMessage () {
+    const { config } = this.props
     return (
       <h1 align='center' style={{ marginTop: '200px', color: 'rgba(255, 255, 255, 0.3)'}}>
-        Create new snippet using Ctrl + N
+        Create new snippet using { config.keyboard.createSnippet }
       </h1>
     )
   }
