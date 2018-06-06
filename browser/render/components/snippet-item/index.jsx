@@ -32,7 +32,8 @@ export default class SnippetItem extends React.Component {
       mode: snippetMode,
       theme: theme,
       gutters: showLineNumber ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'] : [],
-      readOnly: true
+      readOnly: true,
+      autoCloseBrackets: true
     })
 
     this.editor.setOption('indentUnit', tabSize)
