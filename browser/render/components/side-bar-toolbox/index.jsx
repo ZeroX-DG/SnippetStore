@@ -1,12 +1,22 @@
 import React from 'react'
+import eventEmitter from 'lib/event-emitter'
 import FAIcon from '@fortawesome/react-fontawesome'
 import './side-bar-toolbox'
 
 export default class SideBarToolBox extends React.Component {
+  handleSettingClick () {
+    eventEmitter.emit('modal:open', 'settingModal')
+  }
+
   render () {
     return (
       <div className='sidebar-toolbox'>
-        <FAIcon icon='cog' />
+        <h3 className='logo'>
+          SnippetStore
+          <span className='icon' onClick={this.handleSettingClick}>
+            <FAIcon icon='cog' />
+          </span>
+        </h3>
       </div>
     )
   }

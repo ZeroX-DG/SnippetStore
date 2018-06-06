@@ -17,6 +17,7 @@ export default class Main extends React.Component {
   }
 
   componentDidMount () {
+    require(`codemirror/theme/${this.state.config.editor.theme}.css`)
     document.body.setAttribute('data-theme', this.state.config.ui.theme)
     init()
     eventEmitter.on('config:set', (event, config) => {

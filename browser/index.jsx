@@ -17,7 +17,6 @@ import 'codemirror/addon/fold/comment-fold'
 import 'codemirror/addon/fold/xml-fold'
 import 'codemirror/addon/fold/indent-fold'
 import 'codemirror/addon/fold/markdown-fold'
-import 'codemirror/theme/seti.css'
 
 import 'react-toastify/dist/ReactToastify.css'
 

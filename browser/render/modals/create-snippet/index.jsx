@@ -30,6 +30,10 @@ export default class CreateSnippetModal extends React.Component {
     const snippetLang = this.refs.lang.value
     const snippetCode = this.editor.getValue()
 
+    if (!snippetName || !snippetLang || !snippetCode) {
+      return
+    }
+
     this.props.store.createSnippet({
       name: snippetName,
       lang: snippetLang,
@@ -41,7 +45,7 @@ export default class CreateSnippetModal extends React.Component {
 
   reset () {
     this.refs.snippetName.value = ''
-    this.refs.lang.value = ''
+    this.refs.lang.selectedIndex = 0
     this.editor.setValue('')
   }
 
@@ -50,6 +54,7 @@ export default class CreateSnippetModal extends React.Component {
       <ModalSkeleton name='createSnippetModal'>
         <h2 className='modal-title'>Create snippet</h2>
         <div className='modal-content'>
+          <p></p>
           <div className='input-group'>
             <label>Snippet name</label>
             <input type='text' ref='snippetName' />

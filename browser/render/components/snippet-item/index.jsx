@@ -53,10 +53,12 @@ export default class SnippetItem extends React.Component {
   handleSaveChangesClick () {
     const valueChanged = this.props.snippet.value !== this.editor.getValue()
     const langChanged  = this.props.snippet.lang !== this.refs.lang.value
-    if (valueChanged || langChanged) {
+    const nameChanged  = this.props.snippet.name !== this.refs.name.value
+    if (valueChanged || langChanged || nameChanged) {
       const newSnippet = _.clone(this.props.snippet)
       newSnippet.value = this.editor.getValue()
       newSnippet.lang  = this.refs.lang.value
+      newSnippet.name  = this.refs.name.value
       if (langChanged) {
         const snippetMode = CodeMirror.findModeByName(newSnippet.lang).mode
         require(`codemirror/mode/${snippetMode}/${snippetMode}`)
@@ -102,16 +104,23 @@ export default class SnippetItem extends React.Component {
           <div className='info'>
             { languageIcon }
             &nbsp;&nbsp;&nbsp;
-            {snippet.name}
-            {isEditing && <span className='mode-indicator'>EDITING</span>}
+            {
+              isEditing
+              ? <input type='text' ref='name' defaultValue={snippet.name} />
+              : snippet.name
+            }
           </div>
           <div className='tools'>
             {
               isEditing &&
-              <select ref='lang'>
+              <select ref='lang' defaultValue={snippet.lang}>
                 {
                   CodeMirror.modeInfo.map((mode, index) => (
-                    <option value={mode.name} key={index}>{mode.name}</option>
+                    <option
+                      value={mode.name}
+                      key={index}>
+                      {mode.name}
+                    </option>
                   ))
                 }
               </select>
