@@ -59,10 +59,7 @@ export default class SnippetItem extends React.Component {
     this.editor.setOption('tabSize', tabSize)
     this.editor.setOption('indentWithTabs', indentUsingTab)
 
-    const spans = document.querySelectorAll('span[class^=\'cm-\']')
-    spans.forEach(span => {
-      span.style.fontFamily = fontFamily
-    })
+    this.editor.getWrapperElement().style.fontFamily = fontFamily
     this.editor.refresh()
   }
 

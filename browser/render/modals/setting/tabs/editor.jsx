@@ -7,7 +7,7 @@ import consts from 'render/lib/consts'
 export default class EditorTab extends React.Component {
   componentDidMount () {
     const { config } = this.props
-    const { showLineNumber, theme } = config.editor
+    const { showLineNumber, theme, fontFamily } = config.editor
     const sampleCode = `const number = 1
 if (number == 1) {
   console.log(number * 2)
@@ -24,8 +24,7 @@ if (number == 1) {
       gutters: showLineNumber ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'] : []
     })
 
-    const spans = document.querySelectorAll('span[class^=\'cm-\']')
-    spans.forEach(span => span.style.fontFamily = config.editor.fontFamily)
+    this.editor.getWrapperElement().style.fontFamily = fontFamily
 
     this.editor.setSize('100%', '100%')
   }
