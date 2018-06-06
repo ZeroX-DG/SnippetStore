@@ -12,6 +12,7 @@ export default class ModalSkeleton extends React.Component {
   }
 
   closeModal () {
+    eventEmitter.emit('modal:onClose', this.props.name)
     this.setState({ isOpen: false })
   }
 

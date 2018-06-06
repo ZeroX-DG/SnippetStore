@@ -27,6 +27,8 @@
     "lodash": "^4.17.10",
     "mobx": "^4.2.0",
     "mobx-react": "^5.1.2",
+    "mousetrap": "^1.6.2",
+    "mousetrap-global-bind": "^1.1.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-router-dom": "^4.2.2",

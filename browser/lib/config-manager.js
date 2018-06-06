@@ -3,6 +3,8 @@ import _ from 'lodash'
 const Store = require('electron-store')
 const store = new Store({ name: 'SnippetStoreConf' })
 
+const OSX = global.process.platform === 'darwin'
+
 const DEFAULT_CONFIG = {
   ui: {
     dateFormat: 'dd/mm/yyyy',
@@ -21,6 +23,9 @@ const DEFAULT_CONFIG = {
     fontSize: 18,
     indentUsingTab: false,
     tabSize: 2
+  },
+  keyboard: {
+    createSnippet: OSX ? 'Cmd + N' : 'Ctrl + N'
   }
 }
 

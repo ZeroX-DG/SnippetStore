@@ -7,6 +7,7 @@ import SnippetStore from 'store/SnippetStore'
 import CM from 'lib/config-manager'
 import eventEmitter from 'lib/event-emitter'
 import init from 'core/init'
+import applyShortcut from 'core/functions/keyboard'
 
 export default class Main extends React.Component {
   constructor (props) {
@@ -17,9 +18,11 @@ export default class Main extends React.Component {
   }
 
   componentDidMount () {
-    require(`codemirror/theme/${this.state.config.editor.theme}.css`)
-    document.body.setAttribute('data-theme', this.state.config.ui.theme)
+    const { config } = this.state
+    require(`codemirror/theme/${config.editor.theme}.css`)
+    document.body.setAttribute('data-theme', config.ui.theme)
     init()
+    applyShortcut(config.keyboard)
     eventEmitter.on('config:set', (event, config) => {
       this.setState({ config })
     })

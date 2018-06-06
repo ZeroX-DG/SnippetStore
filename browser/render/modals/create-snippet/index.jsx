@@ -10,7 +10,8 @@ export default class CreateSnippetModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      error: ''
+      error: '',
+      name: 'createSnippetModal'
     }
   }
 
@@ -22,6 +23,12 @@ export default class CreateSnippetModal extends React.Component {
       foldGutter: true,
       gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
       autoRefresh: true
+    })
+
+    eventEmitter.on('modal:onClose', (event, name) => {
+      if (name === this.state.name) {
+        this.reset()
+      }
     })
   }
 
@@ -48,7 +55,7 @@ export default class CreateSnippetModal extends React.Component {
       value: snippetCode
     })
     this.reset()
-    eventEmitter.emit('modal:close', 'createSnippetModal')
+    eventEmitter.emit('modal:close', this.state.name)
   }
 
   reset () {
@@ -59,7 +66,7 @@ export default class CreateSnippetModal extends React.Component {
 
   render () {
     return (
-      <ModalSkeleton name='createSnippetModal'>
+      <ModalSkeleton name={this.state.name}>
         <h2 className='modal-title'>Create snippet</h2>
         <div className='modal-content'>
           <p className='error'>{this.state.error}</p>
