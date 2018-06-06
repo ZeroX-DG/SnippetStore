@@ -10,7 +10,11 @@ const DEFAULT_CONFIG = {
   },
   editor: {
     showLineNumber: true,
-    theme: 'seti'
+    theme: 'seti',
+    fontFamily: 'Consolas, sans-serif',
+    fontSize: 14,
+    indentUsingTab: false,
+    tabSize: 2
   }
 }
 
@@ -21,7 +25,11 @@ function get (option) {
     persistConfig(config)
   }
 
-  config = _.merge({}, DEFAULT_CONFIG, config)
+  config = _.merge(DEFAULT_CONFIG, config)
+
+  if (!_.isEqual(config, DEFAULT_CONFIG)) {
+    persistConfig(config)
+  }
 
   if (typeof option === 'string') {
     const optionPath = option.split('->')
@@ -36,8 +44,10 @@ function get (option) {
 }
 
 function set (config) {
-  eventEmiter.emit('config:set', config)
-  persistConfig(config)
+  const currentConfig = get()
+  const newConfig = Object.assign({}, DEFAULT_CONFIG, currentConfig, config)
+  eventEmiter.emit('config:set', newConfig)
+  persistConfig(newConfig)
 }
 
 function persistConfig (config) {

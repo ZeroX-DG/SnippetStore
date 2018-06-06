@@ -1,6 +1,6 @@
-.modal-content
+.modal-content.setting
   display: flex
-  height: calc(100vh - 100px)
+  height: calc(100vh - 300px)
 .tab-list
   width: 200px
   display: inline-block
@@ -24,5 +24,35 @@
   width: calc(100% - 200px)
   padding: 10px
   padding-left: 30px
+  height: 100%
   .tab-title
     margin-bottom: 30px
+  .middle-content
+    width: 100%
+    height: calc(100% - 110px)
+    overflow-y: scroll
+    .input-group
+      label
+        width: 150px!important
+      input[type='text'], input[type='number']
+        width: 300px!important
+      select
+        width: 300px!important
+      .theme-preview
+        width: 300px
+        height: 200px
+        margin-top: 20px
+        margin-left: 150px
+  .bottom-tool
+    height: 50px
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    .message
+      margin-right: 10px
+      &.success
+        color: #A3CB38
+      &.hide
+        display: none
+  div[class*='-tab']
+    height: 100%

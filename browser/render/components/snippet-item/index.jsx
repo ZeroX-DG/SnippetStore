@@ -21,21 +21,58 @@ export default class SnippetItem extends React.Component {
   
   componentDidMount () {
     const { snippet, config } = this.props
-    const { theme, showLineNumber } = config.editor
+    const { theme, showLineNumber, tabSize, indentUsingTab } = config.editor
     const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
     require(`codemirror/mode/${snippetMode}/${snippetMode}`)
 
     this.editor = CodeMirror(this.refs.editor, {
       lineNumbers: showLineNumber,
       value: snippet.value,
-      foldGutter: true,
+      foldGutter: showLineNumber,
       mode: snippetMode,
       theme: theme,
-      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+      gutters: showLineNumber ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'] : [],
       readOnly: true
     })
 
+    this.editor.setOption('indentUnit', tabSize)
+    this.editor.setOption('tabSize', tabSize)
+    this.editor.setOption('indentWithTabs', indentUsingTab)
     this.editor.setSize('100%', '100%')
+    this.applyEditorStyle()
+  }
+
+  applyEditorStyle (props) {
+    const { snippet, config } = props || this.props
+    const { theme, showLineNumber, fontFamily, fontSize, tabSize, indentUsingTab } = config.editor
+    const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
+    require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+
+    this.editor.getWrapperElement().style.fontSize = `${fontSize}px`
+    this.editor.setOption('lineNumbers', showLineNumber)
+    this.editor.setOption('foldGutter', showLineNumber)
+    this.editor.setOption('theme', theme)
+    this.editor.setOption('gutters', showLineNumber ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'] : [])
+
+    this.editor.setOption('indentUnit', tabSize)
+    this.editor.setOption('tabSize', tabSize)
+    this.editor.setOption('indentWithTabs', indentUsingTab)
+
+    const spans = document.querySelectorAll('span[class^=\'cm-\']')
+    spans.forEach(span => {
+      span.style.fontFamily = fontFamily
+    })
+    this.editor.refresh()
+  }
+
+  componentWillReceiveProps (props) {
+    this.applyEditorStyle(props)
+  }
+
+  handleSnippetLangChange () {
+    const snippetMode = CodeMirror.findModeByName(this.refs.lang.value).mode
+    require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+    this.editor.setOption('mode', snippetMode)
   }
 
   copySnippet () {
@@ -113,7 +150,7 @@ export default class SnippetItem extends React.Component {
           <div className='tools'>
             {
               isEditing &&
-              <select ref='lang' defaultValue={snippet.lang}>
+              <select ref='lang' onChange={this.handleSnippetLangChange.bind(this)} defaultValue={snippet.lang}>
                 {
                   CodeMirror.modeInfo.map((mode, index) => (
                     <option

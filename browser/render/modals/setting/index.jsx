@@ -4,6 +4,7 @@ import eventEmitter from 'lib/event-emitter'
 import './setting'
 
 import InterfaceTab from './tabs/interface'
+import EditorTab from './tabs/editor'
 
 export default class SettingModal extends React.Component {
   constructor (props) {
@@ -18,20 +19,37 @@ export default class SettingModal extends React.Component {
 
   renderTab () {
     const { tab } = this.state
+    const { config } = this.props
     switch(tab) {
       case 'interface':
-        return <InterfaceTab />
+        return <InterfaceTab config={config} />
+      case 'editor':
+        return <EditorTab config={config} />
     }
   }
 
+  switchTab (tab) {
+    this.setState({ tab })
+  }
+
   renderTabList () {
+    const { tab } = this.state
     return (
       <ul>
-        <li className='active'>
+        <li
+          onClick={() => this.switchTab('interface')}
+          className={tab === 'interface' ? 'active' : ''}>
           <div className='tab'>Interface</div>
         </li>
-        <li>
-          <div className='tab'>Interface</div>
+        <li
+          onClick={() => this.switchTab('editor')}
+          className={tab === 'editor' ? 'active' : ''}>
+          <div className='tab'>Editor</div>
+        </li>
+        <li
+          onClick={() => this.switchTab('about')}
+          className={tab === 'about' ? 'active' : ''}>
+          <div className='tab'>About</div>
         </li>
       </ul>
     )
@@ -40,7 +58,7 @@ export default class SettingModal extends React.Component {
   render () {
     return (
       <ModalSkeleton name='settingModal'>
-        <div className='modal-content'>
+        <div className='modal-content setting'>
           <div className='tab-list'>
             {
               this.renderTabList()
