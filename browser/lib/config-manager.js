@@ -18,7 +18,7 @@ const DEFAULT_CONFIG = {
     showLineNumber: true,
     theme: 'seti',
     fontFamily: 'Consolas, sans-serif',
-    fontSize: 14,
+    fontSize: 18,
     indentUsingTab: false,
     tabSize: 2
   }
