@@ -109,15 +109,18 @@ export default class SnippetItem extends React.Component {
   }
 
   handleDeleteClick () {
-    const { snippet } = this.props
-    if (confirm(`Are you sure to delete the snippet ${snippet.name}?`)) {
-      const newSnippet = _.clone(this.props.snippet)
-      this.props.store.deleteSnippet(newSnippet)
+    const { snippet, config } = this.props
+    if (config.ui.showDeleteConfirmDialog) {
+      if (!confirm(`Are you sure to delete the snippet ${snippet.name}?`)) {
+        return
+      }
     }
+    const newSnippet = _.clone(this.props.snippet)
+    this.props.store.deleteSnippet(newSnippet)
   }
 
   render () {
-    const { snippet } = this.props
+    const { snippet, config } = this.props
     const { isEditing } = this.state
     const langMode = CodeMirror.findModeByName(snippet.lang)
     const snippetMode = langMode.mode
@@ -196,10 +199,21 @@ export default class SnippetItem extends React.Component {
         <div className='code' ref='editor'></div>
         <div className='footer'>
           <div className='info-left'>
-            <span className='createAt'>Create at: { formatDate(snippet.createAt) }</span>
-            <span className='updateAt'>Last update: { formatDate(snippet.updateAt) }</span>
+            {
+              config.ui.showSnippetCreateTime &&
+              <span className='createAt'>Create at: { formatDate(snippet.createAt) }</span>
+            }
+            {
+              config.ui.showSnippetUpdateTime &&
+              <span className='updateAt'>Last update: { formatDate(snippet.updateAt) }</span>
+            }
           </div>
-          <div className='info-right'>Copy: { snippet.copy } times</div>
+          <div className='info-right'>
+            {
+              config.ui.showSnippetCopyCount &&
+              <span className='copyCount'>Copy: { snippet.copy } times</span>
+            }
+          </div>
         </div>
       </div>
     )
