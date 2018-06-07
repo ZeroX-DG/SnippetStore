@@ -29,7 +29,7 @@ eventEmitter.on('config:set', (event, newConfig) => {
 
 export function applyShortcut (keys) {
   for (let i = 0; i < actions.length; i++) {
-    const action    = actions[i]
+    const action = actions[i]
     // we must format the key sequence first
     const actionKey = keys[action.name].toLowerCase().replace(/ /g, '')
     Mousetrap.bindGlobal(actionKey, action.action)

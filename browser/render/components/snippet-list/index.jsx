@@ -33,7 +33,14 @@ export default class SnippetList extends React.Component {
   }
 
   renderEmptyMessage () {
-    const { config } = this.props
+    const { config, store } = this.props
+    if (store.rawSnippets.length > 0) {
+      return (
+        <h1 className='emptyMessage'>
+          No snippet found !
+        </h1>
+      )
+    }
     return (
       <h1 className='emptyMessage'>
         Create new snippet using { config.keyboard.createSnippet }
@@ -41,12 +48,16 @@ export default class SnippetList extends React.Component {
     )
   }
 
+  handleSearch (keyword) {
+    this.props.store.filter = keyword
+  }
+
   render () {
     const { snippets } = this.props.store
     return (
       <div className='snippet-list'>
         <div className='search-bar'>
-          <input type='text'/>
+          <input type='text' onChange={e => this.handleSearch(e.target.value)} />
           <div className='search-icon'>
             <FAIcon icon='search' />
           </div>

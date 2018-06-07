@@ -1,11 +1,13 @@
 import { observable, computed } from 'mobx'
 import SnippetAPI from 'core/API/snippet'
+import searchSnippet from 'core/API/search'
 
 class SnippetStore {
   @observable rawSnippets = []
+  @observable filter = ''
 
   @computed get snippets () {
-    return this.rawSnippets
+    return searchSnippet(this.rawSnippets, this.filter)
   }
 
   @computed get languages () {
