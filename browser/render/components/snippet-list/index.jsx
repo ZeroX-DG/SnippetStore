@@ -87,6 +87,8 @@ export default class SnippetList extends React.Component {
             <option value='createTimeOlder'>Sort by create time (older)</option>
             <option value='updateTimeNewer'>Sort by update time (newer)</option>
             <option value='updateTimeOlder'>Sort by update time (older)</option>
+            <option value='copyCountAsc'>Sort by copy count (ascending)</option>
+            <option value='copyCountDesc'>Sort by copy count (descending)</option>
           </select>
         </div>
         {
