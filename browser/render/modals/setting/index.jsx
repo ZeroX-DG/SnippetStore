@@ -6,6 +6,7 @@ import './setting'
 import InterfaceTab from './tabs/interface'
 import EditorTab from './tabs/editor'
 import HotKeysTab from './tabs/hotkeys'
+import About from './tabs/about'
 
 export default class SettingModal extends React.Component {
   constructor (props) {
@@ -28,6 +29,8 @@ export default class SettingModal extends React.Component {
         return <EditorTab config={config} />
       case 'hotkeys':
         return <HotKeysTab config={config} />
+      case 'about':
+        return <About config={config} />
     }
   }
 
