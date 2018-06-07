@@ -1,13 +1,16 @@
 import { observable, computed } from 'mobx'
 import SnippetAPI from 'core/API/snippet'
-import searchSnippet from 'core/API/search'
+import searchSnippet from 'core/API/search-snippet'
+import sortSnippet from 'core/API/sort-snippet'
 
 class SnippetStore {
   @observable rawSnippets = []
   @observable filter = ''
+  @observable sort = 'createTimeNewer'
 
   @computed get snippets () {
-    return searchSnippet(this.rawSnippets, this.filter)
+    let snippets = searchSnippet(this.rawSnippets, this.filter)
+    return sortSnippet(snippets, this.sort)
   }
 
   @computed get languages () {

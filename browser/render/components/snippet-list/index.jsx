@@ -60,6 +60,10 @@ export default class SnippetList extends React.Component {
     this.props.store.filter = keyword
   }
 
+  handleSort (type) {
+    this.props.store.sort = type
+  }
+
   render () {
     const { snippets } = this.props.store
     return (
@@ -78,7 +82,7 @@ export default class SnippetList extends React.Component {
         </div>
         <div className='list-tools'>
           <span className='m-r-10'>SORT:</span>
-          <select name='' id=''>
+          <select onChange={e => this.handleSort(e.target.value)}>
             <option value='createTimeNewer'>Sort by create time (newer)</option>
             <option value='createTimeOlder'>Sort by create time (older)</option>
           </select>
