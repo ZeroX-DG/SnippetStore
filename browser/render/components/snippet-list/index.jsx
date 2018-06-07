@@ -85,6 +85,8 @@ export default class SnippetList extends React.Component {
           <select onChange={e => this.handleSort(e.target.value)}>
             <option value='createTimeNewer'>Sort by create time (newer)</option>
             <option value='createTimeOlder'>Sort by create time (older)</option>
+            <option value='updateTimeNewer'>Sort by update time (newer)</option>
+            <option value='updateTimeOlder'>Sort by update time (older)</option>
           </select>
         </div>
         {
