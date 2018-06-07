@@ -15,7 +15,6 @@ export default class SnippetList extends React.Component {
     const { snippets } = this.props.store
     const { config } = this.props
     return (
-      snippets.length > 0 &&
       <div className='snippets'>
         <ul>
           {
@@ -36,7 +35,7 @@ export default class SnippetList extends React.Component {
   renderEmptyMessage () {
     const { config } = this.props
     return (
-      <h1 align='center' style={{ marginTop: '200px', color: 'rgba(255, 255, 255, 0.3)'}}>
+      <h1 className='emptyMessage'>
         Create new snippet using { config.keyboard.createSnippet }
       </h1>
     )
