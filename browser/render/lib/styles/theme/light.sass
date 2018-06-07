@@ -1,0 +1,59 @@
+body[data-theme='light']
+  background: $body-background--light
+  color: black
+
+body[data-theme='light']
+  .sidebar
+    background: $sidebar-background--light
+    color: $sidebar-foreground--light
+    .badge
+      color: white
+
+body[data-theme='light']
+  .language-list-label
+    color: $language-list-label-foreground--light
+  .languages li:hover
+    color: darken($sidebar-foreground--light, 20)
+
+body[data-theme='light']
+  .snippet-list
+    .search-bar
+      input[type='text']
+        background: $input-tag-background--light
+        color: $input-tag-foreground--light
+      .create-btn
+        background: $snippet-list-create-button-background--light
+        color: $snippet-list-create-button-foreground--light
+    .snippet-item
+      background: $snippet-item-background--light
+      .delete-btn
+        color: $snippet-item-delete-button-foreground--light
+      select
+        background: $input-tag-edit-mode-background--light
+        color: $input-tag-foreground--light
+      input[type='text']
+        background: $input-tag-edit-mode-background--light
+        color: $input-tag-foreground--light
+    select
+      background: $input-tag-background--light
+      color: $input-tag-foreground--light
+
+body[data-theme='light']
+  .modal
+    background: $body-background--light
+    color: black
+    input[type='text'], input[type='number']
+      background: $input-tag-background--light
+      color: $input-tag-foreground--light
+    select
+      background: $input-tag-background--light
+      color: $input-tag-foreground--light
+    button
+      border: none
+      background: $snippet-list-create-button-background--light
+      color: $snippet-list-create-button-foreground--light
+      padding: 10px 20px
+      border-radius: 5px
+      cursor: pointer
+    .tab-list li.active
+      color: white

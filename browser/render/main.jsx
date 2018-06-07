@@ -25,6 +25,7 @@ export default class Main extends React.Component {
     applyShortcut(config.keyboard)
     eventEmitter.on('config:set', (event, config) => {
       this.setState({ config })
+      document.body.setAttribute('data-theme', config.ui.theme)
     })
   }
 
