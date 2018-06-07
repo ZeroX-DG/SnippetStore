@@ -7,6 +7,14 @@ import './snippet-list'
 
 @observer
 export default class SnippetList extends React.Component {
+  componentDidMount () {
+    eventEmitter.on('languageList:pickLang', (event, language) => {
+      const newKeyword = `lang:${language}`
+      this.refs.search.value = newKeyword
+      this.handleSearch(newKeyword)
+    })
+  }
+
   handleCreateSnippetClick () {
     eventEmitter.emit('modal:open', 'createSnippetModal')
   }
@@ -57,7 +65,7 @@ export default class SnippetList extends React.Component {
     return (
       <div className='snippet-list'>
         <div className='search-bar'>
-          <input type='text' onChange={e => this.handleSearch(e.target.value)} />
+          <input type='text' ref='search' onChange={e => this.handleSearch(e.target.value)} />
           <div className='search-icon'>
             <FAIcon icon='search' />
           </div>
@@ -68,7 +76,13 @@ export default class SnippetList extends React.Component {
             Create
           </button>
         </div>
-
+        <div className='list-tools'>
+          <span className='m-r-10'>SORT:</span>
+          <select name='' id=''>
+            <option value='createTimeNewer'>Sort by create time (newer)</option>
+            <option value='createTimeOlder'>Sort by create time (older)</option>
+          </select>
+        </div>
         {
           snippets.length > 0
             ? this.renderSnippetList()

@@ -5,9 +5,14 @@ import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import isDevIconExists from 'lib/devicon-exists'
 import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
+import eventEmitter from 'lib/event-emitter'
 
 @observer
 export default class LanguageList extends React.Component {
+  handleLanguageList (lang) {
+    eventEmitter.emit('languageList:pickLang', lang)
+  }
+
   render () {
     const { languages } = this.props.store
     return (
@@ -35,7 +40,7 @@ export default class LanguageList extends React.Component {
                 languageIcon = <i className={`devicon-${snippetMode}-plain colored`} />
               }
               return (
-                <li key={index}>
+                <li key={index} onClick={() => this.handleLanguageList(language)}>
                   <div className='icon'>
                     { languageIcon }
                   </div>
