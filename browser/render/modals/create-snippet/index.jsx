@@ -17,13 +17,20 @@ export default class CreateSnippetModal extends React.Component {
 
   componentDidMount () {
     const { config } = this.props
+    const { fontFamily, showLineNumber, theme, tabSize, indentUsingTab } = config.editor
     this.editor = CodeMirror(this.refs.editor, {
-      lineNumbers: config.editor.showLineNumber,
-      theme: config.editor.theme,
+      lineNumbers: showLineNumber,
+      theme: theme,
       foldGutter: true,
       gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
       autoRefresh: true
     })
+
+    this.editor.setOption('indentUnit', tabSize)
+    this.editor.setOption('tabSize', tabSize)
+    this.editor.setOption('indentWithTabs', indentUsingTab)
+    this.editor.setSize('100%', '300px')
+    this.editor.getWrapperElement().style.fontFamily = fontFamily
 
     eventEmitter.on('modal:onClose', (event, name) => {
       if (name === this.state.name) {

@@ -39,7 +39,7 @@ export default class SnippetItem extends React.Component {
     this.editor.setOption('indentUnit', tabSize)
     this.editor.setOption('tabSize', tabSize)
     this.editor.setOption('indentWithTabs', indentUsingTab)
-    this.editor.setSize('100%', '100%')
+    this.editor.setSize('100%', 'auto')
     this.applyEditorStyle()
   }
 
@@ -60,6 +60,7 @@ export default class SnippetItem extends React.Component {
     this.editor.setOption('indentWithTabs', indentUsingTab)
 
     this.editor.getWrapperElement().style.fontFamily = fontFamily
+    this.editor.getWrapperElement().querySelector('.CodeMirror-scroll').style.maxHeight = '300px'
     this.editor.refresh()
   }
 
