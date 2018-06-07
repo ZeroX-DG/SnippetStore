@@ -20,7 +20,7 @@ function createWindow () {
       zoomFactor: 1.0,
       blinkFeatures: 'OverlayScrollbars'
     },
-    icon: path.resolve(__dirname, '../resources/app.png')
+    icon: path.resolve(__dirname, '../resources/icon/icon512.png')
   })
 
   const url = 'file://' + path.resolve(__dirname, './index.html')
