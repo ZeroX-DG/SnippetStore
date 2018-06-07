@@ -83,10 +83,10 @@ export default class SnippetList extends React.Component {
         <div className='list-tools'>
           <span className='m-r-10'>SORT:</span>
           <select onChange={e => this.handleSort(e.target.value)}>
-            <option value='createTimeNewer'>Sort by create time (newer)</option>
-            <option value='createTimeOlder'>Sort by create time (older)</option>
-            <option value='updateTimeNewer'>Sort by update time (newer)</option>
-            <option value='updateTimeOlder'>Sort by update time (older)</option>
+            <option value='createTimeNewer'>Sort by create time (newest)</option>
+            <option value='createTimeOlder'>Sort by create time (oldest)</option>
+            <option value='updateTimeNewer'>Sort by update time (newest)</option>
+            <option value='updateTimeOlder'>Sort by update time (oldest)</option>
             <option value='copyCountAsc'>Sort by copy count (ascending)</option>
             <option value='copyCountDesc'>Sort by copy count (descending)</option>
           </select>
