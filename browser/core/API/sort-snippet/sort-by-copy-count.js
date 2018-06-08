@@ -1,6 +1,6 @@
 function sortByCopyCount (snippets, type) {
   return snippets.sort((a, b) => {
-    return type === 'copyCountAsc' ? b.createAt - a.createAt : a.createAt - b.createAt
+    return type === 'copyCountAsc' ? a.copy - b.copy : b.copy - a.copy
   })
 }
 
