@@ -3,6 +3,7 @@ import './side-bar'
 import eventEmitter from 'lib/event-emitter'
 import LanguageList from '../language-list'
 import SideBarToolBox from '../side-bar-toolbox'
+import TagList from '../tag-list'
 
 export default class SideBar extends React.Component {
   constructor (props) {
@@ -28,6 +29,7 @@ export default class SideBar extends React.Component {
     return (
       <div className='sidebar' ref='root'>
         <SideBarToolBox />
+        <TagList store={store} config={config} />
         <LanguageList store={store} config={config} />
       </div>
     )

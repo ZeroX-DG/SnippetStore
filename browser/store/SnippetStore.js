@@ -25,6 +25,20 @@ class SnippetStore {
     return languages
   }
 
+  @computed get tags () {
+    const tags = {}
+    this.rawSnippets.forEach(snippet => {
+      snippet.tags.forEach(tag => {
+        if (tags[tag]) {
+          tags[tag] += 1
+        } else {
+          tags[tag] = 1
+        }
+      })
+    })
+    return tags
+  }
+
   loadSnippets (snippets) {
     this.rawSnippets = snippets
   }

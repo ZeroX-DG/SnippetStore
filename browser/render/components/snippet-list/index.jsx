@@ -15,6 +15,12 @@ export default class SnippetList extends React.Component {
       this.handleSearch(newKeyword)
     })
 
+    eventEmitter.on('taglist:pickTag', (event, tag) => {
+      const newKeyword = `#${tag}`
+      this.refs.search.value = newKeyword
+      this.handleSearch(newKeyword)
+    })
+
     eventEmitter.on('sidebar:toggled', (event, newSize) => {
       this.refs.root.style.width = `calc(100% - ${newSize}px)`
       this.refs.root.style.left = `${newSize}px`

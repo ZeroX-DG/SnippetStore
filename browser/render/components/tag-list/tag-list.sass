@@ -1,14 +1,15 @@
-.language-list
-  text-overflow: ellipsis
-  overflow: hidden
+.tag-list
+  width: 100%
+  max-height: 30%
+  overflow-y: scroll
+  padding-left: 20px
+  margin-bottom: 30px
   font-family: 'Lato'
-  height: 50%
-  .language-list-label
+  .tag-list-label
     font-size: 15px
-    margin-bottom: 20px
+    margin-bottom: 10px
     font-weight: bold
     width: 100%
-    padding: 0 20px
     display: flex
     align-items: center
     justify-content: space-between
@@ -19,17 +20,12 @@
       float: right
       font-size: 15px
       border-radius: 5px
-  .languages
-    margin-top: 10px
-    font-size: 17px
-    height: calc(100% - 60px)
-    width: 100%
-    overflow-y: scroll
+  .tags
+    font-size: 18px
     li
       height: 30px
       width: 100%
       cursor: pointer
-      padding-left: 20px
       margin-bottom: 10px
       .badge
         padding: 5px 10px
@@ -37,15 +33,6 @@
         display: inline
         float: right
         font-size: 15px
-        margin-right: 10px
         border-radius: 5px
-      .language-name
+      .tag-name
         display: inline
-      .icon
-        vertical-align: middle
-        margin-right: 10px
-        display: inline
-        .lang-icon
-          height: 25px
-        i
-          font-size: 25px
