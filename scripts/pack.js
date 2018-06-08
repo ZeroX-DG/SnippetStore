@@ -20,7 +20,7 @@ function start (platform) {
     case 'win':
       Object.assign(opts, {
         platform: 'win32',
-        icon: path.join(__dirname, '..','resources', 'icon', 'icon512.png'),
+        icon: path.join(__dirname, '..','resources', 'icon', 'icon512.ico'),
         'version-string': {
           FileDescription: 'SnippetStore',
           OriginalFilename: 'SnippetStore',
