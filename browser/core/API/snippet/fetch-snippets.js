@@ -11,7 +11,14 @@ function fetchSnippets () {
     sander.writeFileSync(SNIPPET_INFO_FILE, '[]')
     return []
   }
-  return JSON.parse(fileData)
+  // additional properties for later updates
+  const additionalProperties = {
+    copy: 0,
+    tags: []
+  }
+  let snippets = JSON.parse(fileData)
+  snippets = snippets.map(snippet => Object.assign({}, additionalProperties, snippet))
+  return snippets
 }
 
 module.exports = fetchSnippets

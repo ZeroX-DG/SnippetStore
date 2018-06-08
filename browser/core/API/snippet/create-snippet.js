@@ -9,8 +9,9 @@ function createSnippet (snippet) {
   const createAt = time
   const updateAt = time
   const copy = 0
+  const tags = []
 
-  snippet = _.merge({ key, createAt, updateAt, copy }, snippet)
+  snippet = _.merge({ key, createAt, updateAt, copy, tags }, snippet)
 
   let snippets = []
 

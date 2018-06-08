@@ -93,11 +93,14 @@ export default class SnippetItem extends React.Component {
     const valueChanged = this.props.snippet.value !== this.editor.getValue()
     const langChanged  = this.props.snippet.lang !== this.refs.lang.value
     const nameChanged  = this.props.snippet.name !== this.refs.name.value
-    if (valueChanged || langChanged || nameChanged) {
+    const newTags      = this.refs.tags.value.replace(/ /g, '').split(',')
+    const tagChanged   = !_.isEqual(this.props.snippet.tags, newTags)
+    if (valueChanged || langChanged || nameChanged || tagChanged) {
       const newSnippet = _.clone(this.props.snippet)
       newSnippet.value = this.editor.getValue()
       newSnippet.lang  = this.refs.lang.value
       newSnippet.name  = this.refs.name.value
+      newSnippet.tags  = newTags
       if (langChanged) {
         const snippetMode = CodeMirror.findModeByName(newSnippet.lang).mode
         require(`codemirror/mode/${snippetMode}/${snippetMode}`)
@@ -197,6 +200,16 @@ export default class SnippetItem extends React.Component {
               <FAIcon icon='trash-alt'/>
             </div>
           </div>
+        </div>
+        <div className='tag-list'>
+          <span className='icon'>
+            <FAIcon icon='tags' />
+          </span>
+          {
+            isEditing
+            ? <input type='text' ref='tags' defaultValue={snippet.tags.join(', ')} />
+            : snippet.tags.join(', ')
+          }
         </div>
         <div className='code' ref='editor'></div>
         <div className='footer'>

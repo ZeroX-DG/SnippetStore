@@ -8,6 +8,7 @@ import faSearch from '@fortawesome/fontawesome-free-solid/faSearch'
 import faCopy from '@fortawesome/fontawesome-free-solid/faCopy'
 import faCheck from '@fortawesome/fontawesome-free-solid/faCheck'
 import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt'
+import faTags from '@fortawesome/fontawesome-free-solid/faTags'
 
 fontawesome.library.add(
   faEdit,
@@ -17,5 +18,6 @@ fontawesome.library.add(
   faSearch,
   faCopy,
   faCheck,
-  faTrashAlt
+  faTrashAlt,
+  faTags
 )
