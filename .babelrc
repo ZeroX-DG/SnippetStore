@@ -20,9 +20,9 @@
         "es2015"
       ],
       "plugins": [
+        "transform-decorators-legacy",
+        "transform-class-properties",
         [
-          "transform-decorators-legacy",
-          "transform-class-properties",
           "babel-plugin-webpack-alias",
           {
             "config": "${PWD}/scripts/webpack.config.js"
