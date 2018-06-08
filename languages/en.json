@@ -48,5 +48,7 @@
   "save changes": "save changes",
   "edit": "chỉnh sửa",
   "delete snippet": "delete snippet",
-  "times": "times"
+  "times": "times",
+  "Are you sure to delete this snippet?": "Are you sure to delete this snippet?",
+  "Copied to clipboard": "Copied to clipboard"
 }

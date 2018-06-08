@@ -48,5 +48,7 @@
   "save changes": "lưu thay đổi",
   "edit": "chỉnh sửa",
   "delete snippet": "xóa snippet",
-  "times": "lần"
+  "times": "lần",
+  "Are you sure to delete this snippet?": "Bạn có chắc muốn xóa snippet này?",
+  "Copied to clipboard": "đã sao chép vào bộ nhớ"
 }

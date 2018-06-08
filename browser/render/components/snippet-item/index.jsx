@@ -78,7 +78,7 @@ export default class SnippetItem extends React.Component {
   copySnippet () {
     Clipboard.set(this.props.snippet.value)
     if (this.props.config.ui.showCopyNoti) {
-      toast.info('Copied to clipboard', { autoClose: 2000 })
+      toast.info(i18n.__('Copied to clipboard'), { autoClose: 2000 })
     }
     const newSnippet = _.clone(this.props.snippet)
     this.props.store.increaseCopyTime(newSnippet)
@@ -113,7 +113,7 @@ export default class SnippetItem extends React.Component {
   handleDeleteClick () {
     const { snippet, config } = this.props
     if (config.ui.showDeleteConfirmDialog) {
-      if (!confirm(`Are you sure to delete the snippet ${snippet.name}?`)) {
+      if (!confirm(i18n.__('Are you sure to delete this snippet?'))) {
         return
       }
     }
