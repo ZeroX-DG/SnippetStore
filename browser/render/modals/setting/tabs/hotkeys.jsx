@@ -7,7 +7,8 @@ export default class HotKeysTab extends React.Component {
     const newSetting = {
       keyboard: {
         createSnippet: this.refs.createSnippet.value,
-        openSetting: this.refs.openSetting.value
+        openSetting: this.refs.openSetting.value,
+        toggleSidebar: this.refs.toggleSidebar.value
       }
     }
 
@@ -31,6 +32,10 @@ export default class HotKeysTab extends React.Component {
           <div className='input-group'>
             <label>{ i18n.__('Open setting') }</label>
             <input type='text' defaultValue={keyboard.openSetting} ref='openSetting' />
+          </div>
+          <div className='input-group'>
+            <label>{ i18n.__('Toggle small sidebar') }</label>
+            <input type='text' defaultValue={keyboard.toggleSidebar} ref='toggleSidebar' />
           </div>
         </div>
         <div className='bottom-tool'>
