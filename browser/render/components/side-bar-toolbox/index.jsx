@@ -12,7 +12,7 @@ export default class SideBarToolBox extends React.Component {
     return (
       <div className='sidebar-toolbox'>
         <h3 className='logo'>
-          SnippetStore
+          <span className='logo-text'>SnippetStore</span>
           <span className='icon' onClick={this.handleSettingClick}>
             <FAIcon icon='cog' />
           </span>

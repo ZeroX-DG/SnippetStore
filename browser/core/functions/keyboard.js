@@ -16,6 +16,12 @@ const actions = [
     action: () => {
       eventEmitter.emit('modal:open', 'settingModal')
     }
+  },
+  {
+    name: 'toggleSidebar',
+    action: () => {
+      eventEmitter.emit('sidebar:toggle')
+    }
   }
 ]
 

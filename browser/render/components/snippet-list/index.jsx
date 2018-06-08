@@ -14,6 +14,11 @@ export default class SnippetList extends React.Component {
       this.refs.search.value = newKeyword
       this.handleSearch(newKeyword)
     })
+
+    eventEmitter.on('sidebar:toggled', (event, newSize) => {
+      this.refs.root.style.width = `calc(100% - ${newSize}px)`
+      this.refs.root.style.left = `${newSize}px`
+    })
   }
 
   handleCreateSnippetClick () {
@@ -68,7 +73,7 @@ export default class SnippetList extends React.Component {
   render () {
     const { snippets } = this.props.store
     return (
-      <div className='snippet-list'>
+      <div className='snippet-list' ref='root'>
         <div className='search-bar'>
           <input type='text' ref='search' onChange={e => this.handleSearch(e.target.value)} />
           <div className='search-icon'>

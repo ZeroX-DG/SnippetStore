@@ -26,7 +26,8 @@ const DEFAULT_CONFIG = {
   },
   keyboard: {
     createSnippet: OSX ? 'Cmd + N' : 'Ctrl + N',
-    openSetting: OSX ? 'Cmd + ,' : 'Ctrl + ,'
+    openSetting: OSX ? 'Cmd + ,' : 'Ctrl + ,',
+    toggleSidebar: OSX ? 'Cmd + B': 'Ctrl + B'
   }
 }
 
