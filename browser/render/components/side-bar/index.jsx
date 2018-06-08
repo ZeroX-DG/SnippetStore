@@ -24,10 +24,11 @@ export default class SideBar extends React.Component {
   }
 
   render () {
+    const { config, store } = this.props
     return (
       <div className='sidebar' ref='root'>
         <SideBarToolBox />
-        <LanguageList store={this.props.store} />
+        <LanguageList store={store} config={config} />
       </div>
     )
   }

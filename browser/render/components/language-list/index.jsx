@@ -16,6 +16,8 @@ export default class LanguageList extends React.Component {
 
   render () {
     const { languages } = this.props.store
+    const { config } = this.props
+    i18n.setLocale(config.ui.language)
     return (
       <div className='language-list'>
         <div className='language-list-label'>
