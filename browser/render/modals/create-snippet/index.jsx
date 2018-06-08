@@ -93,7 +93,7 @@ export default class CreateSnippetModal extends React.Component {
             </select>
           </div>
           <div className='code-input-group'>
-            <label>{ i18n.__('Snippet code') }</label>
+            <label>{ i18n.__('Snippet content') }</label>
             <div className='code' ref='editor'></div>
           </div>
           <button
