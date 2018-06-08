@@ -66,7 +66,7 @@ if (number == 1) {
     const editorConf = config.editor
     return (
       <div className='editor-tab'>
-        <h1 className='tab-title'>Editor</h1>
+        <h1 className='tab-title'>{ i18n.__('Editor') }</h1>
         <div className='middle-content'>
           <div className='group-checkbox'>
             <label>

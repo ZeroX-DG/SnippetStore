@@ -31,7 +31,7 @@ export default class InterfaceTab extends React.Component {
     const languages  = getLanguages()
     return (
       <div className='interface-tab'>
-        <h1 className='tab-title'>Interface</h1>
+        <h1 className='tab-title'>{ i18n.__('Interface') }</h1>
         <div className='middle-content'>
           <div className='group'>
             <label>{ i18n.__('Theme') }</label>

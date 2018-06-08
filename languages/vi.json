@@ -37,5 +37,10 @@
   "Show snippet update time": "Hiển thị thời gian chỉnh sửa của snippet",
   "Show snippet copy count": "Hiển thị số lần sao chép của snippet",
   "Date format": "Định dạng ngày",
-  "Interface setting saved": "Cài đặt giao diện đã được lưu"
+  "Interface setting saved": "Cài đặt giao diện đã được lưu",
+  "Interface": "Giao diện",
+  "Editor": "Bộ soạn thảo",
+  "Hotkeys": "Phím tắt",
+  "Dark": "Tối",
+  "Light": "Sáng"
 }

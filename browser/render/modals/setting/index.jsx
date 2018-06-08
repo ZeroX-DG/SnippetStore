@@ -1,6 +1,7 @@
 import React from 'react'
 import ModalSkeleton from '../modal-skeleton'
 import eventEmitter from 'lib/event-emitter'
+import i18n from 'render/lib/i18n'
 import './setting'
 
 import InterfaceTab from './tabs/interface'
@@ -45,28 +46,29 @@ export default class SettingModal extends React.Component {
         <li
           onClick={() => this.switchTab('interface')}
           className={tab === 'interface' ? 'active' : ''}>
-          <div className='tab'>Interface</div>
+          <div className='tab'>{ i18n.__('Interface') }</div>
         </li>
         <li
           onClick={() => this.switchTab('editor')}
           className={tab === 'editor' ? 'active' : ''}>
-          <div className='tab'>Editor</div>
+          <div className='tab'>{ i18n.__('Editor') }</div>
         </li>
         <li
           onClick={() => this.switchTab('hotkeys')}
           className={tab === 'hotkeys' ? 'active' : ''}>
-          <div className='tab'>Hotkeys</div>
+          <div className='tab'>{ i18n.__('Hotkeys') }</div>
         </li>
         <li
           onClick={() => this.switchTab('about')}
           className={tab === 'about' ? 'active' : ''}>
-          <div className='tab'>About</div>
+          <div className='tab'>{ i18n.__('About') }</div>
         </li>
       </ul>
     )
   }
 
   render () {
+    i18n.setLocale(this.props.config.ui.language)
     return (
       <ModalSkeleton name='settingModal'>
         <div className='modal-content setting'>

@@ -73,9 +73,10 @@ export default class CreateSnippetModal extends React.Component {
   }
 
   render () {
+    i18n.setLocale(this.props.config.ui.language)
     return (
       <ModalSkeleton name={this.state.name}>
-        <h2 className='modal-title'>Create snippet</h2>
+        <h2 className='modal-title'>{ i18n.__('Create snippet') }</h2>
         <div className='modal-content'>
           <p className='error'>{this.state.error}</p>
           <div className='input-group'>

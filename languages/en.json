@@ -37,5 +37,10 @@
   "Show snippet update time": "Show snippet update time",
   "Show snippet copy count": "Show snippet copy count",
   "Date format": "Date format",
-  "Interface setting saved": "Interface setting saved"
+  "Interface setting saved": "Interface setting saved",
+  "Interface": "Interface",
+  "Editor": "Editor",
+  "Hotkeys": "Hotkeys",
+  "Dark": "Dark",
+  "Light": "Light"
 }
