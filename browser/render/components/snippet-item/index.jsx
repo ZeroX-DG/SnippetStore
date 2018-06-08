@@ -169,7 +169,7 @@ export default class SnippetItem extends React.Component {
             }
             <div
               className='copy-btn'
-              data-tip='copy'
+              data-tip={ i18n.__('copy') }
               onClick={this.copySnippet.bind(this)}>
               <FAIcon icon='copy'/>
             </div>
@@ -178,21 +178,21 @@ export default class SnippetItem extends React.Component {
               ? 
               <div
                 className='save-btn'
-                data-tip='save changes'
+                data-tip={ i18n.__('save changes') }
                 onClick={this.handleSaveChangesClick.bind(this)}>
                 <FAIcon icon='check'/>
               </div>
               :
               <div
                 className='edit-btn'
-                data-tip='edit'
+                data-tip={ i18n.__('edit') }
                 onClick={this.handleEditButtonClick.bind(this)}>
                 <FAIcon icon='edit'/>
               </div>
             }
             <div
               className='delete-btn'
-              data-tip='delete snippet'
+              data-tip={ i18n.__('delete snippet') }
               onClick={this.handleDeleteClick.bind(this)}>
               <FAIcon icon='trash-alt'/>
             </div>

@@ -43,5 +43,10 @@
   "Hotkeys": "Hotkeys",
   "Dark": "Dark",
   "Light": "Light",
-  "Toggle small sidebar": "Toggle small sidebar"
+  "Toggle small sidebar": "Toggle small sidebar",
+  "copy": "copy",
+  "save changes": "save changes",
+  "edit": "chỉnh sửa",
+  "delete snippet": "delete snippet",
+  "times": "times"
 }

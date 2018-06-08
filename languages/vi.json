@@ -43,5 +43,10 @@
   "Hotkeys": "Phím tắt",
   "Dark": "Tối",
   "Light": "Sáng",
-  "Toggle small sidebar": "Làm nhỏ menu trái"
+  "Toggle small sidebar": "Làm nhỏ menu trái",
+  "copy": "sao chép",
+  "save changes": "lưu thay đổi",
+  "edit": "chỉnh sửa",
+  "delete snippet": "xóa snippet",
+  "times": "lần"
 }
