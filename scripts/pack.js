@@ -8,9 +8,9 @@ function start (platform) {
     name: pkg.productName,
     arch: 'x64',
     dir: path.join(__dirname, '..'),
-    version: '1.8.6',
+    version: pkg.version,
     'app-version': pkg.version,
-    asar: false,
+    asar: true,
     prune: true,
     overwrite: true,
     out: path.join(__dirname, '..', 'dist'),
@@ -20,10 +20,10 @@ function start (platform) {
     case 'win':
       Object.assign(opts, {
         platform: 'win32',
-        icon: path.join(__dirname, 'resources/app.ico'),
+        icon: path.join(__dirname, '..','resources', 'icon', 'icon512.png'),
         'version-string': {
-          FileDescription: 'DBPower',
-          OriginalFilename: 'DBPower',
+          FileDescription: 'SnippetStore',
+          OriginalFilename: 'SnippetStore',
           FileVersion: pkg.version,
           ProductVersion: pkg.version,
           ProductName: pkg.productName,
@@ -39,7 +39,7 @@ function start (platform) {
     case 'osx':
       Object.assign(opts, {
         platform: 'darwin',
-        icon: path.join(__dirname, 'resources/app.icns'),
+        icon: path.join(__dirname, '..','resources', 'icon', 'icon512.png'),
         'app-category-type': 'public.app-category.developer-tools'
       })
       packager(opts, function (err, appPath) {
@@ -51,7 +51,7 @@ function start (platform) {
     case 'linux':
       Object.assign(opts, {
         platform: 'linux',
-        icon: path.join(__dirname, 'resources/app.icns'),
+        icon: path.join(__dirname, '..','resources', 'icon', 'icon512.png'),
         'app-category-type': 'public.app-category.developer-tools'
       })
       packager(opts, function (err, appPath) {
@@ -63,4 +63,4 @@ function start (platform) {
   }
 }
 
-start('linux')
+start(process.argv[2])

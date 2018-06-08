@@ -27,7 +27,9 @@ function createWindow () {
 
   mainWindow.loadURL(url)
   mainWindow.on('resize', _.throttle(storeWindowSize, 500))
-  mainWindow.webContents.openDevTools()
+  if (process.env.NODE_ENV === 'dev') {
+    mainWindow.webContents.openDevTools()
+  }
 }
 
 function storeWindowSize () {
