@@ -6,6 +6,7 @@ import 'codemirror/mode/meta'
 import isDevIconExists from 'lib/devicon-exists'
 import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
 import eventEmitter from 'lib/event-emitter'
+import i18n from 'render/lib/i18n'
 
 @observer
 export default class LanguageList extends React.Component {
@@ -18,7 +19,7 @@ export default class LanguageList extends React.Component {
     return (
       <div className='language-list'>
         <div className='language-list-label'>
-          LANGUAGES
+          { i18n.__('LANGUAGES') }
           <div className='badge'>{ Object.keys(languages).length }</div>
         </div>
         <ul className='languages'>

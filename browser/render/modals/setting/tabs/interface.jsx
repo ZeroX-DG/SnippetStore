@@ -1,6 +1,7 @@
 import React from 'react'
 import { getLanguages } from 'render/lib/languages'
 import ConfigManager from 'lib/config-manager'
+import i18n from 'render/lib/i18n'
 
 export default class InterfaceTab extends React.Component {
   saveSetting () {
@@ -33,14 +34,14 @@ export default class InterfaceTab extends React.Component {
         <h1 className='tab-title'>Interface</h1>
         <div className='middle-content'>
           <div className='group'>
-            <label>Theme</label>
+            <label>{ i18n.__('Theme') }</label>
             <select ref='theme' defaultValue={theme}>
-              <option value='dark'>Dark</option>
-              <option value='light'>Light</option>
+              <option value='dark'>{ i18n.__('Dark') }</option>
+              <option value='light'>{ i18n.__('Light') }</option>
             </select>
           </div>
           <div className='group'>
-            <label>Language</label>
+            <label>{ i18n.__('Language') }</label>
             <select ref='language' defaultValue={config.ui.language}>
               {
                 languages.map(
@@ -56,7 +57,7 @@ export default class InterfaceTab extends React.Component {
                 type='checkbox'
                 ref='showCopyNoti'
                 defaultChecked={config.ui.showCopyNoti} />
-              Show notification when copy
+              { i18n.__('Show notification when copy') }
             </label>
           </div>
           <div className='group-checkbox'>
@@ -65,7 +66,7 @@ export default class InterfaceTab extends React.Component {
                 type='checkbox'
                 ref='showDeleteConfirmDialog'
                 defaultChecked={config.ui.showDeleteConfirmDialog}/>
-              Show confirm dialog when delete
+              { i18n.__('Show confirm dialog when delete') }
             </label>
           </div>
           <div className='group-checkbox'>
@@ -74,7 +75,7 @@ export default class InterfaceTab extends React.Component {
                 type='checkbox'
                 ref='showSnippetCreateTime'
                 defaultChecked={config.ui.showSnippetCreateTime}/>
-              Show snippet create time
+              { i18n.__('Show snippet create time') }
             </label>
           </div>
           <div className='group-checkbox'>
@@ -83,7 +84,7 @@ export default class InterfaceTab extends React.Component {
                 type='checkbox'
                 ref='showSnippetUpdateTime'
                 defaultChecked={config.ui.showSnippetUpdateTime}/>
-              Show snippet update time
+              { i18n.__('Show snippet update time') }
             </label>
           </div>
           <div className='group-checkbox'>
@@ -92,19 +93,19 @@ export default class InterfaceTab extends React.Component {
                 type='checkbox'
                 ref='showSnippetCopyCount'
                 defaultChecked={config.ui.showSnippetCopyCount}/>
-              Show snippet copy count
+              { i18n.__('Show snippet copy count') }
             </label>
           </div>
           <div className='group'>
-            <label>Date format</label>
+            <label>{ i18n.__('Date format') }</label>
             <input type='text' ref='dateFormat' defaultValue={config.ui.dateFormat}/>
           </div>
         </div>
         <div className='bottom-tool'>
           <label className='message success hide' ref='message'>
-            Interface setting saved
+            { i18n.__('Interface setting saved') }
           </label>
-          <button onClick={this.saveSetting.bind(this)}>Save</button>
+          <button onClick={this.saveSetting.bind(this)}>{ i18n.__('Save') }</button>
         </div>
       </div>
     )

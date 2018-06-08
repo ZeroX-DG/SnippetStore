@@ -1,5 +1,6 @@
 import React from 'react'
 import ConfigManager from 'lib/config-manager'
+import i18n from 'render/lib/i18n'
 
 export default class HotKeysTab extends React.Component {
   saveSetting () {
@@ -21,20 +22,22 @@ export default class HotKeysTab extends React.Component {
     const { keyboard } = this.props.config
     return (
       <div className='hotkeys-tab'>
-        <h1 className='tab-title'>HotKeys</h1>
+        <h1 className='tab-title'>{ i18n.__('HotKeys') }</h1>
         <div className='middle-content'>
           <div className='input-group'>
-            <label>Create snippet</label>
+            <label>{ i18n.__('Create snippet') }</label>
             <input type='text' defaultValue={keyboard.createSnippet} ref='createSnippet' />
           </div>
           <div className='input-group'>
-            <label>Open setting</label>
+            <label>{ i18n.__('Open setting') }</label>
             <input type='text' defaultValue={keyboard.openSetting} ref='openSetting' />
           </div>
         </div>
         <div className='bottom-tool'>
-          <label className='message success hide' ref='message'>Hotkeys setting saved</label>
-          <button onClick={this.saveSetting.bind(this)}>Save</button>
+          <label className='message success hide' ref='message'>
+            { i18n.__('Hotkeys setting saved') }
+          </label>
+          <button onClick={this.saveSetting.bind(this)}>{ i18n.__('Save') }</button>
         </div>
       </div>
     )

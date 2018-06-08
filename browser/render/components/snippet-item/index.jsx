@@ -7,6 +7,7 @@ import Clipboard from 'core/functions/clipboard'
 import formatDate from 'lib/date-format'
 import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
 import isDevIconExists from 'lib/devicon-exists'
+import i18n from 'render/lib/i18n'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import './snippet-item'
@@ -202,17 +203,23 @@ export default class SnippetItem extends React.Component {
           <div className='info-left'>
             {
               config.ui.showSnippetCreateTime &&
-              <span className='createAt'>Create at: { formatDate(snippet.createAt) }</span>
+              <span className='createAt'>
+                { i18n.__('Create at') } : { formatDate(snippet.createAt) }
+              </span>
             }
             {
               config.ui.showSnippetUpdateTime &&
-              <span className='updateAt'>Last update: { formatDate(snippet.updateAt) }</span>
+              <span className='updateAt'>
+                { i18n.__('Last update') } : { formatDate(snippet.updateAt) }
+              </span>
             }
           </div>
           <div className='info-right'>
             {
               config.ui.showSnippetCopyCount &&
-              <span className='copyCount'>Copy: { snippet.copy } times</span>
+              <span className='copyCount'>
+                { i18n.__('Copy') } : { snippet.copy } { i18n.__('times') }
+              </span>
             }
           </div>
         </div>

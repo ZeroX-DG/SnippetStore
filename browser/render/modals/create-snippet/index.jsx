@@ -1,6 +1,7 @@
 import React from 'react'
 import ModalSkeleton from '../modal-skeleton'
 import eventEmitter from 'lib/event-emitter'
+import i18n from 'render/lib/i18n'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import 'codemirror/addon/display/autorefresh'
@@ -78,11 +79,11 @@ export default class CreateSnippetModal extends React.Component {
         <div className='modal-content'>
           <p className='error'>{this.state.error}</p>
           <div className='input-group'>
-            <label>Snippet name</label>
+            <label>{ i18n.__('Snippet name') }</label>
             <input type='text' ref='snippetName' />
           </div>
           <div className='input-group'>
-            <label>Snippet language</label>
+            <label>{ i18n.__('Snippet language') }</label>
             <select ref='lang' onChange={this.changeLang.bind(this)}>
               {
                 CodeMirror.modeInfo.map((mode, index) => (
@@ -92,12 +93,12 @@ export default class CreateSnippetModal extends React.Component {
             </select>
           </div>
           <div className='code-input-group'>
-            <label>Snippet code</label>
+            <label>{ i18n.__('Snippet code') }</label>
             <div className='code' ref='editor'></div>
           </div>
           <button
             className='float-right'
-            onClick={this.createSnippet.bind(this)}>Create</button>
+            onClick={this.createSnippet.bind(this)}>{ i18n.__('Create') }</button>
         </div>
       </ModalSkeleton>
     )

@@ -3,6 +3,7 @@ import CodeMirror from 'codemirror'
 import ConfigManager from 'lib/config-manager'
 import 'codemirror/mode/javascript/javascript'
 import consts from 'render/lib/consts'
+import i18n from 'render/lib/i18n'
 
 export default class EditorTab extends React.Component {
   componentDidMount () {
@@ -74,11 +75,11 @@ if (number == 1) {
                 defaultChecked={editorConf.showLineNumber} 
                 onChange={this.previewEditorLineNumberChange.bind(this)}
                 ref='showLineNumber'/>
-                Show line number
+                { i18n.__('Show line number') }
               </label>
           </div>
           <div className='input-group'>
-            <label>Theme</label>
+            <label>{ i18n.__('Theme') }</label>
             <select ref='themeSelector' onChange={this.previewEditorThemeChange.bind(this)} defaultValue={config.editor.theme}>
               {
                 consts.EDITOR_THEMES.map((theme, index) => (
@@ -89,28 +90,30 @@ if (number == 1) {
             <div className='theme-preview' ref='themePreview'></div>
           </div>
           <div className='input-group'>
-            <label>Editor font family</label>
+            <label>{ i18n.__('Editor font family') }</label>
             <input type='text' defaultValue={editorConf.fontFamily} ref='fontFamily' />
           </div>
           <div className='input-group'>
-            <label>Editor font size</label>
+            <label>{ i18n.__('Editor font size') }</label>
             <input type='number' defaultValue={editorConf.fontSize} ref='fontSize' />
           </div>
           <div className='input-group'>
-            <label>Editor indent style</label>
+            <label>{ i18n.__('Editor indent style') }</label>
             <select defaultValue={editorConf.indentUsingTab ? 'tab' : 'space'} ref='indentStyle'>
               <option value='tab'>Tab</option>
               <option value='space'>Space</option>
             </select>
           </div>
           <div className='input-group'>
-            <label>Editor tab size</label>
+            <label>{ i18n.__('Editor tab size') }</label>
             <input type='number' defaultValue={editorConf.tabSize} ref='tabSize'/>
           </div>
         </div>
         <div className='bottom-tool'>
-          <label className='message success hide' ref='message'>Editor setting saved</label>
-          <button onClick={this.saveSetting.bind(this)}>Save</button>
+          <label className='message success hide' ref='message'>
+            { i18n.__('Editor setting saved') }
+          </label>
+          <button onClick={this.saveSetting.bind(this)}>{ i18n.__('Save') }</button>
         </div>
       </div>
     )

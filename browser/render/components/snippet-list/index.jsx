@@ -3,6 +3,7 @@ import SnippetItem from '../snippet-item'
 import eventEmitter from 'lib/event-emitter'
 import FAIcon from '@fortawesome/react-fontawesome'
 import { observer } from 'mobx-react'
+import i18n from 'render/lib/i18n'
 import './snippet-list'
 
 @observer
@@ -45,13 +46,13 @@ export default class SnippetList extends React.Component {
     if (store.rawSnippets.length > 0) {
       return (
         <h1 className='emptyMessage'>
-          No snippet found !
+          { i18n.__('No snippet found !') }
         </h1>
       )
     }
     return (
       <h1 className='emptyMessage'>
-        Create new snippet using { config.keyboard.createSnippet }
+        { i18n.__('Create new snippet using ') } { config.keyboard.createSnippet }
       </h1>
     )
   }
@@ -77,18 +78,30 @@ export default class SnippetList extends React.Component {
             <div className='icon'>
               <FAIcon icon='plus' />
             </div>
-            Create
+            { i18n.__('Create') }
           </button>
         </div>
         <div className='list-tools'>
-          <span className='m-r-10'>SORT:</span>
+          <span className='m-r-10'>{ i18n.__('SORT') }:</span>
           <select onChange={e => this.handleSort(e.target.value)}>
-            <option value='createTimeNewer'>Sort by create time (newest)</option>
-            <option value='createTimeOlder'>Sort by create time (oldest)</option>
-            <option value='updateTimeNewer'>Sort by update time (newest)</option>
-            <option value='updateTimeOlder'>Sort by update time (oldest)</option>
-            <option value='copyCountAsc'>Sort by copy count (ascending)</option>
-            <option value='copyCountDesc'>Sort by copy count (descending)</option>
+            <option value='createTimeNewer'>
+              { i18n.__('Sort by create time (newest)') }
+            </option>
+            <option value='createTimeOlder'>
+              { i18n.__('Sort by create time (oldest)') }
+            </option>
+            <option value='updateTimeNewer'>
+              { i18n.__('Sort by update time (newest)') }
+            </option>
+            <option value='updateTimeOlder'>
+              { i18n.__('Sort by update time (oldest)') }
+            </option>
+            <option value='copyCountAsc'>
+              { i18n.__('Sort by copy count (ascending)') }
+            </option>
+            <option value='copyCountDesc'>
+              { i18n.__('Sort by copy count (descending)') }
+            </option>
           </select>
         </div>
         {
