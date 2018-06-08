@@ -10,6 +10,7 @@ import isDevIconExists from 'lib/devicon-exists'
 import i18n from 'render/lib/i18n'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
+import 'codemirror/addon/display/autorefresh'
 import './snippet-item'
 
 export default class SnippetItem extends React.Component {
@@ -34,7 +35,8 @@ export default class SnippetItem extends React.Component {
       theme: theme,
       gutters: showLineNumber ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'] : [],
       readOnly: true,
-      autoCloseBrackets: true
+      autoCloseBrackets: true,
+      autoRefresh: true
     })
 
     this.editor.setOption('indentUnit', tabSize)
