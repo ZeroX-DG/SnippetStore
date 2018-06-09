@@ -27,6 +27,23 @@ npm i
 ```
 npm run dev
 ```
+## Build
+Build for windows:
+```
+npm run prod:win
+```
+Build for macOS:
+```
+npm run prod:osx
+```
+Build for linux:
+```
+npm run prod:linux
+```
+Build for current OS:
+```
+npm run prod
+```
 
 ## Author & Maintainer
 - [Hung Nguyen](https://github.com/ZeroX-DG)

@@ -63,4 +63,17 @@ function start (platform) {
   }
 }
 
-start(process.argv[2])
+function getTarget () {
+  switch (process.platform) {
+    case 'darwin':
+      return 'osx'
+    case 'win32':
+      return 'win'
+    case 'linux':
+      return 'linux'
+    default:
+      return process.platform
+  }
+}
+
+start(process.argv[2] !== 'current' ? process.argv[2] : getTarget())
