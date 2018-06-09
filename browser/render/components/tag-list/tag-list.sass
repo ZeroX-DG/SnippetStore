@@ -1,7 +1,6 @@
 .tag-list
   width: 100%
-  max-height: 30%
-  overflow-y: scroll
+  max-height: 200px
   padding-left: 20px
   margin-bottom: 30px
   font-family: 'Lato'
@@ -20,13 +19,19 @@
       float: right
       font-size: 15px
       border-radius: 5px
+      margin-right: 22px
   .tags
     font-size: 18px
+    max-height: calc(200px - 28px)
+    overflow-y: scroll
     li
       height: 30px
       width: 100%
       cursor: pointer
       margin-bottom: 10px
+      display: flex
+      justify-content: space-between
+      align-items: center
       .badge
         padding: 5px 10px
         background: rgba(0, 0, 0, 0.26)
@@ -34,5 +39,10 @@
         float: right
         font-size: 15px
         border-radius: 5px
+        margin-right: 10px
       .tag-name
-        display: inline
+        display: inline-block
+        width: 80%
+        text-overflow: ellipsis
+        overflow: hidden
+        white-space: nowrap

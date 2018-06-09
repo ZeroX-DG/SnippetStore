@@ -1,14 +1,14 @@
 .language-list
-  text-overflow: ellipsis
-  overflow: hidden
+  width: 100%
+  max-height: 300px
+  padding-left: 20px
+  margin-bottom: 30px
   font-family: 'Lato'
-  height: 50%
   .language-list-label
     font-size: 15px
     margin-bottom: 20px
     font-weight: bold
     width: 100%
-    padding: 0 20px
     display: flex
     align-items: center
     justify-content: space-between
@@ -19,28 +19,34 @@
       float: right
       font-size: 15px
       border-radius: 5px
+      margin-right: 22px
   .languages
-    margin-top: 10px
     font-size: 17px
-    height: calc(100% - 60px)
-    width: 100%
+    max-height: calc(300px - 28px)
     overflow-y: scroll
     li
       height: 30px
       width: 100%
       cursor: pointer
-      padding-left: 20px
       margin-bottom: 10px
+      display: flex
+      justify-content: space-between
+      align-items: center
       .badge
         padding: 5px 10px
         background: rgba(0, 0, 0, 0.26)
         display: inline
         float: right
         font-size: 15px
-        margin-right: 10px
+        margin-left: 10px
         border-radius: 5px
+        margin-right: 10px
       .language-name
-        display: inline
+        display: inline-block
+        width: 80%
+        text-overflow: ellipsis
+        overflow: hidden
+        white-space: nowrap
       .icon
         vertical-align: middle
         margin-right: 10px
