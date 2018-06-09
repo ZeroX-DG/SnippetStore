@@ -7,6 +7,12 @@
 ## About this project
 SnippetStore is a application for developers to store their snippets and quickly retrieve them when needed.
 
+## Shortcut
+| Action                    | Key      |
+|---------------------------|----------|
+| Open create snippet modal | ctrl + n |
+| Open setting modal        | ctrl + , |
+
 ## Tech Stack
 - Framework: [Electron](https://electronjs.org/)
 - Bundler: [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [Electron-packager](https://github.com/electron-userland/electron-packager)
