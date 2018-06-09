@@ -1,7 +1,7 @@
 import path from 'path'
 import { remote } from 'electron'
-const { app } = remote
 import { getLanguageCodes } from './languages'
+const { app } = remote
 
 // load package for localization
 const i18n = new (require('i18n-2'))({

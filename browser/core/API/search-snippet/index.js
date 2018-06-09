@@ -6,14 +6,14 @@ function searchSnippet (snippets, keyword) {
   const searchParts = keyword.split(' ').filter(word => word !== '')
   let result = snippets
   const langRegex = /lang:(.*)/
-  const tagRegex  = /#(.*)/
+  const tagRegex = /#(.*)/
 
   searchParts.forEach(search => {
     const language = langRegex.exec(search)
     const tag = tagRegex.exec(search)
     if (language) {
       result = searchByLanguage(result, language[1])
-    } else if (tag){
+    } else if (tag) {
       result = searchByTag(result, tag)
     } else {
       result = searchByName(result, search)

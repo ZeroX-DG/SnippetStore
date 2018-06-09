@@ -20,7 +20,7 @@ function start (platform) {
     case 'win':
       Object.assign(opts, {
         platform: 'win32',
-        icon: path.join(__dirname, '..','resources', 'icon', 'icon512.ico'),
+        icon: path.join(__dirname, '..', 'resources', 'icon', 'icon512.ico'),
         'version-string': {
           FileDescription: 'SnippetStore',
           OriginalFilename: 'SnippetStore',
@@ -39,7 +39,7 @@ function start (platform) {
     case 'osx':
       Object.assign(opts, {
         platform: 'darwin',
-        icon: path.join(__dirname, '..','resources', 'icon', 'icon512.png'),
+        icon: path.join(__dirname, '..', 'resources', 'icon', 'icon512.png'),
         'app-category-type': 'public.app-category.developer-tools'
       })
       packager(opts, function (err, appPath) {
@@ -51,7 +51,7 @@ function start (platform) {
     case 'linux':
       Object.assign(opts, {
         platform: 'linux',
-        icon: path.join(__dirname, '..','resources', 'icon', 'icon512.png'),
+        icon: path.join(__dirname, '..', 'resources', 'icon', 'icon512.png'),
         'app-category-type': 'public.app-category.developer-tools'
       })
       packager(opts, function (err, appPath) {

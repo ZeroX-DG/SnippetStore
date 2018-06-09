@@ -11,7 +11,6 @@ describe('fetch snippet', () => {
   })
 
   it('should return an empty array if no snippets exists', () => {
-
     const snippets = SnippetAPI.fetchSnippets()
     expect(Array.isArray(snippets)).toBe(true)
     expect(snippets.length).toBe(0)
