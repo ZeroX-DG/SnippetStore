@@ -7,6 +7,9 @@
 ## About this project
 SnippetStore is a application for developers to store their snippets and quickly retrieve them when needed.
 
+## Download
+You can get the latest release of SnippetStore [here](https://github.com/ZeroX-DG/SnippetStore/releases)
+
 ## Shortcut
 | Action                    | Key      |
 |---------------------------|----------|
