@@ -2,7 +2,7 @@
   <img src='resources/image/screenshot.png' />
 </p>
 <h1 align='center'>SnippetStore</h1>
-<p align='center'><i>A snippet store for lazy developers</i></p>
+<p align='center'><i>A snippet management app for developers</i></p>
 
 ## About this project
 SnippetStore is a application for developers to store their snippets and quickly retrieve them when needed.

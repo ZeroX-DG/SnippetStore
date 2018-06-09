@@ -28,7 +28,7 @@ class SnippetStore {
   @computed get tags () {
     const tags = {}
     this.rawSnippets.forEach(snippet => {
-      snippet.tags.forEach(tag => {
+      snippet.tags.filter(tag => tag).forEach(tag => {
         if (tags[tag]) {
           tags[tag] += 1
         } else {

@@ -30,7 +30,7 @@ export default class CreateSnippetModal extends React.Component {
     this.editor.setOption('indentUnit', tabSize)
     this.editor.setOption('tabSize', tabSize)
     this.editor.setOption('indentWithTabs', indentUsingTab)
-    this.editor.setSize('100%', '300px')
+    this.editor.setSize('100%', '200px')
     this.editor.getWrapperElement().style.fontFamily = fontFamily
 
     eventEmitter.on('modal:onClose', (event, name) => {
@@ -48,9 +48,10 @@ export default class CreateSnippetModal extends React.Component {
   }
 
   createSnippet () {
-    const snippetName = this.refs.snippetName.value
-    const snippetLang = this.refs.lang.value
-    const snippetCode = this.editor.getValue()
+    const snippetName        = this.refs.snippetName.value
+    const snippetLang        = this.refs.lang.value
+    const snippetCode        = this.editor.getValue()
+    const snippetDescription = this.refs.description.value
 
     if (!snippetName || !snippetLang) {
       this.setState({ error: 'Please specify at least snippet name and language' })
@@ -60,14 +61,16 @@ export default class CreateSnippetModal extends React.Component {
     this.props.store.createSnippet({
       name: snippetName,
       lang: snippetLang,
-      value: snippetCode
+      value: snippetCode,
+      description: snippetDescription
     })
     this.reset()
     eventEmitter.emit('modal:close', this.state.name)
   }
 
   reset () {
-    this.refs.snippetName.value = ''
+    this.refs.snippetName.value  = ''
+    this.refs.description.value  = ''
     this.refs.lang.selectedIndex = 0
     this.editor.setValue('')
   }
@@ -92,6 +95,10 @@ export default class CreateSnippetModal extends React.Component {
                 ))
               }
             </select>
+          </div>
+          <div className='code-input-group'>
+            <label>{ i18n.__('Snippet description') }</label>
+            <textarea ref='description'></textarea>
           </div>
           <div className='code-input-group'>
             <label>{ i18n.__('Snippet content') }</label>

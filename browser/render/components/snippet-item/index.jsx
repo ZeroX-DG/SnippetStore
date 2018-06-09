@@ -92,17 +92,19 @@ export default class SnippetItem extends React.Component {
   }
 
   handleSaveChangesClick () {
-    const valueChanged = this.props.snippet.value !== this.editor.getValue()
-    const langChanged  = this.props.snippet.lang !== this.refs.lang.value
-    const nameChanged  = this.props.snippet.name !== this.refs.name.value
-    const newTags      = this.refs.tags.value.replace(/ /g, '').split(',')
-    const tagChanged   = !_.isEqual(this.props.snippet.tags, newTags)
-    if (valueChanged || langChanged || nameChanged || tagChanged) {
-      const newSnippet = _.clone(this.props.snippet)
-      newSnippet.value = this.editor.getValue()
-      newSnippet.lang  = this.refs.lang.value
-      newSnippet.name  = this.refs.name.value
-      newSnippet.tags  = newTags
+    const valueChanged       = this.props.snippet.value !== this.editor.getValue()
+    const langChanged        = this.props.snippet.lang !== this.refs.lang.value
+    const nameChanged        = this.props.snippet.name !== this.refs.name.value
+    const newTags            = this.refs.tags.value.replace(/ /g, '').split(',')
+    const tagChanged         = !_.isEqual(this.props.snippet.tags, newTags)
+    const descriptionChanged = this.props.snippet.description !== this.refs.description.value
+    if (valueChanged || langChanged || nameChanged || tagChanged || descriptionChanged) {
+      const newSnippet       = _.clone(this.props.snippet)
+      newSnippet.value       = this.editor.getValue()
+      newSnippet.lang        = this.refs.lang.value
+      newSnippet.name        = this.refs.name.value
+      newSnippet.tags        = newTags
+      newSnippet.description = this.refs.description.value
       if (langChanged) {
         const snippetMode = CodeMirror.findModeByName(newSnippet.lang).mode
         require(`codemirror/mode/${snippetMode}/${snippetMode}`)
@@ -211,6 +213,13 @@ export default class SnippetItem extends React.Component {
             isEditing
             ? <input type='text' ref='tags' defaultValue={snippet.tags.join(', ')} />
             : snippet.tags.join(', ')
+          }
+        </div>
+        <div className={`description ${isEditing ? 'editing' : ''}`}>
+          {
+            isEditing
+            ? <textarea ref='description'>{snippet.description}</textarea>
+            : snippet.description
           }
         </div>
         <div className='code' ref='editor'></div>

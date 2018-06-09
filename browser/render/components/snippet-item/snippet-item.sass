@@ -66,31 +66,26 @@
       font-size: 15px
       border-radius: 5px
       padding: 2px 5px
-  .content
-    display: flex
-    .file-list
-      label
-        margin: 10px
-        display: block
-        height: 20px
-      ul
-        width: 100%
-        height: calc(100% - 40px)
-        li
-          width: 100%
-          height: 30px
-          padding: 5px 10px
-          cursor: pointer
-          text-overflow: ellipsis
-          white-space: nowrap
-          overflow: hidden
-    .code
-      min-height: calc(100% - 110px)
-      max-height: 300px
-      &.with-file-list
-        width: 80%
-    .file-list
-      width: 20%
+  .description
+    max-height: 200px
+    padding: 10px
+    overflow-y: scroll
+    white-space: pre-line
+    line-height: 1.5em
+    &.editing
+      overflow: hidden
+    textarea
+      width: 100%
+      height: 170px
+      border: none
+      outline: none
+      font-size: 15px
+      border-radius: 5px
+      padding: 10px
+      resize: none
+      font-family: 'Lato'
+  .code
+    max-height: 300px
   .footer
     width: 100%
     height: 40px

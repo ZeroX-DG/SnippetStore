@@ -1,7 +1,7 @@
 {
   "name": "snippetstore",
   "version": "0.0.1",
-  "description": "A snippet store for lazy developers",
+  "description": "A snippet management app for developers",
   "main": "index.js",
   "productName": "SnippetStore",
   "scripts": {
