@@ -63,6 +63,7 @@ export default class SnippetItem extends React.Component {
     this.editor.setOption('indentWithTabs', indentUsingTab)
 
     this.editor.getWrapperElement().style.fontFamily = fontFamily
+    this.editor.getWrapperElement().style.minHeight = this.refs.fileList.clientHeight + 'px'
     this.editor.getWrapperElement().querySelector('.CodeMirror-scroll').style.maxHeight = '300px'
     this.editor.refresh()
   }
@@ -213,7 +214,17 @@ export default class SnippetItem extends React.Component {
             : snippet.tags.join(', ')
           }
         </div>
-        <div className='code' ref='editor'></div>
+        <div className='content'>
+          <div className='file-list' ref='fileList'>
+            <label>FILES</label>
+            <ul>
+              <li>config-manager.js</li>
+              <li>keyboard.js</li>
+              <li>file-with-a-very-long-name-ha.js</li>
+            </ul>
+          </div>
+          <div className='code with-file-list' ref='editor'></div>
+        </div>
         <div className='footer'>
           <div className='info-left'>
             {

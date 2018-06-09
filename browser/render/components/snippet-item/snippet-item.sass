@@ -66,9 +66,31 @@
       font-size: 15px
       border-radius: 5px
       padding: 2px 5px
-  .code
-    min-height: calc(100% - 110px)
-    max-height: 300px
+  .content
+    display: flex
+    .file-list
+      label
+        margin: 10px
+        display: block
+        height: 20px
+      ul
+        width: 100%
+        height: calc(100% - 40px)
+        li
+          width: 100%
+          height: 30px
+          padding: 5px 10px
+          cursor: pointer
+          text-overflow: ellipsis
+          white-space: nowrap
+          overflow: hidden
+    .code
+      min-height: calc(100% - 110px)
+      max-height: 300px
+      &.with-file-list
+        width: 80%
+    .file-list
+      width: 20%
   .footer
     width: 100%
     height: 40px
