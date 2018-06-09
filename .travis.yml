@@ -1,0 +1,14 @@
+language: node_js
+os:
+  - linux
+  - windows
+node_js:
+  - 7
+before_script:
+  - npm install -g jest
+script:
+  - npm run lint && npm run test
+sudo: required
+cache:
+  directories:
+    - node_modules
