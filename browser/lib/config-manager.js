@@ -14,7 +14,8 @@ const DEFAULT_CONFIG = {
     showDeleteConfirmDialog: true,
     showSnippetCreateTime: true,
     showSnippetUpdateTime: true,
-    showSnippetCopyCount: true
+    showSnippetCopyCount: true,
+    smallSidebar: false
   },
   editor: {
     showLineNumber: true,
@@ -58,7 +59,7 @@ function get (option) {
 
 function set (config) {
   const currentConfig = get()
-  const newConfig = Object.assign({}, DEFAULT_CONFIG, currentConfig, config)
+  const newConfig = _.merge({}, DEFAULT_CONFIG, currentConfig, config)
   eventEmiter.emit('config:set', newConfig)
   persistConfig(newConfig)
 }
