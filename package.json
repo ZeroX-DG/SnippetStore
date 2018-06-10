@@ -19,8 +19,8 @@
     "prod:win": "npm run build && npm run pack:win",
     "prod:osx": "npm run build && npm run pack:osx",
     "prod": "npm run build && npm run pack:current",
-    "dev": "NODE_ENV=dev concurrently --success first --kill-others \"npm run webpack\" \"npm run start-dev\"",
-    "test": "NODE_ENV=test BABEL_ENV=test jest"
+    "dev": "cross-env NODE_ENV=dev concurrently --success first --kill-others \"npm run webpack\" \"npm run start-dev\"",
+    "test": "cross-env NODE_ENV=test BABEL_ENV=test jest"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.7",
@@ -60,6 +60,7 @@
     "babel-register": "^6.26.0",
     "chalk": "^2.4.1",
     "concurrently": "^3.5.1",
+    "cross-env": "^5.1.6",
     "css-loader": "^0.28.11",
     "del": "^3.0.0",
     "electron": "^1.8.6",
