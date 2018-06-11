@@ -10,6 +10,22 @@ SnippetStore is a application for developers to store their snippets and quickly
 ## Download
 You can get the latest release of SnippetStore [here](https://github.com/ZeroX-DG/SnippetStore/releases)
 
+1. Download it and unzip it
+2. Run it
+
+## Theme
+SnippetStore currently support 2 themes dark and light
+
+
+| Light theme                                        | Dark theme                                        |
+|----------------------------------------------------|---------------------------------------------------|
+| <img src='resources/image/screenshot-light.png' /> | <img src='resources/image/screenshot-dark.png' /> |
+
+## Internalization
+SnippetStore currently support 2 languages:
+- English
+- Vietnamese
+
 ## Shortcut
 | Action                    | Key      |
 |---------------------------|----------|
@@ -24,35 +40,8 @@ You can get the latest release of SnippetStore [here](https://github.com/ZeroX-D
 - Lint: [ESLint](https://eslint.org/)
 - Test: [Jest](https://facebook.github.io/jest/)
 
-## Development
-1. Fork this project
-2. Clone this project
-3. Install dependencies
-```
-cd SnippetStore
-npm i
-```
-4. Run Project
-```
-npm run dev
-```
-## Build
-Build for windows:
-```
-npm run prod:win
-```
-Build for macOS:
-```
-npm run prod:osx
-```
-Build for linux:
-```
-npm run prod:linux
-```
-Build for current OS:
-```
-npm run prod
-```
+## Contributing
+Check out [contributing.md](contributing.md)
 
 ## Author & Maintainer
 - [Hung Nguyen](https://github.com/ZeroX-DG)
