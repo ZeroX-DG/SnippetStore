@@ -5,7 +5,7 @@
 <p align='center'><i>A snippet management app for developers</i></p>
 
 ## About this project
-SnippetStore is a application for developers to store their snippets and quickly retrieve them when needed.
+SnippetStore is a application for developers to store their snippets and quickly retrieve them when needed. SnippetStore mainly focus on storing code therefor its interface is small and simple, perfect for busy developers who doesn't care about small details.
 
 ## Download
 You can get the latest release of SnippetStore [here](https://github.com/ZeroX-DG/SnippetStore/releases)
