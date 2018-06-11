@@ -45,7 +45,7 @@ export default class InterfaceTab extends React.Component {
             <select ref='language' defaultValue={config.ui.language}>
               {
                 languages.map(
-                  language => 
+                  language =>
                     <option value={language.code} key={language.code}>{language.name}</option>
                 )
               }

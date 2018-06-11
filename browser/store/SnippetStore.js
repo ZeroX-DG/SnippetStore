@@ -9,7 +9,7 @@ class SnippetStore {
   @observable sort = 'createTimeNewer'
 
   @computed get snippets () {
-    let snippets = searchSnippet(this.rawSnippets, this.filter)
+    const snippets = searchSnippet(this.rawSnippets, this.filter)
     return sortSnippet(snippets, this.sort)
   }
 
@@ -65,6 +65,6 @@ class SnippetStore {
   }
 }
 
-let store = window.store = new SnippetStore()
+const store = window.store = new SnippetStore()
 
 export default store

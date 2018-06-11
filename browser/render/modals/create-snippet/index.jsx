@@ -5,7 +5,6 @@ import i18n from 'render/lib/i18n'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import 'codemirror/addon/display/autorefresh'
-const sander = require('sander')
 
 export default class CreateSnippetModal extends React.Component {
   constructor (props) {

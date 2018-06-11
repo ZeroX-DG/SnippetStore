@@ -72,11 +72,11 @@ if (number == 1) {
             <label>
               <input
                 type='checkbox'
-                defaultChecked={editorConf.showLineNumber} 
+                defaultChecked={editorConf.showLineNumber}
                 onChange={this.previewEditorLineNumberChange.bind(this)}
                 ref='showLineNumber'/>
-                { i18n.__('Show line number') }
-              </label>
+              { i18n.__('Show line number') }
+            </label>
           </div>
           <div className='input-group'>
             <label>{ i18n.__('Theme') }</label>

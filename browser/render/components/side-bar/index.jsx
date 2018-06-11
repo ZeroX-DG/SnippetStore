@@ -7,10 +7,6 @@ import TagList from '../tag-list'
 import ConfigManager from 'lib/config-manager'
 
 export default class SideBar extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
   componentDidMount () {
     if (ConfigManager.get('ui->smallSidebar')) {
       eventEmitter.emit('sidebar:toggled', 70)
@@ -35,7 +31,7 @@ export default class SideBar extends React.Component {
   render () {
     const { config, store } = this.props
     return (
-      <div className={`sidebar ${config.ui.smallSidebar ? 'small': ''}`} ref='root'>
+      <div className={`sidebar ${config.ui.smallSidebar ? 'small' : ''}`} ref='root'>
         <SideBarToolBox />
         <TagList store={store} config={config} />
         <LanguageList store={store} config={config} />

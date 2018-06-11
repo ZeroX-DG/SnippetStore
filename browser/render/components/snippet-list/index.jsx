@@ -32,7 +32,7 @@ export default class SnippetList extends React.Component {
 
   renderSnippetList () {
     const { snippets } = this.props.store
-    const { config } = this.props
+    const { config, store } = this.props
     return (
       <div className='snippets'>
         <ul>

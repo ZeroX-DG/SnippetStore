@@ -20,7 +20,7 @@ export default class SnippetItem extends React.Component {
       isEditing: false
     }
   }
-  
+
   componentDidMount () {
     const { snippet, config } = this.props
     const { theme, showLineNumber, tabSize, indentUsingTab } = config.editor
@@ -124,7 +124,7 @@ export default class SnippetItem extends React.Component {
         return
       }
     }
-    const newSnippet = _.clone(this.props.snippet)
+    const newSnippet = _.clone(snippet)
     this.props.store.deleteSnippet(newSnippet)
   }
 
@@ -155,8 +155,8 @@ export default class SnippetItem extends React.Component {
             &nbsp;&nbsp;&nbsp;
             {
               isEditing
-              ? <input type='text' ref='name' defaultValue={snippet.name} />
-              : snippet.name
+                ? <input type='text' ref='name' defaultValue={snippet.name} />
+                : snippet.name
             }
           </div>
           <div className='tools'>
@@ -182,20 +182,18 @@ export default class SnippetItem extends React.Component {
             </div>
             {
               isEditing
-              ? 
-              <div
-                className='save-btn'
-                data-tip={ i18n.__('save changes') }
-                onClick={this.handleSaveChangesClick.bind(this)}>
-                <FAIcon icon='check'/>
-              </div>
-              :
-              <div
-                className='edit-btn'
-                data-tip={ i18n.__('edit') }
-                onClick={this.handleEditButtonClick.bind(this)}>
-                <FAIcon icon='edit'/>
-              </div>
+                ? <div
+                  className='save-btn'
+                  data-tip={ i18n.__('save changes') }
+                  onClick={this.handleSaveChangesClick.bind(this)}>
+                  <FAIcon icon='check'/>
+                </div>
+                : <div
+                  className='edit-btn'
+                  data-tip={ i18n.__('edit') }
+                  onClick={this.handleEditButtonClick.bind(this)}>
+                  <FAIcon icon='edit'/>
+                </div>
             }
             <div
               className='delete-btn'
@@ -211,15 +209,15 @@ export default class SnippetItem extends React.Component {
           </span>
           {
             isEditing
-            ? <input type='text' ref='tags' defaultValue={snippet.tags.join(', ')} />
-            : snippet.tags.join(', ')
+              ? <input type='text' ref='tags' defaultValue={snippet.tags.join(', ')} />
+              : snippet.tags.join(', ')
           }
         </div>
         <div className={`description ${isEditing ? 'editing' : ''}`}>
           {
             isEditing
-            ? <textarea ref='description'>{snippet.description}</textarea>
-            : snippet.description
+              ? <textarea ref='description'>{snippet.description}</textarea>
+              : snippet.description
           }
         </div>
         <div className='code' ref='editor'></div>

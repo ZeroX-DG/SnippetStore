@@ -1,6 +1,5 @@
 import React from 'react'
 import ModalSkeleton from '../modal-skeleton'
-import eventEmitter from 'lib/event-emitter'
 import i18n from 'render/lib/i18n'
 import './setting'
 
@@ -23,7 +22,7 @@ export default class SettingModal extends React.Component {
   renderTab () {
     const { tab } = this.state
     const { config } = this.props
-    switch(tab) {
+    switch (tab) {
       case 'interface':
         return <InterfaceTab config={config} />
       case 'editor':
