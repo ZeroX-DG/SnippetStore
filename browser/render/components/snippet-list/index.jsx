@@ -23,7 +23,6 @@ export default class SnippetList extends React.Component {
 
     eventEmitter.on('sidebar:toggled', (event, newSize) => {
       this.refs.root.style.width = `calc(100% - ${newSize}px)`
-      this.refs.root.style.left = `${newSize}px`
     })
   }
 
