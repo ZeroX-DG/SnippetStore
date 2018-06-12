@@ -128,8 +128,8 @@ export default class SnippetItem extends React.Component {
     this.props.store.deleteSnippet(newSnippet)
   }
 
-  render () {
-    const { snippet, config } = this.props
+  renderHeader () {
+    const { snippet } = this.props
     const { isEditing } = this.state
     const langMode = CodeMirror.findModeByName(snippet.lang)
     const snippetMode = langMode.mode
@@ -147,104 +147,133 @@ export default class SnippetItem extends React.Component {
       languageIcon = <i className={`devicon-${snippetMode}-plain colored`} data-tip={snippet.lang} />
     }
     return (
+      <div className='header'>
+        <div className='info'>
+          { languageIcon }
+          &nbsp;&nbsp;&nbsp;
+          {
+            isEditing
+              ? <input type='text' ref='name' defaultValue={snippet.name} />
+              : snippet.name
+          }
+        </div>
+        <div className='tools'>
+          {
+            isEditing &&
+            <select ref='lang' onChange={this.handleSnippetLangChange.bind(this)} defaultValue={snippet.lang}>
+              {
+                CodeMirror.modeInfo.map((mode, index) => (
+                  <option
+                    value={mode.name}
+                    key={index}>
+                    {mode.name}
+                  </option>
+                ))
+              }
+            </select>
+          }
+          <div
+            className='copy-btn'
+            data-tip={ i18n.__('copy') }
+            onClick={this.copySnippet.bind(this)}>
+            <FAIcon icon='copy'/>
+          </div>
+          {
+            isEditing
+              ? <div
+                className='save-btn'
+                data-tip={ i18n.__('save changes') }
+                onClick={this.handleSaveChangesClick.bind(this)}>
+                <FAIcon icon='check'/>
+              </div>
+              : <div
+                className='edit-btn'
+                data-tip={ i18n.__('edit') }
+                onClick={this.handleEditButtonClick.bind(this)}>
+                <FAIcon icon='edit'/>
+              </div>
+          }
+          <div
+            className='delete-btn'
+            data-tip={ i18n.__('delete snippet') }
+            onClick={this.handleDeleteClick.bind(this)}>
+            <FAIcon icon='trash-alt'/>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  renderTagList () {
+    const { snippet } = this.props
+    const { isEditing } = this.state
+    return (
+      <div className='tag-list'>
+        <span className='icon'>
+          <FAIcon icon='tags' />
+        </span>
+        {
+          isEditing
+            ? <input type='text' ref='tags' defaultValue={snippet.tags.join(', ')} />
+            : snippet.tags.join(', ')
+        }
+      </div>
+    )
+  }
+
+  renderDescription () {
+    const { snippet } = this.props
+    const { isEditing } = this.state
+    return (
+      <div className={`description ${isEditing ? 'editing' : ''}`}>
+        {
+          isEditing
+            ? <textarea ref='description'>{snippet.description}</textarea>
+            : snippet.description
+        }
+      </div>
+    )
+  }
+
+  renderFooter () {
+    const { snippet, config } = this.props
+    return (
+      <div className='footer'>
+        <div className='info-left'>
+          {
+            config.ui.showSnippetCreateTime &&
+            <span className='createAt'>
+              { i18n.__('Create at') } : { formatDate(snippet.createAt) }
+            </span>
+          }
+          {
+            config.ui.showSnippetUpdateTime &&
+            <span className='updateAt'>
+              { i18n.__('Last update') } : { formatDate(snippet.updateAt) }
+            </span>
+          }
+        </div>
+        <div className='info-right'>
+          {
+            config.ui.showSnippetCopyCount &&
+            <span className='copyCount'>
+              { i18n.__('Copy') } : { snippet.copy } { i18n.__('times') }
+            </span>
+          }
+        </div>
+      </div>
+    )
+  }
+
+  render () {
+    return (
       <div className='snippet-item'>
         <ReactTooltip place='bottom' effect='solid' />
-        <div className='header'>
-          <div className='info'>
-            { languageIcon }
-            &nbsp;&nbsp;&nbsp;
-            {
-              isEditing
-                ? <input type='text' ref='name' defaultValue={snippet.name} />
-                : snippet.name
-            }
-          </div>
-          <div className='tools'>
-            {
-              isEditing &&
-              <select ref='lang' onChange={this.handleSnippetLangChange.bind(this)} defaultValue={snippet.lang}>
-                {
-                  CodeMirror.modeInfo.map((mode, index) => (
-                    <option
-                      value={mode.name}
-                      key={index}>
-                      {mode.name}
-                    </option>
-                  ))
-                }
-              </select>
-            }
-            <div
-              className='copy-btn'
-              data-tip={ i18n.__('copy') }
-              onClick={this.copySnippet.bind(this)}>
-              <FAIcon icon='copy'/>
-            </div>
-            {
-              isEditing
-                ? <div
-                  className='save-btn'
-                  data-tip={ i18n.__('save changes') }
-                  onClick={this.handleSaveChangesClick.bind(this)}>
-                  <FAIcon icon='check'/>
-                </div>
-                : <div
-                  className='edit-btn'
-                  data-tip={ i18n.__('edit') }
-                  onClick={this.handleEditButtonClick.bind(this)}>
-                  <FAIcon icon='edit'/>
-                </div>
-            }
-            <div
-              className='delete-btn'
-              data-tip={ i18n.__('delete snippet') }
-              onClick={this.handleDeleteClick.bind(this)}>
-              <FAIcon icon='trash-alt'/>
-            </div>
-          </div>
-        </div>
-        <div className='tag-list'>
-          <span className='icon'>
-            <FAIcon icon='tags' />
-          </span>
-          {
-            isEditing
-              ? <input type='text' ref='tags' defaultValue={snippet.tags.join(', ')} />
-              : snippet.tags.join(', ')
-          }
-        </div>
-        <div className={`description ${isEditing ? 'editing' : ''}`}>
-          {
-            isEditing
-              ? <textarea ref='description'>{snippet.description}</textarea>
-              : snippet.description
-          }
-        </div>
+        { this.renderHeader() }
+        { this.renderTagList() }
+        { this.renderDescription() }
         <div className='code' ref='editor'></div>
-        <div className='footer'>
-          <div className='info-left'>
-            {
-              config.ui.showSnippetCreateTime &&
-              <span className='createAt'>
-                { i18n.__('Create at') } : { formatDate(snippet.createAt) }
-              </span>
-            }
-            {
-              config.ui.showSnippetUpdateTime &&
-              <span className='updateAt'>
-                { i18n.__('Last update') } : { formatDate(snippet.updateAt) }
-              </span>
-            }
-          </div>
-          <div className='info-right'>
-            {
-              config.ui.showSnippetCopyCount &&
-              <span className='copyCount'>
-                { i18n.__('Copy') } : { snippet.copy } { i18n.__('times') }
-              </span>
-            }
-          </div>
-        </div>
+        { this.renderFooter() }
       </div>
     )
   }
