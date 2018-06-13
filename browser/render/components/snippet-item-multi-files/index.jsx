@@ -2,6 +2,9 @@ import React from 'react'
 import FAIcon from '@fortawesome/react-fontawesome'
 import ReactTooltip from 'react-tooltip'
 import i18n from 'render/lib/i18n'
+import Clipboard from 'core/functions/clipboard'
+import { toast } from 'react-toastify'
+import _ from 'lodash'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import 'codemirror/addon/display/autorefresh'
@@ -10,8 +13,93 @@ export default class SnippetItemMultiFiles extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isEditing: false
+      isEditing: false,
+      selectedFile: 0
     }
+  }
+
+  componentDidMount () {
+    const { snippet, config } = this.props
+    const { selectedFile } = this.state
+    const { theme, showLineNumber, tabSize, indentUsingTab } = config.editor
+    const file = snippet.files[selectedFile]
+    const fileExtension = file.name.substring(file.name.lastIndexOf('.') + 1)
+    const snippetMode = CodeMirror.findModeByExtension(fileExtension).mode
+    require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+
+    const gutters = showLineNumber
+      ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+      : []
+
+    this.editor = CodeMirror(this.refs.editor, {
+      lineNumbers: showLineNumber,
+      value: file.value,
+      foldGutter: showLineNumber,
+      mode: snippetMode,
+      theme: theme,
+      gutters: gutters,
+      readOnly: true,
+      autoCloseBrackets: true,
+      autoRefresh: true
+    })
+
+    this.editor.setOption('indentUnit', tabSize)
+    this.editor.setOption('tabSize', tabSize)
+    this.editor.setOption('indentWithTabs', indentUsingTab)
+    this.editor.setSize('100%', 'auto')
+    this.applyEditorStyle()
+  }
+
+  applyEditorStyle (props) {
+    const { snippet, config } = props || this.props
+    const { selectedFile } = this.state
+    const {
+      theme,
+      showLineNumber,
+      fontFamily,
+      fontSize,
+      tabSize,
+      indentUsingTab
+    } = config.editor
+    const gutters = showLineNumber
+      ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+      : []
+
+    const file = snippet.files[selectedFile]
+    const fileExtension = file.name.substring(file.name.lastIndexOf('.') + 1)
+    const snippetMode = CodeMirror.findModeByExtension(fileExtension).mode
+    require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+
+    this.editor.getWrapperElement().style.fontSize = `${fontSize}px`
+    this.editor.setOption('lineNumbers', showLineNumber)
+    this.editor.setOption('foldGutter', showLineNumber)
+    this.editor.setOption('theme', theme)
+    this.editor.setOption('gutters', gutters)
+
+    this.editor.setOption('indentUnit', tabSize)
+    this.editor.setOption('tabSize', tabSize)
+    this.editor.setOption('indentWithTabs', indentUsingTab)
+
+    const wrapperElement = this.editor.getWrapperElement()
+    wrapperElement.style.fontFamily = fontFamily
+    wrapperElement.querySelector('.CodeMirror-scroll').style.maxHeight = '300px'
+    this.editor.refresh()
+  }
+
+  componentWillReceiveProps (props) {
+    this.applyEditorStyle(props)
+  }
+
+  copySnippet () {
+    const { snippet, config, store } = this.props
+    const { selectedFile } = this.state
+    const file = snippet.files[selectedFile]
+    Clipboard.set(file.value)
+    if (config.ui.showCopyNoti) {
+      toast.info(i18n.__('Copied to clipboard'), { autoClose: 2000 })
+    }
+    const newSnippet = _.clone(snippet)
+    store.increaseCopyTime(newSnippet)
   }
 
   renderHeader () {
@@ -27,20 +115,6 @@ export default class SnippetItemMultiFiles extends React.Component {
           }
         </div>
         <div className='tools'>
-          {
-            isEditing &&
-            <select ref='lang' onChange={this.handleSnippetLangChange.bind(this)} defaultValue={snippet.lang}>
-              {
-                CodeMirror.modeInfo.map((mode, index) => (
-                  <option
-                    value={mode.name}
-                    key={index}>
-                    {mode.name}
-                  </option>
-                ))
-              }
-            </select>
-          }
           <div
             className='copy-btn'
             data-tip={ i18n.__('copy') }

@@ -10,13 +10,33 @@ import i18n from 'render/lib/i18n'
 
 @observer
 export default class LanguageList extends React.Component {
-  handleLanguageList (lang) {
+  handleLanguageClick (lang) {
     eventEmitter.emit('languageList:pickLang', lang)
   }
 
+  getLanguageIcon (lang) {
+    const langMode = CodeMirror.findModeByName(lang)
+    const snippetMode = langMode.mode
+    let languageIcon = <img src={defaultLanguageIcon} className='lang-icon' />
+    if (langMode.alias) {
+      for (let i = 0; i < langMode.alias.length; i++) {
+        const alias = langMode.alias[i]
+        if (isDevIconExists(`devicon-${alias}-plain`)) {
+          languageIcon = <i className={`devicon-${alias}-plain colored`} />
+          break
+        }
+      }
+    }
+    // if it's not alias then maybe the mode name ?
+    if (isDevIconExists(`devicon-${snippetMode}-plain`)) {
+      languageIcon = <i className={`devicon-${snippetMode}-plain colored`} />
+    }
+    return languageIcon
+  }
+
   render () {
-    const { languages } = this.props.store
-    const { config } = this.props
+    const { config, store } = this.props
+    const { languages } = store
     i18n.setLocale(config.ui.language)
     return (
       <div className='language-list'>
@@ -27,23 +47,11 @@ export default class LanguageList extends React.Component {
         <ul className='languages'>
           {
             Object.keys(languages).map((language, index) => {
-              const langMode = CodeMirror.findModeByName(language)
-              const snippetMode = langMode.mode
-              let languageIcon = <img src={defaultLanguageIcon} className='lang-icon' />
-              if (langMode.alias) {
-                for (let i = 0; i < langMode.alias.length; i++) {
-                  if (isDevIconExists(`devicon-${langMode.alias[i]}-plain`)) {
-                    languageIcon = <i className={`devicon-${langMode.alias[i]}-plain colored`} />
-                    break
-                  }
-                }
-              }
-              // if it's not alias then maybe the mode name ?
-              if (isDevIconExists(`devicon-${snippetMode}-plain`)) {
-                languageIcon = <i className={`devicon-${snippetMode}-plain colored`} />
-              }
+              const languageIcon = this.getLanguageIcon(language)
               return (
-                <li key={index} onClick={() => this.handleLanguageList(language)}>
+                <li
+                  key={index}
+                  onClick={() => this.handleLanguageClick(language)}>
                   <div className='icon'>
                     { languageIcon }
                   </div>

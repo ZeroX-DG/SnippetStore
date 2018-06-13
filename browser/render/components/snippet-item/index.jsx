@@ -26,14 +26,16 @@ export default class SnippetItem extends React.Component {
     const { theme, showLineNumber, tabSize, indentUsingTab } = config.editor
     const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
     require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-
+    const gutters = showLineNumber
+      ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+      : []
     this.editor = CodeMirror(this.refs.editor, {
       lineNumbers: showLineNumber,
       value: snippet.value,
       foldGutter: showLineNumber,
       mode: snippetMode,
       theme: theme,
-      gutters: showLineNumber ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'] : [],
+      gutters: gutters,
       readOnly: true,
       autoCloseBrackets: true,
       autoRefresh: true
@@ -48,22 +50,35 @@ export default class SnippetItem extends React.Component {
 
   applyEditorStyle (props) {
     const { snippet, config } = props || this.props
-    const { theme, showLineNumber, fontFamily, fontSize, tabSize, indentUsingTab } = config.editor
-    const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
-    require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-
+    const {
+      theme,
+      showLineNumber,
+      fontFamily,
+      fontSize,
+      tabSize,
+      indentUsingTab
+    } = config.editor
+    // only update codemirror mode if new props is passed
+    if (props) {
+      const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
+      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+    }
+    const gutters = showLineNumber
+      ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+      : []
     this.editor.getWrapperElement().style.fontSize = `${fontSize}px`
     this.editor.setOption('lineNumbers', showLineNumber)
     this.editor.setOption('foldGutter', showLineNumber)
     this.editor.setOption('theme', theme)
-    this.editor.setOption('gutters', showLineNumber ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'] : [])
+    this.editor.setOption('gutters', gutters)
 
     this.editor.setOption('indentUnit', tabSize)
     this.editor.setOption('tabSize', tabSize)
     this.editor.setOption('indentWithTabs', indentUsingTab)
 
-    this.editor.getWrapperElement().style.fontFamily = fontFamily
-    this.editor.getWrapperElement().querySelector('.CodeMirror-scroll').style.maxHeight = '300px'
+    const wrapperElement = this.editor.getWrapperElement()
+    wrapperElement.style.fontFamily = fontFamily
+    wrapperElement.querySelector('.CodeMirror-scroll').style.maxHeight = '300px'
     this.editor.refresh()
   }
 
@@ -92,13 +107,20 @@ export default class SnippetItem extends React.Component {
   }
 
   handleSaveChangesClick () {
-    const valueChanged       = this.props.snippet.value !== this.editor.getValue()
-    const langChanged        = this.props.snippet.lang !== this.refs.lang.value
-    const nameChanged        = this.props.snippet.name !== this.refs.name.value
-    const newTags            = this.refs.tags.value.replace(/ /g, '').split(',')
-    const tagChanged         = !_.isEqual(this.props.snippet.tags, newTags)
-    const descriptionChanged = this.props.snippet.description !== this.refs.description.value
-    if (valueChanged || langChanged || nameChanged || tagChanged || descriptionChanged) {
+    const { snippet }    = this.props
+    const valueChanged   = snippet.value !== this.editor.getValue()
+    const langChanged    = snippet.lang !== this.refs.lang.value
+    const nameChanged    = snippet.name !== this.refs.name.value
+    const newTags        = this.refs.tags.value.replace(/ /g, '').split(',')
+    const tagChanged     = !_.isEqual(snippet.tags, newTags)
+    const descripChanged = snippet.description !== this.refs.description.value
+    if (
+      valueChanged  ||
+      langChanged   ||
+      nameChanged   ||
+      tagChanged    ||
+      descripChanged
+    ) {
       const newSnippet       = _.clone(this.props.snippet)
       newSnippet.value       = this.editor.getValue()
       newSnippet.lang        = this.refs.lang.value
@@ -133,18 +155,29 @@ export default class SnippetItem extends React.Component {
     const { isEditing } = this.state
     const langMode = CodeMirror.findModeByName(snippet.lang)
     const snippetMode = langMode.mode
-    let languageIcon = <img src={defaultLanguageIcon} className='lang-icon' data-tip={snippet.lang}/>
+    let languageIcon =
+      <img
+        src={defaultLanguageIcon}
+        className='lang-icon'
+        data-tip={snippet.lang}/>
     if (langMode.alias) {
       for (let i = 0; i < langMode.alias.length; i++) {
-        if (isDevIconExists(`devicon-${langMode.alias[i]}-plain`)) {
-          languageIcon = <i className={`devicon-${langMode.alias[i]}-plain colored`} data-tip={snippet.lang}/>
+        const alias = langMode.alias[i]
+        if (isDevIconExists(`devicon-${alias}-plain`)) {
+          languageIcon =
+            <i
+              className={`devicon-${alias}-plain colored`}
+              data-tip={snippet.lang}/>
           break
         }
       }
     }
     // if it's not alias then maybe the mode name ?
     if (isDevIconExists(`devicon-${snippetMode}-plain`)) {
-      languageIcon = <i className={`devicon-${snippetMode}-plain colored`} data-tip={snippet.lang} />
+      languageIcon =
+        <i
+          className={`devicon-${snippetMode}-plain colored`}
+          data-tip={snippet.lang} />
     }
     return (
       <div className='header'>
@@ -160,17 +193,20 @@ export default class SnippetItem extends React.Component {
         <div className='tools'>
           {
             isEditing &&
-            <select ref='lang' onChange={this.handleSnippetLangChange.bind(this)} defaultValue={snippet.lang}>
-              {
-                CodeMirror.modeInfo.map((mode, index) => (
-                  <option
-                    value={mode.name}
-                    key={index}>
-                    {mode.name}
-                  </option>
-                ))
-              }
-            </select>
+              <select
+                ref='lang'
+                onChange={this.handleSnippetLangChange.bind(this)}
+                defaultValue={snippet.lang}>
+                {
+                  CodeMirror.modeInfo.map((mode, index) => (
+                    <option
+                      value={mode.name}
+                      key={index}>
+                      {mode.name}
+                    </option>
+                  ))
+                }
+              </select>
           }
           <div
             className='copy-btn'
@@ -214,7 +250,10 @@ export default class SnippetItem extends React.Component {
         </span>
         {
           isEditing
-            ? <input type='text' ref='tags' defaultValue={snippet.tags.join(', ')} />
+            ? <input
+              type='text'
+              ref='tags'
+              defaultValue={snippet.tags.join(', ')} />
             : snippet.tags.join(', ')
         }
       </div>
@@ -228,7 +267,10 @@ export default class SnippetItem extends React.Component {
       <div className={`description ${isEditing ? 'editing' : ''}`}>
         {
           isEditing
-            ? <textarea ref='description'>{snippet.description}</textarea>
+            ? <textarea
+              ref='description'
+              defaultValue={snippet.description}>
+            </textarea>
             : snippet.description
         }
       </div>
