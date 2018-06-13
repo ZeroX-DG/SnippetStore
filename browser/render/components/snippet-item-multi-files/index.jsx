@@ -5,6 +5,7 @@ import i18n from 'render/lib/i18n'
 import Clipboard from 'core/functions/clipboard'
 import { toast } from 'react-toastify'
 import _ from 'lodash'
+import formatDate from 'lib/date-format'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import 'codemirror/addon/display/autorefresh'
@@ -102,6 +103,17 @@ export default class SnippetItemMultiFiles extends React.Component {
     store.increaseCopyTime(newSnippet)
   }
 
+  handleDeleteClick () {
+    const { snippet, config } = this.props
+    if (config.ui.showDeleteConfirmDialog) {
+      if (!confirm(i18n.__('Are you sure to delete this snippet?'))) {
+        return
+      }
+    }
+    const newSnippet = _.clone(snippet)
+    this.props.store.deleteSnippet(newSnippet)
+  }
+
   renderHeader () {
     const { isEditing } = this.state
     const { snippet } = this.props
@@ -147,6 +159,87 @@ export default class SnippetItemMultiFiles extends React.Component {
     )
   }
 
+  renderTagList () {
+    const { snippet } = this.props
+    const { isEditing } = this.state
+    return (
+      <div className='tag-list'>
+        <span className='icon'>
+          <FAIcon icon='tags' />
+        </span>
+        {
+          isEditing
+            ? <input
+              type='text'
+              ref='tags'
+              defaultValue={snippet.tags.join(', ')} />
+            : snippet.tags.join(', ')
+        }
+      </div>
+    )
+  }
+
+  renderDescription () {
+    const { snippet } = this.props
+    const { isEditing } = this.state
+    return (
+      <div className={`description ${isEditing ? 'editing' : ''}`}>
+        {
+          isEditing
+            ? <textarea
+              ref='description'
+              defaultValue={snippet.description}>
+            </textarea>
+            : snippet.description
+        }
+      </div>
+    )
+  }
+
+  renderFooter () {
+    const { snippet, config } = this.props
+    return (
+      <div className='footer'>
+        <div className='info-left'>
+          {
+            config.ui.showSnippetCreateTime &&
+            <span className='createAt'>
+              { i18n.__('Create at') } : { formatDate(snippet.createAt) }
+            </span>
+          }
+          {
+            config.ui.showSnippetUpdateTime &&
+            <span className='updateAt'>
+              { i18n.__('Last update') } : { formatDate(snippet.updateAt) }
+            </span>
+          }
+        </div>
+        <div className='info-right'>
+          {
+            config.ui.showSnippetCopyCount &&
+            <span className='copyCount'>
+              { i18n.__('Copy') } : { snippet.copy } { i18n.__('times') }
+            </span>
+          }
+        </div>
+      </div>
+    )
+  }
+
+  renderFileList () {
+    const { snippet } = this.props
+    const files = snippet.files
+    return (
+      <div className='file-list'>
+        <ul>
+          {
+            files.map(file => <li key={file.key}>{ file.name }</li>)
+          }
+        </ul>
+      </div>
+    )
+  }
+
   render () {
     return (
       <div className='snippet-item-multi-files'>
@@ -154,7 +247,10 @@ export default class SnippetItemMultiFiles extends React.Component {
         { this.renderHeader() }
         { this.renderTagList() }
         { this.renderDescription() }
-        <div className='code' ref='editor'></div>
+        <div className='inline'>
+          { this.renderFileList() }
+          <div className='code' ref='editor'></div>
+        </div>
         { this.renderFooter() }
       </div>
     )
