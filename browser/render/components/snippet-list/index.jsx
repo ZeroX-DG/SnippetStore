@@ -1,5 +1,6 @@
 import React from 'react'
 import SnippetItem from '../snippet-item'
+import SnippetItemMultiFiles from '../snippet-item-multi-files'
 import eventEmitter from 'lib/event-emitter'
 import FAIcon from '@fortawesome/react-fontawesome'
 import { observer } from 'mobx-react'
@@ -38,12 +39,19 @@ export default class SnippetList extends React.Component {
         <ul>
           {
             snippets.map(snippet => (
-              <li key={snippet.key}>
-                <SnippetItem
-                  snippet={snippet}
-                  config={config}
-                  store={store}/>
-              </li>
+              snippet.files
+                ? <li>
+                  <SnippetItemMultiFiles
+                    snippet={snippet}
+                    config={config}
+                    store={store}/>
+                </li>
+                : <li key={snippet.key}>
+                  <SnippetItem
+                    snippet={snippet}
+                    config={config}
+                    store={store}/>
+                </li>
             ))
           }
         </ul>
