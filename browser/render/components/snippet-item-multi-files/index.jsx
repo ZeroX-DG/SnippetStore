@@ -357,7 +357,7 @@ export default class SnippetItemMultiFiles extends React.Component {
     newInput.className = 'fileName newFile'
     newLI.appendChild(newInput)
     fileList.insertBefore(newLI, fileList.lastChild)
-    newLI.focus()
+    newInput.focus()
     this.applyEditorStyle()
   }
 
