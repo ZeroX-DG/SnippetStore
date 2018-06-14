@@ -39,7 +39,7 @@ export default class SnippetList extends React.Component {
         <ul>
           {
             snippets.map(snippet => (
-              snippet.files
+              Array.isArray(snippet.files)
                 ? <li>
                   <SnippetItemMultiFiles
                     snippet={snippet}
@@ -70,7 +70,8 @@ export default class SnippetList extends React.Component {
     }
     return (
       <h1 className='emptyMessage'>
-        { i18n.__('Create new snippet using ') } { config.keyboard.createSnippet }
+        { i18n.__('Create new snippet using ') }
+        { config.keyboard.createSnippet }
       </h1>
     )
   }
@@ -88,11 +89,16 @@ export default class SnippetList extends React.Component {
     return (
       <div className='snippet-list' ref='root'>
         <div className='search-bar'>
-          <input type='text' ref='search' onChange={e => this.handleSearch(e.target.value)} />
+          <input
+            type='text'
+            ref='search'
+            onChange={e => this.handleSearch(e.target.value)} />
           <div className='search-icon'>
             <FAIcon icon='search' />
           </div>
-          <button className='create-btn' onClick={this.handleCreateSnippetClick}>
+          <button
+            className='create-btn'
+            onClick={this.handleCreateSnippetClick}>
             <div className='icon'>
               <FAIcon icon='plus' />
             </div>
