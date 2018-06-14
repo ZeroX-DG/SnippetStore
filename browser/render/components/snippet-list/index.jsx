@@ -39,8 +39,8 @@ export default class SnippetList extends React.Component {
         <ul>
           {
             snippets.map(snippet => (
-              Array.isArray(snippet.files)
-                ? <li>
+              snippet.files !== undefined
+                ? <li key={snippet.key}>
                   <SnippetItemMultiFiles
                     snippet={snippet}
                     config={config}

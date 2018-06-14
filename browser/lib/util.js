@@ -24,8 +24,13 @@ export function findIndexObject (array, property, value) {
   return -1
 }
 
+export function getExtension (name) {
+  return name.substring(name.lastIndexOf('.') + 1)
+}
+
 export default {
   generateKey,
   findObject,
-  findIndexObject
+  findIndexObject,
+  getExtension
 }

@@ -2,6 +2,8 @@ import { observable, computed } from 'mobx'
 import SnippetAPI from 'core/API/snippet'
 import searchSnippet from 'core/API/search-snippet'
 import sortSnippet from 'core/API/sort-snippet'
+import CodeMirror from 'codemirror'
+import 'codemirror/mode/meta'
 
 class SnippetStore {
   @observable rawSnippets = []
@@ -16,10 +18,23 @@ class SnippetStore {
   @computed get languages () {
     const languages = {}
     this.rawSnippets.forEach(snippet => {
-      if (languages[snippet.lang]) {
-        languages[snippet.lang] += 1
+      if (snippet.files !== undefined) {
+        snippet.files.forEach(file => {
+          const ExtensionIndex = file.name.lastIndexOf('.') + 1
+          const fileExtension = file.name.substring(ExtensionIndex)
+          const langName = CodeMirror.findModeByExtension(fileExtension).name
+          if (languages[langName]) {
+            languages[langName] += 1
+          } else {
+            languages[langName] = 1
+          }
+        })
       } else {
-        languages[snippet.lang] = 1
+        if (languages[snippet.lang]) {
+          languages[snippet.lang] += 1
+        } else {
+          languages[snippet.lang] = 1
+        }
       }
     })
     return languages

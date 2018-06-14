@@ -28,19 +28,19 @@ body[data-theme='light']
       .create-btn
         background: $snippet-list-create-button-background--light
         color: $snippet-list-create-button-foreground--light
-    .snippet-item
+    .snippet-item, .snippet-item-multi-files
       background: $snippet-item-background--light
-      .content
-        background: $snippet-item-file-list--light
-        .file-list
-          li:hover
-            background: rgba(0, 0, 0, 0.1)
+      .file-list
+        li:hover
+          background: rgba(0, 0, 0, 0.1)
+        li.selected
+          background: rgba(0, 0, 0, 0.2)
       .delete-btn
         color: $snippet-item-delete-button-foreground--light
       select
         background: $input-tag-edit-mode-background--light
         color: $input-tag-foreground--light
-      input[type='text']
+      input[type='text'], textarea
         background: $input-tag-edit-mode-background--light
         color: $input-tag-foreground--light
     select
