@@ -4,9 +4,10 @@ import ReactTooltip from 'react-tooltip'
 import i18n from 'render/lib/i18n'
 import Clipboard from 'core/functions/clipboard'
 import { toast } from 'react-toastify'
+import { toJS } from 'mobx'
 import _ from 'lodash'
 import formatDate from 'lib/date-format'
-import { getExtension } from 'lib/util'
+import { getExtension, generateKey } from 'lib/util'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import 'codemirror/addon/display/autorefresh'
@@ -87,7 +88,7 @@ export default class SnippetItemMultiFiles extends React.Component {
     wrapperElement.style.fontFamily = fontFamily
     const scrollElement = wrapperElement.querySelector('.CodeMirror-scroll')
     scrollElement.style.maxHeight = '300px'
-    const FileList = this.refs.root.querySelector('.file-list')
+    const FileList = this.refs.fileList
     scrollElement.style.minHeight = `${FileList.clientHeight}px`
     this.editor.refresh()
   }
@@ -122,9 +123,10 @@ export default class SnippetItemMultiFiles extends React.Component {
   handleSaveChangesClick () {
     const { snippet }      = this.props
     const { selectedFile } = this.state
+    const fileList         = this.refs.fileList.querySelectorAll(`.fileName`)
     const file             = snippet.files[selectedFile]
     const valueChanged     = file.value !== this.editor.getValue()
-    const fileNameRef      = this.refs[`file${selectedFile}`]
+    const fileNameRef      = fileList[selectedFile]
     const fileNameChanged  = file.name !== fileNameRef.value
     const nameChanged      = snippet.name !== this.refs.name.value
     const oldLang          = getExtension(file.name)
@@ -133,13 +135,17 @@ export default class SnippetItemMultiFiles extends React.Component {
     const newTags          = this.refs.tags.value.replace(/ /g, '').split(',')
     const tagChanged       = !_.isEqual(snippet.tags, newTags)
     const descripChanged   = snippet.description !== this.refs.description.value
+    const oldFilenames     = snippet.files.slice().map(file => file.name)
+    const newFilenames     = this.extractFilenames(fileList)
+    const fileListChanged  = !_.isEqual(oldFilenames, newFilenames)
     if (
       valueChanged    ||
       fileNameChanged ||
       langChanged     ||
       tagChanged      ||
       descripChanged  ||
-      nameChanged
+      nameChanged     ||
+      fileListChanged
     ) {
       const newSnippet                     = _.clone(this.props.snippet)
       newSnippet.name                      = this.refs.name.value
@@ -147,6 +153,9 @@ export default class SnippetItemMultiFiles extends React.Component {
       newSnippet.files[selectedFile].name  = fileNameRef.value
       newSnippet.tags                      = newTags
       newSnippet.description               = this.refs.description.value
+      if (fileListChanged) {
+        newSnippet.files = this.updateFileList(newFilenames)
+      }
       if (langChanged) {
         const snippetMode = CodeMirror.findModeByExtension(newLang).mode
         require(`codemirror/mode/${snippetMode}/${snippetMode}`)
@@ -155,13 +164,38 @@ export default class SnippetItemMultiFiles extends React.Component {
       this.props.store.updateSnippet(newSnippet)
     }
 
+    const tempInputs = [...this.refs.fileList.querySelectorAll('.newFile')]
+    tempInputs.forEach(input => input.parentElement.remove())
     this.setState({ isEditing: false })
     this.editor.setOption('readOnly', true)
   }
 
+  extractFilenames (fileList) {
+    return [...fileList].map(file => file.value)
+  }
+
+  updateFileList (newFileList) {
+    const { snippet } = this.props
+    const newSnippet  = _.clone(snippet)
+    let files         = newSnippet.files
+    files             = toJS(files)
+    newFileList = newFileList.filter(newFile => newFile) // remove empty name file
+    // filter all files that has been removed
+    files = files.filter(file => newFileList.indexOf(file.name) !== -1)
+    // add new files
+    newFileList.forEach(file => {
+      if (!files.find(ffile => ffile.name === file)) {
+        files.push({ key: generateKey(), name: file, value: '' })
+      }
+    })
+    return files
+  }
+
   handleEditButtonClick () {
-    this.setState({ isEditing: true })
-    this.editor.setOption('readOnly', false)
+    this.setState({ isEditing: true }, () => {
+      this.applyEditorStyle()
+      this.editor.setOption('readOnly', false)
+    })
   }
 
   renderHeader () {
@@ -281,7 +315,7 @@ export default class SnippetItemMultiFiles extends React.Component {
     const { selectedFile, isEditing } = this.state
     const files = snippet.files
     return (
-      <div className='file-list'>
+      <div className='file-list' ref='fileList'>
         <ul>
           {
             files.map((file, index) =>
@@ -293,16 +327,38 @@ export default class SnippetItemMultiFiles extends React.Component {
                   isEditing
                     ? <input
                       type='text'
-                      ref={`file${index}`}
+                      className='fileName'
                       defaultValue={file.name} />
                     : file.name
                 }
               </li>
             )
           }
+          {
+            isEditing &&
+            <li>
+              <input
+                type='text'
+                ref='newFile'
+                onFocus={this.handleNewFileFocus.bind(this)}
+                placeholder='New file'/>
+            </li>
+          }
         </ul>
       </div>
     )
+  }
+
+  handleNewFileFocus () {
+    const fileList = this.refs.fileList.querySelector('ul')
+    const newLI = document.createElement('li')
+    const newInput = document.createElement('input')
+    newInput.type = 'text'
+    newInput.className = 'fileName newFile'
+    newLI.appendChild(newInput)
+    fileList.insertBefore(newLI, fileList.lastChild)
+    newLI.focus()
+    this.applyEditorStyle()
   }
 
   handleChangeFileClick (index) {
