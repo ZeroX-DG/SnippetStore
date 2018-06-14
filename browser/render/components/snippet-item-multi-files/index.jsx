@@ -313,7 +313,14 @@ export default class SnippetItemMultiFiles extends React.Component {
         const file = snippet.files[index]
         const fileExtension = file.name.substring(file.name.lastIndexOf('.') + 1)
         const snippetMode = CodeMirror.findModeByExtension(fileExtension).mode
-        require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+        if (snippetMode === 'htmlmixed') {
+          require(`codemirror/mode/xml/xml`)
+          this.editor.setOption('mode', 'xml')
+          this.editor.setOption('htmlMode', true)
+        } else {
+          require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+          this.editor.setOption('mode', snippetMode)
+        }
         this.editor.setValue(snippet.files[index].value)
       })
     }
