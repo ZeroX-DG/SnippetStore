@@ -358,6 +358,12 @@ export default class SnippetItemMultiFiles extends React.Component {
     newLI.appendChild(newInput)
     fileList.insertBefore(newLI, fileList.lastChild)
     newInput.focus()
+    // remove newly added file if the user click outside and its name is empty
+    newInput.addEventListener('blur', () => {
+      if (!newInput.value) {
+        newInput.parentElement.remove()
+      }
+    })
     this.applyEditorStyle()
   }
 
