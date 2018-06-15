@@ -21,6 +21,19 @@ SnippetStore currently support 2 themes dark and light
 |----------------------------------------------------|---------------------------------------------------|
 | <img src='resources/image/screenshot-light.png' /> | <img src='resources/image/screenshot-dark.png' /> |
 
+## Tag support
+With SnippetStore you can assign multiple tags to your snippet and easy find them using the tag list on the right bar
+<p align='center'>
+  <img src='resources/image/screenshot-tag.png'>
+</p>
+
+## Multi file snippet
+Not satisfied with a single file snippet? With SnippetStore you can now store multiple files within a snippet
+
+<p align='center'>
+  <img src='resources/image/screenshot-multi-file.png'>
+</p>
+
 ## Internalization
 SnippetStore currently support 2 languages:
 - English
