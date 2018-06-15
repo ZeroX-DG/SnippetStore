@@ -32,12 +32,16 @@ export default class ModalSkeleton extends React.Component {
 
   render () {
     const { isOpen } = this.state
+    const { width, closeBtn } = this.props
     return (
       <div className='modal-overlay' style={{display: isOpen ? 'flex' : 'none'}}>
-        <div className='modal'>
-          <div className='close-btn' onClick={this.closeModal.bind(this)}>
-            <FAIcon icon='times' />
-          </div>
+        <div className='modal' style={{width: width || '70%'}}>
+          {
+            closeBtn !== false &&
+            <div className='close-btn' onClick={this.closeModal.bind(this)}>
+              <FAIcon icon='times' />
+            </div>
+          }
           {this.props.children}
         </div>
       </div>

@@ -8,7 +8,7 @@ const actions = [
   {
     name: 'createSnippet',
     action: () => {
-      eventEmitter.emit('modal:open', 'createSnippetModal')
+      eventEmitter.emit('modal:open', 'pickSnippetTypeModal')
     }
   },
   {

@@ -28,7 +28,7 @@ export default class SnippetList extends React.Component {
   }
 
   handleCreateSnippetClick () {
-    eventEmitter.emit('modal:open', 'createSnippetModal')
+    eventEmitter.emit('modal:open', 'pickSnippetTypeModal')
   }
 
   renderSnippetList () {
