@@ -331,6 +331,14 @@ export default class SnippetItemMultiFiles extends React.Component {
                       defaultValue={file.name} />
                     : file.name
                 }
+                {
+                  !isEditing &&
+                    <span
+                      className='icon'
+                      onClick={e => this.handleDeleteFile(e, index)}>
+                      <FAIcon icon='trash-alt' />
+                    </span>
+                }
               </li>
             )
           }
@@ -347,6 +355,21 @@ export default class SnippetItemMultiFiles extends React.Component {
         </ul>
       </div>
     )
+  }
+
+  handleDeleteFile (event, fileIndex) {
+    event.stopPropagation()
+    const { snippet, store } = this.props
+    const newSnippet  = _.clone(snippet)
+    newSnippet.files.splice(fileIndex, 1)
+    store.updateSnippet(newSnippet)
+    this.refs.fileList.style.maxHeight = '0px'
+    this.applyEditorStyle()
+    // reset height
+    setTimeout(() => {
+      this.refs.fileList.style.maxHeight = '300px'
+      this.applyEditorStyle()
+    })
   }
 
   handleNewFileFocus () {

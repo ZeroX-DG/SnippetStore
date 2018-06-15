@@ -104,6 +104,20 @@
         align-items: center
         padding: 10px
         cursor: pointer
+        justify-content: space-between
+        &:hover .icon
+          opacity: 1
+          pointer-events: all
+        .icon
+          float: right
+          width: 10px
+          height: 10px
+          display: inline-flex
+          justify-content: center
+          align-items: center
+          transition: opacity 0.3s
+          opacity: 0
+          pointer-events: none
         input[type='text']
           width: 100%
           border: none
