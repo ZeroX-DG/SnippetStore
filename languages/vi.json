@@ -52,5 +52,10 @@
   "Are you sure to delete this snippet?": "Bạn có chắc muốn xóa snippet này?",
   "Copied to clipboard": "đã sao chép vào bộ nhớ",
   "TAGS": "TAG",
-  "Snippet description": "Mô tả snippet"
+  "Snippet description": "Mô tả snippet",
+  "Create new snippet": "Tạo snippet mới",
+  "Single-file snippet": "Snippet 1 file",
+  "Multi-file snippet": "Snippet đa file",
+  "This is the type of snippet where you will only store 1 piece of code. This type of snippet is suitable for storing small functions": "Loại snippet này cho phép bạn tạo duy nhất 1 file. Loại snippet này thích hợp để chứa function nhỏ",
+  "This type of snippet can groups multiple files into 1 snippet and suitable for storing simple code snippet with more than 1 file": "Loại snippet này cho phép nhóm nhiều file trong 1 snippet và thích hợp chứa snippet cần nhiều file nhỏ"
 }
