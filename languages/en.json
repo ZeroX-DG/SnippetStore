@@ -57,5 +57,6 @@
   "Single-file snippet": "Single-file snippet",
   "Multi-file snippet": "Multi-file snippet",
   "This is the type of snippet where you will only store 1 piece of code. This type of snippet is suitable for storing small functions": "This is the type of snippet where you will only store 1 piece ofcode. This type of snippet is suitable for storing small functions",
-  "This type of snippet can groups multiple files into 1 snippet and suitable for storing simple code snippet with more than 1 file": "This type of snippet can groups multiple files into 1 snippet and suitable for storing simple code snippet with more than 1 file"
+  "This type of snippet can groups multiple files into 1 snippet and suitable for storing simple code snippet with more than 1 file": "This type of snippet can groups multiple files into 1 snippet and suitable for storing simple code snippet with more than 1 file",
+  "The snippet must have at least 1 file": "The snippet must have at least 1 file"
 }

@@ -18,7 +18,8 @@ export default class SnippetItemMultiFiles extends React.Component {
     super(props)
     this.state = {
       isEditing: false,
-      selectedFile: 0
+      selectedFile: 0,
+      editingFiles: []
     }
   }
 
@@ -28,8 +29,14 @@ export default class SnippetItemMultiFiles extends React.Component {
     const { theme, showLineNumber, tabSize, indentUsingTab } = config.editor
     const file = snippet.files[selectedFile]
     const fileExtension = getExtension(file.name)
-    const snippetMode = CodeMirror.findModeByExtension(fileExtension).mode
-    require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+    const resultMode = CodeMirror.findModeByExtension(fileExtension)
+    let snippetMode = 'null'
+    if (resultMode) {
+      snippetMode = resultMode.mode
+      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+    }
+
+    this.setState({ editingFiles: snippet.files })
 
     const gutters = showLineNumber
       ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
@@ -51,6 +58,9 @@ export default class SnippetItemMultiFiles extends React.Component {
     this.editor.setOption('tabSize', tabSize)
     this.editor.setOption('indentWithTabs', indentUsingTab)
     this.editor.setSize('100%', 'auto')
+    this.editor.on('change', () => {
+      this.handleEditingFileValueChange()
+    })
     this.applyEditorStyle()
   }
 
@@ -69,10 +79,19 @@ export default class SnippetItemMultiFiles extends React.Component {
       ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
       : []
 
+    const totalSnippets = snippet.files.length
     const file = snippet.files[selectedFile]
+    if (!file) {
+      this.handleChangeFileClick(totalSnippets - 1)
+      return
+    }
     const fileExtension = getExtension(file.name)
-    const snippetMode = CodeMirror.findModeByExtension(fileExtension).mode
-    require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+    const resultMode = CodeMirror.findModeByExtension(fileExtension)
+    let snippetMode = 'null'
+    if (resultMode) {
+      snippetMode = resultMode.mode
+      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+    }
 
     this.editor.getWrapperElement().style.fontSize = `${fontSize}px`
     this.editor.setOption('lineNumbers', showLineNumber)
@@ -95,6 +114,66 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   componentWillReceiveProps (props) {
     this.applyEditorStyle(props)
+  }
+
+  renderHeader () {
+    const { isEditing } = this.state
+    const { snippet } = this.props
+    return (
+      <div className='header'>
+        <div className='info'>
+          {
+            isEditing
+              ? <input type='text' ref='name' defaultValue={snippet.name} />
+              : snippet.name
+          }
+        </div>
+        <div className='tools'>
+          {
+            !isEditing &&
+            <div
+              className='copy-btn'
+              data-tip={ i18n.__('copy') }
+              onClick={this.copySnippet.bind(this)}>
+              <FAIcon icon='copy'/>
+            </div>
+          }
+          {
+            isEditing &&
+            <div
+              className='discard-btn'
+              data-tip={ i18n.__('discard changes') }
+              onClick={this.handleDiscardChangesClick.bind(this)}>
+              <FAIcon icon='times'/>
+            </div>
+          }
+          {
+            isEditing
+              ? <div
+                className='save-btn'
+                data-tip={ i18n.__('save changes') }
+                onClick={this.handleSaveChangesClick.bind(this)}>
+                <FAIcon icon='check'/>
+              </div>
+              : <div
+                className='edit-btn'
+                data-tip={ i18n.__('edit') }
+                onClick={this.handleEditButtonClick.bind(this)}>
+                <FAIcon icon='edit'/>
+              </div>
+          }
+          {
+            !isEditing &&
+            <div
+              className='delete-btn'
+              data-tip={ i18n.__('delete snippet') }
+              onClick={this.handleDeleteClick.bind(this)}>
+              <FAIcon icon='trash-alt'/>
+            </div>
+          }
+        </div>
+      </div>
+    )
   }
 
   copySnippet () {
@@ -121,126 +200,45 @@ export default class SnippetItemMultiFiles extends React.Component {
   }
 
   handleSaveChangesClick () {
-    const { snippet }      = this.props
-    const { selectedFile } = this.state
-    const fileList         = this.refs.fileList.querySelectorAll(`.fileName`)
-    const file             = snippet.files[selectedFile]
-    const valueChanged     = file.value !== this.editor.getValue()
-    const fileNameRef      = fileList[selectedFile]
-    const fileNameChanged  = file.name !== fileNameRef.value
-    const nameChanged      = snippet.name !== this.refs.name.value
-    const oldLang          = getExtension(file.name)
-    const newLang          = getExtension(fileNameRef.value)
-    const langChanged      = oldLang !== newLang
-    const newTags          = this.refs.tags.value.replace(/ /g, '').split(',')
-    const tagChanged       = !_.isEqual(snippet.tags, newTags)
-    const descripChanged   = snippet.description !== this.refs.description.value
-    const oldFilenames     = snippet.files.slice().map(file => file.name)
-    const newFilenames     = this.extractFilenames(fileList)
-    const fileListChanged  = !_.isEqual(oldFilenames, newFilenames)
-    if (
-      valueChanged    ||
-      fileNameChanged ||
-      langChanged     ||
-      tagChanged      ||
-      descripChanged  ||
-      nameChanged     ||
-      fileListChanged
-    ) {
-      const newSnippet                     = _.clone(this.props.snippet)
-      newSnippet.name                      = this.refs.name.value
-      newSnippet.files[selectedFile].value = this.editor.getValue()
-      newSnippet.files[selectedFile].name  = fileNameRef.value
-      newSnippet.tags                      = newTags
-      newSnippet.description               = this.refs.description.value
-      if (fileListChanged) {
-        newSnippet.files = this.updateFileList(newFilenames)
-      }
-      if (langChanged) {
-        const snippetMode = CodeMirror.findModeByExtension(newLang).mode
-        require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-        this.editor.setOption('mode', snippetMode)
-      }
-      this.props.store.updateSnippet(newSnippet)
+    const { snippet, store } = this.props
+    const { editingFiles }   = this.state
+    const nameChanged        = snippet.name !== this.refs.name.value
+    const newTags            = this.refs.tags.value.replace(/ /g, '').split(',')
+    const tagChanged         = !_.isEqual(snippet.tags, newTags)
+    const descripChanged     = snippet.description !== this.refs.description.value
+    if (tagChanged || descripChanged || nameChanged) {
+      const newSnippet       = _.clone(snippet)
+      newSnippet.name        = this.refs.name.value
+      newSnippet.tags        = newTags
+      newSnippet.description = this.refs.description.value
+      newSnippet.files       = editingFiles
+      store.updateSnippet(newSnippet)
     }
-
-    const tempInputs = [...this.refs.fileList.querySelectorAll('.newFile')]
-    tempInputs.forEach(input => input.parentElement.remove())
-    this.setState({ isEditing: false })
+    this.setState({ isEditing: false }, () => {
+      this.resetSnippetHeight()
+    })
     this.editor.setOption('readOnly', true)
   }
 
-  extractFilenames (fileList) {
-    return [...fileList].map(file => file.value)
-  }
-
-  updateFileList (newFileList) {
-    const { snippet } = this.props
-    const newSnippet  = _.clone(snippet)
-    let files         = newSnippet.files
-    files             = toJS(files)
-    newFileList = newFileList.filter(newFile => newFile) // remove empty name file
-    // filter all files that has been removed
-    files = files.filter(file => newFileList.indexOf(file.name) !== -1)
-    // add new files
-    newFileList.forEach(file => {
-      if (!files.find(ffile => ffile.name === file)) {
-        files.push({ key: generateKey(), name: file, value: '' })
-      }
-    })
-    return files
-  }
-
   handleEditButtonClick () {
+    const { snippet } = this.props
     this.setState({ isEditing: true }, () => {
       this.applyEditorStyle()
+      this.setState({ editingFiles: snippet.files })
       this.editor.setOption('readOnly', false)
     })
   }
 
-  renderHeader () {
-    const { isEditing } = this.state
+  handleDiscardChangesClick () {
     const { snippet } = this.props
-    return (
-      <div className='header'>
-        <div className='info'>
-          {
-            isEditing
-              ? <input type='text' ref='name' defaultValue={snippet.name} />
-              : snippet.name
-          }
-        </div>
-        <div className='tools'>
-          <div
-            className='copy-btn'
-            data-tip={ i18n.__('copy') }
-            onClick={this.copySnippet.bind(this)}>
-            <FAIcon icon='copy'/>
-          </div>
-          {
-            isEditing
-              ? <div
-                className='save-btn'
-                data-tip={ i18n.__('save changes') }
-                onClick={this.handleSaveChangesClick.bind(this)}>
-                <FAIcon icon='check'/>
-              </div>
-              : <div
-                className='edit-btn'
-                data-tip={ i18n.__('edit') }
-                onClick={this.handleEditButtonClick.bind(this)}>
-                <FAIcon icon='edit'/>
-              </div>
-          }
-          <div
-            className='delete-btn'
-            data-tip={ i18n.__('delete snippet') }
-            onClick={this.handleDeleteClick.bind(this)}>
-            <FAIcon icon='trash-alt'/>
-          </div>
-        </div>
-      </div>
-    )
+    this.setState({
+      isEditing: false,
+      editingFiles: snippet.files,
+      selectedFile: 0
+    }, () => {
+      this.editor.setOption('readOnly', true)
+      this.resetSnippetHeight()
+    })
   }
 
   renderTagList () {
@@ -312,8 +310,8 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   renderFileList () {
     const { snippet } = this.props
-    const { selectedFile, isEditing } = this.state
-    const files = snippet.files
+    const { selectedFile, isEditing, editingFiles } = this.state
+    const files = isEditing ? editingFiles : snippet.files
     return (
       <div className='file-list' ref='fileList'>
         <ul>
@@ -328,16 +326,16 @@ export default class SnippetItemMultiFiles extends React.Component {
                     ? <input
                       type='text'
                       className='fileName'
+                      onChange={e => this.handleEditingFileNameChange(e, index)}
                       defaultValue={file.name} />
                     : file.name
                 }
                 {
-                  !isEditing &&
-                    <span
-                      className='icon'
-                      onClick={e => this.handleDeleteFile(e, index)}>
-                      <FAIcon icon='trash-alt' />
-                    </span>
+                  <span
+                    className='icon'
+                    onClick={e => this.handleDeleteFile(e, index)}>
+                    <FAIcon icon='trash-alt' />
+                  </span>
                 }
               </li>
             )
@@ -357,15 +355,45 @@ export default class SnippetItemMultiFiles extends React.Component {
     )
   }
 
+  handleEditingFileNameChange (event, index) {
+    const { editingFiles } = this.state
+    const newEditingFiles  = toJS(editingFiles)
+    const name = event.target.value
+    newEditingFiles[index].name = name
+    this.setState({ editingFiles: newEditingFiles })
+  }
+
   handleDeleteFile (event, fileIndex) {
     event.stopPropagation()
     const { snippet, store } = this.props
-    const newSnippet  = _.clone(snippet)
-    newSnippet.files.splice(fileIndex, 1)
-    store.updateSnippet(newSnippet)
+    const { editingFiles, isEditing, selectedFile } = this.state
+    if (snippet.files.length > 1 && editingFiles.length > 1) {
+      // remove directly if not in editing mode
+      if (!isEditing) {
+        const newSnippet  = _.clone(snippet)
+        newSnippet.files.splice(fileIndex, 1)
+        store.updateSnippet(newSnippet)
+      } else {
+        // remove temporary from state
+        const newEditingFiles = toJS(editingFiles)
+        newEditingFiles.splice(fileIndex, 1)
+        this.setState({ editingFiles: newEditingFiles })
+      }
+      // prevent reading deleted snippet
+      if (selectedFile > editingFiles.length - 1) {
+        this.handleChangeFileClick(editingFiles.length - 1, () => {
+          this.resetSnippetHeight()
+        })
+      }
+    } else {
+      toast.error(i18n.__('The snippet must have at least 1 file'))
+    }
+  }
+
+  resetSnippetHeight () {
+    // reset height
     this.refs.fileList.style.maxHeight = '0px'
     this.applyEditorStyle()
-    // reset height
     setTimeout(() => {
       this.refs.fileList.style.maxHeight = '300px'
       this.applyEditorStyle()
@@ -373,31 +401,26 @@ export default class SnippetItemMultiFiles extends React.Component {
   }
 
   handleNewFileFocus () {
-    const fileList = this.refs.fileList.querySelector('ul')
-    const newLI = document.createElement('li')
-    const newInput = document.createElement('input')
-    newInput.type = 'text'
-    newInput.className = 'fileName newFile'
-    newLI.appendChild(newInput)
-    fileList.insertBefore(newLI, fileList.lastChild)
-    newInput.focus()
-    // remove newly added file if the user click outside and its name is empty
-    newInput.addEventListener('blur', () => {
-      if (!newInput.value) {
-        newInput.parentElement.remove()
-      }
+    const { editingFiles } = this.state
+    const newEditingFiles = toJS(editingFiles)
+    newEditingFiles.push({ key: generateKey(), name: '', value: '' })
+    this.setState({ editingFiles: newEditingFiles }, () => {
+      const inputs = this.refs.fileList.firstChild.childNodes
+      const input  = inputs[inputs.length - 2].querySelector('input')
+      input.focus()
     })
     this.applyEditorStyle()
   }
 
-  handleChangeFileClick (index) {
+  handleChangeFileClick (index, callback) {
     const { snippet } = this.props
-    const { isEditing } = this.state
-    if (!isEditing) {
-      this.setState({ selectedFile: index }, () => {
-        const file = snippet.files[index]
-        const fileExtension = file.name.substring(file.name.lastIndexOf('.') + 1)
-        const snippetMode = CodeMirror.findModeByExtension(fileExtension).mode
+    const { editingFiles, isEditing } = this.state
+    this.setState({ selectedFile: index }, () => {
+      const file = isEditing ? editingFiles[index] : snippet.files[index]
+      const fileExtension = file.name.substring(file.name.lastIndexOf('.') + 1)
+      const resultMode = CodeMirror.findModeByExtension(fileExtension)
+      if (resultMode) {
+        const snippetMode = resultMode.mode
         if (snippetMode === 'htmlmixed') {
           require(`codemirror/mode/xml/xml`)
           this.editor.setOption('mode', 'xml')
@@ -406,8 +429,22 @@ export default class SnippetItemMultiFiles extends React.Component {
           require(`codemirror/mode/${snippetMode}/${snippetMode}`)
           this.editor.setOption('mode', snippetMode)
         }
-        this.editor.setValue(snippet.files[index].value)
-      })
+      } else {
+        this.editor.setOption('mode', 'null')
+      }
+      this.editor.setValue(file.value)
+      if (callback && typeof callback === 'function') {
+        callback()
+      }
+    })
+  }
+
+  handleEditingFileValueChange () {
+    const { isEditing, selectedFile, editingFiles } = this.state
+    if (isEditing) {
+      const newEditingFiles = toJS(editingFiles)
+      newEditingFiles[selectedFile].value = this.editor.getValue()
+      this.setState({ editingFiles: newEditingFiles })
     }
   }
 

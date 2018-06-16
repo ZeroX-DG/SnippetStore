@@ -22,7 +22,11 @@ class SnippetStore {
         snippet.files.forEach(file => {
           const ExtensionIndex = file.name.lastIndexOf('.') + 1
           const fileExtension = file.name.substring(ExtensionIndex)
-          const langName = CodeMirror.findModeByExtension(fileExtension).name
+          const mode = CodeMirror.findModeByExtension(fileExtension)
+          let langName = `.${fileExtension.toUpperCase()}`
+          if (mode) {
+            langName = mode.name
+          }
           if (languages[langName]) {
             languages[langName] += 1
           } else {

@@ -2,16 +2,20 @@ import React from 'react'
 import ModalSkeleton from '../modal-skeleton'
 import eventEmitter from 'lib/event-emitter'
 import i18n from 'render/lib/i18n'
+import FAIcon from '@fortawesome/react-fontawesome'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import 'codemirror/addon/display/autorefresh'
+import './create-multi-file-snippet'
 
 export default class CreateMultiFilesSnippetModal extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       error: '',
-      name: 'createMultiFilesSnippetModal'
+      name: 'createMultiFilesSnippetModal',
+      selectedFile: 0,
+      files: []
     }
   }
 
@@ -82,30 +86,80 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
     this.editor.setValue('')
   }
 
+  renderFileList () {
+    const { selectedFile, files } = this.state
+    return (
+      <div className='file-list' ref='fileList'>
+        <ul>
+          {
+            files.map((file, index) =>
+              <li
+                key={file.key}
+                onClick={() => this.handleChangeFileClick(index)}
+                className={index === selectedFile ? 'selected' : ''}>
+                {
+                  <input
+                    type='text'
+                    className='fileName'
+                    defaultValue={file.name} />
+                }
+                {
+                  <span
+                    className='icon'
+                    onClick={e => this.handleDeleteFile(e, index)}>
+                    <FAIcon icon='trash-alt' />
+                  </span>
+                }
+              </li>
+            )
+          }
+          {
+            <li>
+              <input
+                type='text'
+                ref='newFile'
+                onFocus={this.handleNewFileFocus.bind(this)}
+                placeholder='New file'/>
+            </li>
+          }
+        </ul>
+      </div>
+    )
+  }
+
+  handleDeleteFile () {}
+  handleChangeFileClick () {}
+  handleNewFileFocus () {}
+
   render () {
     i18n.setLocale(this.props.config.ui.language)
     return (
       <ModalSkeleton name={this.state.name}>
-        <h2 className='modal-title'>{ i18n.__('Create snippet') }</h2>
-        <div className='modal-content'>
-          <p className='error'>{this.state.error}</p>
-          <div className='input-group'>
-            <label>{ i18n.__('Snippet name') }</label>
-            <input type='text' ref='snippetName' />
+        <div className='create-multi-file-snippet'>
+          <h2 className='modal-title'>{ i18n.__('Create snippet') }</h2>
+          <div className='modal-content'>
+            <p className='error'>{this.state.error}</p>
+            <div className='input-group'>
+              <label>{ i18n.__('Snippet name') }</label>
+              <input type='text' ref='snippetName' />
+            </div>
+            <div className='code-input-group'>
+              <label>{ i18n.__('Snippet description') }</label>
+              <textarea ref='description'></textarea>
+            </div>
+            <div className='code-input-group'>
+              <label>{ i18n.__('Snippet content') }</label>
+              <div className='inline'>
+                {this.renderFileList()}
+                <div className='code' ref='editor'></div>
+              </div>
+            </div>
+            <button
+              className='float-right'
+              onClick={this.createSnippet.bind(this)}>
+              { i18n.__('Create') }
+            </button>
           </div>
-          <div className='code-input-group'>
-            <label>{ i18n.__('Snippet description') }</label>
-            <textarea ref='description'></textarea>
-          </div>
-          <div className='code-input-group'>
-            <label>{ i18n.__('Snippet content') }</label>
-            <div className='code' ref='editor'></div>
-          </div>
-          <button
-            className='float-right'
-            onClick={this.createSnippet.bind(this)}>
-            { i18n.__('Create') }
-          </button>
         </div>
       </ModalSkeleton>
     )

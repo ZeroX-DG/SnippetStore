@@ -15,21 +15,24 @@ export default class LanguageList extends React.Component {
   }
 
   getLanguageIcon (lang) {
-    const langMode = CodeMirror.findModeByName(lang)
-    const snippetMode = langMode.mode
     let languageIcon = <img src={defaultLanguageIcon} className='lang-icon' />
-    if (langMode.alias) {
-      for (let i = 0; i < langMode.alias.length; i++) {
-        const alias = langMode.alias[i]
-        if (isDevIconExists(`devicon-${alias}-plain`)) {
-          languageIcon = <i className={`devicon-${alias}-plain colored`} />
-          break
+    const langMode = CodeMirror.findModeByName(lang)
+    if (langMode) {
+      const snippetMode = langMode.mode
+
+      if (langMode.alias) {
+        for (let i = 0; i < langMode.alias.length; i++) {
+          const alias = langMode.alias[i]
+          if (isDevIconExists(`devicon-${alias}-plain`)) {
+            languageIcon = <i className={`devicon-${alias}-plain colored`} />
+            break
+          }
         }
       }
-    }
-    // if it's not alias then maybe the mode name ?
-    if (isDevIconExists(`devicon-${snippetMode}-plain`)) {
-      languageIcon = <i className={`devicon-${snippetMode}-plain colored`} />
+      // if it's not alias then maybe the mode name ?
+      if (isDevIconExists(`devicon-${snippetMode}-plain`)) {
+        languageIcon = <i className={`devicon-${snippetMode}-plain colored`} />
+      }
     }
     return languageIcon
   }
