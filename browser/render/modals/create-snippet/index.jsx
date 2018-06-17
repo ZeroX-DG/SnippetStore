@@ -16,21 +16,12 @@ export default class CreateSnippetModal extends React.Component {
   }
 
   componentDidMount () {
-    const { config } = this.props
-    const { fontFamily, showLineNumber, theme, tabSize, indentUsingTab } = config.editor
     this.editor = CodeMirror(this.refs.editor, {
-      lineNumbers: showLineNumber,
-      theme: theme,
-      foldGutter: true,
-      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
       autoRefresh: true
     })
 
-    this.editor.setOption('indentUnit', tabSize)
-    this.editor.setOption('tabSize', tabSize)
-    this.editor.setOption('indentWithTabs', indentUsingTab)
-    this.editor.setSize('100%', '200px')
-    this.editor.getWrapperElement().style.fontFamily = fontFamily
+    this.editor.setSize('100%', '100%')
+    this.applyEditorStyle()
 
     eventEmitter.on('modal:onClose', (event, name) => {
       if (name === this.state.name) {
@@ -69,7 +60,7 @@ export default class CreateSnippetModal extends React.Component {
 
     const wrapperElement = this.editor.getWrapperElement()
     wrapperElement.style.fontFamily = fontFamily
-    wrapperElement.querySelector('.CodeMirror-scroll').style.maxHeight = '300px'
+    wrapperElement.querySelector('.CodeMirror-scroll').style.maxHeight = '200px'
     this.editor.refresh()
   }
 
@@ -80,8 +71,17 @@ export default class CreateSnippetModal extends React.Component {
   changeLang () {
     const snippetLang = this.refs.lang.value
     const snippetMode = CodeMirror.findModeByName(snippetLang).mode
-    require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-    this.editor.setOption('mode', snippetMode)
+    if (snippetMode === 'htmlmixed') {
+      require(`codemirror/mode/xml/xml`)
+      this.editor.setOption('mode', 'xml')
+      this.editor.setOption('htmlMode', true)
+    } else if (snippetMode === 'sql') {
+      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+      this.editor.setOption('mode', 'text/x-sql')
+    } else {
+      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+      this.editor.setOption('mode', snippetMode)
+    }
   }
 
   createSnippet () {
@@ -135,7 +135,7 @@ export default class CreateSnippetModal extends React.Component {
           </div>
           <div className='code-input-group'>
             <label>{ i18n.__('Snippet description') }</label>
-            <textarea ref='description'></textarea>
+            <textarea ref='description' className='description'></textarea>
           </div>
           <div className='code-input-group'>
             <label>{ i18n.__('Snippet content') }</label>
