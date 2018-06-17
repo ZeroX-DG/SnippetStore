@@ -18,8 +18,11 @@ function searchByLanguage (snippets, language) {
           if (mode) {
             langName = mode.name
           }
-          return langName.match(languageRegex)
+          if (langName.match(languageRegex)) {
+            return true
+          }
         }
+        return false
       } else {
         return snippet.lang.match(languageRegex)
       }
