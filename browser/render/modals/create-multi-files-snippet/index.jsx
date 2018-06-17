@@ -123,8 +123,9 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
   reset () {
     this.refs.snippetName.value  = ''
     this.refs.description.value  = ''
-    this.refs.lang.selectedIndex = 0
-    this.editor.setValue('')
+    this.setState({ files: [], selectedFile: 0, error: '' }, () => {
+      this.editor.setValue('')
+    })
   }
 
   renderFileList () {
@@ -235,9 +236,11 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
 
   handleEditingFileValueChange () {
     const { selectedFile, files } = this.state
-    const newEditingFiles = _.clone(files)
-    newEditingFiles[selectedFile].value = this.editor.getValue()
-    this.setState({ files: newEditingFiles })
+    if (files.length > 0) {
+      const newEditingFiles = _.clone(files)
+      newEditingFiles[selectedFile].value = this.editor.getValue()
+      this.setState({ files: newEditingFiles })
+    }
   }
 
   handleEditingFileNameChange (event, index) {
