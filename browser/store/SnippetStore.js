@@ -23,7 +23,9 @@ class SnippetStore {
           const ExtensionIndex = file.name.lastIndexOf('.') + 1
           const fileExtension = file.name.substring(ExtensionIndex)
           const mode = CodeMirror.findModeByExtension(fileExtension)
-          let langName = `.${fileExtension.toUpperCase()}`
+          let langName = fileExtension
+            ? fileExtension.toUpperCase()
+            : 'unknown'
           if (mode) {
             langName = mode.name
           }
