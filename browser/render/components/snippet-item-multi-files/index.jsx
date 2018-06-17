@@ -200,17 +200,18 @@ export default class SnippetItemMultiFiles extends React.Component {
   }
 
   handleSaveChangesClick () {
+    const { tags, name, description } = this.refs
     const { snippet, store } = this.props
     const { editingFiles }   = this.state
-    const nameChanged        = snippet.name !== this.refs.name.value
-    const newTags            = this.refs.tags.value.replace(/ /g, '').split(',')
+    const nameChanged        = snippet.name !== name.value
+    const newTags            = tags.value.replace(/ /g, '').split(',')
     const tagChanged         = !_.isEqual(snippet.tags, newTags)
-    const descripChanged     = snippet.description !== this.refs.description.value
-    if (tagChanged || descripChanged || nameChanged) {
+    const descriptionChanged = snippet.description !== description.value
+    if (tagChanged || descriptionChanged || nameChanged) {
       const newSnippet       = _.clone(snippet)
-      newSnippet.name        = this.refs.name.value
+      newSnippet.name        = name.value
       newSnippet.tags        = newTags
-      newSnippet.description = this.refs.description.value
+      newSnippet.description = description.value
       newSnippet.files       = editingFiles
       store.updateSnippet(newSnippet)
     }
@@ -402,9 +403,13 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   handleNewFileFocus () {
     const { editingFiles } = this.state
+    // make a clone of the current editing file list
     const newEditingFiles = toJS(editingFiles)
+    // push a new file to the list
     newEditingFiles.push({ key: generateKey(), name: '', value: '' })
     this.setState({ editingFiles: newEditingFiles }, () => {
+      // a new input tag will automatically created after set state and we want
+      // to focus on that input tag
       const inputs = this.refs.fileList.firstChild.childNodes
       const input  = inputs[inputs.length - 2].querySelector('input')
       input.focus()
@@ -415,10 +420,14 @@ export default class SnippetItemMultiFiles extends React.Component {
   handleChangeFileClick (index, callback) {
     const { snippet } = this.props
     const { editingFiles, isEditing } = this.state
+    // set the new selected file index
     this.setState({ selectedFile: index }, () => {
+      // if the snippet is in the editing mode, interact with the state instead
+      // of the snippet in prop
       const file = isEditing ? editingFiles[index] : snippet.files[index]
       const fileExtension = file.name.substring(file.name.lastIndexOf('.') + 1)
       const resultMode = CodeMirror.findModeByExtension(fileExtension)
+      // if the mode for that language exists then use it otherwise use text
       if (resultMode) {
         const snippetMode = resultMode.mode
         if (snippetMode === 'htmlmixed') {
