@@ -204,12 +204,24 @@ export default class SnippetItem extends React.Component {
                 }
               </select>
           }
-          <div
-            className='copy-btn'
-            data-tip={ i18n.__('copy') }
-            onClick={this.copySnippet.bind(this)}>
-            <FAIcon icon='copy'/>
-          </div>
+          {
+            !isEditing &&
+            <div
+              className='copy-btn'
+              data-tip={ i18n.__('copy') }
+              onClick={this.copySnippet.bind(this)}>
+              <FAIcon icon='copy'/>
+            </div>
+          }
+          {
+            isEditing &&
+            <div
+              className='discard-btn'
+              data-tip={ i18n.__('discard changes') }
+              onClick={this.handleDiscardChangesClick.bind(this)}>
+              <FAIcon icon='times'/>
+            </div>
+          }
           {
             isEditing
               ? <div
@@ -225,15 +237,24 @@ export default class SnippetItem extends React.Component {
                 <FAIcon icon='edit'/>
               </div>
           }
-          <div
-            className='delete-btn'
-            data-tip={ i18n.__('delete snippet') }
-            onClick={this.handleDeleteClick.bind(this)}>
-            <FAIcon icon='trash-alt'/>
-          </div>
+          {
+            !isEditing &&
+            <div
+              className='delete-btn'
+              data-tip={ i18n.__('delete snippet') }
+              onClick={this.handleDeleteClick.bind(this)}>
+              <FAIcon icon='trash-alt'/>
+            </div>
+          }
         </div>
       </div>
     )
+  }
+
+  handleDiscardChangesClick () {
+    this.setState({ isEditing: false }, () => {
+      this.editor.setOption('readOnly', true)
+    })
   }
 
   renderTagList () {
