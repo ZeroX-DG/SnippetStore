@@ -5,12 +5,12 @@ const Store = require('electron-store')
 const store = new Store()
 const _ = require('lodash')
 
-let showMenu = process.platform !== 'win32'
+const showMenu = process.platform !== 'win32'
 const windowSize = store.get('windowsize') || { width: 1080, height: 720 }
 let mainWindow = null
 
 function createWindow () {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: windowSize.width,
     height: windowSize.height,
     minWidth: 500,

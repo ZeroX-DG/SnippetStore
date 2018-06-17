@@ -25,7 +25,12 @@ export function findIndexObject (array, property, value) {
 }
 
 export function getExtension (name) {
-  return name.substring(name.lastIndexOf('.') + 1)
+  const indexOfExtension = name.lastIndexOf('.')
+  if (indexOfExtension !== -1) {
+    return name.substring(indexOfExtension + 1)
+  } else {
+    return null
+  }
 }
 
 export default {

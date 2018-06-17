@@ -23,7 +23,7 @@ export default class SnippetItem extends React.Component {
 
   componentDidMount () {
     const { snippet, config } = this.props
-    const { theme, showLineNumber, tabSize, indentUsingTab } = config.editor
+    const { theme, showLineNumber } = config.editor
     const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
     require(`codemirror/mode/${snippetMode}/${snippetMode}`)
     const gutters = showLineNumber
@@ -40,10 +40,6 @@ export default class SnippetItem extends React.Component {
       autoCloseBrackets: true,
       autoRefresh: true
     })
-
-    this.editor.setOption('indentUnit', tabSize)
-    this.editor.setOption('tabSize', tabSize)
-    this.editor.setOption('indentWithTabs', indentUsingTab)
     this.editor.setSize('100%', 'auto')
     this.applyEditorStyle()
   }

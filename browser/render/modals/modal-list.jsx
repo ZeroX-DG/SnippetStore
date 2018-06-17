@@ -6,20 +6,21 @@ import SettingModal from './setting'
 
 export default class ModalList extends React.Component {
   render () {
+    const { config, store } = this.props
     return (
       <React.Fragment>
         <CreateSnippetModal
-          config={this.props.config}
-          store={this.props.store}/>
+          config={config}
+          store={store}/>
         <CreateMultiFilesSnippetModal
-          config={this.props.config}
-          store={this.props.store} />
+          config={config}
+          store={store} />
         <SettingModal
-          config={this.props.config}
-          store={this.props.store} />
+          config={config}
+          store={store} />
         <PickSnippetType
-          config={this.props.config}
-          store={this.props.store} />
+          config={config}
+          store={store} />
       </React.Fragment>
     )
   }

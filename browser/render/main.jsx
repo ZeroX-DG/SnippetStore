@@ -33,12 +33,13 @@ export default class Main extends React.Component {
   }
 
   render () {
+    const { config } = this.state
     return (
       <div className='wrapper'>
         <ToastContainer />
-        <ModalList store={SnippetStore} config={this.state.config} />
-        <SideBar store={SnippetStore} config={this.state.config} />
-        <SnippetList store={SnippetStore} config={this.state.config} />
+        <ModalList store={SnippetStore} config={config} />
+        <SideBar store={SnippetStore} config={config} />
+        <SnippetList store={SnippetStore} config={config} />
       </div>
     )
   }

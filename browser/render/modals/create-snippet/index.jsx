@@ -39,6 +39,44 @@ export default class CreateSnippetModal extends React.Component {
     })
   }
 
+  applyEditorStyle (props) {
+    const { config } = props || this.props
+    const {
+      theme,
+      showLineNumber,
+      fontFamily,
+      fontSize,
+      tabSize,
+      indentUsingTab
+    } = config.editor
+    // only update codemirror mode if new props is passed
+    if (props) {
+      const snippetMode = CodeMirror.findModeByName(this.refs.lang.value).mode
+      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+    }
+    const gutters = showLineNumber
+      ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+      : []
+    this.editor.getWrapperElement().style.fontSize = `${fontSize}px`
+    this.editor.setOption('lineNumbers', showLineNumber)
+    this.editor.setOption('foldGutter', showLineNumber)
+    this.editor.setOption('theme', theme)
+    this.editor.setOption('gutters', gutters)
+
+    this.editor.setOption('indentUnit', tabSize)
+    this.editor.setOption('tabSize', tabSize)
+    this.editor.setOption('indentWithTabs', indentUsingTab)
+
+    const wrapperElement = this.editor.getWrapperElement()
+    wrapperElement.style.fontFamily = fontFamily
+    wrapperElement.querySelector('.CodeMirror-scroll').style.maxHeight = '300px'
+    this.editor.refresh()
+  }
+
+  componentWillReceiveProps (props) {
+    this.applyEditorStyle(props)
+  }
+
   changeLang () {
     const snippetLang = this.refs.lang.value
     const snippetMode = CodeMirror.findModeByName(snippetLang).mode

@@ -10,7 +10,7 @@ const APP_DATA_PATH = isTest
 
 const SNIPPET_INFO_FILE = path.join(APP_DATA_PATH, 'snippets.json')
 
-let APIConfig = {
+const APIConfig = {
   APP_DATA_PATH,
   SNIPPET_INFO_FILE
 }

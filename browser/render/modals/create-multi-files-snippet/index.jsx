@@ -31,6 +31,7 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
       gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
       autoRefresh: true
     })
+    this.editor.setSize('100%', '100%')
 
     this.editor.on('change', () => {
       this.handleEditingFileValueChange()
@@ -44,8 +45,12 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
     })
   }
 
-  applyEditorStyle () {
-    const { config } = this.props
+  componentWillReceiveProps (props) {
+    this.applyEditorStyle(props)
+  }
+
+  applyEditorStyle (props) {
+    const { config } = props || this.props
     const { selectedFile, files } = this.state
     const {
       theme,
@@ -58,20 +63,6 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
     const gutters = showLineNumber
       ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
       : []
-
-    const totalSnippets = files.length
-    const file = files[selectedFile]
-    if (!file) {
-      this.handleChangeFileClick(totalSnippets - 1)
-      return
-    }
-    const fileExtension = getExtension(file.name)
-    const resultMode = CodeMirror.findModeByExtension(fileExtension)
-    let snippetMode = 'null'
-    if (resultMode) {
-      snippetMode = resultMode.mode
-      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-    }
 
     this.editor.getWrapperElement().style.fontSize = `${fontSize}px`
     this.editor.setOption('lineNumbers', showLineNumber)
@@ -86,10 +77,24 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
     const wrapperElement = this.editor.getWrapperElement()
     wrapperElement.style.fontFamily = fontFamily
     const scrollElement = wrapperElement.querySelector('.CodeMirror-scroll')
-    scrollElement.style.maxHeight = '300px'
+    scrollElement.style.maxHeight = '200px'
     const FileList = this.refs.fileList
     scrollElement.style.minHeight = `${FileList.clientHeight}px`
     this.editor.refresh()
+
+    const totalSnippets = files.length
+    const file = files[selectedFile]
+    if (!file) {
+      this.handleChangeFileClick(totalSnippets - 1)
+      return
+    }
+    const fileExtension = getExtension(file.name)
+    const resultMode = CodeMirror.findModeByExtension(fileExtension)
+    let snippetMode = 'null'
+    if (resultMode) {
+      snippetMode = resultMode.mode
+      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+    }
   }
 
   createSnippet () {
@@ -186,7 +191,6 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
 
   handleChangeFileClick (index, callback) {
     const { files } = this.state
-    console.log(index)
     // set the new selected file index
     this.setState({ selectedFile: index }, () => {
       // if the snippet is in the editing mode, interact with the state instead
