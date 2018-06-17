@@ -21,7 +21,9 @@ class SnippetStore {
       if (snippet.files !== undefined) {
         snippet.files.forEach(file => {
           const ExtensionIndex = file.name.lastIndexOf('.') + 1
-          const fileExtension = file.name.substring(ExtensionIndex)
+          const fileExtension = ExtensionIndex >= 2
+            ? file.name.substring(ExtensionIndex)
+            : ''
           const mode = CodeMirror.findModeByExtension(fileExtension)
           let langName = fileExtension
             ? fileExtension.toUpperCase()

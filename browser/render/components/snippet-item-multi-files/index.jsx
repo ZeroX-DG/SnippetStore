@@ -329,7 +329,7 @@ export default class SnippetItemMultiFiles extends React.Component {
                       className='fileName'
                       onChange={e => this.handleEditingFileNameChange(e, index)}
                       defaultValue={file.name} />
-                    : file.name
+                    : (file.name ? file.name : 'untitled')
                 }
                 {
                   <span
@@ -412,6 +412,7 @@ export default class SnippetItemMultiFiles extends React.Component {
       // to focus on that input tag
       const inputs = this.refs.fileList.firstChild.childNodes
       const input  = inputs[inputs.length - 2].querySelector('input')
+      this.handleChangeFileClick(newEditingFiles.length - 1)
       input.focus()
     })
     this.applyEditorStyle()
