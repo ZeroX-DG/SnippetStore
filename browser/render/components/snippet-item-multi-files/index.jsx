@@ -382,10 +382,15 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   handleDeleteFile (event, fileIndex) {
     event.stopPropagation()
-    const { snippet, store } = this.props
+    const { snippet, store, config } = this.props
     const { editingFiles, isEditing, selectedFile } = this.state
     if (snippet.files.length > 1 && editingFiles.length > 1) {
       // remove directly if not in editing mode
+      if (config.ui.showDeleteConfirmDialog) {
+        if (!confirm(i18n.__('Are you sure to delete this file?'))) {
+          return
+        }
+      }
       if (!isEditing) {
         const newSnippet  = _.clone(snippet)
         newSnippet.files.splice(fileIndex, 1)
