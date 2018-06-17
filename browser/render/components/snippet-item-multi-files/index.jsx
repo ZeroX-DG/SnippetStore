@@ -361,6 +361,22 @@ export default class SnippetItemMultiFiles extends React.Component {
     const newEditingFiles  = toJS(editingFiles)
     const name = event.target.value
     newEditingFiles[index].name = name
+    const fileExtension = getExtension(name)
+    const resultMode = CodeMirror.findModeByExtension(fileExtension)
+    // if the mode for that language exists then use it otherwise use text
+    if (resultMode) {
+      const snippetMode = resultMode.mode
+      if (snippetMode === 'htmlmixed') {
+        require(`codemirror/mode/xml/xml`)
+        this.editor.setOption('mode', 'xml')
+        this.editor.setOption('htmlMode', true)
+      } else {
+        require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+        this.editor.setOption('mode', snippetMode)
+      }
+    } else {
+      this.editor.setOption('mode', 'null')
+    }
     this.setState({ editingFiles: newEditingFiles })
   }
 
@@ -426,7 +442,7 @@ export default class SnippetItemMultiFiles extends React.Component {
       // if the snippet is in the editing mode, interact with the state instead
       // of the snippet in prop
       const file = isEditing ? editingFiles[index] : snippet.files[index]
-      const fileExtension = file.name.substring(file.name.lastIndexOf('.') + 1)
+      const fileExtension = getExtension(file.name)
       const resultMode = CodeMirror.findModeByExtension(fileExtension)
       // if the mode for that language exists then use it otherwise use text
       if (resultMode) {
