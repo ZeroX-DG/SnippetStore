@@ -6,6 +6,8 @@ Every notable changes in each version will be listed in this file.
 - **Snippet**: Multi file snippet support
 - **Interface**: Added snippet type picker when create new snippet
 - **Core**: Updated search snippet API to fit multi file snippet structure
+- **Core**: New shortcut ESC to close modal
+- **Interface**: Added new menu bar which can be trigger using Alt key
 ## Bugfixes:
 - **Interface**: Updated i18n support for some missing components
 - **Interface**: Updated tag list & language list height and width overflow bug
