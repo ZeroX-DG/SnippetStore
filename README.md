@@ -11,8 +11,8 @@ SnippetStore is a application for developers to store their snippets and quickly
 Currently SnippetStore only available for linux. If you use other OS then you will have to build it from source.
 You can get the latest release of SnippetStore [here](https://github.com/ZeroX-DG/SnippetStore/releases)
 
-1. Download it and unzip it
-2. Run it
+1. Download the .deb file and execute it.
+2. The app should appear in your menu
 
 ## Theme
 SnippetStore currently support 2 themes dark and light
