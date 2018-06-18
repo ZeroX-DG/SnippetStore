@@ -8,6 +8,7 @@
 SnippetStore is a application for developers to store their snippets and quickly retrieve them when needed. SnippetStore mainly focus on storing code therefor its interface is small and simple, perfect for busy developers who doesn't care about small details.
 
 ## Download
+Currently SnippetStore only available for linux. If you use other OS then you will have to build it from source.
 You can get the latest release of SnippetStore [here](https://github.com/ZeroX-DG/SnippetStore/releases)
 
 1. Download it and unzip it

@@ -50,7 +50,8 @@ var config = Object.assign({}, skeleton, {
   },
   output: {
     path: path.join(__dirname, '..', 'compiled'),
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: '../compiled/'
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),

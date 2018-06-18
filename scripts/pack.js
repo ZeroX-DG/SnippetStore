@@ -14,7 +14,7 @@ function start (platform) {
     prune: true,
     overwrite: true,
     out: path.join(__dirname, '..', 'dist'),
-    ignore: /^\/browser|\.babelrc|\.gitignore|^\/\.gitmodules|^\/readme.md|^\/webpack|^\/node_modules\/babel-register/
+    ignore: /^\/browser|\.babelrc|README.md|CHANGELOG.md|jsconfig.json|\/test|\/scripts|\.gitignore|\.eslintignore|\.eslintrc.js|.travis.yml|contributing.md|^\/\.gitmodules|^\/readme.md|^\/webpack|^\/node_modules\/babel-register/
   }
   switch (platform) {
     case 'win':

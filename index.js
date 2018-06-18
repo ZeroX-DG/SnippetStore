@@ -1,1 +1,4 @@
-require('./app/app-main')
+function runMainApp () {
+  require('./app/app-main')
+}
+runMainApp()
