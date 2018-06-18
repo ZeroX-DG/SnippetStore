@@ -22,6 +22,12 @@ const actions = [
     action: () => {
       eventEmitter.emit('sidebar:toggle')
     }
+  },
+  {
+    name: 'closeAllModals',
+    action: () => {
+      eventEmitter.emit('modal:closeAll')
+    }
   }
 ]
 

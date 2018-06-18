@@ -38,4 +38,6 @@ function storeWindowSize () {
   } catch (e) {}
 }
 
-module.exports = createWindow
+createWindow()
+
+module.exports = mainWindow

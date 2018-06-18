@@ -28,6 +28,10 @@ export default class ModalSkeleton extends React.Component {
         this.setState({ isOpen: false })
       }
     })
+
+    eventEmitter.on('modal:closeAll', () => {
+      this.setState({ isOpen: false })
+    })
   }
 
   render () {
