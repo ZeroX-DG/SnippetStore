@@ -20,7 +20,7 @@ const DEFAULT_CONFIG = {
   editor: {
     showLineNumber: true,
     theme: 'seti',
-    fontFamily: 'Consolas, sans-serif',
+    fontFamily: 'Fira Code, Consolas, sans-serif',
     fontSize: 18,
     indentUsingTab: false,
     tabSize: 2

@@ -19,6 +19,7 @@ Every notable changes in each version will be listed in this file.
 - **Interface**: Prevent user select in some components
 - **Development**: Added cross-env for better development in cross platform
 - **Snippet**: Allow resize snippet description textarea in edit mode
+- **Interace**: Bundled Fira Code font along with the app
 
 # 0.0.1
 - Single file snippet
