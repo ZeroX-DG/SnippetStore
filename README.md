@@ -46,6 +46,7 @@ SnippetStore currently support 2 languages:
 | Open create snippet modal | ctrl + n |
 | Open setting modal        | ctrl + , |
 | Toggle small sidebar mode | ctrl + b |
+| Close all modal           | esc      |
 
 ## Tech Stack
 - Framework: [Electron](https://electronjs.org/)
