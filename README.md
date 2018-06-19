@@ -2,7 +2,12 @@
   <img src='resources/image/screenshot.png' />
 </p>
 <h1 align='center'>SnippetStore</h1>
-<p align='center'><i>A snippet management app for developers</i></p>
+<p align='center'>
+<i>A snippet management app for developers</i>
+</p>
+<p align='center'>
+<img src='https://travis-ci.org/ZeroX-DG/SnippetStore.svg?branch=master' alt='travis'>
+</p>
 
 ## About this project
 SnippetStore is a application for developers to store their snippets and quickly retrieve them when needed. SnippetStore mainly focus on storing code therefor its interface is small and simple, perfect for busy developers who doesn't care about small details.
