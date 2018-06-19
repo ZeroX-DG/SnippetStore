@@ -1,7 +1,7 @@
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
 import SideBar from './components/side-bar'
-import SnippetList from './components/snippet-list'
+import MainArea from './components/main-area'
 import ModalList from './modals/modal-list'
 import SnippetStore from 'store/SnippetStore'
 import CM from 'lib/config-manager'
@@ -39,7 +39,7 @@ export default class Main extends React.Component {
         <ToastContainer />
         <ModalList store={SnippetStore} config={config} />
         <SideBar store={SnippetStore} config={config} />
-        <SnippetList store={SnippetStore} config={config} />
+        <MainArea store={SnippetStore} config={config} />
       </div>
     )
   }

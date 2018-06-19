@@ -1,61 +1,13 @@
-.snippet-list
-  height: 100vh
-  width: calc(100% - 300px)
-  position: fixed
-  right: 0
-  overflow-y: hidden
-  .search-bar
-    width: calc(80% - 10px)
-    margin: 20px 10%
-    margin-top: 55px
-    border-radius: 5px
-    overflow: hidden
-    position: relative
-    display: flex
-    input[type='text']
-      width: calc(100% - 80px)
-      height: 40px
-      padding: 5px 10px
-      padding-left: 35px
-      border: none
-      outline: none
-      font-size: 15px
-    .search-icon
-      position: absolute
-      left: 10px
-      top: 10px
-    .create-btn
-      width: 80px
-      height: 40px
-      border: none
-      cursor: pointer
-      .icon
-        margin-right: 10px
-        display: inline
-  .snippets
-    width: 100%
-    height: calc(100% - 200px)
-    overflow-y: scroll
-    &::-webkit-scrollbar
-      width: 12px
+.snippets
+  width: 100%
+  height: calc(100% - 200px)
+  overflow-y: scroll
+  &::-webkit-scrollbar
+    width: 12px
 
-    &::-webkit-scrollbar-thumb
-      background-color: rgba(0, 0, 0, 0.5)
-
-  .emptyMessage
-    text-align: center
-    color: inherit
-    margin-top: 200px
-  .list-tools
-    width: 80%
-    margin-left: 10%
-    margin-bottom: 20px
-    font-family: 'Lato'
-    select
-      width: 270px
-      height: 30px
-      border: none
-      outline: none
-      display: inline-block
-      padding-left: 5px
-      border-radius: 5px
+  &::-webkit-scrollbar-thumb
+    background-color: rgba(0, 0, 0, 0.5)
+.emptyMessage
+  text-align: center
+  color: inherit
+  margin-top: 200px
