@@ -22,12 +22,6 @@ export default class CreateSnippetModal extends React.Component {
 
     this.editor.setSize('100%', '100%')
     this.applyEditorStyle()
-
-    eventEmitter.on('modal:onClose', (event, name) => {
-      if (name === this.state.name) {
-        this.reset()
-      }
-    })
   }
 
   applyEditorStyle (props) {
@@ -101,15 +95,7 @@ export default class CreateSnippetModal extends React.Component {
       value: snippetCode,
       description: snippetDescription
     })
-    this.reset()
-    eventEmitter.emit('modal:close', this.state.name)
-  }
-
-  reset () {
-    this.refs.snippetName.value  = ''
-    this.refs.description.value  = ''
-    this.refs.lang.selectedIndex = 0
-    this.editor.setValue('')
+    eventEmitter.emit('modal:close')
   }
 
   render () {

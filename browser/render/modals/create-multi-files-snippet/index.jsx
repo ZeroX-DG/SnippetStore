@@ -115,16 +115,7 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
       description: snippetDescription,
       files
     })
-    this.reset()
-    eventEmitter.emit('modal:close', this.state.name)
-  }
-
-  reset () {
-    this.refs.snippetName.value  = ''
-    this.refs.description.value  = ''
-    this.setState({ files: [], selectedFile: 0, error: '' }, () => {
-      this.editor.setValue('')
-    })
+    eventEmitter.emit('modal:close')
   }
 
   renderFileList () {
