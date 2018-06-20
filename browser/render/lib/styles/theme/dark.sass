@@ -54,7 +54,7 @@ body[data-theme='dark']
     input[type='text'], input[type='number'], textarea, select
       background: $input-tag-background--dark
       color: $input-tag-foreground--dark
-    button
+    button:not(.button)
       border: none
       background: $snippet-list-create-button-background--dark
       color: $snippet-list-create-button-foreground--dark
@@ -63,7 +63,8 @@ body[data-theme='dark']
       cursor: pointer
     .pick-snippet-type .button
       border-color: rgba(255, 255, 255, 0.3)
-      &:hover
+      color: white
+      &:focus
         background: rgba(255, 255, 255, 0.1)
     .create-multi-file-snippet
       .file-list

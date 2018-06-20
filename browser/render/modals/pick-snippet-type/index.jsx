@@ -12,6 +12,10 @@ export default class PickSnippetType extends React.Component {
     }
   }
 
+  componentDidMount () {
+    this.refs.singleFileButton.focus()
+  }
+
   handleSingleFileSnippetClick () {
     eventEmitter.emit('modal:close', this.state.name)
     eventEmitter.emit('modal:open', 'createSnippetModal')
@@ -22,14 +26,30 @@ export default class PickSnippetType extends React.Component {
     eventEmitter.emit('modal:open', 'createMultiFilesSnippetModal')
   }
 
+  handleSwitchButton (name, event) {
+    if (event.keyCode === 9) { // tab key
+      event.preventDefault()
+      if (name === 'multiFileButton') {
+        this.refs.singleFileButton.focus()
+      } else {
+        this.refs.multiFileButton.focus()
+      }
+    }
+  }
+
   render () {
     i18n.setLocale(this.props.config.ui.language)
     return (
-      <ModalSkeleton name={this.state.name} width='600px'>
+      <ModalSkeleton
+        name={this.state.name}
+        width='600px'>
         <div className='pick-snippet-type'>
           <h2 className='m-b-30'>{i18n.__('Create new snippet')}</h2>
-          <div
+
+          <button
             className='button'
+            ref='singleFileButton'
+            onKeyDown={e => this.handleSwitchButton('singleFileButton', e)}
             onClick={this.handleSingleFileSnippetClick.bind(this)}>
             <h3>{i18n.__('Single-file snippet')}</h3>
             <p>
@@ -41,9 +61,12 @@ export default class PickSnippetType extends React.Component {
                 )
               }
             </p>
-          </div>
-          <div
+          </button>
+
+          <button
             className='button'
+            ref='multiFileButton'
+            onKeyDown={e => this.handleSwitchButton('multiFileButton', e)}
             onClick={this.handleMultiFileSnippetClick.bind(this)}>
             <h3>{i18n.__('Multi-file snippet')}</h3>
             <p>
@@ -55,7 +78,7 @@ export default class PickSnippetType extends React.Component {
                 )
               }
             </p>
-          </div>
+          </button>
         </div>
       </ModalSkeleton>
     )

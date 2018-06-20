@@ -26,7 +26,7 @@ const actions = [
   {
     name: 'closeAllModals',
     action: () => {
-      eventEmitter.emit('modal:closeAll')
+      eventEmitter.emit('modal:close')
     }
   }
 ]
