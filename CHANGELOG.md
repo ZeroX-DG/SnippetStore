@@ -1,5 +1,10 @@
 # Change Log
 Every notable changes in each version will be listed in this file.
+# 0.1.1
+## Bugfixes:
+- **Interface**: Fixed theme bug when restructured snippet list ([0a838a5](https://github.com/ZeroX-DG/SnippetStore/commit/0a838a5))
+## Improvements:
+- **Development**: Restructured snippet list into smaller components ([354e499](https://github.com/ZeroX-DG/SnippetStore/commit/354e499))
 
 # 0.1.0
 ## Features:
