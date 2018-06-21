@@ -8,6 +8,7 @@ Every notable changes in each version will be listed in this file.
 ## Improvements:
 - **Development**: Restructured snippet list into smaller components ([354e499](https://github.com/ZeroX-DG/SnippetStore/commit/354e499))
 - **Interface**: Passed control to modal list so that only 1 modal can open at the time ([e85849e](https://github.com/ZeroX-DG/SnippetStore/commit/e85849e))
+- **Interface**: Added ESC text bellow modal's close button ([eb16841](https://github.com/ZeroX-DG/SnippetStore/commit/eb16841))
 # 0.1.0
 ## Features:
 - **Snippet**: Multi file snippet support
