@@ -17,6 +17,7 @@ export default class ModalSkeleton extends React.Component {
             closeBtn !== false &&
             <div className='close-btn' onClick={this.closeModal.bind(this)}>
               <FAIcon icon='times' />
+              <span className='text'>ESC</span>
             </div>
           }
           {this.props.children}
