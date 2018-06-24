@@ -6,7 +6,7 @@ export default class MainAreaToolBox extends React.Component {
   render () {
     const { store } = this.props
     return (
-      <div className='list-tools'>
+      <div className="list-tools">
         <SortSnippetTool store={store} />
       </div>
     )

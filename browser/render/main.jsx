@@ -35,7 +35,7 @@ export default class Main extends React.Component {
   render () {
     const { config } = this.state
     return (
-      <div className='wrapper'>
+      <div className="wrapper">
         <ToastContainer />
         <ModalList store={SnippetStore} config={config} />
         <SideBar store={SnippetStore} config={config} />

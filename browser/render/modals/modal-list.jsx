@@ -28,29 +28,13 @@ export default class ModalList extends React.Component {
     const { modal } = this.state
     switch (modal) {
       case 'pickSnippetTypeModal':
-        return (
-          <PickSnippetType
-            config={config}
-            store={store} />
-        )
+        return <PickSnippetType config={config} store={store} />
       case 'createSnippetModal':
-        return (
-          <CreateSnippetModal
-            config={config}
-            store={store}/>
-        )
+        return <CreateSnippetModal config={config} store={store} />
       case 'createMultiFilesSnippetModal':
-        return (
-          <CreateMultiFilesSnippetModal
-            config={config}
-            store={store} />
-        )
+        return <CreateMultiFilesSnippetModal config={config} store={store} />
       case 'settingModal':
-        return (
-          <SettingModal
-            config={config}
-            store={store} />
-        )
+        return <SettingModal config={config} store={store} />
       default:
         return ''
     }

@@ -6,7 +6,9 @@ function updateSnippet (snippet) {
   let snippets = []
 
   if (sander.existsSync(SNIPPET_INFO_FILE)) {
-    snippets = JSON.parse(sander.readFileSync(SNIPPET_INFO_FILE, { encoding: 'utf-8' }))
+    snippets = JSON.parse(
+      sander.readFileSync(SNIPPET_INFO_FILE, { encoding: 'utf-8' })
+    )
   }
 
   const snippetIndex = findIndexObject(snippets, 'key', snippet.key)
@@ -15,9 +17,11 @@ function updateSnippet (snippet) {
     throw new Error(`Can't find a snippet with key: ${snippets.key}`)
   }
 
-  snippet.updateAt = (new Date()).getTime()
+  snippet.updateAt = new Date().getTime()
   snippets[snippetIndex] = snippet
-  sander.writeFileSync(SNIPPET_INFO_FILE, JSON.stringify(snippets), { encoding: 'utf-8' })
+  sander.writeFileSync(SNIPPET_INFO_FILE, JSON.stringify(snippets), {
+    encoding: 'utf-8'
+  })
 
   return snippetIndex
 }

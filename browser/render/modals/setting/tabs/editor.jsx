@@ -22,7 +22,9 @@ if (number == 1) {
       mode: 'javascript',
       theme: theme,
       foldGutter: showLineNumber,
-      gutters: showLineNumber ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'] : []
+      gutters: showLineNumber
+        ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+        : []
     })
 
     this.editor.getWrapperElement().style.fontFamily = fontFamily
@@ -33,7 +35,12 @@ if (number == 1) {
   previewEditorLineNumberChange () {
     this.editor.setOption('lineNumbers', this.refs.showLineNumber.checked)
     this.editor.setOption('foldGutter', this.refs.showLineNumber.checked)
-    this.editor.setOption('gutters', this.refs.showLineNumber.checked ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'] : [])
+    this.editor.setOption(
+      'gutters',
+      this.refs.showLineNumber.checked
+        ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+        : []
+    )
   }
 
   previewEditorThemeChange () {
@@ -65,55 +72,77 @@ if (number == 1) {
     const { config } = this.props
     const editorConf = config.editor
     return (
-      <div className='editor-tab'>
-        <h1 className='tab-title'>{ i18n.__('Editor') }</h1>
-        <div className='middle-content'>
-          <div className='group-checkbox'>
+      <div className="editor-tab">
+        <h1 className="tab-title">{i18n.__('Editor')}</h1>
+        <div className="middle-content">
+          <div className="group-checkbox">
             <label>
               <input
-                type='checkbox'
+                type="checkbox"
                 defaultChecked={editorConf.showLineNumber}
                 onChange={this.previewEditorLineNumberChange.bind(this)}
-                ref='showLineNumber'/>
-              { i18n.__('Show line number') }
+                ref="showLineNumber"
+              />
+              {i18n.__('Show line number')}
             </label>
           </div>
-          <div className='input-group'>
-            <label>{ i18n.__('Theme') }</label>
-            <select ref='themeSelector' onChange={this.previewEditorThemeChange.bind(this)} defaultValue={config.editor.theme}>
-              {
-                consts.EDITOR_THEMES.map((theme, index) => (
-                  <option value={theme} key={index}>{theme}</option>
-                ))
-              }
+          <div className="input-group">
+            <label>{i18n.__('Theme')}</label>
+            <select
+              ref="themeSelector"
+              onChange={this.previewEditorThemeChange.bind(this)}
+              defaultValue={config.editor.theme}
+            >
+              {consts.EDITOR_THEMES.map((theme, index) => (
+                <option value={theme} key={index}>
+                  {theme}
+                </option>
+              ))}
             </select>
-            <div className='theme-preview' ref='themePreview'></div>
+            <div className="theme-preview" ref="themePreview" />
           </div>
-          <div className='input-group'>
-            <label>{ i18n.__('Editor font family') }</label>
-            <input type='text' defaultValue={editorConf.fontFamily} ref='fontFamily' />
+          <div className="input-group">
+            <label>{i18n.__('Editor font family')}</label>
+            <input
+              type="text"
+              defaultValue={editorConf.fontFamily}
+              ref="fontFamily"
+            />
           </div>
-          <div className='input-group'>
-            <label>{ i18n.__('Editor font size') }</label>
-            <input type='number' defaultValue={editorConf.fontSize} ref='fontSize' />
+          <div className="input-group">
+            <label>{i18n.__('Editor font size')}</label>
+            <input
+              type="number"
+              defaultValue={editorConf.fontSize}
+              ref="fontSize"
+            />
           </div>
-          <div className='input-group'>
-            <label>{ i18n.__('Editor indent style') }</label>
-            <select defaultValue={editorConf.indentUsingTab ? 'tab' : 'space'} ref='indentStyle'>
-              <option value='tab'>Tab</option>
-              <option value='space'>Space</option>
+          <div className="input-group">
+            <label>{i18n.__('Editor indent style')}</label>
+            <select
+              defaultValue={editorConf.indentUsingTab ? 'tab' : 'space'}
+              ref="indentStyle"
+            >
+              <option value="tab">Tab</option>
+              <option value="space">Space</option>
             </select>
           </div>
-          <div className='input-group'>
-            <label>{ i18n.__('Editor tab size') }</label>
-            <input type='number' defaultValue={editorConf.tabSize} ref='tabSize'/>
+          <div className="input-group">
+            <label>{i18n.__('Editor tab size')}</label>
+            <input
+              type="number"
+              defaultValue={editorConf.tabSize}
+              ref="tabSize"
+            />
           </div>
         </div>
-        <div className='bottom-tool'>
-          <label className='message success hide' ref='message'>
-            { i18n.__('Editor setting saved') }
+        <div className="bottom-tool">
+          <label className="message success hide" ref="message">
+            {i18n.__('Editor setting saved')}
           </label>
-          <button onClick={this.saveSetting.bind(this)}>{ i18n.__('Save') }</button>
+          <button onClick={this.saveSetting.bind(this)}>
+            {i18n.__('Save')}
+          </button>
         </div>
       </div>
     )

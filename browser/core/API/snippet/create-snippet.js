@@ -5,7 +5,7 @@ const sander = require('sander')
 
 function createSnippet (snippet) {
   const key = generateKey()
-  const time = (new Date()).getTime()
+  const time = new Date().getTime()
   const createAt = time
   const updateAt = time
   const copy = 0
@@ -16,12 +16,16 @@ function createSnippet (snippet) {
   let snippets = []
 
   if (sander.existsSync(SNIPPET_INFO_FILE)) {
-    const fileData = sander.readFileSync(SNIPPET_INFO_FILE, { encoding: 'utf-8' })
+    const fileData = sander.readFileSync(SNIPPET_INFO_FILE, {
+      encoding: 'utf-8'
+    })
     snippets = JSON.parse(fileData)
   }
 
   snippets.push(snippet)
-  sander.writeFileSync(SNIPPET_INFO_FILE, JSON.stringify(snippets), { encoding: 'utf-8' })
+  sander.writeFileSync(SNIPPET_INFO_FILE, JSON.stringify(snippets), {
+    encoding: 'utf-8'
+  })
 
   return snippet
 }

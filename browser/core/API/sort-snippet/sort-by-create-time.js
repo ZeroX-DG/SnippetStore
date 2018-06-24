@@ -1,6 +1,8 @@
 function sortByCreateTime (snippets, type) {
   return snippets.sort((a, b) => {
-    return type === 'createTimeNewer' ? b.createAt - a.createAt : a.createAt - b.createAt
+    return type === 'createTimeNewer'
+      ? b.createAt - a.createAt
+      : a.createAt - b.createAt
   })
 }
 

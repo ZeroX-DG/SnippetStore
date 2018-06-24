@@ -10,36 +10,24 @@ export default class SnippetList extends React.Component {
   renderMultiFileSnippet (snippet) {
     const { config, store } = this.props
     return (
-      <SnippetItemMultiFiles
-        snippet={snippet}
-        config={config}
-        store={store}/>
+      <SnippetItemMultiFiles snippet={snippet} config={config} store={store} />
     )
   }
 
   renderSingleFileSnippet (snippet) {
     const { config, store } = this.props
-    return (
-      <SnippetItem
-        snippet={snippet}
-        config={config}
-        store={store}/>
-    )
+    return <SnippetItem snippet={snippet} config={config} store={store} />
   }
 
   renderEmptyMessage () {
     const { config, store } = this.props
     if (store.rawSnippets.length > 0) {
-      return (
-        <h1 className='emptyMessage'>
-          { i18n.__('No snippet found !') }
-        </h1>
-      )
+      return <h1 className="emptyMessage">{i18n.__('No snippet found !')}</h1>
     }
     return (
-      <h1 className='emptyMessage'>
-        { i18n.__('Create new snippet using ') }
-        { config.keyboard.createSnippet }
+      <h1 className="emptyMessage">
+        {i18n.__('Create new snippet using ')}
+        {config.keyboard.createSnippet}
       </h1>
     )
   }
@@ -47,19 +35,15 @@ export default class SnippetList extends React.Component {
   renderSnippetList () {
     const { snippets } = this.props.store
     return (
-      <div className='snippets'>
+      <div className="snippets">
         <ul>
-          {
-            snippets.map(snippet => (
-              <li key={snippet.key}>
-                {
-                  snippet.files === undefined
-                    ? this.renderSingleFileSnippet(snippet)
-                    : this.renderMultiFileSnippet(snippet)
-                }
-              </li>
-            ))
-          }
+          {snippets.map(snippet => (
+            <li key={snippet.key}>
+              {snippet.files === undefined
+                ? this.renderSingleFileSnippet(snippet)
+                : this.renderMultiFileSnippet(snippet)}
+            </li>
+          ))}
         </ul>
       </div>
     )

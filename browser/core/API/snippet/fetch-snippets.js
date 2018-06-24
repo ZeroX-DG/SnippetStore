@@ -17,7 +17,9 @@ function fetchSnippets () {
     tags: []
   }
   let snippets = JSON.parse(fileData)
-  snippets = snippets.map(snippet => Object.assign({}, additionalProperties, snippet))
+  snippets = snippets.map(snippet =>
+    Object.assign({}, additionalProperties, snippet)
+  )
   return snippets
 }
 

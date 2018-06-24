@@ -79,13 +79,15 @@ export default class CreateSnippetModal extends React.Component {
   }
 
   createSnippet () {
-    const snippetName        = this.refs.snippetName.value
-    const snippetLang        = this.refs.lang.value
-    const snippetCode        = this.editor.getValue()
+    const snippetName = this.refs.snippetName.value
+    const snippetLang = this.refs.lang.value
+    const snippetCode = this.editor.getValue()
     const snippetDescription = this.refs.description.value
 
     if (!snippetName || !snippetLang) {
-      this.setState({ error: 'Please specify at least snippet name and language' })
+      this.setState({
+        error: 'Please specify at least snippet name and language'
+      })
       return
     }
 
@@ -102,34 +104,37 @@ export default class CreateSnippetModal extends React.Component {
     i18n.setLocale(this.props.config.ui.language)
     return (
       <ModalSkeleton name={this.state.name}>
-        <h2 className='modal-title'>{ i18n.__('Create snippet') }</h2>
-        <div className='modal-content'>
-          <p className='error'>{this.state.error}</p>
-          <div className='input-group'>
-            <label>{ i18n.__('Snippet name') }</label>
-            <input type='text' ref='snippetName' />
+        <h2 className="modal-title">{i18n.__('Create snippet')}</h2>
+        <div className="modal-content">
+          <p className="error">{this.state.error}</p>
+          <div className="input-group">
+            <label>{i18n.__('Snippet name')}</label>
+            <input type="text" ref="snippetName" />
           </div>
-          <div className='input-group'>
-            <label>{ i18n.__('Snippet language') }</label>
-            <select ref='lang' onChange={this.changeLang.bind(this)}>
-              {
-                CodeMirror.modeInfo.map((mode, index) => (
-                  <option value={mode.name} key={index}>{mode.name}</option>
-                ))
-              }
+          <div className="input-group">
+            <label>{i18n.__('Snippet language')}</label>
+            <select ref="lang" onChange={this.changeLang.bind(this)}>
+              {CodeMirror.modeInfo.map((mode, index) => (
+                <option value={mode.name} key={index}>
+                  {mode.name}
+                </option>
+              ))}
             </select>
           </div>
-          <div className='code-input-group'>
-            <label>{ i18n.__('Snippet description') }</label>
-            <textarea ref='description' className='description'></textarea>
+          <div className="code-input-group">
+            <label>{i18n.__('Snippet description')}</label>
+            <textarea ref="description" className="description" />
           </div>
-          <div className='code-input-group'>
-            <label>{ i18n.__('Snippet content') }</label>
-            <div className='code' ref='editor'></div>
+          <div className="code-input-group">
+            <label>{i18n.__('Snippet content')}</label>
+            <div className="code" ref="editor" />
           </div>
           <button
-            className='float-right'
-            onClick={this.createSnippet.bind(this)}>{ i18n.__('Create') }</button>
+            className="float-right"
+            onClick={this.createSnippet.bind(this)}
+          >
+            {i18n.__('Create')}
+          </button>
         </div>
       </ModalSkeleton>
     )

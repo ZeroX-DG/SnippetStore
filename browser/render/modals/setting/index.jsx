@@ -16,8 +16,7 @@ export default class SettingModal extends React.Component {
     }
   }
 
-  reset () {
-  }
+  reset () {}
 
   renderTab () {
     const { tab } = this.state
@@ -44,23 +43,27 @@ export default class SettingModal extends React.Component {
       <ul>
         <li
           onClick={() => this.switchTab('interface')}
-          className={tab === 'interface' ? 'active' : ''}>
-          <div className='tab'>{ i18n.__('Interface') }</div>
+          className={tab === 'interface' ? 'active' : ''}
+        >
+          <div className="tab">{i18n.__('Interface')}</div>
         </li>
         <li
           onClick={() => this.switchTab('editor')}
-          className={tab === 'editor' ? 'active' : ''}>
-          <div className='tab'>{ i18n.__('Editor') }</div>
+          className={tab === 'editor' ? 'active' : ''}
+        >
+          <div className="tab">{i18n.__('Editor')}</div>
         </li>
         <li
           onClick={() => this.switchTab('hotkeys')}
-          className={tab === 'hotkeys' ? 'active' : ''}>
-          <div className='tab'>{ i18n.__('Hotkeys') }</div>
+          className={tab === 'hotkeys' ? 'active' : ''}
+        >
+          <div className="tab">{i18n.__('Hotkeys')}</div>
         </li>
         <li
           onClick={() => this.switchTab('about')}
-          className={tab === 'about' ? 'active' : ''}>
-          <div className='tab'>{ i18n.__('About') }</div>
+          className={tab === 'about' ? 'active' : ''}
+        >
+          <div className="tab">{i18n.__('About')}</div>
         </li>
       </ul>
     )
@@ -69,18 +72,10 @@ export default class SettingModal extends React.Component {
   render () {
     i18n.setLocale(this.props.config.ui.language)
     return (
-      <ModalSkeleton name='settingModal'>
-        <div className='modal-content setting'>
-          <div className='tab-list'>
-            {
-              this.renderTabList()
-            }
-          </div>
-          <div className='tab-content'>
-            {
-              this.renderTab()
-            }
-          </div>
+      <ModalSkeleton name="settingModal">
+        <div className="modal-content setting">
+          <div className="tab-list">{this.renderTabList()}</div>
+          <div className="tab-content">{this.renderTab()}</div>
         </div>
       </ModalSkeleton>
     )

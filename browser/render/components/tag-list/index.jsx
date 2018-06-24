@@ -13,20 +13,18 @@ export default class TagList extends React.Component {
   render () {
     const { tags } = this.props.store
     return (
-      <div className='tag-list'>
-        <div className='tag-list-label'>
-          { i18n.__('TAGS') }
-          <div className='badge'>{ Object.keys(tags).length }</div>
+      <div className="tag-list">
+        <div className="tag-list-label">
+          {i18n.__('TAGS')}
+          <div className="badge">{Object.keys(tags).length}</div>
         </div>
-        <ul className='tags'>
-          {
-            Object.keys(tags).map((tag, index) => (
-              <li key={index} onClick={() => this.handleTagClick(tag)}>
-                <div className='tag-name'>#{tag}</div>
-                <div className='badge'>{ tags[tag] }</div>
-              </li>
-            ))
-          }
+        <ul className="tags">
+          {Object.keys(tags).map((tag, index) => (
+            <li key={index} onClick={() => this.handleTagClick(tag)}>
+              <div className="tag-name">#{tag}</div>
+              <div className="badge">{tags[tag]}</div>
+            </li>
+          ))}
         </ul>
       </div>
     )

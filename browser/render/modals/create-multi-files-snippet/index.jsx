@@ -92,9 +92,9 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
   }
 
   createSnippet () {
-    const snippetName        = this.refs.snippetName.value
+    const snippetName = this.refs.snippetName.value
     const snippetDescription = this.refs.description.value
-    const { files }          = this.state
+    const { files } = this.state
 
     if (!snippetName) {
       this.setState({
@@ -121,38 +121,40 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
   renderFileList () {
     const { selectedFile, files } = this.state
     return (
-      <div className='file-list' ref='fileList'>
+      <div className="file-list" ref="fileList">
         <ul>
-          {
-            files.map((file, index) =>
-              <li
-                key={file.key}
-                onClick={() => this.handleChangeFileClick(index)}
-                className={index === selectedFile ? 'selected' : ''}>
-                {
-                  <input
-                    type='text'
-                    className='fileName'
-                    onChange={e => this.handleEditingFileNameChange(e, index)}
-                    defaultValue={file.name} />
-                }
-                {
-                  <span
-                    className='icon'
-                    onClick={e => this.handleDeleteFile(e, index)}>
-                    <FAIcon icon='trash-alt' />
-                  </span>
-                }
-              </li>
-            )
-          }
+          {files.map((file, index) => (
+            <li
+              key={file.key}
+              onClick={() => this.handleChangeFileClick(index)}
+              className={index === selectedFile ? 'selected' : ''}
+            >
+              {
+                <input
+                  type="text"
+                  className="fileName"
+                  onChange={e => this.handleEditingFileNameChange(e, index)}
+                  defaultValue={file.name}
+                />
+              }
+              {
+                <span
+                  className="icon"
+                  onClick={e => this.handleDeleteFile(e, index)}
+                >
+                  <FAIcon icon="trash-alt" />
+                </span>
+              }
+            </li>
+          ))}
           {
             <li>
               <input
-                type='text'
-                ref='newFile'
+                type="text"
+                ref="newFile"
                 onFocus={this.handleNewFileFocus.bind(this)}
-                placeholder='New file'/>
+                placeholder="New file"
+              />
             </li>
           }
         </ul>
@@ -223,7 +225,7 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
       // a new input tag will automatically created after set state and we want
       // to focus on that input tag
       const inputs = this.refs.fileList.firstChild.childNodes
-      const input  = inputs[inputs.length - 2].querySelector('input')
+      const input = inputs[inputs.length - 2].querySelector('input')
       this.handleChangeFileClick(newEditingFiles.length - 1)
       input.focus()
     })
@@ -241,7 +243,7 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
 
   handleEditingFileNameChange (event, index) {
     const { files } = this.state
-    const newEditingFiles  = _.clone(files)
+    const newEditingFiles = _.clone(files)
     const name = event.target.value
     newEditingFiles[index].name = name
     this.applyEditorLanguage(name)
@@ -252,29 +254,30 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
     i18n.setLocale(this.props.config.ui.language)
     return (
       <ModalSkeleton name={this.state.name}>
-        <div className='create-multi-file-snippet'>
-          <h2 className='modal-title'>{ i18n.__('Create snippet') }</h2>
-          <div className='modal-content'>
-            <p className='error'>{this.state.error}</p>
-            <div className='input-group'>
-              <label>{ i18n.__('Snippet name') }</label>
-              <input type='text' ref='snippetName' />
+        <div className="create-multi-file-snippet">
+          <h2 className="modal-title">{i18n.__('Create snippet')}</h2>
+          <div className="modal-content">
+            <p className="error">{this.state.error}</p>
+            <div className="input-group">
+              <label>{i18n.__('Snippet name')}</label>
+              <input type="text" ref="snippetName" />
             </div>
-            <div className='code-input-group'>
-              <label>{ i18n.__('Snippet description') }</label>
-              <textarea ref='description'></textarea>
+            <div className="code-input-group">
+              <label>{i18n.__('Snippet description')}</label>
+              <textarea ref="description" />
             </div>
-            <div className='code-input-group'>
-              <label>{ i18n.__('Snippet content') }</label>
-              <div className='inline'>
+            <div className="code-input-group">
+              <label>{i18n.__('Snippet content')}</label>
+              <div className="inline">
                 {this.renderFileList()}
-                <div className='code' ref='editor'></div>
+                <div className="code" ref="editor" />
               </div>
             </div>
             <button
-              className='float-right'
-              onClick={this.createSnippet.bind(this)}>
-              { i18n.__('Create') }
+              className="float-right"
+              onClick={this.createSnippet.bind(this)}
+            >
+              {i18n.__('Create')}
             </button>
           </div>
         </div>

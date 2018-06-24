@@ -10,11 +10,11 @@ export default class SideBarToolBox extends React.Component {
 
   render () {
     return (
-      <div className='sidebar-toolbox'>
-        <h3 className='logo'>
-          <span className='logo-text'>SnippetStore</span>
-          <span className='icon' onClick={this.handleSettingClick}>
-            <FAIcon icon='cog' />
+      <div className="sidebar-toolbox">
+        <h3 className="logo">
+          <span className="logo-text">SnippetStore</span>
+          <span className="icon" onClick={this.handleSettingClick}>
+            <FAIcon icon="cog" />
           </span>
         </h3>
       </div>

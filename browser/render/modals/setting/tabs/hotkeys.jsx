@@ -22,27 +22,41 @@ export default class HotKeysTab extends React.Component {
   render () {
     const { keyboard } = this.props.config
     return (
-      <div className='hotkeys-tab'>
-        <h1 className='tab-title'>{ i18n.__('HotKeys') }</h1>
-        <div className='middle-content'>
-          <div className='input-group'>
-            <label>{ i18n.__('Create snippet') }</label>
-            <input type='text' defaultValue={keyboard.createSnippet} ref='createSnippet' />
+      <div className="hotkeys-tab">
+        <h1 className="tab-title">{i18n.__('HotKeys')}</h1>
+        <div className="middle-content">
+          <div className="input-group">
+            <label>{i18n.__('Create snippet')}</label>
+            <input
+              type="text"
+              defaultValue={keyboard.createSnippet}
+              ref="createSnippet"
+            />
           </div>
-          <div className='input-group'>
-            <label>{ i18n.__('Open setting') }</label>
-            <input type='text' defaultValue={keyboard.openSetting} ref='openSetting' />
+          <div className="input-group">
+            <label>{i18n.__('Open setting')}</label>
+            <input
+              type="text"
+              defaultValue={keyboard.openSetting}
+              ref="openSetting"
+            />
           </div>
-          <div className='input-group'>
-            <label>{ i18n.__('Toggle small sidebar') }</label>
-            <input type='text' defaultValue={keyboard.toggleSidebar} ref='toggleSidebar' />
+          <div className="input-group">
+            <label>{i18n.__('Toggle small sidebar')}</label>
+            <input
+              type="text"
+              defaultValue={keyboard.toggleSidebar}
+              ref="toggleSidebar"
+            />
           </div>
         </div>
-        <div className='bottom-tool'>
-          <label className='message success hide' ref='message'>
-            { i18n.__('Hotkeys setting saved') }
+        <div className="bottom-tool">
+          <label className="message success hide" ref="message">
+            {i18n.__('Hotkeys setting saved')}
           </label>
-          <button onClick={this.saveSetting.bind(this)}>{ i18n.__('Save') }</button>
+          <button onClick={this.saveSetting.bind(this)}>
+            {i18n.__('Save')}
+          </button>
         </div>
       </div>
     )

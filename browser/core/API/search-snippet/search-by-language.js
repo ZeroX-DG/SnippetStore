@@ -12,9 +12,7 @@ function searchByLanguage (snippets, language) {
           const file = snippet.files[i]
           const fileExtension = getExtension(file.name)
           const mode = CodeMirror.findModeByExtension(fileExtension)
-          let langName = fileExtension
-            ? fileExtension.toUpperCase()
-            : 'unknown'
+          let langName = fileExtension ? fileExtension.toUpperCase() : 'unknown'
           if (mode) {
             langName = mode.name
           }

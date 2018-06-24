@@ -120,57 +120,59 @@ export default class SnippetItemMultiFiles extends React.Component {
     const { isEditing } = this.state
     const { snippet } = this.props
     return (
-      <div className='header'>
-        <div className='info'>
-          {
-            isEditing
-              ? <input type='text' ref='name' defaultValue={snippet.name} />
-              : snippet.name
-          }
+      <div className="header">
+        <div className="info">
+          {isEditing ? (
+            <input type="text" ref="name" defaultValue={snippet.name} />
+          ) : (
+            snippet.name
+          )}
         </div>
-        <div className='tools'>
-          {
-            !isEditing &&
+        <div className="tools">
+          {!isEditing && (
             <div
-              className='copy-btn'
-              data-tip={ i18n.__('copy') }
-              onClick={this.copySnippet.bind(this)}>
-              <FAIcon icon='copy'/>
+              className="copy-btn"
+              data-tip={i18n.__('copy')}
+              onClick={this.copySnippet.bind(this)}
+            >
+              <FAIcon icon="copy" />
             </div>
-          }
-          {
-            isEditing &&
+          )}
+          {isEditing && (
             <div
-              className='discard-btn'
-              data-tip={ i18n.__('discard changes') }
-              onClick={this.handleDiscardChangesClick.bind(this)}>
-              <FAIcon icon='times'/>
+              className="discard-btn"
+              data-tip={i18n.__('discard changes')}
+              onClick={this.handleDiscardChangesClick.bind(this)}
+            >
+              <FAIcon icon="times" />
             </div>
-          }
-          {
-            isEditing
-              ? <div
-                className='save-btn'
-                data-tip={ i18n.__('save changes') }
-                onClick={this.handleSaveChangesClick.bind(this)}>
-                <FAIcon icon='check'/>
-              </div>
-              : <div
-                className='edit-btn'
-                data-tip={ i18n.__('edit') }
-                onClick={this.handleEditButtonClick.bind(this)}>
-                <FAIcon icon='edit'/>
-              </div>
-          }
-          {
-            !isEditing &&
+          )}
+          {isEditing ? (
             <div
-              className='delete-btn'
-              data-tip={ i18n.__('delete snippet') }
-              onClick={this.handleDeleteClick.bind(this)}>
-              <FAIcon icon='trash-alt'/>
+              className="save-btn"
+              data-tip={i18n.__('save changes')}
+              onClick={this.handleSaveChangesClick.bind(this)}
+            >
+              <FAIcon icon="check" />
             </div>
-          }
+          ) : (
+            <div
+              className="edit-btn"
+              data-tip={i18n.__('edit')}
+              onClick={this.handleEditButtonClick.bind(this)}
+            >
+              <FAIcon icon="edit" />
+            </div>
+          )}
+          {!isEditing && (
+            <div
+              className="delete-btn"
+              data-tip={i18n.__('delete snippet')}
+              onClick={this.handleDeleteClick.bind(this)}
+            >
+              <FAIcon icon="trash-alt" />
+            </div>
+          )}
         </div>
       </div>
     )
@@ -202,17 +204,17 @@ export default class SnippetItemMultiFiles extends React.Component {
   handleSaveChangesClick () {
     const { tags, name, description } = this.refs
     const { snippet, store } = this.props
-    const { editingFiles }   = this.state
-    const nameChanged        = snippet.name !== name.value
-    const newTags            = tags.value.replace(/ /g, '').split(',')
-    const tagChanged         = !_.isEqual(snippet.tags, newTags)
+    const { editingFiles } = this.state
+    const nameChanged = snippet.name !== name.value
+    const newTags = tags.value.replace(/ /g, '').split(',')
+    const tagChanged = !_.isEqual(snippet.tags, newTags)
     const descriptionChanged = snippet.description !== description.value
     if (tagChanged || descriptionChanged || nameChanged) {
-      const newSnippet       = _.clone(snippet)
-      newSnippet.name        = name.value
-      newSnippet.tags        = newTags
+      const newSnippet = _.clone(snippet)
+      newSnippet.name = name.value
+      newSnippet.tags = newTags
       newSnippet.description = description.value
-      newSnippet.files       = editingFiles
+      newSnippet.files = editingFiles
       store.updateSnippet(newSnippet)
     }
     this.setState({ isEditing: false }, () => {
@@ -232,32 +234,36 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   handleDiscardChangesClick () {
     const { snippet } = this.props
-    this.setState({
-      isEditing: false,
-      editingFiles: snippet.files,
-      selectedFile: 0
-    }, () => {
-      this.editor.setOption('readOnly', true)
-      this.resetSnippetHeight()
-    })
+    this.setState(
+      {
+        isEditing: false,
+        editingFiles: snippet.files,
+        selectedFile: 0
+      },
+      () => {
+        this.editor.setOption('readOnly', true)
+        this.resetSnippetHeight()
+      }
+    )
   }
 
   renderTagList () {
     const { snippet } = this.props
     const { isEditing } = this.state
     return (
-      <div className='tag-list'>
-        <span className='icon'>
-          <FAIcon icon='tags' />
+      <div className="tag-list">
+        <span className="icon">
+          <FAIcon icon="tags" />
         </span>
-        {
-          isEditing
-            ? <input
-              type='text'
-              ref='tags'
-              defaultValue={snippet.tags.join(', ')} />
-            : snippet.tags.join(', ')
-        }
+        {isEditing ? (
+          <input
+            type="text"
+            ref="tags"
+            defaultValue={snippet.tags.join(', ')}
+          />
+        ) : (
+          snippet.tags.join(', ')
+        )}
       </div>
     )
   }
@@ -267,14 +273,11 @@ export default class SnippetItemMultiFiles extends React.Component {
     const { isEditing } = this.state
     return (
       <div className={`description ${isEditing ? 'editing' : ''}`}>
-        {
-          isEditing
-            ? <textarea
-              ref='description'
-              defaultValue={snippet.description}>
-            </textarea>
-            : snippet.description
-        }
+        {isEditing ? (
+          <textarea ref="description" defaultValue={snippet.description} />
+        ) : (
+          snippet.description
+        )}
       </div>
     )
   }
@@ -282,28 +285,25 @@ export default class SnippetItemMultiFiles extends React.Component {
   renderFooter () {
     const { snippet, config } = this.props
     return (
-      <div className='footer'>
-        <div className='info-left'>
-          {
-            config.ui.showSnippetCreateTime &&
-            <span className='createAt'>
-              { i18n.__('Create at') } : { formatDate(snippet.createAt) }
+      <div className="footer">
+        <div className="info-left">
+          {config.ui.showSnippetCreateTime && (
+            <span className="createAt">
+              {i18n.__('Create at')} : {formatDate(snippet.createAt)}
             </span>
-          }
-          {
-            config.ui.showSnippetUpdateTime &&
-            <span className='updateAt'>
-              { i18n.__('Last update') } : { formatDate(snippet.updateAt) }
+          )}
+          {config.ui.showSnippetUpdateTime && (
+            <span className="updateAt">
+              {i18n.__('Last update')} : {formatDate(snippet.updateAt)}
             </span>
-          }
+          )}
         </div>
-        <div className='info-right'>
-          {
-            config.ui.showSnippetCopyCount &&
-            <span className='copyCount'>
-              { i18n.__('Copy') } : { snippet.copy } { i18n.__('times') }
+        <div className="info-right">
+          {config.ui.showSnippetCopyCount && (
+            <span className="copyCount">
+              {i18n.__('Copy')} : {snippet.copy} {i18n.__('times')}
             </span>
-          }
+          )}
         </div>
       </div>
     )
@@ -314,43 +314,46 @@ export default class SnippetItemMultiFiles extends React.Component {
     const { selectedFile, isEditing, editingFiles } = this.state
     const files = isEditing ? editingFiles : snippet.files
     return (
-      <div className='file-list' ref='fileList'>
+      <div className="file-list" ref="fileList">
         <ul>
-          {
-            files.map((file, index) =>
-              <li
-                key={file.key}
-                onClick={() => this.handleChangeFileClick(index)}
-                className={index === selectedFile ? 'selected' : ''}>
-                {
-                  isEditing
-                    ? <input
-                      type='text'
-                      className='fileName'
-                      onChange={e => this.handleEditingFileNameChange(e, index)}
-                      defaultValue={file.name} />
-                    : (file.name ? file.name : 'untitled')
-                }
-                {
-                  <span
-                    className='icon'
-                    onClick={e => this.handleDeleteFile(e, index)}>
-                    <FAIcon icon='trash-alt' />
-                  </span>
-                }
-              </li>
-            )
-          }
-          {
-            isEditing &&
+          {files.map((file, index) => (
+            <li
+              key={file.key}
+              onClick={() => this.handleChangeFileClick(index)}
+              className={index === selectedFile ? 'selected' : ''}
+            >
+              {isEditing ? (
+                <input
+                  type="text"
+                  className="fileName"
+                  onChange={e => this.handleEditingFileNameChange(e, index)}
+                  defaultValue={file.name}
+                />
+              ) : file.name ? (
+                file.name
+              ) : (
+                'untitled'
+              )}
+              {
+                <span
+                  className="icon"
+                  onClick={e => this.handleDeleteFile(e, index)}
+                >
+                  <FAIcon icon="trash-alt" />
+                </span>
+              }
+            </li>
+          ))}
+          {isEditing && (
             <li>
               <input
-                type='text'
-                ref='newFile'
+                type="text"
+                ref="newFile"
                 onFocus={this.handleNewFileFocus.bind(this)}
-                placeholder='New file'/>
+                placeholder="New file"
+              />
             </li>
-          }
+          )}
         </ul>
       </div>
     )
@@ -358,7 +361,7 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   handleEditingFileNameChange (event, index) {
     const { editingFiles } = this.state
-    const newEditingFiles  = toJS(editingFiles)
+    const newEditingFiles = toJS(editingFiles)
     const name = event.target.value
     newEditingFiles[index].name = name
     const fileExtension = getExtension(name)
@@ -392,7 +395,7 @@ export default class SnippetItemMultiFiles extends React.Component {
         }
       }
       if (!isEditing) {
-        const newSnippet  = _.clone(snippet)
+        const newSnippet = _.clone(snippet)
         newSnippet.files.splice(fileIndex, 1)
         store.updateSnippet(newSnippet)
       } else {
@@ -432,7 +435,7 @@ export default class SnippetItemMultiFiles extends React.Component {
       // a new input tag will automatically created after set state and we want
       // to focus on that input tag
       const inputs = this.refs.fileList.firstChild.childNodes
-      const input  = inputs[inputs.length - 2].querySelector('input')
+      const input = inputs[inputs.length - 2].querySelector('input')
       this.handleChangeFileClick(newEditingFiles.length - 1)
       input.focus()
     })
@@ -481,16 +484,16 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   render () {
     return (
-      <div className='snippet-item-multi-files' ref='root'>
-        <ReactTooltip place='bottom' effect='solid' />
-        { this.renderHeader() }
-        { this.renderTagList() }
-        { this.renderDescription() }
-        <div className='inline'>
-          { this.renderFileList() }
-          <div className='code' ref='editor'></div>
+      <div className="snippet-item-multi-files" ref="root">
+        <ReactTooltip place="bottom" effect="solid" />
+        {this.renderHeader()}
+        {this.renderTagList()}
+        {this.renderDescription()}
+        <div className="inline">
+          {this.renderFileList()}
+          <div className="code" ref="editor" />
         </div>
-        { this.renderFooter() }
+        {this.renderFooter()}
       </div>
     )
   }

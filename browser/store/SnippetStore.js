@@ -10,24 +10,23 @@ class SnippetStore {
   @observable filter = ''
   @observable sort = 'createTimeNewer'
 
-  @computed get snippets () {
+  @computed
+  get snippets () {
     const snippets = searchSnippet(this.rawSnippets, this.filter)
     return sortSnippet(snippets, this.sort)
   }
 
-  @computed get languages () {
+  @computed
+  get languages () {
     const languages = {}
     this.rawSnippets.forEach(snippet => {
       if (snippet.files !== undefined) {
         snippet.files.forEach(file => {
           const ExtensionIndex = file.name.lastIndexOf('.') + 1
-          const fileExtension = ExtensionIndex >= 2
-            ? file.name.substring(ExtensionIndex)
-            : ''
+          const fileExtension =
+            ExtensionIndex >= 2 ? file.name.substring(ExtensionIndex) : ''
           const mode = CodeMirror.findModeByExtension(fileExtension)
-          let langName = fileExtension
-            ? fileExtension.toUpperCase()
-            : 'unknown'
+          let langName = fileExtension ? fileExtension.toUpperCase() : 'unknown'
           if (mode) {
             langName = mode.name
           }
@@ -48,7 +47,8 @@ class SnippetStore {
     return languages
   }
 
-  @computed get tags () {
+  @computed
+  get tags () {
     const tags = {}
     this.rawSnippets.forEach(snippet => {
       snippet.tags.filter(tag => tag).forEach(tag => {
@@ -88,6 +88,6 @@ class SnippetStore {
   }
 }
 
-const store = window.store = new SnippetStore()
+const store = (window.store = new SnippetStore())
 
 export default store

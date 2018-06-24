@@ -63,7 +63,7 @@ document.addEventListener('keyup', function (e) {
 
 ReactDOM.render(
   <BrowserRouter>
-    <Route path='/' component={Main} />
+    <Route path="/" component={Main} />
   </BrowserRouter>,
   document.getElementById('app')
 )

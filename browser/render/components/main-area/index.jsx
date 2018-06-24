@@ -27,7 +27,7 @@ export default class MainArea extends React.Component {
   render () {
     const { store, config } = this.props
     return (
-      <div className='main-area' ref='root'>
+      <div className="main-area" ref="root">
         <SearchSnippetBar store={store} />
         <MainAreaToolBox store={store} />
         <SnippetList store={store} config={config} />

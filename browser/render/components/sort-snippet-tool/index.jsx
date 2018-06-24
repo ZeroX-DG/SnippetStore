@@ -10,28 +10,29 @@ export default class SortSnippetTool extends React.Component {
   render () {
     return (
       <Fragment>
-        <span className='m-r-10'>{ i18n.__('SORT') }:</span>
+        <span className="m-r-10">{i18n.__('SORT')}:</span>
 
         <select
-          className='sort-snippet-select'
-          onChange={e => this.handleSort(e.target.value)}>
-          <option value='createTimeNewer'>
-            { i18n.__('Sort by create time (newest)') }
+          className="sort-snippet-select"
+          onChange={e => this.handleSort(e.target.value)}
+        >
+          <option value="createTimeNewer">
+            {i18n.__('Sort by create time (newest)')}
           </option>
-          <option value='createTimeOlder'>
-            { i18n.__('Sort by create time (oldest)') }
+          <option value="createTimeOlder">
+            {i18n.__('Sort by create time (oldest)')}
           </option>
-          <option value='updateTimeNewer'>
-            { i18n.__('Sort by update time (newest)') }
+          <option value="updateTimeNewer">
+            {i18n.__('Sort by update time (newest)')}
           </option>
-          <option value='updateTimeOlder'>
-            { i18n.__('Sort by update time (oldest)') }
+          <option value="updateTimeOlder">
+            {i18n.__('Sort by update time (oldest)')}
           </option>
-          <option value='copyCountAsc'>
-            { i18n.__('Sort by copy count (ascending)') }
+          <option value="copyCountAsc">
+            {i18n.__('Sort by copy count (ascending)')}
           </option>
-          <option value='copyCountDesc'>
-            { i18n.__('Sort by copy count (descending)') }
+          <option value="copyCountDesc">
+            {i18n.__('Sort by copy count (descending)')}
           </option>
         </select>
       </Fragment>
