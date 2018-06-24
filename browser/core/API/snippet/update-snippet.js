@@ -1,15 +1,10 @@
 import { findIndexObject } from 'lib/util'
+import fetchSnippets from './fetch-snippets'
 import { SNIPPET_INFO_FILE } from '../config'
 const sander = require('sander')
 
 function updateSnippet (snippet) {
-  let snippets = []
-
-  if (sander.existsSync(SNIPPET_INFO_FILE)) {
-    snippets = JSON.parse(
-      sander.readFileSync(SNIPPET_INFO_FILE, { encoding: 'utf-8' })
-    )
-  }
+  const snippets = fetchSnippets()
 
   const snippetIndex = findIndexObject(snippets, 'key', snippet.key)
 
