@@ -9,6 +9,7 @@ class SnippetStore {
   @observable rawSnippets = []
   @observable filter = ''
   @observable sort = 'createTimeNewer'
+  @observable selectedSnippet = null
 
   @computed
   get snippets () {

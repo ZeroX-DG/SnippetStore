@@ -5,10 +5,18 @@ import formatDate from 'lib/date-format'
 import './snippet-item'
 
 export default class SnippetItem extends React.Component {
+  pickSnippet () {
+    const { store, snippet } = this.props
+    store.selectedSnippet = snippet
+  }
+
   render () {
     const { snippet } = this.props
     return (
-      <div className="snippet-item list-and-detail">
+      <div
+        className="snippet-item list-and-detail"
+        onClick={() => this.pickSnippet()}
+      >
         <p className="name">
           <span className="icon">
             {snippet.files ? (

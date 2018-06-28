@@ -17,7 +17,8 @@
   "Snippet language": "Ngôn ngữ snippet",
   "Snippet content": "Nội dung snippet",
   "About": "Giới thiệu",
-  "SnippetStore is a snippet management app developers": "SnippetStore là một ứng dụng quản lý snippet cho các lập trình viên",
+  "SnippetStore is a snippet management app developers":
+    "SnippetStore là một ứng dụng quản lý snippet cho các lập trình viên",
   "Show line number": "Hiển thị số dòng",
   "Theme": "Chủ đề",
   "Editor font family": "Phông chữ của bộ soạn thảo",
@@ -56,9 +57,12 @@
   "Create new snippet": "Tạo snippet mới",
   "Single-file snippet": "Snippet 1 file",
   "Multi-file snippet": "Snippet đa file",
-  "This is the type of snippet where you will only store 1 piece of code. This type of snippet is suitable for storing small functions": "Loại snippet này cho phép bạn tạo duy nhất 1 file. Loại snippet này thích hợp để chứa function nhỏ",
-  "This type of snippet can groups multiple files into 1 snippet and suitable for storing simple code snippet with more than 1 file": "Loại snippet này cho phép nhóm nhiều file trong 1 snippet và thích hợp chứa snippet cần nhiều file nhỏ",
+  "This is the type of snippet where you will only store 1 piece of code. This type of snippet is suitable for storing small functions":
+    "Loại snippet này cho phép bạn tạo duy nhất 1 file. Loại snippet này thích hợp để chứa function nhỏ",
+  "This type of snippet can groups multiple files into 1 snippet and suitable for storing simple code snippet with more than 1 file":
+    "Loại snippet này cho phép nhóm nhiều file trong 1 snippet và thích hợp chứa snippet cần nhiều file nhỏ",
   "The snippet must have at least 1 file": "Snippet phải có ít nhất 1 file",
   "discard changes": "Hủy thay đổi",
-  "Are you sure to delete this file?": "Bạn có chắc muốn xóa file này?"
+  "Are you sure to delete this file?": "Bạn có chắc muốn xóa file này?",
+  "Pick a snippet from list": "Chọn 1 snippet trong danh sách"
 }
