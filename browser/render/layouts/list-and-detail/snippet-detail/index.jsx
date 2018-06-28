@@ -1,7 +1,12 @@
 import React from 'react'
+import './snippet-detail'
 
 export default class SnippetDetail extends React.Component {
   render () {
-    return <h1>Hello</h1>
+    return (
+      <div className="snippet-detail">
+        <h1>Hello</h1>
+      </div>
+    )
   }
 }
