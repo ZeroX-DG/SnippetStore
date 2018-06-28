@@ -325,7 +325,7 @@ export default class SnippetItem extends React.Component {
 
   render () {
     return (
-      <div className="snippet-item">
+      <div className="snippet-item original">
         <ReactTooltip place="bottom" effect="solid" />
         {this.renderHeader()}
         {this.renderTagList()}

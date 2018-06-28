@@ -1,5 +1,6 @@
 import React from 'react'
 import { getLanguages } from 'render/lib/languages'
+import { getLayouts } from 'render/lib/layouts'
 import ConfigManager from 'lib/config-manager'
 import i18n from 'render/lib/i18n'
 
@@ -14,7 +15,8 @@ export default class InterfaceTab extends React.Component {
         showDeleteConfirmDialog: this.refs.showDeleteConfirmDialog.checked,
         showSnippetCreateTime: this.refs.showSnippetCreateTime.checked,
         showSnippetUpdateTime: this.refs.showSnippetUpdateTime.checked,
-        showSnippetCopyCount: this.refs.showSnippetCopyCount.checked
+        showSnippetCopyCount: this.refs.showSnippetCopyCount.checked,
+        layout: this.refs.layout.value
       }
     }
 
@@ -29,6 +31,7 @@ export default class InterfaceTab extends React.Component {
     const { config } = this.props
     const { theme } = config.ui
     const languages = getLanguages()
+    const layouts = getLayouts()
     return (
       <div className="interface-tab">
         <h1 className="tab-title">{i18n.__('Interface')}</h1>
@@ -107,6 +110,16 @@ export default class InterfaceTab extends React.Component {
               ref="dateFormat"
               defaultValue={config.ui.dateFormat}
             />
+          </div>
+          <div className="group">
+            <label>{i18n.__('Layout')}</label>
+            <select ref="layout" defaultValue={config.ui.layout}>
+              {layouts.map(layout => (
+                <option value={layout.name} key={layout.name}>
+                  {layout.label}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
         <div className="bottom-tool">

@@ -1,7 +1,6 @@
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
 import SideBar from './components/side-bar'
-import MainArea from './layouts/original/main-area'
 import ModalList from './modals/modal-list'
 import SnippetStore from 'store/SnippetStore'
 import CM from 'lib/config-manager'
@@ -9,6 +8,9 @@ import eventEmitter from 'lib/event-emitter'
 import init from 'core/init'
 import applyShortcut from 'core/functions/keyboard'
 import i18n from 'render/lib/i18n'
+
+import MainAreaOriginal from './layouts/original/main-area'
+import MainAreaListAndDetail from './layouts/list-and-detail/main-area'
 
 export default class Main extends React.Component {
   constructor (props) {
@@ -32,6 +34,19 @@ export default class Main extends React.Component {
     })
   }
 
+  renderMainArea () {
+    const { config } = this.state
+    const { layout } = config.ui
+    switch (layout) {
+      case 'original':
+        return <MainAreaOriginal store={SnippetStore} config={config} />
+      case 'list-and-detail':
+        return <MainAreaListAndDetail store={SnippetStore} config={config} />
+      default:
+        return <MainAreaOriginal store={SnippetStore} config={config} />
+    }
+  }
+
   render () {
     const { config } = this.state
     return (
@@ -39,7 +54,7 @@ export default class Main extends React.Component {
         <ToastContainer />
         <ModalList store={SnippetStore} config={config} />
         <SideBar store={SnippetStore} config={config} />
-        <MainArea store={SnippetStore} config={config} />
+        {this.renderMainArea()}
       </div>
     )
   }

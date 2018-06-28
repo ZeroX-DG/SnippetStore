@@ -15,7 +15,8 @@ const DEFAULT_CONFIG = {
     showSnippetCreateTime: true,
     showSnippetUpdateTime: true,
     showSnippetCopyCount: true,
-    smallSidebar: false
+    smallSidebar: false,
+    layout: 'original'
   },
   editor: {
     showLineNumber: true,

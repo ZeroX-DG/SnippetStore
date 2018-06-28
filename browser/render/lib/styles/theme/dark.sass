@@ -26,7 +26,7 @@ body[data-theme='dark']
       .create-btn
         background: $snippet-list-create-button-background--dark
         color: $snippet-list-create-button-foreground--dark
-    .snippet-item, .snippet-item-multi-files
+    .snippet-item.original, .snippet-item-multi-files
       background: $snippet-item-background--dark
       .file-list
         li:hover
@@ -46,6 +46,13 @@ body[data-theme='dark']
       color: $input-tag-foreground--dark
     .emptyMessage
       color: rgba(255, 255, 255, 0.3)
+    .snippets.list-and-detail
+      background: $snippet-list-list-and-detail-background--dark
+    .snippet-item.list-and-detail
+      &:hover
+        background: $snippet-item-list-and-detail-hover-background--dark
+      &::after
+        background: $snippet-item-list-and-detail-hover-background--dark
 
 body[data-theme='dark']
   .modal

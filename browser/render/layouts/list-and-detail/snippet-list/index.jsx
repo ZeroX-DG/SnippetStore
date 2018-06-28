@@ -1,24 +1,11 @@
 import React from 'react'
 import SnippetItem from '../snippet-item'
-import SnippetItemMultiFiles from '../snippet-item-multi-files'
 import i18n from 'render/lib/i18n'
 import { observer } from 'mobx-react'
 import './snippet-list'
 
 @observer
 export default class SnippetList extends React.Component {
-  renderMultiFileSnippet (snippet) {
-    const { config, store } = this.props
-    return (
-      <SnippetItemMultiFiles snippet={snippet} config={config} store={store} />
-    )
-  }
-
-  renderSingleFileSnippet (snippet) {
-    const { config, store } = this.props
-    return <SnippetItem snippet={snippet} config={config} store={store} />
-  }
-
   renderEmptyMessage () {
     const { config, store } = this.props
     if (store.rawSnippets.length > 0) {
@@ -35,13 +22,11 @@ export default class SnippetList extends React.Component {
   renderSnippetList () {
     const { snippets } = this.props.store
     return (
-      <div className="snippets original">
+      <div className="snippets list-and-detail">
         <ul>
           {snippets.map(snippet => (
             <li key={snippet.key}>
-              {snippet.files === undefined
-                ? this.renderSingleFileSnippet(snippet)
-                : this.renderMultiFileSnippet(snippet)}
+              <SnippetItem snippet={snippet} />
             </li>
           ))}
         </ul>
