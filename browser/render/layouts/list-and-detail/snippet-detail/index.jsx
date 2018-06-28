@@ -1,5 +1,6 @@
 import React from 'react'
 import i18n from 'render/lib/i18n'
+import FAIcon from '@fortawesome/react-fontawesome'
 import { observer } from 'mobx-react'
 import './snippet-detail'
 
@@ -13,7 +14,20 @@ export default class SnippetDetail extends React.Component {
 
   renderSnippet () {
     const { selectedSnippet } = this.props.store
-    return <div className="header">{selectedSnippet.name}</div>
+    return (
+      <div>
+        <div className="header">
+          <p className="snippet-name">{selectedSnippet.name}</p>
+        </div>
+        <p className="tags">
+          <span className="icon">
+            <FAIcon icon="tags" />
+          </span>
+          {selectedSnippet.tags.join(', ')}
+        </p>
+        <p className="description">{selectedSnippet.description}</p>
+      </div>
+    )
   }
 
   render () {
