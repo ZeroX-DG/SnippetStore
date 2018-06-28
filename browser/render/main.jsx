@@ -1,7 +1,7 @@
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
 import SideBar from './components/side-bar'
-import MainArea from './components/main-area'
+import MainArea from './layouts/original/main-area'
 import ModalList from './modals/modal-list'
 import SnippetStore from 'store/SnippetStore'
 import CM from 'lib/config-manager'

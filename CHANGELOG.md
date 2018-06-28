@@ -10,6 +10,7 @@ Every notable changes in each version will be listed in this file.
 
 ## Bugfixes:
 
+- **Interface**: Fixed side bar click doesn't trigger search ([165fa66](https://github.com/ZeroX-DG/SnippetStore/commit/165fa66))
 - **Interface**: Fixed theme bug when restructured snippet list ([0a838a5](https://github.com/ZeroX-DG/SnippetStore/commit/0a838a5))
 
 ## Improvements:
