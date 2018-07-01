@@ -28,7 +28,7 @@ export default class SnippetDetail extends React.Component {
           mode: snippetMode,
           theme: theme,
           gutters: gutters,
-          readOnly: false,
+          readOnly: true,
           autoCloseBrackets: true,
           autoRefresh: true
         })
@@ -86,13 +86,17 @@ export default class SnippetDetail extends React.Component {
         <div className="header">
           <p className="snippet-name">{selectedSnippet.name}</p>
         </div>
-        <p className="tags">
-          <span className="icon">
-            <FAIcon icon="tags" />
-          </span>
-          {selectedSnippet.tags.join(', ')}
-        </p>
-        <p className="description">{selectedSnippet.description}</p>
+        {selectedSnippet.tags.length > 0 && (
+          <p className="tags">
+            <span className="icon">
+              <FAIcon icon="tags" />
+            </span>
+            {selectedSnippet.tags.join(', ')}
+          </p>
+        )}
+        {selectedSnippet.description && (
+          <p className="description">{selectedSnippet.description}</p>
+        )}
         <div className="code" ref="editor" />
       </Fragment>
     )
