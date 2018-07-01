@@ -2,6 +2,14 @@ body[data-theme='light']
   background: $body-background--light
   color: black
 
+  ::-webkit-scrollbar
+    width: 12px
+
+  ::-webkit-scrollbar-thumb
+    background-color: rgba(0, 0, 0, 0.2)
+    &:hover
+      background-color: rgba(0, 0, 0, 0.5)
+
 body[data-theme='light']
   .sidebar
     background: $sidebar-background--light
@@ -48,6 +56,13 @@ body[data-theme='light']
       color: $input-tag-foreground--light
     .emptyMessage
       color: rgba(0, 0, 0, 0.3)
+    .snippets.list-and-detail
+      background: $snippet-list-list-and-detail-background--light
+    .snippet-item.list-and-detail
+      &:hover
+        background: $snippet-item-list-and-detail-hover-background--light
+      &::after
+        background: $snippet-item-list-and-detail-hover-background--light
 
 body[data-theme='light']
   .modal

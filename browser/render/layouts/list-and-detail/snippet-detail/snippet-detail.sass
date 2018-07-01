@@ -1,7 +1,8 @@
 .snippet-detail
   width: calc(100% - 350px)
   height: 100vh
-  display: inline-block
+  display: inline-flex
+  flex-direction: column
   vertical-align: top
   overflow: overlay
   .header
@@ -26,6 +27,5 @@
       margin-right: 10px
   .code
     width: 100%
-    height: calc(100% - 300px)
-    bottom: 0
-    position: fixed
+    flex: 1 1 auto
+    overflow-y: overlay

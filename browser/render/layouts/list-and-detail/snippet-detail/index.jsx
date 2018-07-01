@@ -28,10 +28,11 @@ export default class SnippetDetail extends React.Component {
           mode: snippetMode,
           theme: theme,
           gutters: gutters,
-          readOnly: true,
+          readOnly: false,
           autoCloseBrackets: true,
           autoRefresh: true
         })
+      this.editor.setOption('mode', snippetMode)
       this.editor.setValue(selectedSnippet.value)
       this.editor.setSize('100%', '100%')
       this.applyEditorStyle()

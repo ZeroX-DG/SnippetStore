@@ -2,6 +2,14 @@ body[data-theme='dark']
   background: $body-background--dark
   color: white
 
+  ::-webkit-scrollbar
+    width: 12px
+
+  ::-webkit-scrollbar-thumb
+    background-color: rgba(0, 0, 0, 0.24)
+    &:hover
+      background-color: rgba(0, 0, 0, 0.7)
+
 body[data-theme='dark']
   .sidebar
     background: $sidebar-background--dark
