@@ -2,20 +2,23 @@
 
 Every notable changes in each version will be listed in this file.
 
-# 0.1.1
+# 0.2.0
 
 ## Features:
 
 - **Interface**: Switch option with tab key in pick snippet type modal ([e85849e](https://github.com/ZeroX-DG/SnippetStore/commit/e85849e))
+- **Interface**: New layout 'list and detail' ([ca74a3e](https://github.com/ZeroX-DG/SnippetStore/commit/ca74a3e))
 
 ## Bugfixes:
 
 - **Interface**: Fixed side bar click doesn't trigger search ([165fa66](https://github.com/ZeroX-DG/SnippetStore/commit/165fa66))
 - **Interface**: Fixed theme bug when restructured snippet list ([0a838a5](https://github.com/ZeroX-DG/SnippetStore/commit/0a838a5))
+- **Interface**: Fixed scroll bar color for each theme ([99e0f96](https://github.com/ZeroX-DG/SnippetStore/commit/99e0f96))
 
 ## Improvements:
 
 - **Development**: Restructured snippet list into smaller components ([354e499](https://github.com/ZeroX-DG/SnippetStore/commit/354e499))
+- **Development**: Restructured components into their separate layout ([ca74a3e](https://github.com/ZeroX-DG/SnippetStore/commit/ca74a3e))
 - **Development**: Prettified the whole source code using prettier ([60646d9](https://github.com/ZeroX-DG/SnippetStore/commit/60646d9))
 - **Interface**: Passed control to modal list so that only 1 modal can open at the time ([e85849e](https://github.com/ZeroX-DG/SnippetStore/commit/e85849e))
 - **Interface**: Added ESC text bellow modal's close button ([eb16841](https://github.com/ZeroX-DG/SnippetStore/commit/eb16841))
