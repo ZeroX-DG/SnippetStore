@@ -13,6 +13,13 @@ import './snippet-detail'
 
 @observer
 export default class SnippetDetail extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isEditing: false
+    }
+  }
+
   componentDidUpdate () {
     const { config, store } = this.props
     const { selectedSnippet } = store
@@ -84,24 +91,35 @@ export default class SnippetDetail extends React.Component {
   }
 
   renderTopBar () {
+    const { isEditing } = this.state
     return (
       <div className="top-bar">
         <div className="left-tool">
-          <div
-            className="copy-btn"
-            onClick={this.copySnippet.bind(this)}
-            data-tip={i18n.__('copy')}
-          >
-            <FAIcon icon="copy" />
-          </div>
-          <div className="edit-btn" data-tip={i18n.__('edit')}>
-            <FAIcon icon="edit" />
-          </div>
+          {!isEditing && (
+            <div
+              className="copy-btn"
+              onClick={this.copySnippet.bind(this)}
+              data-tip={i18n.__('copy')}
+            >
+              <FAIcon icon="copy" />
+            </div>
+          )}
+          {!isEditing && (
+            <div className="edit-btn" data-tip={i18n.__('edit')}>
+              <FAIcon icon="edit" />
+            </div>
+          )}
         </div>
         <div className="right-tool">
-          <div className="delete-btn" data-tip={i18n.__('delete snippet')}>
-            <FAIcon icon="trash-alt" />
-          </div>
+          {!isEditing && (
+            <div
+              className="delete-btn"
+              onClick={this.handleDeleteClick.bind(this)}
+              data-tip={i18n.__('delete snippet')}
+            >
+              <FAIcon icon="trash-alt" />
+            </div>
+          )}
         </div>
       </div>
     )
@@ -116,6 +134,21 @@ export default class SnippetDetail extends React.Component {
     }
     const newSnippet = _.clone(selectedSnippet)
     store.increaseCopyTime(newSnippet)
+  }
+
+  handleDeleteClick () {
+    const { config, store } = this.props
+    const { selectedSnippet } = store
+    if (config.ui.showDeleteConfirmDialog) {
+      if (!confirm(i18n.__('Are you sure to delete this snippet?'))) {
+        return
+      }
+    }
+    const newSnippet = _.clone(selectedSnippet)
+    store.deleteSnippet(newSnippet)
+    store.selectedSnippet = null
+    // reset editor null so that it will re-initiate editor with the new snippet
+    this.editor = null
   }
 
   renderSnippet () {
