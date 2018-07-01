@@ -1,6 +1,10 @@
 import React, { Fragment } from 'react'
 import i18n from 'render/lib/i18n'
 import FAIcon from '@fortawesome/react-fontawesome'
+import Clipboard from 'core/functions/clipboard'
+import ReactTooltip from 'react-tooltip'
+import _ from 'lodash'
+import { toast } from 'react-toastify'
 import { observer } from 'mobx-react'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
@@ -79,10 +83,46 @@ export default class SnippetDetail extends React.Component {
     )
   }
 
+  renderTopBar () {
+    return (
+      <div className="top-bar">
+        <div className="left-tool">
+          <div
+            className="copy-btn"
+            onClick={this.copySnippet.bind(this)}
+            data-tip={i18n.__('copy')}
+          >
+            <FAIcon icon="copy" />
+          </div>
+          <div className="edit-btn" data-tip={i18n.__('edit')}>
+            <FAIcon icon="edit" />
+          </div>
+        </div>
+        <div className="right-tool">
+          <div className="delete-btn" data-tip={i18n.__('delete snippet')}>
+            <FAIcon icon="trash-alt" />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  copySnippet () {
+    const { config, store } = this.props
+    const { selectedSnippet } = store
+    Clipboard.set(selectedSnippet.value)
+    if (config.ui.showCopyNoti) {
+      toast.info(i18n.__('Copied to clipboard'), { autoClose: 2000 })
+    }
+    const newSnippet = _.clone(selectedSnippet)
+    store.increaseCopyTime(newSnippet)
+  }
+
   renderSnippet () {
     const { selectedSnippet } = this.props.store
     return (
       <Fragment>
+        {this.renderTopBar()}
         <div className="header">
           <p className="snippet-name">{selectedSnippet.name}</p>
         </div>
@@ -106,6 +146,7 @@ export default class SnippetDetail extends React.Component {
     const { selectedSnippet } = this.props.store
     return (
       <div className="snippet-detail">
+        <ReactTooltip place="bottom" effect="solid" />
         {!selectedSnippet && this.renderEmptySnippet()}
         {selectedSnippet && this.renderSnippet()}
       </div>
