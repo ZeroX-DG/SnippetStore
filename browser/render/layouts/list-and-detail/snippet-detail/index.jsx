@@ -5,6 +5,7 @@ import Clipboard from 'core/functions/clipboard'
 import formatDate from 'lib/date-format'
 import ReactTooltip from 'react-tooltip'
 import _ from 'lodash'
+import eventEmitter from 'lib/event-emitter'
 import { toast } from 'react-toastify'
 import { observer } from 'mobx-react'
 import CodeMirror from 'codemirror'
@@ -105,9 +106,30 @@ export default class SnippetDetail extends React.Component {
               <FAIcon icon="copy" />
             </div>
           )}
-          {!isEditing && (
-            <div className="edit-btn" data-tip={i18n.__('edit')}>
+          {isEditing ? (
+            <div
+              className="save-btn"
+              data-tip={i18n.__('save changes')}
+              onClick={this.handleSaveChangesClick.bind(this)}
+            >
+              <FAIcon icon="check" />
+            </div>
+          ) : (
+            <div
+              className="edit-btn"
+              data-tip={i18n.__('edit')}
+              onClick={this.handleEditButtonClick.bind(this)}
+            >
               <FAIcon icon="edit" />
+            </div>
+          )}
+          {isEditing && (
+            <div
+              className="discard-btn"
+              data-tip={i18n.__('discard changes')}
+              onClick={this.handleDiscardChangesClick.bind(this)}
+            >
+              <FAIcon icon="times" />
             </div>
           )}
         </div>
@@ -150,6 +172,52 @@ export default class SnippetDetail extends React.Component {
     store.selectedSnippet = null
     // reset editor null so that it will re-initiate editor with the new snippet
     this.editor = null
+  }
+
+  handleEditButtonClick () {
+    this.setState({ isEditing: true })
+    eventEmitter.emit('snippet-detail:edit-start')
+    this.editor.setOption('readOnly', false)
+  }
+
+  handleDiscardChangesClick () {
+    this.setState({ isEditing: false }, () => {
+      eventEmitter.emit('snippet-detail:edit-end')
+      this.editor.setOption('readOnly', true)
+    })
+  }
+
+  handleSaveChangesClick () {
+    const { snippet } = this.props
+    const valueChanged = snippet.value !== this.editor.getValue()
+    const langChanged = snippet.lang !== this.refs.lang.value
+    const nameChanged = snippet.name !== this.refs.name.value
+    const newTags = this.refs.tags.value.replace(/ /g, '').split(',')
+    const tagChanged = !_.isEqual(snippet.tags, newTags)
+    const descripChanged = snippet.description !== this.refs.description.value
+    if (
+      valueChanged ||
+      langChanged ||
+      nameChanged ||
+      tagChanged ||
+      descripChanged
+    ) {
+      const newSnippet = _.clone(this.props.snippet)
+      newSnippet.value = this.editor.getValue()
+      newSnippet.lang = this.refs.lang.value
+      newSnippet.name = this.refs.name.value
+      newSnippet.tags = newTags
+      newSnippet.description = this.refs.description.value
+      if (langChanged) {
+        const snippetMode = CodeMirror.findModeByName(newSnippet.lang).mode
+        require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+        this.editor.setOption('mode', snippetMode)
+      }
+      this.props.store.updateSnippet(newSnippet)
+    }
+
+    this.setState({ isEditing: false })
+    this.editor.setOption('readOnly', true)
   }
 
   renderSnippet () {
