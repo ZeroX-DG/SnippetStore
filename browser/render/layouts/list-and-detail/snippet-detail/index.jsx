@@ -6,6 +6,8 @@ import formatDate from 'lib/date-format'
 import ReactTooltip from 'react-tooltip'
 import _ from 'lodash'
 import eventEmitter from 'lib/event-emitter'
+import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
+import isDevIconExists from 'lib/devicon-exists'
 import { toast } from 'react-toastify'
 import { observer } from 'mobx-react'
 import CodeMirror from 'codemirror'
@@ -188,13 +190,15 @@ export default class SnippetDetail extends React.Component {
   }
 
   handleSaveChangesClick () {
-    const { snippet } = this.props
-    const valueChanged = snippet.value !== this.editor.getValue()
-    const langChanged = snippet.lang !== this.refs.lang.value
-    const nameChanged = snippet.name !== this.refs.name.value
+    const { store } = this.props
+    const { selectedSnippet } = store
+    const valueChanged = selectedSnippet.value !== this.editor.getValue()
+    const langChanged = selectedSnippet.lang !== this.refs.lang.value
+    const nameChanged = selectedSnippet.name !== this.refs.name.value
     const newTags = this.refs.tags.value.replace(/ /g, '').split(',')
-    const tagChanged = !_.isEqual(snippet.tags, newTags)
-    const descripChanged = snippet.description !== this.refs.description.value
+    const tagChanged = !_.isEqual(selectedSnippet.tags, newTags)
+    const descripChanged =
+      selectedSnippet.description !== this.refs.description.value
     if (
       valueChanged ||
       langChanged ||
@@ -202,7 +206,7 @@ export default class SnippetDetail extends React.Component {
       tagChanged ||
       descripChanged
     ) {
-      const newSnippet = _.clone(this.props.snippet)
+      const newSnippet = _.clone(selectedSnippet)
       newSnippet.value = this.editor.getValue()
       newSnippet.lang = this.refs.lang.value
       newSnippet.name = this.refs.name.value
@@ -215,50 +219,162 @@ export default class SnippetDetail extends React.Component {
       }
       this.props.store.updateSnippet(newSnippet)
     }
-
-    this.setState({ isEditing: false })
+    this.setState({ isEditing: false }, () => {
+      eventEmitter.emit('snippet-detail:edit-end')
+    })
     this.editor.setOption('readOnly', true)
   }
 
   renderSnippet () {
-    const { config, store } = this.props
-    const { selectedSnippet } = store
     return (
       <Fragment>
         {this.renderTopBar()}
         <div className="header">
-          <p className="snippet-name">{selectedSnippet.name}</p>
-          <p>
-            {config.ui.showSnippetCreateTime && (
-              <span className="createAt info">
-                {i18n.__('Create at')} : {formatDate(selectedSnippet.createAt)}
-              </span>
-            )}
-            {config.ui.showSnippetUpdateTime && (
-              <span className="updateAt info">
-                {i18n.__('Last update')}: {formatDate(selectedSnippet.updateAt)}
-              </span>
-            )}
-            {config.ui.showSnippetCopyCount && (
-              <span className="copyCount info">
-                {i18n.__('Copy')} : {selectedSnippet.copy} {i18n.__('times')}
-              </span>
-            )}
-          </p>
+          {this.renderSnippetName()}
+          {this.renderOtherInfo()}
         </div>
-        {selectedSnippet.tags.length > 0 && (
-          <p className="tags">
-            <span className="icon">
-              <FAIcon icon="tags" />
-            </span>
-            {selectedSnippet.tags.join(', ')}
-          </p>
-        )}
-        {selectedSnippet.description && (
-          <p className="description">{selectedSnippet.description}</p>
-        )}
+        {this.renderTagList()}
+        {this.renderDescription()}
         <div className="code" ref="editor" />
       </Fragment>
+    )
+  }
+
+  renderOtherInfo () {
+    const { config, store } = this.props
+    const { selectedSnippet } = store
+    return (
+      <p>
+        {config.ui.showSnippetCreateTime && (
+          <span className="createAt info">
+            {i18n.__('Create at')} : {formatDate(selectedSnippet.createAt)}
+          </span>
+        )}
+        {config.ui.showSnippetUpdateTime && (
+          <span className="updateAt info">
+            {i18n.__('Last update')}: {formatDate(selectedSnippet.updateAt)}
+          </span>
+        )}
+        {config.ui.showSnippetCopyCount && (
+          <span className="copyCount info">
+            {i18n.__('Copy')} : {selectedSnippet.copy} {i18n.__('times')}
+          </span>
+        )}
+      </p>
+    )
+  }
+
+  renderSnippetName () {
+    const { store } = this.props
+    const { isEditing } = this.state
+    const { selectedSnippet } = store
+    const langMode = CodeMirror.findModeByName(selectedSnippet.lang)
+    const snippetMode = langMode.mode
+    let languageIcon = (
+      <img
+        src={defaultLanguageIcon}
+        className="lang-icon"
+        data-tip={selectedSnippet.lang}
+      />
+    )
+    if (langMode.alias) {
+      for (let i = 0; i < langMode.alias.length; i++) {
+        const alias = langMode.alias[i]
+        if (isDevIconExists(`devicon-${alias}-plain`)) {
+          languageIcon = (
+            <i
+              className={`devicon-${alias}-plain colored`}
+              data-tip={selectedSnippet.lang}
+            />
+          )
+          break
+        }
+      }
+    }
+    // if it's not alias then maybe the mode name ?
+    if (isDevIconExists(`devicon-${snippetMode}-plain`)) {
+      languageIcon = (
+        <i
+          className={`devicon-${snippetMode}-plain colored`}
+          data-tip={selectedSnippet.lang}
+        />
+      )
+    }
+    return (
+      <p className="snippet-name">
+        {!isEditing && <span className="icon">{languageIcon}</span>}
+        {isEditing ? (
+          <input
+            type="text"
+            className="snippet-name-input"
+            ref="name"
+            defaultValue={selectedSnippet.name}
+          />
+        ) : (
+          selectedSnippet.name
+        )}
+        {isEditing && (
+          <select
+            ref="lang"
+            onChange={this.handleSnippetLangChange.bind(this)}
+            defaultValue={selectedSnippet.lang}
+          >
+            {CodeMirror.modeInfo.map((mode, index) => (
+              <option value={mode.name} key={index}>
+                {mode.name}
+              </option>
+            ))}
+          </select>
+        )}
+      </p>
+    )
+  }
+
+  handleSnippetLangChange () {
+    const snippetMode = CodeMirror.findModeByName(this.refs.lang.value).mode
+    require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+    this.editor.setOption('mode', snippetMode)
+  }
+
+  renderDescription () {
+    const { store } = this.props
+    const { selectedSnippet } = store
+    const { isEditing } = this.state
+    return (
+      <p className={`description ${isEditing ? 'editing' : ''}`}>
+        {isEditing ? (
+          <textarea
+            ref="description"
+            defaultValue={selectedSnippet.description}
+          />
+        ) : (
+          selectedSnippet.description
+        )}
+      </p>
+    )
+  }
+
+  renderTagList () {
+    const { store } = this.props
+    const { isEditing } = this.state
+    const { selectedSnippet } = store
+    return (
+      selectedSnippet.tags.length > 0 && (
+        <p className="tags">
+          <span className="icon">
+            <FAIcon icon="tags" />
+          </span>
+          {isEditing ? (
+            <input
+              type="text"
+              ref="tags"
+              defaultValue={selectedSnippet.tags.join(', ')}
+            />
+          ) : (
+            selectedSnippet.tags.join(', ')
+          )}
+        </p>
+      )
     )
   }
 

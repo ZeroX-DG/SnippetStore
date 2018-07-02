@@ -76,6 +76,7 @@ class SnippetStore {
     // update using the snippet API
     const snippetIndex = SnippetAPI.updateSnippet(snippet)
     this.rawSnippets[snippetIndex] = snippet
+    this.selectedSnippet = snippet
   }
 
   increaseCopyTime (snippet) {
