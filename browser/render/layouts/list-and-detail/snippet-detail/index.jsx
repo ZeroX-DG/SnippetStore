@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import i18n from 'render/lib/i18n'
 import FAIcon from '@fortawesome/react-fontawesome'
 import Clipboard from 'core/functions/clipboard'
+import formatDate from 'lib/date-format'
 import ReactTooltip from 'react-tooltip'
 import _ from 'lodash'
 import { toast } from 'react-toastify'
@@ -152,12 +153,30 @@ export default class SnippetDetail extends React.Component {
   }
 
   renderSnippet () {
-    const { selectedSnippet } = this.props.store
+    const { config, store } = this.props
+    const { selectedSnippet } = store
     return (
       <Fragment>
         {this.renderTopBar()}
         <div className="header">
           <p className="snippet-name">{selectedSnippet.name}</p>
+          <p>
+            {config.ui.showSnippetCreateTime && (
+              <span className="createAt info">
+                {i18n.__('Create at')} : {formatDate(selectedSnippet.createAt)}
+              </span>
+            )}
+            {config.ui.showSnippetUpdateTime && (
+              <span className="updateAt info">
+                {i18n.__('Last update')}: {formatDate(selectedSnippet.updateAt)}
+              </span>
+            )}
+            {config.ui.showSnippetCopyCount && (
+              <span className="copyCount info">
+                {i18n.__('Copy')} : {selectedSnippet.copy} {i18n.__('times')}
+              </span>
+            )}
+          </p>
         </div>
         {selectedSnippet.tags.length > 0 && (
           <p className="tags">
