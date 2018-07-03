@@ -64,5 +64,6 @@
   "The snippet must have at least 1 file": "Snippet phải có ít nhất 1 file",
   "discard changes": "Hủy thay đổi",
   "Are you sure to delete this file?": "Bạn có chắc muốn xóa file này?",
-  "Pick a snippet from list": "Chọn 1 snippet trong danh sách"
+  "Pick a snippet from list": "Chọn 1 snippet trong danh sách",
+  "Layout": "Bố cục"
 }

@@ -66,5 +66,6 @@
     "The snippet must have at least 1 file",
   "discard changes": "discard changes",
   "Are you sure to delete this file?": "Are you sure to delete this file?",
-  "Pick a snippet from list": "Pick a snippet from list"
+  "Pick a snippet from list": "Pick a snippet from list",
+  "Layout": "Layout"
 }
