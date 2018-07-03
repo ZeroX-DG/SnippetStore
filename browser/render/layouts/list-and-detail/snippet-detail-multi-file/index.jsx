@@ -6,6 +6,7 @@ import ReactTooltip from 'react-tooltip'
 import _ from 'lodash'
 import eventEmitter from 'lib/event-emitter'
 import { getExtension, generateKey } from 'lib/util'
+import Clipboard from 'core/functions/clipboard'
 import { toast } from 'react-toastify'
 import { toJS } from 'mobx'
 import CodeMirror from 'codemirror'
@@ -398,14 +399,24 @@ export default class SnippetDetailMultiFile extends React.Component {
               ) : (
                 'untitled'
               )}
-              {
-                <span
-                  className="icon"
-                  onClick={e => this.handleDeleteFile(e, index)}
-                >
-                  <FAIcon icon="trash-alt" />
-                </span>
-              }
+              <div className="tools">
+                {
+                  <span
+                    className="icon"
+                    onClick={() => this.handleCopyFile(index)}
+                  >
+                    <FAIcon icon="copy" />
+                  </span>
+                }
+                {
+                  <span
+                    className="icon"
+                    onClick={e => this.handleDeleteFile(e, index)}
+                  >
+                    <FAIcon icon="trash-alt" />
+                  </span>
+                }
+              </div>
             </li>
           ))}
           {isEditing && (
@@ -419,6 +430,17 @@ export default class SnippetDetailMultiFile extends React.Component {
         </ul>
       </div>
     )
+  }
+
+  handleCopyFile (index) {
+    const { snippet, config, store } = this.props
+    const file = snippet.files[index]
+    Clipboard.set(file.value)
+    if (config.ui.showCopyNoti) {
+      toast.info(i18n.__('Copied to clipboard'), { autoClose: 2000 })
+    }
+    const newSnippet = _.clone(snippet)
+    store.increaseCopyTime(newSnippet)
   }
 
   renderOtherInfo () {
