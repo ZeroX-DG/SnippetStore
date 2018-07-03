@@ -3,12 +3,15 @@ import { observer } from 'mobx-react'
 import i18n from 'render/lib/i18n'
 import SnippetDetail from '../snippet-detail'
 import SnippetDetailMultiFile from '../snippet-detail-multi-file'
+import './snippet-detail-wrapper'
 
 @observer
 export default class SnippetDetailWrapper extends React.Component {
   renderEmptySnippet () {
     return (
-      <h1 className="emptyMessage">{i18n.__('Pick a snippet from list')}</h1>
+      <div className="emptyMessageWrapper">
+        <h1 className="emptyMessage">{i18n.__('Pick a snippet from list')}</h1>
+      </div>
     )
   }
 
