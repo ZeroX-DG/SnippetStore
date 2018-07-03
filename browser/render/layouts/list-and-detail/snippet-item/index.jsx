@@ -32,10 +32,10 @@ export default class SnippetItem extends React.Component {
   }
 
   render () {
-    const { snippet } = this.props
+    const { snippet, selected } = this.props
     return (
       <div
-        className="snippet-item list-and-detail"
+        className={`snippet-item list-and-detail ${selected ? 'selected' : ''}`}
         onContextMenu={() => this.handleContextMenu(snippet)}
         onClick={() => this.pickSnippet()}
       >

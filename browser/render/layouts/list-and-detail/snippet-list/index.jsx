@@ -18,7 +18,7 @@ export default class SnippetList extends React.Component {
 
   renderSnippetList () {
     const { store, config } = this.props
-    const { snippets } = store
+    const { snippets, selectedSnippet } = store
     return (
       <div className="snippets list-and-detail">
         <div className="wall" ref="wall" />
@@ -26,7 +26,14 @@ export default class SnippetList extends React.Component {
         <ul>
           {snippets.map(snippet => (
             <li key={snippet.key}>
-              <SnippetItem store={store} config={config} snippet={snippet} />
+              <SnippetItem
+                selected={
+                  selectedSnippet && selectedSnippet.key === snippet.key
+                }
+                store={store}
+                config={config}
+                snippet={snippet}
+              />
             </li>
           ))}
         </ul>
