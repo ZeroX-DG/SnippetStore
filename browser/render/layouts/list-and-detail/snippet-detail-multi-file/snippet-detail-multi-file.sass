@@ -1,0 +1,129 @@
+.snippet-detail-multi-file
+  width: calc(100% - 350px)
+  height: 100vh
+  display: inline-flex
+  flex-direction: column
+  vertical-align: top
+  overflow: overlay
+  .header
+    width: 100%
+    padding: 0 20px
+    .snippet-name
+      font-size: 30px
+      font-family: 'Lato'
+      overflow: hidden
+      text-overflow: ellipsis
+      margin-top: 0px
+      .icon
+        margin-right: 15px
+        margin-right: 10px
+        display: inline
+        .lang-icon
+          height: 25px
+        i
+          font-size: 25px
+      input[type='text']
+        height: 35px
+        border: none
+        outline: none
+        background: transparent
+        font-size: 15px
+        border-radius: 5px
+        padding: 2px 5px
+        display: inline-block
+      .snippet-name-input
+        width: calc(100% - 180px)
+        margin-right: 20px
+      select
+        width: 150px
+        height: 35px
+        border: none
+        border-radius: 5px
+        outline: none
+        display: inline-block
+        padding-left: 5px
+    .info
+      margin-right: 15px
+  .description
+    width: 100%
+    max-height: 200px
+    overflow-y: scroll
+    padding: 0 20px
+    font-size: 18px
+    textarea
+      width: 100%
+      max-height: 170px
+      border: none
+      outline: none
+      font-size: 15px
+      border-radius: 5px
+      padding: 10px
+      resize: vertical
+      font-family: 'Lato'
+  .tags
+    width: 100%
+    padding: 0 20px
+    .icon
+      margin-right: 10px
+    input[type='text']
+      width: calc(100% - 40px)
+      height: 35px
+      border: none
+      outline: none
+      background: transparent
+      font-size: 15px
+      border-radius: 5px
+      padding: 2px 5px
+  .code
+    width: 100%
+    flex: 1 1 auto
+    overflow-y: overlay
+  .top-bar
+    width: 100%
+    height: 50px
+    display: flex
+    align-items: center
+    padding: 0 20px
+    .left-tool, .right-tool
+      width: 50%
+      display: flex
+    .left-tool
+      justify-content: flex-start
+      div[class*='-btn']
+        margin-right: 25px
+        cursor: pointer
+    .right-tool
+      justify-content: flex-end
+      div[class*='-btn']
+        margin-left: 25px
+        cursor: pointer
+  .file-list
+    width: 100%
+    ul
+      width: 100%
+      overflow-x: overlay
+      white-space: nowrap
+      display: flex
+      li
+        height: 40px
+        display: flex
+        align-items: center
+        padding: 0 10px
+        text-overflow: ellipsis
+        justify-content: space-between
+        cursor: pointer
+        &.selected
+          border-bottom: 2px solid
+        .icon
+          opacity: 0
+          transition: opacity 0.3s
+        &:hover .icon
+          opacity: 1
+      .add-file-btn
+        width: 40px
+        height: 40px
+        display: inline-block
+        border-left: 1px solid black
+        display: flex
+        justify-content: center
+        align-items: center
