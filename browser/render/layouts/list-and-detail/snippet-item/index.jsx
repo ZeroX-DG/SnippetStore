@@ -16,7 +16,7 @@ export default class SnippetItem extends React.Component {
     const { config, store, snippet } = this.props
     ContextMenu.popup([
       {
-        label: i18n.__('Delete snippet'),
+        label: i18n.__('delete snippet'),
         click () {
           if (config.ui.showDeleteConfirmDialog) {
             if (!confirm(i18n.__('Are you sure to delete this snippet?'))) {
