@@ -7,7 +7,7 @@ import _ from 'lodash'
 import eventEmitter from 'lib/event-emitter'
 import { getExtension, generateKey } from 'lib/util'
 import { toast } from 'react-toastify'
-import { toJS } from 'mobx-react'
+import { toJS } from 'mobx'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import 'codemirror/addon/display/autorefresh'
@@ -65,21 +65,22 @@ export default class SnippetDetailMultiFile extends React.Component {
   }
 
   componentDidUpdate () {
-    const { store } = this.props
-    const { selectedSnippet } = store
-    const { selectedFile } = this.state
+    const { snippet } = this.props
+    const { selectedFile, isEditing } = this.state
 
-    const file = selectedSnippet.files[selectedFile]
-    const fileExtension = getExtension(file.name)
-    const resultMode = CodeMirror.findModeByExtension(fileExtension)
-    let snippetMode = 'null'
-    if (resultMode) {
-      snippetMode = resultMode.mode
-      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+    if (!isEditing) {
+      const file = snippet.files[selectedFile]
+      const fileExtension = getExtension(file.name)
+      const resultMode = CodeMirror.findModeByExtension(fileExtension)
+      let snippetMode = 'null'
+      if (resultMode) {
+        snippetMode = resultMode.mode
+        require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+      }
+
+      this.editor.setOption('mode', snippetMode)
+      this.editor.setValue(file.value)
     }
-
-    this.editor.setOption('mode', snippetMode)
-    this.editor.setValue(file.value)
   }
 
   applyEditorStyle (props) {
@@ -457,19 +458,6 @@ export default class SnippetDetailMultiFile extends React.Component {
         ) : (
           snippet.name
         )}
-        {isEditing && (
-          <select
-            ref="lang"
-            onChange={this.handleSnippetLangChange.bind(this)}
-            defaultValue={snippet.lang}
-          >
-            {CodeMirror.modeInfo.map((mode, index) => (
-              <option value={mode.name} key={index}>
-                {mode.name}
-              </option>
-            ))}
-          </select>
-        )}
       </p>
     )
   }
@@ -499,20 +487,18 @@ export default class SnippetDetailMultiFile extends React.Component {
     const { isEditing } = this.state
     const tags = snippet.tags.filter(tag => tag)
     return (
-      snippet.tags.length > 0 && (
-        <p className="tags">
-          <span className="icon">
-            <FAIcon icon="tags" />
-          </span>
-          {isEditing ? (
-            <input type="text" ref="tags" defaultValue={tags.join(', ')} />
-          ) : tags.length > 0 ? (
-            tags.join(', ')
-          ) : (
-            'No tag'
-          )}
-        </p>
-      )
+      <p className="tags">
+        <span className="icon">
+          <FAIcon icon="tags" />
+        </span>
+        {isEditing ? (
+          <input type="text" ref="tags" defaultValue={tags.join(', ')} />
+        ) : tags.length > 0 ? (
+          tags.join(', ')
+        ) : (
+          'No tag'
+        )}
+      </p>
     )
   }
 
