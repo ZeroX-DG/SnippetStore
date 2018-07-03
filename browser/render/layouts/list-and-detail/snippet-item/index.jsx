@@ -2,6 +2,8 @@ import React from 'react'
 import FAIcon from '@fortawesome/react-fontawesome'
 import i18n from 'render/lib/i18n'
 import formatDate from 'lib/date-format'
+import ContextMenu from 'render/lib/context-menu'
+import _ from 'lodash'
 import './snippet-item'
 
 export default class SnippetItem extends React.Component {
@@ -10,11 +12,31 @@ export default class SnippetItem extends React.Component {
     store.selectedSnippet = snippet
   }
 
+  handleContextMenu () {
+    const { config, store, snippet } = this.props
+    ContextMenu.popup([
+      {
+        label: i18n.__('Delete snippet'),
+        click () {
+          if (config.ui.showDeleteConfirmDialog) {
+            if (!confirm(i18n.__('Are you sure to delete this snippet?'))) {
+              return
+            }
+          }
+          const newSnippet = _.clone(snippet)
+          store.deleteSnippet(newSnippet)
+          store.selectedSnippet = null
+        }
+      }
+    ])
+  }
+
   render () {
     const { snippet } = this.props
     return (
       <div
         className="snippet-item list-and-detail"
+        onContextMenu={() => this.handleContextMenu(snippet)}
         onClick={() => this.pickSnippet()}
       >
         <p className="name">
