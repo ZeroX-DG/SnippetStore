@@ -6,34 +6,52 @@ import formatDate from 'lib/date-format'
 import ReactTooltip from 'react-tooltip'
 import _ from 'lodash'
 import eventEmitter from 'lib/event-emitter'
+import { getExtension } from 'lib/util'
 import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
 import isDevIconExists from 'lib/devicon-exists'
 import { toast } from 'react-toastify'
+import { observer } from 'mobx-react'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import 'codemirror/addon/display/autorefresh'
-import './snippet-detail'
+import './snippet-detail-multi-file'
 
-export default class SnippetDetail extends React.Component {
+@observer
+export default class SnippetDetailMultiFile extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isEditing: false
+      isEditing: false,
+      selectedFile: 0,
+      editingFiles: []
     }
   }
 
-  componentDidMount () {
-    const { config, snippet } = this.props
-    if (snippet) {
-      const { theme, showLineNumber } = config.editor
-      const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
+  componentDidUpdate () {
+    const { store, config } = this.props
+    const { selectedSnippet } = store
+    const { selectedFile } = this.state
+    const { theme, showLineNumber, tabSize, indentUsingTab } = config.editor
+    const file = selectedSnippet.files[selectedFile]
+    const fileExtension = getExtension(file.name)
+    const resultMode = CodeMirror.findModeByExtension(fileExtension)
+    let snippetMode = 'null'
+    if (resultMode) {
+      snippetMode = resultMode.mode
       require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-      const gutters = showLineNumber
-        ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-        : []
-      this.editor = CodeMirror(this.refs.editor, {
+    }
+
+    this.setState({ editingFiles: selectedSnippet.files })
+
+    const gutters = showLineNumber
+      ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+      : []
+
+    this.editor =
+      this.editor ||
+      CodeMirror(this.refs.editor, {
         lineNumbers: showLineNumber,
-        value: snippet.value,
+        value: file.value,
         foldGutter: showLineNumber,
         mode: snippetMode,
         theme: theme,
@@ -42,21 +60,20 @@ export default class SnippetDetail extends React.Component {
         autoCloseBrackets: true,
         autoRefresh: true
       })
-      this.editor.setSize('100%', '100%')
-      this.applyEditorStyle()
-    }
-  }
-
-  componentWillUpdate (props) {
-    const { snippet } = props
-    const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
-    require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-    this.editor.setValue(snippet.value)
-    this.editor.setOption('mode', snippetMode)
+    this.editor.setOption('indentUnit', tabSize)
+    this.editor.setOption('tabSize', tabSize)
+    this.editor.setOption('indentWithTabs', indentUsingTab)
+    this.editor.setSize('100%', 'auto')
+    this.editor.on('change', () => {
+      this.handleEditingFileValueChange()
+    })
+    this.applyEditorStyle()
   }
 
   applyEditorStyle (props) {
-    const { config, snippet } = props || this.props
+    const { store, config } = props || this.props
+    const { selectedSnippet } = store
+    const { selectedFile } = this.state
     const {
       theme,
       showLineNumber,
@@ -65,14 +82,24 @@ export default class SnippetDetail extends React.Component {
       tabSize,
       indentUsingTab
     } = config.editor
-    // only update codemirror mode if new props is passed
-    if (props) {
-      const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
-      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-    }
     const gutters = showLineNumber
       ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
       : []
+
+    const totalSnippets = selectedSnippet.files.length
+    const file = selectedSnippet.files[selectedFile]
+    if (!file) {
+      this.handleChangeFileClick(totalSnippets - 1)
+      return
+    }
+    const fileExtension = getExtension(file.name)
+    const resultMode = CodeMirror.findModeByExtension(fileExtension)
+    let snippetMode = 'null'
+    if (resultMode) {
+      snippetMode = resultMode.mode
+      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+    }
+
     this.editor.getWrapperElement().style.fontSize = `${fontSize}px`
     this.editor.setOption('lineNumbers', showLineNumber)
     this.editor.setOption('foldGutter', showLineNumber)
@@ -85,11 +112,21 @@ export default class SnippetDetail extends React.Component {
 
     const wrapperElement = this.editor.getWrapperElement()
     wrapperElement.style.fontFamily = fontFamily
+    const scrollElement = wrapperElement.querySelector('.CodeMirror-scroll')
+    scrollElement.style.maxHeight = '300px'
+    const FileList = this.refs.fileList
+    scrollElement.style.minHeight = `${FileList.clientHeight}px`
     this.editor.refresh()
   }
 
   componentWillReceiveProps (props) {
     this.applyEditorStyle(props)
+  }
+
+  renderEmptySnippet () {
+    return (
+      <h1 className="emptyMessage">{i18n.__('Pick a snippet from list')}</h1>
+    )
   }
 
   renderTopBar () {
@@ -149,25 +186,29 @@ export default class SnippetDetail extends React.Component {
   }
 
   copySnippet () {
-    const { config, snippet, store } = this.props
-    Clipboard.set(snippet.value)
+    const { config, store } = this.props
+    const { selectedSnippet } = store
+    Clipboard.set(selectedSnippet.value)
     if (config.ui.showCopyNoti) {
       toast.info(i18n.__('Copied to clipboard'), { autoClose: 2000 })
     }
-    const newSnippet = _.clone(snippet)
+    const newSnippet = _.clone(selectedSnippet)
     store.increaseCopyTime(newSnippet)
   }
 
   handleDeleteClick () {
-    const { config, snippet, store } = this.props
+    const { config, store } = this.props
+    const { selectedSnippet } = store
     if (config.ui.showDeleteConfirmDialog) {
       if (!confirm(i18n.__('Are you sure to delete this snippet?'))) {
         return
       }
     }
-    const newSnippet = _.clone(snippet)
+    const newSnippet = _.clone(selectedSnippet)
     store.deleteSnippet(newSnippet)
     store.selectedSnippet = null
+    // reset editor null so that it will re-initiate editor with the new snippet
+    this.editor = null
   }
 
   handleEditButtonClick () {
@@ -184,13 +225,15 @@ export default class SnippetDetail extends React.Component {
   }
 
   handleSaveChangesClick () {
-    const { store, snippet } = this.props
-    const valueChanged = snippet.value !== this.editor.getValue()
-    const langChanged = snippet.lang !== this.refs.lang.value
-    const nameChanged = snippet.name !== this.refs.name.value
+    const { store } = this.props
+    const { selectedSnippet } = store
+    const valueChanged = selectedSnippet.value !== this.editor.getValue()
+    const langChanged = selectedSnippet.lang !== this.refs.lang.value
+    const nameChanged = selectedSnippet.name !== this.refs.name.value
     const newTags = this.refs.tags.value.replace(/ /g, '').split(',')
-    const tagChanged = !_.isEqual(snippet.tags, newTags)
-    const descripChanged = snippet.description !== this.refs.description.value
+    const tagChanged = !_.isEqual(selectedSnippet.tags, newTags)
+    const descripChanged =
+      selectedSnippet.description !== this.refs.description.value
     if (
       valueChanged ||
       langChanged ||
@@ -198,7 +241,7 @@ export default class SnippetDetail extends React.Component {
       tagChanged ||
       descripChanged
     ) {
-      const newSnippet = _.clone(snippet)
+      const newSnippet = _.clone(selectedSnippet)
       newSnippet.value = this.editor.getValue()
       newSnippet.lang = this.refs.lang.value
       newSnippet.name = this.refs.name.value
@@ -209,7 +252,7 @@ export default class SnippetDetail extends React.Component {
         require(`codemirror/mode/${snippetMode}/${snippetMode}`)
         this.editor.setOption('mode', snippetMode)
       }
-      store.updateSnippet(newSnippet)
+      this.props.store.updateSnippet(newSnippet)
     }
     this.setState({ isEditing: false }, () => {
       eventEmitter.emit('snippet-detail:edit-end')
@@ -233,22 +276,23 @@ export default class SnippetDetail extends React.Component {
   }
 
   renderOtherInfo () {
-    const { config, snippet } = this.props
+    const { config, store } = this.props
+    const { selectedSnippet } = store
     return (
       <p>
         {config.ui.showSnippetCreateTime && (
           <span className="createAt info">
-            {i18n.__('Create at')} : {formatDate(snippet.createAt)}
+            {i18n.__('Create at')} : {formatDate(selectedSnippet.createAt)}
           </span>
         )}
         {config.ui.showSnippetUpdateTime && (
           <span className="updateAt info">
-            {i18n.__('Last update')}: {formatDate(snippet.updateAt)}
+            {i18n.__('Last update')}: {formatDate(selectedSnippet.updateAt)}
           </span>
         )}
         {config.ui.showSnippetCopyCount && (
           <span className="copyCount info">
-            {i18n.__('Copy')} : {snippet.copy} {i18n.__('times')}
+            {i18n.__('Copy')} : {selectedSnippet.copy} {i18n.__('times')}
           </span>
         )}
       </p>
@@ -256,15 +300,16 @@ export default class SnippetDetail extends React.Component {
   }
 
   renderSnippetName () {
-    const { snippet } = this.props
+    const { store } = this.props
     const { isEditing } = this.state
-    const langMode = CodeMirror.findModeByName(snippet.lang)
+    const { selectedSnippet } = store
+    const langMode = CodeMirror.findModeByName(selectedSnippet.lang)
     const snippetMode = langMode.mode
     let languageIcon = (
       <img
         src={defaultLanguageIcon}
         className="lang-icon"
-        data-tip={snippet.lang}
+        data-tip={selectedSnippet.lang}
       />
     )
     if (langMode.alias) {
@@ -274,7 +319,7 @@ export default class SnippetDetail extends React.Component {
           languageIcon = (
             <i
               className={`devicon-${alias}-plain colored`}
-              data-tip={snippet.lang}
+              data-tip={selectedSnippet.lang}
             />
           )
           break
@@ -286,7 +331,7 @@ export default class SnippetDetail extends React.Component {
       languageIcon = (
         <i
           className={`devicon-${snippetMode}-plain colored`}
-          data-tip={snippet.lang}
+          data-tip={selectedSnippet.lang}
         />
       )
     }
@@ -298,16 +343,16 @@ export default class SnippetDetail extends React.Component {
             type="text"
             className="snippet-name-input"
             ref="name"
-            defaultValue={snippet.name}
+            defaultValue={selectedSnippet.name}
           />
         ) : (
-          snippet.name
+          selectedSnippet.name
         )}
         {isEditing && (
           <select
             ref="lang"
             onChange={this.handleSnippetLangChange.bind(this)}
-            defaultValue={snippet.lang}
+            defaultValue={selectedSnippet.lang}
           >
             {CodeMirror.modeInfo.map((mode, index) => (
               <option value={mode.name} key={index}>
@@ -327,46 +372,54 @@ export default class SnippetDetail extends React.Component {
   }
 
   renderDescription () {
-    const { snippet } = this.props
+    const { store } = this.props
+    const { selectedSnippet } = store
     const { isEditing } = this.state
     return (
       <p className={`description ${isEditing ? 'editing' : ''}`}>
         {isEditing ? (
-          <textarea ref="description" defaultValue={snippet.description} />
+          <textarea
+            ref="description"
+            defaultValue={selectedSnippet.description}
+          />
         ) : (
-          snippet.description
+          selectedSnippet.description
         )}
       </p>
     )
   }
 
   renderTagList () {
-    const { snippet } = this.props
+    const { store } = this.props
     const { isEditing } = this.state
-    const tags = snippet.tags.filter(tag => tag)
+    const { selectedSnippet } = store
     return (
-      <p className="tags">
-        <span className="icon">
-          <FAIcon icon="tags" />
-        </span>
-        {isEditing ? (
-          <input type="text" ref="tags" defaultValue={tags.join(', ')} />
-        ) : tags.length > 0 ? (
-          tags.join(', ')
-        ) : (
-          'No tag'
-        )}
-      </p>
+      selectedSnippet.tags.length > 0 && (
+        <p className="tags">
+          <span className="icon">
+            <FAIcon icon="tags" />
+          </span>
+          {isEditing ? (
+            <input
+              type="text"
+              ref="tags"
+              defaultValue={selectedSnippet.tags.join(', ')}
+            />
+          ) : (
+            selectedSnippet.tags.join(', ')
+          )}
+        </p>
+      )
     )
   }
 
   render () {
-    const { snippet } = this.props
+    const { selectedSnippet } = this.props.store
     return (
-      <div className="snippet-detail">
+      <div className="snippet-detail-multi-file">
         <ReactTooltip place="bottom" effect="solid" />
-        {!snippet && this.renderEmptySnippet()}
-        {snippet && this.renderSnippet()}
+        {!selectedSnippet && this.renderEmptySnippet()}
+        {selectedSnippet && this.renderSnippet()}
       </div>
     )
   }
