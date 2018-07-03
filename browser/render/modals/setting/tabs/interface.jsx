@@ -112,7 +112,7 @@ export default class InterfaceTab extends React.Component {
             />
           </div>
           <div className="group">
-            <label>{i18n.__('Layout')}</label>
+            <label>{i18n.__('Snippet list layout')}</label>
             <select ref="layout" defaultValue={config.ui.layout}>
               {layouts.map(layout => (
                 <option value={layout.name} key={layout.name}>
