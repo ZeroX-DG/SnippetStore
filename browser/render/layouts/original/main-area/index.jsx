@@ -8,8 +8,12 @@ import './main-area'
 export default class MainArea extends React.Component {
   componentDidMount () {
     eventEmitter.on('sidebar:toggled', (event, newSize) => {
-      this.refs.root.style.width = `calc(100% - ${newSize}px)`
+      if (this.refs.root) {
+        this.refs.root.style.width = `calc(100% - ${newSize}px)`
+      }
     })
+
+    eventEmitter.emit('sidebar:getSize')
   }
 
   render () {

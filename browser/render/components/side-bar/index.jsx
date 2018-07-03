@@ -14,18 +14,29 @@ export default class SideBar extends React.Component {
       eventEmitter.emit('sidebar:toggled', 300)
     }
     eventEmitter.on('sidebar:toggle', () => {
-      if (this.refs.root.classList.contains('small')) {
-        this.refs.root.classList.remove('small')
-        ConfigManager.set({ ui: { smallSidebar: false } })
-        const newSize = 300
-        eventEmitter.emit('sidebar:toggled', newSize)
-      } else {
-        this.refs.root.classList.add('small')
-        ConfigManager.set({ ui: { smallSidebar: true } })
-        const newSize = 70
-        eventEmitter.emit('sidebar:toggled', newSize)
-      }
+      this.toggle()
     })
+    eventEmitter.on('sidebar:getSize', () => {
+      let newSize = 300
+      if (this.refs.root.classList.contains('small')) {
+        newSize = 70
+      }
+      eventEmitter.emit('sidebar:toggled', newSize)
+    })
+  }
+
+  toggle () {
+    if (this.refs.root.classList.contains('small')) {
+      this.refs.root.classList.remove('small')
+      ConfigManager.set({ ui: { smallSidebar: false } })
+      const newSize = 300
+      eventEmitter.emit('sidebar:toggled', newSize)
+    } else {
+      this.refs.root.classList.add('small')
+      ConfigManager.set({ ui: { smallSidebar: true } })
+      const newSize = 70
+      eventEmitter.emit('sidebar:toggled', newSize)
+    }
   }
 
   render () {
