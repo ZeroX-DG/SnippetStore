@@ -297,7 +297,7 @@ export default class SnippetDetailMultiFile extends React.Component {
     }
   }
 
-  handleNewFileFocus () {
+  handleNewFileClick () {
     const { editingFiles } = this.state
     // make a clone of the current editing file list
     const newEditingFiles = toJS(editingFiles)
@@ -306,10 +306,10 @@ export default class SnippetDetailMultiFile extends React.Component {
     this.setState({ editingFiles: newEditingFiles }, () => {
       // a new input tag will automatically created after set state and we want
       // to focus on that input tag
-      const inputs = this.refs.fileList.firstChild.childNodes
-      const input = inputs[inputs.length - 2].querySelector('input')
+      const files = this.refs.fileList.firstChild.childNodes
+      const file = files[files.length - 2].querySelector('input')
       this.handleChangeFileClick(newEditingFiles.length - 1)
-      input.focus()
+      file.focus()
     })
     this.applyEditorStyle()
   }
@@ -382,9 +382,7 @@ export default class SnippetDetailMultiFile extends React.Component {
               key={file.key}
               onClick={() => this.handleChangeFileClick(index)}
               style={{
-                width: isEditing
-                  ? `calc(${100 / files.length}% - 40px)`
-                  : `${100 / files.length}%`
+                width: `${100 / files.length}%`
               }}
               className={index === selectedFile ? 'selected' : ''}
             >
@@ -411,7 +409,10 @@ export default class SnippetDetailMultiFile extends React.Component {
             </li>
           ))}
           {isEditing && (
-            <li className="add-file-btn">
+            <li
+              className="add-file-btn"
+              onClick={this.handleNewFileClick.bind(this)}
+            >
               <FAIcon icon="plus" />
             </li>
           )}
