@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "A snippet management app for developers",
   "main": "index.js",
-  "productName": "SnippetStore",
   "scripts": {
     "start-dev": "electron ./index.js --hot",
     "start": "electron ./index.js",
@@ -11,8 +10,59 @@
     "fix": "eslint . --fix",
     "lint": "eslint .",
     "build": "node scripts/build.js",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:mac": "npm run build && electron-builder --mac",
     "dev": "cross-env NODE_ENV=dev concurrently --success first --kill-others \"npm run webpack\" \"npm run start-dev\"",
     "test": "cross-env NODE_ENV=test BABEL_ENV=test jest"
+  },
+  "build": {
+    "appId": "com.zerox-dg.snippetstore",
+    "productName": "Snippet Store",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.js",
+      "package.json",
+      "compiled/**/*",
+      "app/**/*",
+      "node_modules/**/*",
+      "resources/**/*",
+      "languages/**/*"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 438,
+          "y": 275,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 192,
+          "y": 275,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "resources/icon/icon512.png"
+    },
+    "linux": {
+      "category": "Development",
+      "icon": "resources/icon",
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "resources/icon/icon512.ico"
+    }
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.7",
