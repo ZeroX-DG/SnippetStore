@@ -1,12 +1,13 @@
-<p align='center'>
-  <img src='resources/image/screenshot.png' />
-</p>
 <h1 align='center'>SnippetStore</h1>
 <p align='center'>
 <i>A snippet management app for developers</i>
 </p>
 <p align='center'>
 <img src='https://travis-ci.org/ZeroX-DG/SnippetStore.svg?branch=master' alt='travis'>
+</p>
+
+<p align='center'>
+  <img src='resources/image/intro-gif.gif' />
 </p>
 
 ## About this project
