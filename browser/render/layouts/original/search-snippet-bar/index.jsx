@@ -8,13 +8,17 @@ export default class SearchSnippetBar extends React.Component {
   componentDidMount () {
     eventEmitter.on('languageList:pickLang', (event, language) => {
       const newKeyword = `lang:${language}`
-      this.refs.search.value = newKeyword
+      if (this.refs.search) {
+        this.refs.search.value = newKeyword
+      }
       this.handleSearch(newKeyword)
     })
 
     eventEmitter.on('taglist:pickTag', (event, tag) => {
       const newKeyword = `#${tag}`
-      this.refs.search.value = newKeyword
+      if (this.refs.search) {
+        this.refs.search.value = newKeyword
+      }
       this.handleSearch(newKeyword)
     })
   }
