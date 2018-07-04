@@ -42,7 +42,7 @@ export default class SnippetDetail extends React.Component {
         autoCloseBrackets: true,
         autoRefresh: true
       })
-      this.editor.setSize('100%', '100%')
+      this.editor.setSize('100%', 'auto')
       this.applyEditorStyle()
     }
   }

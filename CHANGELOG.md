@@ -22,6 +22,7 @@ Every notable changes in each version will be listed in this file.
 - **Development**: Prettified the whole source code using prettier ([60646d9](https://github.com/ZeroX-DG/SnippetStore/commit/60646d9))
 - **Interface**: Passed control to modal list so that only 1 modal can open at the time ([e85849e](https://github.com/ZeroX-DG/SnippetStore/commit/e85849e))
 - **Interface**: Added ESC text bellow modal's close button ([eb16841](https://github.com/ZeroX-DG/SnippetStore/commit/eb16841))
+- **Users**: Supported windows OS ([a6c3c9f](https://github.com/ZeroX-DG/SnippetStore/commit/a6c3c9f))
 
 # 0.1.0
 

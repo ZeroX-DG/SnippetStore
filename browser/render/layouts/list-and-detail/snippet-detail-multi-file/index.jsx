@@ -125,10 +125,6 @@ export default class SnippetDetailMultiFile extends React.Component {
 
     const wrapperElement = this.editor.getWrapperElement()
     wrapperElement.style.fontFamily = fontFamily
-    const scrollElement = wrapperElement.querySelector('.CodeMirror-scroll')
-    scrollElement.style.maxHeight = '300px'
-    const FileList = this.refs.fileList
-    scrollElement.style.minHeight = `${FileList.clientHeight}px`
     this.editor.refresh()
   }
 
@@ -398,14 +394,14 @@ export default class SnippetDetailMultiFile extends React.Component {
                 'untitled'
               )}
               <div className="tools">
-                {!isEditing &&
+                {!isEditing && (
                   <span
                     className="icon"
                     onClick={() => this.handleCopyFile(index)}
                   >
                     <FAIcon icon="copy" />
                   </span>
-                }
+                )}
                 {
                   <span
                     className="icon"
