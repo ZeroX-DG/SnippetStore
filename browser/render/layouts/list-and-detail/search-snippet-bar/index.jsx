@@ -4,22 +4,32 @@ import eventEmitter from 'lib/event-emitter'
 import './search-snippet-bar'
 
 export default class SearchSnippetBar extends React.Component {
-  componentDidMount () {
-    eventEmitter.on('languageList:pickLang', (event, language) => {
+  constructor (props) {
+    super(props)
+    this.handleSearchLanguage = (event, language) => {
       const newKeyword = `lang:${language}`
       if (this.refs.search) {
         this.refs.search.value = newKeyword
       }
       this.handleSearch(newKeyword)
-    })
-
-    eventEmitter.on('taglist:pickTag', (event, tag) => {
+    }
+    this.handleSearchTag = (event, tag) => {
       const newKeyword = `#${tag}`
       if (this.refs.search) {
         this.refs.search.value = newKeyword
       }
       this.handleSearch(newKeyword)
-    })
+    }
+  }
+
+  componentDidMount () {
+    eventEmitter.on('languageList:pickLang', this.handleSearchLanguage)
+    eventEmitter.on('taglist:pickTag', this.handleSearchTag)
+  }
+
+  componentWillUnmount () {
+    eventEmitter.off('languageList:pickLang', this.handleSearchLanguage)
+    eventEmitter.off('taglist:pickTag', this.handleSearchTag)
   }
 
   handleCreateSnippetClick () {
