@@ -8,6 +8,10 @@ Every notable changes in each version will be listed in this file.
 
 - **Interface**: Fixed sidebar click conflict search bar on 2 layouts ([2a7f527](https://github.com/ZeroX-DG/SnippetStore/commit/2a7f527))
 
+## Improvements:
+
+- **Development**: Improved event handler in search bar in 2 layouts ([64934e4](https://github.com/ZeroX-DG/SnippetStore/commit/64934e4))
+
 # 0.2.0
 
 ## Features:
