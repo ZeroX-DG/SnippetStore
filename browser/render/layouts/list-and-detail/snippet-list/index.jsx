@@ -1,6 +1,7 @@
 import React from 'react'
 import SnippetItem from '../snippet-item'
 import SearchSnippetBar from '../search-snippet-bar'
+import SortSnippetTool from '../sort-snippet-tool'
 import eventEmitter from 'lib/event-emitter'
 import { observer } from 'mobx-react'
 import './snippet-list'
@@ -23,6 +24,7 @@ export default class SnippetList extends React.Component {
       <div className="snippets list-and-detail">
         <div className="wall" ref="wall" />
         <SearchSnippetBar store={store} />
+        <SortSnippetTool store={store} />
         <ul>
           {snippets.map(snippet => (
             <li key={snippet.key}>
