@@ -270,7 +270,7 @@ export default class SnippetDetailMultiFile extends React.Component {
     event.stopPropagation()
     const { snippet, store, config } = this.props
     const { editingFiles, isEditing, selectedFile } = this.state
-    if (snippet.files.length > 1 && editingFiles.length > 1) {
+    if (snippet.files.length > 1 || editingFiles.length > 1) {
       // remove directly if not in editing mode
       if (config.ui.showDeleteConfirmDialog) {
         if (!confirm(i18n.__('Are you sure to delete this file?'))) {
@@ -289,9 +289,7 @@ export default class SnippetDetailMultiFile extends React.Component {
       }
       // prevent reading deleted snippet
       if (selectedFile > editingFiles.length - 1) {
-        this.handleChangeFileClick(editingFiles.length - 1, () => {
-          this.resetSnippetHeight()
-        })
+        this.handleChangeFileClick(editingFiles.length - 1)
       }
     } else {
       toast.error(i18n.__('The snippet must have at least 1 file'))
@@ -400,7 +398,7 @@ export default class SnippetDetailMultiFile extends React.Component {
                 'untitled'
               )}
               <div className="tools">
-                {
+                {!isEditing &&
                   <span
                     className="icon"
                     onClick={() => this.handleCopyFile(index)}
