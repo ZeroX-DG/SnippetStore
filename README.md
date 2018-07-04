@@ -15,7 +15,13 @@ SnippetStore is a application for developers to store their snippets and quickly
 
 ## Download
 
-Currently SnippetStore only available for linux and windows. If you're using MacOS, you can also build a version for you OS too (not guarantee it will work!)
+Currently SnippetStore only available for linux and windows.
+
+If you're using MacOS, you can also build a version for you OS too (not guarantee it will work!)
+
+```
+npm run dist:mac
+```
 
 You can get the latest release of SnippetStore [here](https://github.com/ZeroX-DG/SnippetStore/releases)
 
