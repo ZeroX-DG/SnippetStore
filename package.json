@@ -13,6 +13,7 @@
     "dist:linux": "npm run build && electron-builder --linux",
     "dist:win": "npm run build && electron-builder --win",
     "dist:mac": "npm run build && electron-builder --mac",
+    "dist:win:linux": "npm run build && electron-builder --win --linux",
     "dev": "cross-env NODE_ENV=dev concurrently --success first --kill-others \"npm run webpack\" \"npm run start-dev\"",
     "test": "cross-env NODE_ENV=test BABEL_ENV=test jest"
   },
