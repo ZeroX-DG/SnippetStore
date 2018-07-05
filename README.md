@@ -1,9 +1,26 @@
 <h1 align='center'>SnippetStore</h1>
 <p align='center'>
-<i>A snippet management app for developers</i>
+<i>:tada: A snippet management app for developers :rocket:</i>
+</p>
+<p align='center'>
+  <a href='https://twitter.com/intent/tweet?text=Wow!&hashtags=SnippetStore&url=https%3A%2F%2Fgithub.com%2FZeroX-DG%2FSnippetStore'>
+    <img src="https://img.shields.io/twitter/url/https/github.com/ZeroX-DG/SnippetStore.svg?style=for-the-badge" alt="twitter">
+  </a>
 </p>
 <p align='center'>
 <img src='https://travis-ci.org/ZeroX-DG/SnippetStore.svg?branch=master' alt='travis'>
+<a href='https://github.com/ZeroX-DG/SnippetStore/releases'>
+  <img src='https://badge.fury.io/gh/ZeroX-DG%2FSnippetStore.svg' alt='version'>
+</a>
+<a href='https://github.com/ZeroX-DG/SnippetStore/releases'>
+  <img src='https://img.shields.io/github/downloads/ZeroX-DG/SnippetStore/total.svg' alt='total download'>
+</a>
+<a href='https://github.com/ZeroX-DG/SnippetStore/stargazers'>
+  <img src='https://img.shields.io/github/stars/ZeroX-DG/SnippetStore.svg' alt='stars'>
+</a>
+<a href='https://github.com/ZeroX-DG/SnippetStore/network'>
+  <img src='https://img.shields.io/github/forks/ZeroX-DG/SnippetStore.svg' alt='forks'>
+</a>
 </p>
 
 <p align='center'>
