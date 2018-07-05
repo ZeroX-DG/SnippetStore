@@ -31,6 +31,14 @@
 
 SnippetStore is a application for developers to store their snippets and quickly retrieve them when needed. SnippetStore mainly focus on storing code therefor its interface is small and simple, perfect for busy developers who doesn't care about small details.
 
+## Features
+
+- Support single file and multi file snippet.
+- Support 2 layouts.
+- Dark and light themes.
+- Tags support
+- Supported 2 languages: English and Vietnamese
+
 ## Download
 
 Currently SnippetStore only available for linux and windows.
