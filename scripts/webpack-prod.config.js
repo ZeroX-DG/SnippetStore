@@ -20,7 +20,6 @@ var config = Object.assign({}, skeleton, {
       }
     })
   ],
-  devtool: 'source-map',
   mode: 'production',
   target: 'electron-renderer'
 })
