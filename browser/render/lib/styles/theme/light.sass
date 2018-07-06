@@ -12,20 +12,20 @@ body[data-theme='light']
 
 body[data-theme='light']
   .sidebar
-    background: $sidebar-background--light
-    color: $sidebar-foreground--light
+    background: map-get($sidebar-light, background)
+    color: map-get($sidebar-light, color)
     .badge
       color: white
 
 body[data-theme='light']
   .tag-list-label
-    color: $language-list-label-foreground--light
+    color: map-deep-get($sidebar-light, label, color)
   .tags li:hover
-    color: darken($sidebar-foreground--light, 20)
+    color: map-get($sidebar-light, color-darken)
   .language-list-label
-    color: $language-list-label-foreground--light
+    color: map-deep-get($sidebar-light, label, color)
   .languages li:hover
-    color: darken($sidebar-foreground--light, 20)
+    color: map-get($sidebar-light, color-darken)
 
 body[data-theme='light']
   .main-area
@@ -92,12 +92,8 @@ body[data-theme='light']
       background: $input-tag-background--light
       color: $input-tag-foreground--light
     button:not(.button)
-      border: none
       background: $snippet-list-create-button-background--light
       color: $snippet-list-create-button-foreground--light
-      padding: 10px 20px
-      border-radius: 5px
-      cursor: pointer
     .tab-list li.active
       color: white
     .pick-snippet-type .button

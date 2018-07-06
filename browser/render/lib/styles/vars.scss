@@ -64,10 +64,14 @@ $input-tag-dark: (
 
 $body-background--light: #fcf2f2;
 // sidebar
-$sidebar-background--light: #efe3e3;
-$sidebar-foreground--light: #95989D;
-// language list
-$language-list-label-foreground--light: #95989D;
+$sidebar-light: (
+  background: #efe3e3,
+  color: #95989D,
+  color-darken: darken(#95989D, 20),
+  label: (
+    color: #95989D
+  )
+);
 // snippet list
 $snippet-list-create-button-background--light: #ffd76d;
 $snippet-list-create-button-foreground--light: #1e1f2b;
