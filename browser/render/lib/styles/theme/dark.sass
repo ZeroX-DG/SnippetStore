@@ -9,93 +9,74 @@ body[data-theme='dark']
     background-color: rgba(0, 0, 0, 0.24)
     &:hover
       background-color: rgba(0, 0, 0, 0.7)
+  select
+    background: map-get($input-tag-dark, background)
+    color: map-get($input-tag-dark, color)
+  input[type='text'], input[type='number'], textarea
+    background: map-get($input-tag-dark, background)
+    color: map-get($input-tag-dark, color)
 
 body[data-theme='dark']
   .sidebar
-    background: $sidebar-background--dark
-    color: $sidebar-foreground--dark
+    background: map-get($sidebar-dark, background)
+    color: map-get($sidebar-dark, color)
 
 body[data-theme='dark']
   .tag-list-label
-    color: $language-list-label-foreground--dark
+    color: map-deep-get($sidebar-dark, label, color)
   .tags li:hover
-    color: lighten($sidebar-foreground--dark, 20)
+    color: map-get($sidebar-dark, color-lighten)
   .language-list-label
-    color: $language-list-label-foreground--dark
+    color: map-deep-get($sidebar-dark, label, color)
   .languages li:hover
-    color: lighten($sidebar-foreground--dark, 20)
+    color: map-get($sidebar-dark, color-lighten)
 
 body[data-theme='dark']
   .main-area
     .search-bar
-      input[type='text']
-        background: $input-tag-background--dark
-        color: $input-tag-foreground--dark
       .create-btn
-        background: $snippet-list-create-button-background--dark
-        color: $snippet-list-create-button-foreground--dark
+        background: map-deep-get($snippet-list-dark, create-button, background)
+        color: map-deep-get($snippet-list-dark, create-button, color)
     .snippet-item.original, .snippet-item-multi-files
-      background: $snippet-item-background--dark
+      background: map-get($snippet-item-dark, background)
       .file-list
         li:hover
-          background: rgba(255, 255, 255, 0.1)
+          background: map-deep-get($snippet-item-dark, file-list, file, hover-background)
         li.selected
-          background: rgba(0, 0, 0, 0.6)
+          background: map-deep-get($snippet-item-dark, file-list, file, selected-background)
       .delete-btn
-        color: $snippet-item-delete-button-foreground--dark
-      select
-        background: $input-tag-background--dark
-        color: $input-tag-foreground--dark
-      input[type='text'], textarea
-        background: $input-tag-background--dark
-        color: $input-tag-foreground--dark
-    select
-      background: $input-tag-background--dark
-      color: $input-tag-foreground--dark
+        color: map-deep-get($snippet-item-dark, delete-button, color)
     .emptyMessage
       color: rgba(255, 255, 255, 0.3)
     .snippets.list-and-detail
-      background: $snippet-list-list-and-detail-background--dark
+      background: map-get($snippet-list-list-and-detail-dark, background)
       .wall
-        background: darken($snippet-list-list-and-detail-background--dark, 2)
+        background: map-deep-get($snippet-list-list-and-detail-dark, wall, background)
       .search-snippet-bar #search
-        color: rgba(255, 255, 255, 0.7)
+        color: map-deep-get($snippet-list-list-and-detail-dark, search-bar, color)
     .snippet-item.list-and-detail
       &:hover
-        background: $snippet-item-list-and-detail-hover-background--dark
+        background: map-get($snippet-item-list-and-detail-dark, hover-background)
       &::after
-        background: $snippet-item-list-and-detail-hover-background--dark
+        background: map-get($snippet-item-list-and-detail-dark, boder-bottom-color)
       &.selected
-        background: darken($snippet-item-list-and-detail-hover-background--dark, 3)
+        background: map-get($snippet-item-list-and-detail-dark, selected-background)
     .snippet-detail, .snippet-detail-multi-file
-      select
-        background: $input-tag-background--dark
-        color: $input-tag-foreground--dark
-      input[type='text'], textarea
-        background: $input-tag-background--dark
-        color: $input-tag-foreground--dark
       .delete-btn
-        color: $snippet-item-delete-button-foreground--dark
+        color: map-deep-get($snippet-item-dark, delete-button, color)
     .snippet-detail-multi-file
       .file-list li
-        background: $snippet-detail-file-background--dark
+        background: map-get($snippet-detail-dark, file-background)
         &.selected
-          border-color: $snippet-detail-file-selected-border--dark
+          border-color: map-get($snippet-detail-dark, selected-border)
 
 body[data-theme='dark']
   .modal
     background: $body-background--dark
     color: white
-    input[type='text'], input[type='number'], textarea, select
-      background: $input-tag-background--dark
-      color: $input-tag-foreground--dark
     button:not(.button)
-      border: none
-      background: $snippet-list-create-button-background--dark
-      color: $snippet-list-create-button-foreground--dark
-      padding: 10px 20px
-      border-radius: 5px
-      cursor: pointer
+      background: map-deep-get($snippet-list-dark, create-button, background)
+      color: map-deep-get($snippet-list-dark, create-button, color)
     .pick-snippet-type .button
       border-color: rgba(255, 255, 255, 0.3)
       color: white

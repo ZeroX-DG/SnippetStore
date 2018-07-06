@@ -1,53 +1,96 @@
 // ==============================
 // DARK THEME
 
-$body-background--dark: #282a3a
+$body-background--dark: #282a3a;
 // sidebar
-$sidebar-background--dark: #1e1f2b
-$sidebar-foreground--dark: #9e9e9e
-// language list
-$language-list-label-foreground--dark: #696d77
+$sidebar-dark: (
+  background: #1e1f2b,
+  color: #9e9e9e,
+  color-lighten: lighten(#9e9e9e, 20),
+  label: (
+    color: #696d77
+  )
+);
+
 // snippet list
-$snippet-list-create-button-background--dark: #ffd76d
-$snippet-list-create-button-foreground--dark: #1e1f2b
-$snippet-list-list-and-detail-background--dark: #161821
+$snippet-list-dark: (
+  create-button: (
+    background: #ffd76d,
+    color: #1e1f2b,
+  )
+);
+
+// snippet list (list and detail layout)
+$snippet-list-list-and-detail-dark: (
+  background: #161821,
+  wall: (
+    background: darken(#161821, 2)
+  ),
+  search-bar: (
+    color: rgba(255, 255, 255, 0.7)
+  )
+);
 // snippet item
-$snippet-item-background--dark: #373a51
-$snippet-item-delete-button-foreground--dark: #EA2027
-$snippet-item-list-and-detail-hover-background--dark: #24273f
+$snippet-item-dark: (
+  background: #373a51,
+  delete-button: (
+    color: #EA2027
+  ),
+  file-list: (
+    file: (
+      hover-background: rgba(255, 255, 255, 0.1),
+      selected-background: rgba(0, 0, 0, 0.6)
+    )
+  )
+);
+$snippet-item-list-and-detail-dark: (
+  hover-background: #24273f,
+  boder-bottom-color: #24273f,
+  selected-background: darken(#24273f, 3)
+);
 // snippet detail
-$snippet-detail-file-background--dark: #11121c
-$snippet-detail-file-selected-border--dark: #0814a0
+$snippet-detail-dark: (
+  file-background: #11121c,
+  selected-border: #0814a0
+);
 // input tag
-$input-tag-background--dark: #1e1f2b
-$input-tag-foreground--dark: white
+$input-tag-dark: (
+  background: #1e1f2b,
+  color: white
+);
 // ==============================
 // ==============================
 // LIGHT THEME
 
-$body-background--light: #fcf2f2
+$body-background--light: #fcf2f2;
 // sidebar
-$sidebar-background--light: #efe3e3
-$sidebar-foreground--light: #95989D
+$sidebar-background--light: #efe3e3;
+$sidebar-foreground--light: #95989D;
 // language list
-$language-list-label-foreground--light: #95989D
+$language-list-label-foreground--light: #95989D;
 // snippet list
-$snippet-list-create-button-background--light: #ffd76d
-$snippet-list-create-button-foreground--light: #1e1f2b
-$snippet-list-list-and-detail-background--light: #e5dada
+$snippet-list-create-button-background--light: #ffd76d;
+$snippet-list-create-button-foreground--light: #1e1f2b;
+$snippet-list-list-and-detail-background--light: #e5dada;
 // snippet item
-$snippet-item-background--light: #efe3e3
-$snippet-item-delete-button-foreground--light: #EA2027
-$snippet-item-list-and-detail-hover-background--light: #ccbdbd
+$snippet-item-background--light: #efe3e3;
+$snippet-item-delete-button-foreground--light: #EA2027;
+$snippet-item-list-and-detail-hover-background--light: #ccbdbd;
 // snippet detail
-$snippet-detail-file-background--light: #dbcece
-$snippet-detail-file-selected-border--light: #511efc
+$snippet-detail-file-background--light: #dbcece;
+$snippet-detail-file-selected-border--light: #511efc;
 // input tag
-$input-tag-background--light: #ede3e3
-$input-tag-foreground--light: black
+$input-tag-background--light: #ede3e3;
+$input-tag-foreground--light: black;
 // snippet item edit mode
-$input-tag-edit-mode-background--light: #ccc1c1
+$input-tag-edit-mode-background--light: #ccc1c1;
 // snippet item file list
-$snippet-item-file-list--light: white
+$snippet-item-file-list--light: white;
 
 // ==============================
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+      $map: map-get($map, $key);
+  }
+  @return $map;
+}

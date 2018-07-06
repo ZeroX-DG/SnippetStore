@@ -15,13 +15,7 @@ var config = {
         use: [
           'style-loader',
           'css-loader',
-          'sass-loader',
-          {
-            loader: 'sass-resources-loader',
-            options: {
-              resources: path.resolve(__dirname, '../browser/render/lib/styles/vars.scss')
-            }
-          }
+          'sass-loader'
         ]
       },
       {
