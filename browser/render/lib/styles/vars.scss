@@ -30,6 +30,7 @@ $snippet-list-list-and-detail-dark: (
     color: rgba(255, 255, 255, 0.7)
   )
 );
+
 // snippet item
 $snippet-item-dark: (
   background: #373a51,
@@ -72,24 +73,58 @@ $sidebar-light: (
     color: #95989D
   )
 );
+
 // snippet list
-$snippet-list-create-button-background--light: #ffd76d;
-$snippet-list-create-button-foreground--light: #1e1f2b;
-$snippet-list-list-and-detail-background--light: #e5dada;
+$snippet-list-light: (
+  create-button: (
+    background: #ffd76d,
+    color: #1e1f2b,
+  )
+);
+
+// snippet list (list and detail layout)
+$snippet-list-list-and-detail-light: (
+  background: #e5dada,
+  wall: (
+    background: darken(#e5dada, 2)
+  ),
+  search-bar: (
+    color: rgba(0, 0, 0, 0.7)
+  )
+);
+
 // snippet item
-$snippet-item-background--light: #efe3e3;
-$snippet-item-delete-button-foreground--light: #EA2027;
-$snippet-item-list-and-detail-hover-background--light: #ccbdbd;
+$snippet-item-light: (
+  background: #efe3e3,
+  delete-button: (
+    color: #EA2027
+  ),
+  file-list: (
+    file: (
+      hover-background: rgba(0, 0, 0, 0.1),
+      selected-background: rgba(0, 0, 0, 0.2)
+    )
+  ),
+  input-tag: (
+    edit-background: #ccc1c1
+  )
+);
+
+$snippet-item-list-and-detail-light: (
+  hover-background: #ccbdbd,
+  boder-bottom-color: #ccbdbd,
+  selected-background: darken(#ccbdbd, 3)
+);
 // snippet detail
-$snippet-detail-file-background--light: #dbcece;
-$snippet-detail-file-selected-border--light: #511efc;
+$snippet-detail-light: (
+  file-background: #dbcece,
+  selected-border: #511efc
+);
 // input tag
-$input-tag-background--light: #ede3e3;
-$input-tag-foreground--light: black;
-// snippet item edit mode
-$input-tag-edit-mode-background--light: #ccc1c1;
-// snippet item file list
-$snippet-item-file-list--light: white;
+$input-tag-light: (
+  background: #ede3e3,
+  color: black
+);
 
 // ==============================
 @function map-deep-get($map, $keys...) {
