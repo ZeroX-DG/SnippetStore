@@ -31,7 +31,8 @@
       "app/**/*",
       "node_modules/**/*",
       "resources/**/*",
-      "languages/**/*"
+      "languages/**/*",
+      "LICENSE"
     ],
     "dmg": {
       "contents": [
