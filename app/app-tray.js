@@ -1,8 +1,10 @@
 const { Menu, Tray, nativeImage } = require('electron')
 const path = require('path')
 
+let tray = null
+
 function createTray (app, mainWindow) {
-  const tray = new Tray(
+  tray = new Tray(
     nativeImage.createFromPath(
       path.join(__dirname, '..', 'resources', 'icon', 'icon512.png')
     )
