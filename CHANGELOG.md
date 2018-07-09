@@ -4,6 +4,10 @@ Every notable changes in each version will be listed in this file.
 
 # 0.2.1
 
+## Features:
+
+- **App**: Added tray bar icon menu ([b6a9c96](https://github.com/ZeroX-DG/SnippetStore/commit/b6a9c96))
+
 ## Bugfixes:
 
 - **Interface**: Fixed sidebar click conflict search bar on 2 layouts ([2a7f527](https://github.com/ZeroX-DG/SnippetStore/commit/2a7f527))
@@ -12,6 +16,7 @@ Every notable changes in each version will be listed in this file.
 ## Improvements:
 
 - **Development**: Improved event handler in search bar in 2 layouts ([64934e4](https://github.com/ZeroX-DG/SnippetStore/commit/64934e4))
+- **Development**: Restructured main process code ([b6a9c96](https://github.com/ZeroX-DG/SnippetStore/commit/b6a9c96))
 - **Interface**: Updated snippet tags with new tag item ([cbca845](https://github.com/ZeroX-DG/SnippetStore/commit/cbca845))
 
 # 0.2.0
