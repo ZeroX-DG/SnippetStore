@@ -2,7 +2,10 @@ const { app, Menu } = require('electron')
 
 let mainWindow = null
 
-const isSecondInstance = app.makeSingleInstance(function (commandLine, workingDirectory) {
+const isSecondInstance = app.makeSingleInstance(function (
+  commandLine,
+  workingDirectory
+) {
   if (mainWindow) {
     if (process.platform === 'win32') {
       mainWindow.minimize()
@@ -18,9 +21,9 @@ if (isSecondInstance) {
 }
 
 app.on('ready', () => {
-  mainWindow = require('./app-window')
-
-  const template = require('./app-menu')
+  mainWindow = require('./app-window')(app)
+  require('./app-tray')(app, mainWindow)
+  const template = require('./app-menu')(app, mainWindow)
   const menu = Menu.buildFromTemplate(template)
   switch (process.platform) {
     case 'darwin':
@@ -36,8 +39,6 @@ app.on('ready', () => {
   }
 })
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+app.on('before-quit', () => {
+  mainWindow.shouldQuit()
 })
