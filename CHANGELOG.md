@@ -7,6 +7,8 @@ Every notable changes in each version will be listed in this file.
 ## Features:
 
 - **App**: Added tray bar icon menu ([b6a9c96](https://github.com/ZeroX-DG/SnippetStore/commit/b6a9c96))
+- **App**: Close app will now hide app and the app still run in tray bar ([b6a9c96](https://github.com/ZeroX-DG/SnippetStore/commit/b6a9c96))
+- **Interface**: Custom tag color (background and foreground) ([9373591](https://github.com/ZeroX-DG/SnippetStore/commit/9373591))
 
 ## Bugfixes:
 
