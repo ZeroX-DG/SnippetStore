@@ -7,6 +7,7 @@ import _ from 'lodash'
 import eventEmitter from 'lib/event-emitter'
 import { getExtension, generateKey } from 'lib/util'
 import Clipboard from 'core/functions/clipboard'
+import TagItem from 'render/components/tag-item'
 import { toast } from 'react-toastify'
 import { toJS } from 'mobx'
 import CodeMirror from 'codemirror'
@@ -511,7 +512,7 @@ export default class SnippetDetailMultiFile extends React.Component {
         {isEditing ? (
           <input type="text" ref="tags" defaultValue={tags.join(', ')} />
         ) : tags.length > 0 ? (
-          tags.join(', ')
+          tags.map((tag, index) => <TagItem tag={tag} key={index} />)
         ) : (
           'No tag'
         )}

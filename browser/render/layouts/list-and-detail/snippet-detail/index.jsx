@@ -8,6 +8,7 @@ import _ from 'lodash'
 import eventEmitter from 'lib/event-emitter'
 import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
 import isDevIconExists from 'lib/devicon-exists'
+import TagItem from 'render/components/tag-item'
 import { toast } from 'react-toastify'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
@@ -352,7 +353,7 @@ export default class SnippetDetail extends React.Component {
         {isEditing ? (
           <input type="text" ref="tags" defaultValue={tags.join(', ')} />
         ) : tags.length > 0 ? (
-          tags.join(', ')
+          tags.map((tag, index) => <TagItem tag={tag} key={index} />)
         ) : (
           'No tag'
         )}
