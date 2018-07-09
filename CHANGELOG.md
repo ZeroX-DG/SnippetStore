@@ -7,6 +7,7 @@ Every notable changes in each version will be listed in this file.
 ## Bugfixes:
 
 - **Interface**: Fixed sidebar click conflict search bar on 2 layouts ([2a7f527](https://github.com/ZeroX-DG/SnippetStore/commit/2a7f527))
+- **Interface**: Fixed height not reset in snippet item in original layout ([a828a3d](https://github.com/ZeroX-DG/SnippetStore/commit/a828a3d))
 
 ## Improvements:
 
