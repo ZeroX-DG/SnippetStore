@@ -9,9 +9,16 @@ export default class TagItem extends React.Component {
   }
 
   render () {
-    const { tag } = this.props
+    const { tag, config } = this.props
     return (
-      <span className="tag-item" onClick={() => this.handleTagClick()}>
+      <span
+        className="tag-item"
+        style={{
+          background: config.ui.tagColor.background,
+          color: config.ui.tagColor.foreground
+        }}
+        onClick={() => this.handleTagClick()}
+      >
         #{tag}
       </span>
     )

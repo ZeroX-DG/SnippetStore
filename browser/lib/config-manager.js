@@ -16,7 +16,11 @@ const DEFAULT_CONFIG = {
     showSnippetUpdateTime: true,
     showSnippetCopyCount: true,
     smallSidebar: false,
-    layout: 'original'
+    layout: 'original',
+    tagColor: {
+      background: '#3742fa',
+      foreground: 'white'
+    }
   },
   editor: {
     showLineNumber: true,

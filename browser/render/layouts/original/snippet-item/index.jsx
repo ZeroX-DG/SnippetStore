@@ -263,7 +263,7 @@ export default class SnippetItem extends React.Component {
   }
 
   renderTagList () {
-    const { snippet } = this.props
+    const { snippet, config } = this.props
     const { isEditing } = this.state
     return (
       <div className="tag-list">
@@ -277,7 +277,9 @@ export default class SnippetItem extends React.Component {
             defaultValue={snippet.tags.join(', ')}
           />
         ) : (
-          snippet.tags.map((tag, index) => <TagItem tag={tag} key={index} />)
+          snippet.tags.map((tag, index) => (
+            <TagItem config={config} tag={tag} key={index} />
+          ))
         )}
       </div>
     )

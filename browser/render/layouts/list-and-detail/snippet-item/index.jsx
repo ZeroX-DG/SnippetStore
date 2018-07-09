@@ -32,7 +32,7 @@ export default class SnippetItem extends React.Component {
   }
 
   render () {
-    const { snippet, selected } = this.props
+    const { snippet, selected, config } = this.props
     return (
       <div
         className={`snippet-item list-and-detail ${selected ? 'selected' : ''}`}
@@ -50,7 +50,9 @@ export default class SnippetItem extends React.Component {
           {snippet.name}
         </p>
         <p className="m-t-10">
-          {snippet.tags.map((tag, index) => <TagItem tag={tag} key={index} />)}
+          {snippet.tags.map((tag, index) => (
+            <TagItem config={config} tag={tag} key={index} />
+          ))}
         </p>
       </div>
     )

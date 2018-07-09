@@ -501,7 +501,7 @@ export default class SnippetDetailMultiFile extends React.Component {
   }
 
   renderTagList () {
-    const { snippet } = this.props
+    const { snippet, config } = this.props
     const { isEditing } = this.state
     const tags = snippet.tags.filter(tag => tag)
     return (
@@ -512,7 +512,9 @@ export default class SnippetDetailMultiFile extends React.Component {
         {isEditing ? (
           <input type="text" ref="tags" defaultValue={tags.join(', ')} />
         ) : tags.length > 0 ? (
-          tags.map((tag, index) => <TagItem tag={tag} key={index} />)
+          tags.map((tag, index) => (
+            <TagItem config={config} tag={tag} key={index} />
+          ))
         ) : (
           'No tag'
         )}
