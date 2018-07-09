@@ -4,7 +4,13 @@ function createTray (app, mainWindow) {
   const tray = new Tray('resources/icon/icon512.png')
 
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Item1', type: 'radio' },
+    {
+      label: 'Open app',
+      type: 'normal',
+      click: () => {
+        mainWindow.show()
+      }
+    },
     { type: 'separator' },
     {
       label: 'Quit',
