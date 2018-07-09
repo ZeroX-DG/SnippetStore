@@ -8,6 +8,7 @@ import { toJS } from 'mobx'
 import _ from 'lodash'
 import formatDate from 'lib/date-format'
 import { getExtension, generateKey } from 'lib/util'
+import TagItem from 'render/components/tag-item'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import 'codemirror/addon/display/autorefresh'
@@ -262,7 +263,7 @@ export default class SnippetItemMultiFiles extends React.Component {
             defaultValue={snippet.tags.join(', ')}
           />
         ) : (
-          snippet.tags.join(', ')
+          snippet.tags.map((tag, index) => <TagItem tag={tag} key={index} />)
         )}
       </div>
     )

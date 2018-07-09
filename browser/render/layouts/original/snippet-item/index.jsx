@@ -7,6 +7,7 @@ import Clipboard from 'core/functions/clipboard'
 import formatDate from 'lib/date-format'
 import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
 import isDevIconExists from 'lib/devicon-exists'
+import TagItem from 'render/components/tag-item'
 import i18n from 'render/lib/i18n'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
@@ -276,7 +277,7 @@ export default class SnippetItem extends React.Component {
             defaultValue={snippet.tags.join(', ')}
           />
         ) : (
-          snippet.tags.join(', ')
+          snippet.tags.map((tag, index) => <TagItem tag={tag} key={index} />)
         )}
       </div>
     )
