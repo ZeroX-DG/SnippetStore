@@ -1,7 +1,7 @@
 import React from 'react'
 import FAIcon from '@fortawesome/react-fontawesome'
 import i18n from 'render/lib/i18n'
-import formatDate from 'lib/date-format'
+import TagItem from 'render/components/tag-item'
 import ContextMenu from 'render/lib/context-menu'
 import _ from 'lodash'
 import './snippet-item'
@@ -50,10 +50,7 @@ export default class SnippetItem extends React.Component {
           {snippet.name}
         </p>
         <p className="m-t-10">
-          {i18n.__('Create at')} : {formatDate(snippet.createAt)}
-        </p>
-        <p className="m-t-5">
-          {i18n.__('Last update')} : {formatDate(snippet.updateAt)}
+          {snippet.tags.map((tag, index) => <TagItem tag={tag} key={index} />)}
         </p>
       </div>
     )
