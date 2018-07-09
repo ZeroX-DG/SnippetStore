@@ -11,7 +11,7 @@ Every notable changes in each version will be listed in this file.
 ## Improvements:
 
 - **Development**: Improved event handler in search bar in 2 layouts ([64934e4](https://github.com/ZeroX-DG/SnippetStore/commit/64934e4))
-- **Interface**: Updated snippet item layout with new tag item ([cbca845](https://github.com/ZeroX-DG/SnippetStore/commit/cbca845))
+- **Interface**: Updated snippet tags with new tag item ([cbca845](https://github.com/ZeroX-DG/SnippetStore/commit/cbca845))
 
 # 0.2.0
 

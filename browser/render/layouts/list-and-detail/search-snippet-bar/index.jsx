@@ -25,11 +25,13 @@ export default class SearchSnippetBar extends React.Component {
   componentDidMount () {
     eventEmitter.on('languageList:pickLang', this.handleSearchLanguage)
     eventEmitter.on('taglist:pickTag', this.handleSearchTag)
+    eventEmitter.on('tag:click', this.handleSearchTag)
   }
 
   componentWillUnmount () {
     eventEmitter.off('languageList:pickLang', this.handleSearchLanguage)
     eventEmitter.off('taglist:pickTag', this.handleSearchTag)
+    eventEmitter.off('tag:click', this.handleSearchTag)
   }
 
   handleCreateSnippetClick () {
