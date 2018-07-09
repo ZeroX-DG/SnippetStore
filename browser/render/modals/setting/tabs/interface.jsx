@@ -16,7 +16,11 @@ export default class InterfaceTab extends React.Component {
         showSnippetCreateTime: this.refs.showSnippetCreateTime.checked,
         showSnippetUpdateTime: this.refs.showSnippetUpdateTime.checked,
         showSnippetCopyCount: this.refs.showSnippetCopyCount.checked,
-        layout: this.refs.layout.value
+        layout: this.refs.layout.value,
+        tagColor: {
+          background: this.refs.tagBackground.value,
+          foreground: this.refs.tagForeground.value
+        }
       }
     }
 
@@ -120,6 +124,23 @@ export default class InterfaceTab extends React.Component {
                 </option>
               ))}
             </select>
+          </div>
+          <div className="group">
+            <label>{i18n.__('Tag color')}</label>
+            <div className="form-group-inline">
+              <input
+                type="text"
+                ref="tagBackground"
+                placeholder="background"
+                defaultValue={config.ui.tagColor.background}
+              />
+              <input
+                type="text"
+                ref="tagForeground"
+                placeholder="foreground"
+                defaultValue={config.ui.tagColor.foreground}
+              />
+            </div>
           </div>
         </div>
         <div className="bottom-tool">
