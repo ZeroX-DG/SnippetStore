@@ -468,6 +468,7 @@ export default class SnippetItemMultiFiles extends React.Component {
         this.editor.setOption('mode', 'null')
       }
       this.editor.setValue(file.value)
+      this.resetSnippetHeight()
       if (callback && typeof callback === 'function') {
         callback()
       }
