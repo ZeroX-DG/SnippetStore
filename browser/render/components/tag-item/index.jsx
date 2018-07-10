@@ -4,8 +4,10 @@ import './tag-item'
 
 export default class TagItem extends React.Component {
   handleTagClick () {
-    const { tag } = this.props
-    eventEmitter.emit('tag:click', tag)
+    const { tag, notClickAble } = this.props
+    if (!notClickAble) {
+      eventEmitter.emit('tag:click', tag)
+    }
   }
 
   render () {

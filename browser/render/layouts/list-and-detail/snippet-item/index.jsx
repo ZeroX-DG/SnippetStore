@@ -53,7 +53,12 @@ export default class SnippetItem extends React.Component {
         <p className="m-t-10">
           {tags.length > 0 ? (
             tags.map((tag, index) => (
-              <TagItem config={config} tag={tag} key={index} />
+              <TagItem
+                config={config}
+                notClickAble={true}
+                tag={tag}
+                key={index}
+              />
             ))
           ) : (
             <span className="no-tag">No tag</span>
