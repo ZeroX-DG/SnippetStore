@@ -1,0 +1,58 @@
+@font-face {
+  font-family: Lato;
+  src: url("../../resources/fonts/lato/Lato-Regular.ttf");
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: Lato;
+  src: url("../../resources/fonts/lato/Lato-Hairline.ttf");
+  font-weight: 100;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: Lato;
+  src: url("../../resources/fonts/lato/Lato-HairlineItalic.ttf");
+  font-weight: 100;
+  font-style: italic;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: Lato;
+  src: url("../../resources/fonts/lato/Lato-Light.ttf");
+  font-weight: 300;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: Lato;
+  src: url("../../resources/fonts/lato/Lato-LightItalic.ttf");
+  font-weight: 300;
+  font-style: italic;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: Lato;
+  src: url("../../resources/fonts/lato/Lato-Bold.ttf");
+  font-weight: 700;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: Lato;
+  src: url("../../resources/fonts/lato/Lato-Italic.ttf");
+  font-weight: normal;
+  font-style: italic;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: Lato;
+  src: url("../../resources/fonts/lato/Lato-Black.ttf");
+  font-weight: 900;
+  text-rendering: optimizeLegibility;
+}
