@@ -18,21 +18,25 @@ export default class About extends React.Component {
     return (
       <div className="about-tab">
         <h1 className="tab-title">{i18n.__('About')}</h1>
-        <div className="inline">
-          <img src={logo} width="200px" />
-          <div className="m-l-100">
-            <h2>SnippetStore</h2>
-            <p>Version: 0.2.1</p>
-            <p className="m-t-20">
-              {i18n.__('SnippetStore is a snippet management app developers')}
-            </p>
+        <div className="content">
+          <div className="inline">
+            <img src={logo} width="200px" />
+            <div className="m-l-100">
+              <h2>SnippetStore</h2>
+              <p>Version: 0.2.1</p>
+              <p className="m-t-20">
+                {i18n.__('SnippetStore is a snippet management app developers')}
+              </p>
+            </div>
           </div>
+          <h2 className="m-t-50">Author</h2>
+          <p>
+            Nguyen Viet Hung (<a href="https://github.com/ZeroX-DG">
+              @ZeroX-DG
+            </a>)
+          </p>
+          <p>Email: viethungax@gmail.com</p>
         </div>
-        <h2 className="m-t-50">Author</h2>
-        <p>
-          Nguyen Viet Hung (<a href="https://github.com/ZeroX-DG">@ZeroX-DG</a>)
-        </p>
-        <p>Email: viethungax@gmail.com</p>
       </div>
     )
   }

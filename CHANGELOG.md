@@ -10,6 +10,7 @@ Every notable changes in each version will be listed in this file.
 - **Interface**: Fixed line clamping bug in snippet name ([57bb655](https://github.com/ZeroX-DG/SnippetStore/commit/57bb655))
 - **Interface**: Fixed main window doesn't show when second instance is opened ([1c96a86](https://github.com/ZeroX-DG/SnippetStore/commit/1c96a86))
 - **Interface**: Fixed tag overflow snippet item ([8b28fc9](https://github.com/ZeroX-DG/SnippetStore/commit/8b28fc9))
+- **Interface**: Fixed about tab content overflow ([e93c03c](https://github.com/ZeroX-DG/SnippetStore/commit/e93c03c))
 
 # 0.2.1
 
