@@ -7,6 +7,7 @@ Every notable changes in each version will be listed in this file.
 ## Bugfixes:
 
 - **Interface**: Fixed scroll unnecessary part in snippet list in `list and detail` mode ([15f26ef](https://github.com/ZeroX-DG/SnippetStore/commit/15f26ef))
+- **Interface**: Fixed line clamping bug in snippet name ([57bb655](https://github.com/ZeroX-DG/SnippetStore/commit/57bb655))
 
 # 0.2.1
 
