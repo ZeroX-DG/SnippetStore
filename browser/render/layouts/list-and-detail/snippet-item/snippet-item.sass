@@ -4,6 +4,8 @@
   position: relative
   padding: 15px
   user-select: none
+  display: flex
+  flex-direction: column
   &::after
     width: 90%
     height: 1px
@@ -22,6 +24,11 @@
   p
     padding: 0
     margin: 0
+  .tags
+    margin-top: 10px
+    flex: 1
+    overflow: hidden
+    flex-wrap: wrap
   .no-tag
     display: block
     text-align: center

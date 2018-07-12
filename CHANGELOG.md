@@ -9,6 +9,7 @@ Every notable changes in each version will be listed in this file.
 - **Interface**: Fixed scroll unnecessary part in snippet list in `list and detail` mode ([15f26ef](https://github.com/ZeroX-DG/SnippetStore/commit/15f26ef))
 - **Interface**: Fixed line clamping bug in snippet name ([57bb655](https://github.com/ZeroX-DG/SnippetStore/commit/57bb655))
 - **Interface**: Fixed main window doesn't show when second instance is opened ([1c96a86](https://github.com/ZeroX-DG/SnippetStore/commit/1c96a86))
+- **Interface**: Fixed tag overflow snippet item ([8b28fc9](https://github.com/ZeroX-DG/SnippetStore/commit/8b28fc9))
 
 # 0.2.1
 

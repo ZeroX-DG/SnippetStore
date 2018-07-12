@@ -50,7 +50,7 @@ export default class SnippetItem extends React.Component {
           </span>
           {snippet.name}
         </p>
-        <p className="m-t-10">
+        <div className="tags">
           {tags.length > 0 ? (
             tags.map((tag, index) => (
               <TagItem
@@ -63,7 +63,7 @@ export default class SnippetItem extends React.Component {
           ) : (
             <span className="no-tag">No tag</span>
           )}
-        </p>
+        </div>
       </div>
     )
   }
