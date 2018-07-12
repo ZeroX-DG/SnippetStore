@@ -6,11 +6,11 @@ Every notable changes in each version will be listed in this file.
 
 ## Bugfixes:
 
-- **Interface**: Fixed scroll unnecessary part in snippet list in `list and detail` mode ([15f26ef](https://github.com/ZeroX-DG/SnippetStore/commit/15f26ef))
-- **Interface**: Fixed line clamping bug in snippet name ([57bb655](https://github.com/ZeroX-DG/SnippetStore/commit/57bb655))
-- **Interface**: Fixed main window doesn't show when second instance is opened ([1c96a86](https://github.com/ZeroX-DG/SnippetStore/commit/1c96a86))
-- **Interface**: Fixed tag overflow snippet item ([8b28fc9](https://github.com/ZeroX-DG/SnippetStore/commit/8b28fc9))
-- **Interface**: Fixed about tab content overflow ([e93c03c](https://github.com/ZeroX-DG/SnippetStore/commit/e93c03c))
+- **Interface**: Fixed scroll unnecessary part in snippet list in `list and detail` mode ([67ee1c2](https://github.com/ZeroX-DG/SnippetStore/commit/67ee1c2))
+- **Interface**: Fixed line clamping bug in snippet name ([a25c42e](https://github.com/ZeroX-DG/SnippetStore/commit/a25c42e))
+- **Interface**: Fixed main window doesn't show when second instance is opened ([fa0a20d](https://github.com/ZeroX-DG/SnippetStore/commit/fa0a20d))
+- **Interface**: Fixed tag overflow snippet item ([5adbfae](https://github.com/ZeroX-DG/SnippetStore/commit/5adbfae))
+- **Interface**: Fixed about tab content overflow ([487a3ae](https://github.com/ZeroX-DG/SnippetStore/commit/487a3ae))
 
 # 0.2.1
 
