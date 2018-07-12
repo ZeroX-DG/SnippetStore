@@ -11,6 +11,7 @@ const isSecondInstance = app.makeSingleInstance(function (
       mainWindow.minimize()
       mainWindow.restore()
     }
+    mainWindow.show()
     mainWindow.focus()
   }
   return true
