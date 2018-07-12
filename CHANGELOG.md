@@ -2,6 +2,12 @@
 
 Every notable changes in each version will be listed in this file.
 
+# 0.2.2
+
+## Bugfixes:
+
+- **Interface**: Fixed scroll unnecessary part in snippet list in `list and detail` mode ([15f26ef](https://github.com/ZeroX-DG/SnippetStore/commit/15f26ef))
+
 # 0.2.1
 
 ## Features:

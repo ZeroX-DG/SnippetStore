@@ -1,11 +1,15 @@
 .snippets.list-and-detail
   width: 350px
   height: 100vh
-  overflow-y: overlay
+  overflow-y: hidden
   text-overflow: ellipsis
   cursor: pointer
-  display: inline-block
+  display: inline-flex
+  flex-direction: column
   position: relative
+  ul
+    overflow-y: overlay
+    flex: 1
   .wall
     width: 100%
     height: 100%
