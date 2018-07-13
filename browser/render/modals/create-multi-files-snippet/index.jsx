@@ -169,14 +169,10 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
     newEditingFiles.splice(fileIndex, 1)
     this.setState({ files: newEditingFiles })
     // prevent reading deleted snippet
-    if (selectedFile > files.length - 1) {
-      this.handleChangeFileClick(files.length - 1, () => {
-        this.resetSnippetHeight()
-      })
-    }
+    this.handleChangeFileClick(selectedFile - 1)
   }
 
-  handleChangeFileClick (index, callback) {
+  handleChangeFileClick (index) {
     const { files } = this.state
     // set the new selected file index
     this.setState({ selectedFile: index }, () => {
@@ -187,9 +183,8 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
         // if the mode for that language exists then use it otherwise use text
         this.applyEditorLanguage(file.name)
         this.editor.setValue(file.value)
-        if (callback && typeof callback === 'function') {
-          callback()
-        }
+      } else {
+        this.editor.setValue('')
       }
     })
   }
