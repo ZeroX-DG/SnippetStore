@@ -128,7 +128,7 @@ export default class SnippetItemMultiFiles extends React.Component {
           {isEditing ? (
             <input type="text" ref="name" defaultValue={snippet.name} />
           ) : (
-            snippet.name
+            <p className="snippet-name">{snippet.name}</p>
           )}
         </div>
         <div className="tools">
@@ -260,11 +260,7 @@ export default class SnippetItemMultiFiles extends React.Component {
           <FAIcon icon="tags" />
         </span>
         {isEditing ? (
-          <input
-            type="text"
-            ref="tags"
-            defaultValue={tags.join(', ')}
-          />
+          <input type="text" ref="tags" defaultValue={tags.join(', ')} />
         ) : tags.length > 0 ? (
           tags.map((tag, index) => (
             <TagItem config={config} tag={tag} key={index} />

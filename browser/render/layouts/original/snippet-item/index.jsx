@@ -190,7 +190,7 @@ export default class SnippetItem extends React.Component {
           {isEditing ? (
             <input type="text" ref="name" defaultValue={snippet.name} />
           ) : (
-            snippet.name
+            <p className="snippet-name">{snippet.name}</p>
           )}
         </div>
         <div className="tools">
