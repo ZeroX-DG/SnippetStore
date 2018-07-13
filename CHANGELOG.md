@@ -11,6 +11,11 @@ Every notable changes in each version will be listed in this file.
 - **Interface**: Fixed main window doesn't show when second instance is opened ([fa0a20d](https://github.com/ZeroX-DG/SnippetStore/commit/fa0a20d))
 - **Interface**: Fixed tag overflow snippet item ([5adbfae](https://github.com/ZeroX-DG/SnippetStore/commit/5adbfae))
 - **Interface**: Fixed about tab content overflow ([487a3ae](https://github.com/ZeroX-DG/SnippetStore/commit/487a3ae))
+- **Interface**: Fixed create multi file snippet modal delete file bug ([16bc2bd](https://github.com/ZeroX-DG/SnippetStore/commit/16bc2bd))
+- **Interface**: Fixed create new file in editing mode in multi file snippet ([58d95d1](https://github.com/ZeroX-DG/SnippetStore/commit/58d95d1))
+- **Interface**: Fixed no tag in snippet item in original layout ([b99c410](https://github.com/ZeroX-DG/SnippetStore/commit/b99c410))
+- **Interface**: Fixed file input background in editing mode in snippet item in original layout ([d8a4916](https://github.com/ZeroX-DG/SnippetStore/commit/d8a4916))
+- **Interface**: Fixed text overflow on snippet name in snippet item in original layout ([d1f990b](https://github.com/ZeroX-DG/SnippetStore/commit/d1f990b))
 
 # 0.2.1
 
