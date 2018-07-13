@@ -16,7 +16,7 @@ $sidebar-dark: (
 $snippet-list-dark: (
   create-button: (
     background: #ffd76d,
-    color: #1e1f2b,
+    color: #1e1f2b
   )
 );
 
@@ -35,7 +35,7 @@ $snippet-list-list-and-detail-dark: (
 $snippet-item-dark: (
   background: #373a51,
   delete-button: (
-    color: #EA2027
+    color: #ea2027
   ),
   file-list: (
     file: (
@@ -67,10 +67,10 @@ $body-background--light: #fcf2f2;
 // sidebar
 $sidebar-light: (
   background: #efe3e3,
-  color: #95989D,
-  color-darken: darken(#95989D, 20),
+  color: #95989d,
+  color-darken: darken(#95989d, 20),
   label: (
-    color: #95989D
+    color: #95989d
   )
 );
 
@@ -78,7 +78,7 @@ $sidebar-light: (
 $snippet-list-light: (
   create-button: (
     background: #ffd76d,
-    color: #1e1f2b,
+    color: #1e1f2b
   )
 );
 
@@ -97,7 +97,7 @@ $snippet-list-list-and-detail-light: (
 $snippet-item-light: (
   background: #efe3e3,
   delete-button: (
-    color: #EA2027
+    color: #ea2027
   ),
   file-list: (
     file: (
@@ -129,7 +129,7 @@ $input-tag-light: (
 // ==============================
 @function map-deep-get($map, $keys...) {
   @each $key in $keys {
-      $map: map-get($map, $key);
+    $map: map-get($map, $key);
   }
   @return $map;
 }
