@@ -265,21 +265,20 @@ export default class SnippetItem extends React.Component {
   renderTagList () {
     const { snippet, config } = this.props
     const { isEditing } = this.state
+    const tags = snippet.tags.filter(tag => tag)
     return (
       <div className="tag-list">
         <span className="icon">
           <FAIcon icon="tags" />
         </span>
         {isEditing ? (
-          <input
-            type="text"
-            ref="tags"
-            defaultValue={snippet.tags.join(', ')}
-          />
-        ) : (
-          snippet.tags.map((tag, index) => (
+          <input type="text" ref="tags" defaultValue={tags.join(', ')} />
+        ) : tags.length > 0 ? (
+          tags.map((tag, index) => (
             <TagItem config={config} tag={tag} key={index} />
           ))
+        ) : (
+          'No tag'
         )}
       </div>
     )

@@ -253,6 +253,7 @@ export default class SnippetItemMultiFiles extends React.Component {
   renderTagList () {
     const { snippet, config } = this.props
     const { isEditing } = this.state
+    const tags = snippet.tags.filter(tag => tag)
     return (
       <div className="tag-list">
         <span className="icon">
@@ -262,12 +263,14 @@ export default class SnippetItemMultiFiles extends React.Component {
           <input
             type="text"
             ref="tags"
-            defaultValue={snippet.tags.join(', ')}
+            defaultValue={tags.join(', ')}
           />
-        ) : (
-          snippet.tags.map((tag, index) => (
+        ) : tags.length > 0 ? (
+          tags.map((tag, index) => (
             <TagItem config={config} tag={tag} key={index} />
           ))
+        ) : (
+          'No tag'
         )}
       </div>
     )
