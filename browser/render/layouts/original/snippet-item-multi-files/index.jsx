@@ -67,7 +67,7 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   applyEditorStyle (props) {
     const { snippet, config } = props || this.props
-    const { selectedFile } = this.state
+    const { isEditing, editingFiles, selectedFile } = this.state
     const {
       theme,
       showLineNumber,
@@ -81,7 +81,9 @@ export default class SnippetItemMultiFiles extends React.Component {
       : []
 
     const totalSnippets = snippet.files.length
-    const file = snippet.files[selectedFile]
+    const file = isEditing
+      ? editingFiles[selectedFile]
+      : snippet.files[selectedFile]
     if (!file) {
       this.handleChangeFileClick(totalSnippets - 1)
       return
