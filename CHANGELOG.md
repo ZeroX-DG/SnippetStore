@@ -2,6 +2,12 @@
 
 Every notable changes in each version will be listed in this file.
 
+# 0.2.3
+
+## Bugfix:
+
+- **Interface**: Fixed delete file bug in create multi file snippet modal ([f88f138](https://github.com/ZeroX-DG/SnippetStore/commit/f88f138))
+
 # 0.2.2
 
 ## Bugfixes:
