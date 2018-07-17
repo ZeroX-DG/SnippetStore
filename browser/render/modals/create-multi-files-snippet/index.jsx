@@ -169,17 +169,35 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
     newEditingFiles.splice(fileIndex, 1)
     this.setState({ files: newEditingFiles })
     // prevent reading deleted snippet
-    this.handleChangeFileClick(selectedFile - 1)
+    if (fileIndex !== selectedFile) {
+      // shift the selected file by 1 to replace to deleted file
+      if (fileIndex < selectedFile) {
+        // by shifting 1 index, the content will changed but we want to use the
+        // old selected file content
+        this.handleChangeFileClick(selectedFile - 1, selectedFile)
+      }
+    } else {
+      // the selected file is deleted
+      if (fileIndex === 0) {
+        this.handleChangeFileClick(0, fileIndex + 1)
+      } else {
+        this.handleChangeFileClick(fileIndex - 1)
+      }
+    }
   }
 
-  handleChangeFileClick (index) {
+  handleChangeFileClick (index, useFileAtIndex) {
     const { files } = this.state
     // set the new selected file index
     this.setState({ selectedFile: index }, () => {
       // if the snippet is in the editing mode, interact with the state instead
       // of the snippet in prop
-      if (index !== -1) {
-        const file = files[index]
+      // Sometime, we want the current index file to change but use the content
+      // of another file (look at the function above)
+      const fileIndex = useFileAtIndex || index
+      const file = files[fileIndex]
+      // first time loaded there is no file
+      if (file) {
         // if the mode for that language exists then use it otherwise use text
         this.applyEditorLanguage(file.name)
         this.editor.setValue(file.value)
@@ -229,8 +247,8 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
 
   handleEditingFileValueChange () {
     const { selectedFile, files } = this.state
-    if (files.length > 0) {
-      const newEditingFiles = _.clone(files)
+    const newEditingFiles = _.clone(files)
+    if (files.length > 0 && newEditingFiles[selectedFile]) {
       newEditingFiles[selectedFile].value = this.editor.getValue()
       this.setState({ files: newEditingFiles })
     }
