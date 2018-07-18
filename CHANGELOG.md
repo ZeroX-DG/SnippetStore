@@ -2,6 +2,12 @@
 
 Every notable changes in each version will be listed in this file.
 
+# 0.2.4
+
+## Improvements:
+
+- **Development**: Improved dist command to clean up dist folder before packaging app
+
 # 0.2.3
 
 ## Bugfix:
