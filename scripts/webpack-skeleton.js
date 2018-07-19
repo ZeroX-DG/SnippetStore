@@ -12,11 +12,7 @@ var config = {
       },
       {
         test: /\.(scss|sass)$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(js|jsx)$/,
@@ -40,13 +36,13 @@ var config = {
   resolve: {
     extensions: ['.js', '.jsx', '.scss', '.sass'],
     alias: {
-      'app': path.join(__dirname, '..', 'app'),
-      'browser': path.join(__dirname, '..', 'browser'),
-      'render': path.join(__dirname, '..', 'browser', 'render'),
-      'core': path.join(__dirname, '..', 'browser', 'core'),
-      'store': path.join(__dirname, '..', 'browser', 'store'),
-      'lib': path.join(__dirname, '..', 'browser', 'lib'),
-      'resources': path.join(__dirname, '..', 'resources')
+      app: path.join(__dirname, '..', 'app'),
+      browser: path.join(__dirname, '..', 'browser'),
+      render: path.join(__dirname, '..', 'browser', 'render'),
+      core: path.join(__dirname, '..', 'browser', 'core'),
+      store: path.join(__dirname, '..', 'browser', 'store'),
+      lib: path.join(__dirname, '..', 'browser', 'lib'),
+      resources: path.join(__dirname, '..', 'resources')
     }
   }
 }

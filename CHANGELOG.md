@@ -7,6 +7,7 @@ Every notable changes in each version will be listed in this file.
 ## Bugfixes:
 
 - **Interface**: Fixed tag overflow bug in snippet item ([15db53b](https://github.com/ZeroX-DG/SnippetStore/commit/15db53b))
+- **Interface**: Fixed remove file in editing mode bug in snippet item ([1875a0f](https://github.com/ZeroX-DG/SnippetStore/commit/1875a0f))
 
 ## Improvements:
 
