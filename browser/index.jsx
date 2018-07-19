@@ -17,6 +17,7 @@ import 'codemirror/addon/fold/comment-fold'
 import 'codemirror/addon/fold/xml-fold'
 import 'codemirror/addon/fold/indent-fold'
 import 'codemirror/addon/fold/markdown-fold'
+import CodeMirror from 'codemirror'
 
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -60,6 +61,9 @@ document.addEventListener('keyup', function (e) {
     isOtherKey = false
   }
 })
+
+CodeMirror.keyMap.default['Shift-Tab'] = 'indentLess'
+CodeMirror.keyMap.default['Tab'] = 'indentMore'
 
 ReactDOM.render(
   <BrowserRouter>
