@@ -409,10 +409,20 @@ export default class SnippetItemMultiFiles extends React.Component {
         this.setState({ editingFiles: newEditingFiles })
       }
       // prevent reading deleted snippet
-      if (selectedFile > editingFiles.length - 1) {
-        this.handleChangeFileClick(editingFiles.length - 1, () => {
-          this.resetSnippetHeight()
-        })
+      if (fileIndex !== selectedFile) {
+        // shift the selected file by 1 to replace to deleted file
+        if (fileIndex < selectedFile) {
+          // by shifting 1 index, the content will changed but we want to use the
+          // old selected file content
+          this.handleChangeFileClick(selectedFile - 1, selectedFile)
+        }
+      } else {
+        // the selected file is deleted
+        if (fileIndex === 0) {
+          this.handleChangeFileClick(0, fileIndex + 1)
+        } else {
+          this.handleChangeFileClick(fileIndex - 1)
+        }
       }
     } else {
       toast.error(i18n.__('The snippet must have at least 1 file'))
@@ -446,34 +456,37 @@ export default class SnippetItemMultiFiles extends React.Component {
     this.applyEditorStyle()
   }
 
-  handleChangeFileClick (index, callback) {
+  handleChangeFileClick (index, useFileAtIndex, callback) {
     const { snippet } = this.props
     const { editingFiles, isEditing } = this.state
     // set the new selected file index
     this.setState({ selectedFile: index }, () => {
       // if the snippet is in the editing mode, interact with the state instead
       // of the snippet in prop
-      const file = isEditing ? editingFiles[index] : snippet.files[index]
-      const fileExtension = getExtension(file.name)
-      const resultMode = CodeMirror.findModeByExtension(fileExtension)
-      // if the mode for that language exists then use it otherwise use text
-      if (resultMode) {
-        const snippetMode = resultMode.mode
-        if (snippetMode === 'htmlmixed') {
-          require(`codemirror/mode/xml/xml`)
-          this.editor.setOption('mode', 'xml')
-          this.editor.setOption('htmlMode', true)
+      const fileIndex = useFileAtIndex || index
+      const file = isEditing ? editingFiles[fileIndex] : snippet.files[index]
+      if (file) {
+        const fileExtension = getExtension(file.name)
+        const resultMode = CodeMirror.findModeByExtension(fileExtension)
+        // if the mode for that language exists then use it otherwise use text
+        if (resultMode) {
+          const snippetMode = resultMode.mode
+          if (snippetMode === 'htmlmixed') {
+            require(`codemirror/mode/xml/xml`)
+            this.editor.setOption('mode', 'xml')
+            this.editor.setOption('htmlMode', true)
+          } else {
+            require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+            this.editor.setOption('mode', snippetMode)
+          }
         } else {
-          require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-          this.editor.setOption('mode', snippetMode)
+          this.editor.setOption('mode', 'null')
         }
-      } else {
-        this.editor.setOption('mode', 'null')
-      }
-      this.editor.setValue(file.value)
-      this.resetSnippetHeight()
-      if (callback && typeof callback === 'function') {
-        callback()
+        this.editor.setValue(file.value)
+        this.resetSnippetHeight()
+        if (callback && typeof callback === 'function') {
+          callback()
+        }
       }
     })
   }
