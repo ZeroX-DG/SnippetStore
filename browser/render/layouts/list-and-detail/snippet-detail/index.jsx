@@ -10,9 +10,9 @@ import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
 import isDevIconExists from 'lib/devicon-exists'
 import TagItem from 'render/components/tag-item'
 import { toast } from 'react-toastify'
+import CodeEditor from 'render/components/code-editor'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
-import 'codemirror/addon/display/autorefresh'
 import './snippet-detail'
 
 export default class SnippetDetail extends React.Component {
@@ -21,77 +21,6 @@ export default class SnippetDetail extends React.Component {
     this.state = {
       isEditing: false
     }
-  }
-
-  componentDidMount () {
-    const { config, snippet } = this.props
-    if (snippet) {
-      const { theme, showLineNumber } = config.editor
-      const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
-      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-      const gutters = showLineNumber
-        ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-        : []
-      this.editor = CodeMirror(this.refs.editor, {
-        lineNumbers: showLineNumber,
-        value: snippet.value,
-        foldGutter: showLineNumber,
-        mode: snippetMode,
-        theme: theme,
-        gutters: gutters,
-        readOnly: true,
-        autoCloseBrackets: true,
-        autoRefresh: true,
-        styleActiveLine: { nonEmpty: false }
-      })
-      this.editor.setSize('100%', 'auto')
-      this.applyEditorStyle()
-    }
-  }
-
-  componentWillUpdate (props) {
-    const { snippet } = props
-    const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
-    require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-    this.editor.setValue(snippet.value)
-    this.editor.setOption('mode', snippetMode)
-  }
-
-  applyEditorStyle (props) {
-    const { config, snippet } = props || this.props
-    const {
-      theme,
-      showLineNumber,
-      fontFamily,
-      fontSize,
-      tabSize,
-      indentUsingTab
-    } = config.editor
-    // only update codemirror mode if new props is passed
-    if (props) {
-      const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
-      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-    }
-    const gutters = showLineNumber
-      ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-      : []
-    this.editor.getWrapperElement().style.fontSize = `${fontSize}px`
-    this.editor.setOption('lineNumbers', showLineNumber)
-    this.editor.setOption('foldGutter', showLineNumber)
-    this.editor.setOption('theme', theme)
-    this.editor.setOption('gutters', gutters)
-
-    this.editor.setOption('indentUnit', tabSize)
-    this.editor.setOption('tabSize', tabSize)
-    this.editor.setOption('indentWithTabs', indentUsingTab)
-
-    const wrapperElement = this.editor.getWrapperElement()
-    wrapperElement.style.fontFamily = fontFamily
-    this.editor.refresh()
-  }
-
-  componentWillReceiveProps (props) {
-    this.applyEditorStyle(props)
   }
 
   renderTopBar () {
@@ -173,26 +102,29 @@ export default class SnippetDetail extends React.Component {
   }
 
   handleEditButtonClick () {
+    const { editor } = this.refs
     this.setState({ isEditing: true })
     eventEmitter.emit('snippet-detail:edit-start')
-    this.editor.setOption('readOnly', false)
+    editor.setOption('readOnly', false)
   }
 
   handleDiscardChangesClick () {
+    const { editor } = this.refs
     this.setState({ isEditing: false }, () => {
       eventEmitter.emit('snippet-detail:edit-end')
-      this.editor.setOption('readOnly', true)
+      editor.setOption('readOnly', true)
     })
   }
 
   handleSaveChangesClick () {
+    const { editor, tags, lang, name, description } = this.refs
     const { store, snippet } = this.props
-    const valueChanged = snippet.value !== this.editor.getValue()
-    const langChanged = snippet.lang !== this.refs.lang.value
-    const nameChanged = snippet.name !== this.refs.name.value
-    const newTags = this.refs.tags.value.replace(/ /g, '').split(',')
+    const valueChanged = snippet.value !== editor.getValue()
+    const langChanged = snippet.lang !== lang.value
+    const nameChanged = snippet.name !== name.value
+    const newTags = tags.value.replace(/ /g, '').split(',')
     const tagChanged = !_.isEqual(snippet.tags, newTags)
-    const descripChanged = snippet.description !== this.refs.description.value
+    const descripChanged = snippet.description !== description.value
     if (
       valueChanged ||
       langChanged ||
@@ -201,25 +133,26 @@ export default class SnippetDetail extends React.Component {
       descripChanged
     ) {
       const newSnippet = _.clone(snippet)
-      newSnippet.value = this.editor.getValue()
-      newSnippet.lang = this.refs.lang.value
-      newSnippet.name = this.refs.name.value
+      newSnippet.value = editor.getValue()
+      newSnippet.lang = lang.value
+      newSnippet.name = name.value
       newSnippet.tags = newTags
-      newSnippet.description = this.refs.description.value
+      newSnippet.description = description.value
       if (langChanged) {
         const snippetMode = CodeMirror.findModeByName(newSnippet.lang).mode
         require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-        this.editor.setOption('mode', snippetMode)
+        editor.setOption('mode', snippetMode)
       }
       store.updateSnippet(newSnippet)
     }
     this.setState({ isEditing: false }, () => {
       eventEmitter.emit('snippet-detail:edit-end')
     })
-    this.editor.setOption('readOnly', true)
+    editor.setOption('readOnly', true)
   }
 
   renderSnippet () {
+    const { config, snippet } = this.props
     return (
       <Fragment>
         {this.renderTopBar()}
@@ -229,7 +162,7 @@ export default class SnippetDetail extends React.Component {
         </div>
         {this.renderTagList()}
         {this.renderDescription()}
-        <div className="code" ref="editor" />
+        <CodeEditor config={config} snippet={snippet} ref="editor" />
       </Fragment>
     )
   }
@@ -323,9 +256,10 @@ export default class SnippetDetail extends React.Component {
   }
 
   handleSnippetLangChange () {
+    const { editor } = this.refs
     const snippetMode = CodeMirror.findModeByName(this.refs.lang.value).mode
     require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-    this.editor.setOption('mode', snippetMode)
+    editor.setOption('mode', snippetMode)
   }
 
   renderDescription () {
