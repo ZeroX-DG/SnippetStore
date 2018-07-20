@@ -65,5 +65,6 @@
   "discard changes": "Hủy thay đổi",
   "Are you sure to delete this file?": "Bạn có chắc muốn xóa file này?",
   "Pick a snippet from list": "Chọn 1 snippet trong danh sách",
-  "Snippet list layout": "Bố cục danh sách snippet"
+  "Snippet list layout": "Bố cục danh sách snippet",
+  "Highlight current line": "Làm nổi dòng hiện tại"
 }

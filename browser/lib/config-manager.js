@@ -28,7 +28,8 @@ const DEFAULT_CONFIG = {
     fontFamily: 'Fira Code, Consolas, sans-serif',
     fontSize: 18,
     indentUsingTab: false,
-    tabSize: 2
+    tabSize: 2,
+    highlightCurrentLine: true
   },
   keyboard: {
     createSnippet: OSX ? 'Cmd + N' : 'Ctrl + N',

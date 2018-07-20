@@ -17,7 +17,7 @@ export default class CodeEditor extends React.Component {
   initSingleFileSnippetEditor () {
     const { config, snippet } = this.props
     if (snippet) {
-      const { theme, showLineNumber } = config.editor
+      const { theme, showLineNumber, highlightCurrentLine } = config.editor
       const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
       require(`codemirror/mode/${snippetMode}/${snippetMode}`)
       const gutters = showLineNumber
@@ -32,9 +32,13 @@ export default class CodeEditor extends React.Component {
         gutters: gutters,
         readOnly: true,
         autoCloseBrackets: true,
-        autoRefresh: true,
-        styleActiveLine: { nonEmpty: false }
+        autoRefresh: true
       })
+      if (highlightCurrentLine) {
+        this.editor.setOption('styleActiveLine', { nonEmpty: false })
+      } else {
+        this.editor.setOption('styleActiveLine', null)
+      }
       this.editor.setSize('100%', 'auto')
       this.applyEditorStyleSingleFile()
     }
@@ -47,7 +51,13 @@ export default class CodeEditor extends React.Component {
       handleEditingFileValueChange,
       selectedFile
     } = this.props
-    const { theme, showLineNumber, tabSize, indentUsingTab } = config.editor
+    const {
+      theme,
+      showLineNumber,
+      tabSize,
+      indentUsingTab,
+      highlightCurrentLine
+    } = config.editor
     const file = snippet.files[selectedFile]
     const fileExtension = getExtension(file.name)
     const resultMode = CodeMirror.findModeByExtension(fileExtension)
@@ -70,10 +80,14 @@ export default class CodeEditor extends React.Component {
       gutters: gutters,
       readOnly: true,
       autoCloseBrackets: true,
-      autoRefresh: true,
-      styleActiveLine: { nonEmpty: false }
+      autoRefresh: true
     })
 
+    if (highlightCurrentLine) {
+      this.editor.setOption('styleActiveLine', { nonEmpty: false })
+    } else {
+      this.editor.setOption('styleActiveLine', null)
+    }
     this.editor.setOption('indentUnit', tabSize)
     this.editor.setOption('tabSize', tabSize)
     this.editor.setOption('indentWithTabs', indentUsingTab)
@@ -132,7 +146,8 @@ export default class CodeEditor extends React.Component {
       fontFamily,
       fontSize,
       tabSize,
-      indentUsingTab
+      indentUsingTab,
+      highlightCurrentLine
     } = config.editor
     // only update codemirror mode if new props is passed
     if (props) {
@@ -151,6 +166,12 @@ export default class CodeEditor extends React.Component {
     this.editor.setOption('indentUnit', tabSize)
     this.editor.setOption('tabSize', tabSize)
     this.editor.setOption('indentWithTabs', indentUsingTab)
+
+    if (highlightCurrentLine) {
+      this.editor.setOption('styleActiveLine', { nonEmpty: false })
+    } else {
+      this.editor.setOption('styleActiveLine', null)
+    }
 
     const wrapperElement = this.editor.getWrapperElement()
     wrapperElement.style.fontFamily = fontFamily
@@ -172,7 +193,8 @@ export default class CodeEditor extends React.Component {
       fontFamily,
       fontSize,
       tabSize,
-      indentUsingTab
+      indentUsingTab,
+      highlightCurrentLine
     } = config.editor
     const gutters = showLineNumber
       ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
@@ -187,6 +209,12 @@ export default class CodeEditor extends React.Component {
         snippetMode = resultMode.mode
         require(`codemirror/mode/${snippetMode}/${snippetMode}`)
       }
+    }
+
+    if (highlightCurrentLine) {
+      this.editor.setOption('styleActiveLine', { nonEmpty: false })
+    } else {
+      this.editor.setOption('styleActiveLine', null)
     }
 
     this.editor.getWrapperElement().style.fontSize = `${fontSize}px`

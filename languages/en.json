@@ -67,5 +67,6 @@
   "discard changes": "discard changes",
   "Are you sure to delete this file?": "Are you sure to delete this file?",
   "Pick a snippet from list": "Pick a snippet from list",
-  "Snippet list layout": "Snippet list layout"
+  "Snippet list layout": "Snippet list layout",
+  "Highlight current line": "Highlight current line"
 }

@@ -8,7 +8,12 @@ import i18n from 'render/lib/i18n'
 export default class EditorTab extends React.Component {
   componentDidMount () {
     const { config } = this.props
-    const { showLineNumber, theme, fontFamily } = config.editor
+    const {
+      showLineNumber,
+      theme,
+      fontFamily,
+      highlightCurrentLine
+    } = config.editor
     const sampleCode = `const number = 1
 if (number == 1) {
   console.log(number * 2)
@@ -26,6 +31,12 @@ if (number == 1) {
         ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
         : []
     })
+
+    if (highlightCurrentLine) {
+      this.editor.setOption('styleActiveLine', { nonEmpty: false })
+    } else {
+      this.editor.setOption('styleActiveLine', null)
+    }
 
     this.editor.getWrapperElement().style.fontFamily = fontFamily
 
@@ -49,6 +60,15 @@ if (number == 1) {
     this.editor.setOption('theme', newTheme)
   }
 
+  highlightCurrentLine () {
+    const highlightCurrentLine = this.refs.highlightCurrentLine.checked
+    if (highlightCurrentLine) {
+      this.editor.setOption('styleActiveLine', { nonEmpty: false })
+    } else {
+      this.editor.setOption('styleActiveLine', null)
+    }
+  }
+
   saveSetting () {
     const newSetting = {
       editor: {
@@ -57,7 +77,8 @@ if (number == 1) {
         fontFamily: this.refs.fontFamily.value,
         fontSize: this.refs.fontSize.value,
         indentUsingTab: this.refs.indentStyle.value === 'tab',
-        tabSize: this.refs.tabSize.value
+        tabSize: this.refs.tabSize.value,
+        highlightCurrentLine: this.refs.highlightCurrentLine.checked
       }
     }
 
@@ -84,6 +105,17 @@ if (number == 1) {
                 ref="showLineNumber"
               />
               {i18n.__('Show line number')}
+            </label>
+          </div>
+          <div className="group-checkbox">
+            <label>
+              <input
+                type="checkbox"
+                defaultChecked={editorConf.highlightCurrentLine}
+                onChange={this.highlightCurrentLine.bind(this)}
+                ref="highlightCurrentLine"
+              />
+              {i18n.__('Highlight current line')}
             </label>
           </div>
           <div className="input-group">
