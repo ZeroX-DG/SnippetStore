@@ -4,6 +4,10 @@ Every notable changes in each version will be listed in this file.
 
 # 0.2.4
 
+## Features:
+
+- **Interface**: Highlight current line ([24762a8](https://github.com/ZeroX-DG/SnippetStore/commit/24762a8))
+
 ## Bugfixes:
 
 - **Interface**: Fixed tag overflow bug in snippet item ([15db53b](https://github.com/ZeroX-DG/SnippetStore/commit/15db53b))
