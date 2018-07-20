@@ -12,6 +12,7 @@ Every notable changes in each version will be listed in this file.
 ## Improvements:
 
 - **Development**: Improved dist command to clean up dist folder before packaging app
+- **Development**: Make all snippet to use 1 code editor component
 
 # 0.2.3
 
