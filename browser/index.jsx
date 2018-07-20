@@ -17,6 +17,13 @@ import 'codemirror/addon/fold/comment-fold'
 import 'codemirror/addon/fold/xml-fold'
 import 'codemirror/addon/fold/indent-fold'
 import 'codemirror/addon/fold/markdown-fold'
+import 'codemirror/addon/comment/comment'
+import 'codemirror/addon/search/search'
+import 'codemirror/addon/search/searchcursor'
+import 'codemirror/addon/search/jump-to-line'
+import 'codemirror/addon/dialog/dialog'
+import 'codemirror/addon/dialog/dialog.css'
+import 'codemirror/addon/selection/active-line'
 import CodeMirror from 'codemirror'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -62,8 +69,16 @@ document.addEventListener('keyup', function (e) {
   }
 })
 
-CodeMirror.keyMap.default['Shift-Tab'] = 'indentLess'
-CodeMirror.keyMap.default['Tab'] = 'indentMore'
+var bindings = {
+  'Shift-Tab': 'indentLess',
+  Tab: 'indentMore',
+  'Ctrl-/': 'toggleComment',
+  'Ctrl-H': 'replace'
+}
+
+for (const binding in bindings) {
+  CodeMirror.keyMap.default[binding] = bindings[binding]
+}
 
 ReactDOM.render(
   <BrowserRouter>
