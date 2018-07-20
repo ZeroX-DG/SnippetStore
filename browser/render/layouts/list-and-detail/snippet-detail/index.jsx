@@ -41,7 +41,8 @@ export default class SnippetDetail extends React.Component {
         gutters: gutters,
         readOnly: true,
         autoCloseBrackets: true,
-        autoRefresh: true
+        autoRefresh: true,
+        styleActiveLine: { nonEmpty: false }
       })
       this.editor.setSize('100%', 'auto')
       this.applyEditorStyle()
