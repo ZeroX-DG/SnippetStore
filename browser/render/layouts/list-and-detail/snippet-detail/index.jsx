@@ -162,7 +162,12 @@ export default class SnippetDetail extends React.Component {
         </div>
         {this.renderTagList()}
         {this.renderDescription()}
-        <CodeEditor config={config} snippet={snippet} ref="editor" />
+        <CodeEditor
+          config={config}
+          type="single"
+          snippet={snippet}
+          ref="editor"
+        />
       </Fragment>
     )
   }
