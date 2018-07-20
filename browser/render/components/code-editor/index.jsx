@@ -154,6 +154,12 @@ export default class CodeEditor extends React.Component {
 
     const wrapperElement = this.editor.getWrapperElement()
     wrapperElement.style.fontFamily = fontFamily
+    if (this.props.maxHeight) {
+      const wrapperElement = this.editor.getWrapperElement()
+      wrapperElement.querySelector(
+        '.CodeMirror-scroll'
+      ).style.maxHeight = this.props.maxHeight
+    }
     this.editor.refresh()
   }
 
@@ -195,6 +201,12 @@ export default class CodeEditor extends React.Component {
 
     const wrapperElement = this.editor.getWrapperElement()
     wrapperElement.style.fontFamily = fontFamily
+    if (this.props.maxHeight) {
+      const wrapperElement = this.editor.getWrapperElement()
+      wrapperElement.querySelector(
+        '.CodeMirror-scroll'
+      ).style.maxHeight = this.props.maxHeight
+    }
     this.editor.refresh()
   }
 

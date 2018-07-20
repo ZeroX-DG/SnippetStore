@@ -9,9 +9,9 @@ import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
 import isDevIconExists from 'lib/devicon-exists'
 import TagItem from 'render/components/tag-item'
 import i18n from 'render/lib/i18n'
+import CodeEditor from 'render/components/code-editor'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
-import 'codemirror/addon/display/autorefresh'
 import './snippet-item'
 
 export default class SnippetItem extends React.Component {
@@ -20,67 +20,6 @@ export default class SnippetItem extends React.Component {
     this.state = {
       isEditing: false
     }
-  }
-
-  componentDidMount () {
-    const { snippet, config } = this.props
-    const { theme, showLineNumber } = config.editor
-    const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
-    require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-    const gutters = showLineNumber
-      ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-      : []
-    this.editor = CodeMirror(this.refs.editor, {
-      lineNumbers: showLineNumber,
-      value: snippet.value,
-      foldGutter: showLineNumber,
-      mode: snippetMode,
-      theme: theme,
-      gutters: gutters,
-      readOnly: true,
-      autoCloseBrackets: true,
-      autoRefresh: true
-    })
-    this.editor.setSize('100%', 'auto')
-    this.applyEditorStyle()
-  }
-
-  applyEditorStyle (props) {
-    const { snippet, config } = props || this.props
-    const {
-      theme,
-      showLineNumber,
-      fontFamily,
-      fontSize,
-      tabSize,
-      indentUsingTab
-    } = config.editor
-    // only update codemirror mode if new props is passed
-    if (props) {
-      const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
-      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-    }
-    const gutters = showLineNumber
-      ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-      : []
-    this.editor.getWrapperElement().style.fontSize = `${fontSize}px`
-    this.editor.setOption('lineNumbers', showLineNumber)
-    this.editor.setOption('foldGutter', showLineNumber)
-    this.editor.setOption('theme', theme)
-    this.editor.setOption('gutters', gutters)
-
-    this.editor.setOption('indentUnit', tabSize)
-    this.editor.setOption('tabSize', tabSize)
-    this.editor.setOption('indentWithTabs', indentUsingTab)
-
-    const wrapperElement = this.editor.getWrapperElement()
-    wrapperElement.style.fontFamily = fontFamily
-    wrapperElement.querySelector('.CodeMirror-scroll').style.maxHeight = '300px'
-    this.editor.refresh()
-  }
-
-  componentWillReceiveProps (props) {
-    this.applyEditorStyle(props)
   }
 
   handleSnippetLangChange () {
@@ -326,13 +265,20 @@ export default class SnippetItem extends React.Component {
   }
 
   render () {
+    const { config, snippet } = this.props
     return (
       <div className="snippet-item original">
         <ReactTooltip place="bottom" effect="solid" />
         {this.renderHeader()}
         {this.renderTagList()}
         {this.renderDescription()}
-        <div className="code" ref="editor" />
+        <CodeEditor
+          config={config}
+          type="single"
+          snippet={snippet}
+          ref="editor"
+          maxHeight="300px"
+        />
         {this.renderFooter()}
       </div>
     )
