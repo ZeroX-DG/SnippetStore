@@ -7,6 +7,7 @@ Every notable changes in each version will be listed in this file.
 ## Features:
 
 - **Interface**: Highlight current line ([24762a8](https://github.com/ZeroX-DG/SnippetStore/commit/24762a8))
+- **Interface**: Search & replace shortcut in snippet code ([b4d397a](https://github.com/ZeroX-DG/SnippetStore/commit/b4d397a))
 
 ## Bugfixes:
 
