@@ -23,9 +23,10 @@ export default class SnippetItem extends React.Component {
   }
 
   handleSnippetLangChange () {
+    const { editor } = this.refs
     const snippetMode = CodeMirror.findModeByName(this.refs.lang.value).mode
     require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-    this.editor.setOption('mode', snippetMode)
+    editor.setOption('mode', snippetMode)
   }
 
   copySnippet () {
@@ -38,18 +39,25 @@ export default class SnippetItem extends React.Component {
   }
 
   handleEditButtonClick () {
+    const { editor } = this.refs
     this.setState({ isEditing: true })
-    this.editor.setOption('readOnly', false)
+    editor.setOption('readOnly', false)
   }
 
   handleSaveChangesClick () {
+    const { editor, lang, name, tags, description } = this.refs
     const { snippet } = this.props
-    const valueChanged = snippet.value !== this.editor.getValue()
-    const langChanged = snippet.lang !== this.refs.lang.value
-    const nameChanged = snippet.name !== this.refs.name.value
-    const newTags = this.refs.tags.value.replace(/ /g, '').split(',')
+    const newSnippetValue = editor.getValue()
+    const newSnippetLang = lang.value
+    const newSnippetName = name.value
+    const newSnippetTags = tags.value
+    const newSnippetDescription = description.value
+    const valueChanged = snippet.value !== newSnippetValue
+    const langChanged = snippet.lang !== newSnippetLang
+    const nameChanged = snippet.name !== newSnippetName
+    const newTags = newSnippetTags.replace(/ /g, '').split(',')
     const tagChanged = !_.isEqual(snippet.tags, newTags)
-    const descripChanged = snippet.description !== this.refs.description.value
+    const descripChanged = snippet.description !== newSnippetDescription
     if (
       valueChanged ||
       langChanged ||
@@ -58,21 +66,21 @@ export default class SnippetItem extends React.Component {
       descripChanged
     ) {
       const newSnippet = _.clone(this.props.snippet)
-      newSnippet.value = this.editor.getValue()
-      newSnippet.lang = this.refs.lang.value
-      newSnippet.name = this.refs.name.value
+      newSnippet.value = newSnippetValue
+      newSnippet.lang = newSnippetLang
+      newSnippet.name = newSnippetName
       newSnippet.tags = newTags
-      newSnippet.description = this.refs.description.value
+      newSnippet.description = newSnippetDescription
       if (langChanged) {
         const snippetMode = CodeMirror.findModeByName(newSnippet.lang).mode
         require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-        this.editor.setOption('mode', snippetMode)
+        editor.setOption('mode', snippetMode)
       }
       this.props.store.updateSnippet(newSnippet)
     }
 
     this.setState({ isEditing: false })
-    this.editor.setOption('readOnly', true)
+    editor.setOption('readOnly', true)
   }
 
   handleDeleteClick () {
@@ -196,8 +204,9 @@ export default class SnippetItem extends React.Component {
   }
 
   handleDiscardChangesClick () {
+    const { editor } = this.refs
     this.setState({ isEditing: false }, () => {
-      this.editor.setOption('readOnly', true)
+      editor.setOption('readOnly', true)
     })
   }
 
