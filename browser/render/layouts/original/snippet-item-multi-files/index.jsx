@@ -11,7 +11,7 @@ import { getExtension, generateKey } from 'lib/util'
 import TagItem from 'render/components/tag-item'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
-import 'codemirror/addon/display/autorefresh'
+import CodeEditor from 'render/components/code-editor'
 import './snippet-item-multi-file'
 
 export default class SnippetItemMultiFiles extends React.Component {
@@ -22,101 +22,6 @@ export default class SnippetItemMultiFiles extends React.Component {
       selectedFile: 0,
       editingFiles: []
     }
-  }
-
-  componentDidMount () {
-    const { snippet, config } = this.props
-    const { selectedFile } = this.state
-    const { theme, showLineNumber, tabSize, indentUsingTab } = config.editor
-    const file = snippet.files[selectedFile]
-    const fileExtension = getExtension(file.name)
-    const resultMode = CodeMirror.findModeByExtension(fileExtension)
-    let snippetMode = 'null'
-    if (resultMode) {
-      snippetMode = resultMode.mode
-      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-    }
-
-    this.setState({ editingFiles: snippet.files })
-
-    const gutters = showLineNumber
-      ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-      : []
-
-    this.editor = CodeMirror(this.refs.editor, {
-      lineNumbers: showLineNumber,
-      value: file.value,
-      foldGutter: showLineNumber,
-      mode: snippetMode,
-      theme: theme,
-      gutters: gutters,
-      readOnly: true,
-      autoCloseBrackets: true,
-      autoRefresh: true
-    })
-
-    this.editor.setOption('indentUnit', tabSize)
-    this.editor.setOption('tabSize', tabSize)
-    this.editor.setOption('indentWithTabs', indentUsingTab)
-    this.editor.setSize('100%', 'auto')
-    this.editor.on('change', () => {
-      this.handleEditingFileValueChange()
-    })
-    this.applyEditorStyle()
-  }
-
-  applyEditorStyle (props) {
-    const { snippet, config } = props || this.props
-    const { isEditing, editingFiles, selectedFile } = this.state
-    const {
-      theme,
-      showLineNumber,
-      fontFamily,
-      fontSize,
-      tabSize,
-      indentUsingTab
-    } = config.editor
-    const gutters = showLineNumber
-      ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-      : []
-
-    const totalSnippets = snippet.files.length
-    const file = isEditing
-      ? editingFiles[selectedFile]
-      : snippet.files[selectedFile]
-    if (!file) {
-      this.handleChangeFileClick(totalSnippets - 1)
-      return
-    }
-    const fileExtension = getExtension(file.name)
-    const resultMode = CodeMirror.findModeByExtension(fileExtension)
-    let snippetMode = 'null'
-    if (resultMode) {
-      snippetMode = resultMode.mode
-      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-    }
-
-    this.editor.getWrapperElement().style.fontSize = `${fontSize}px`
-    this.editor.setOption('lineNumbers', showLineNumber)
-    this.editor.setOption('foldGutter', showLineNumber)
-    this.editor.setOption('theme', theme)
-    this.editor.setOption('gutters', gutters)
-
-    this.editor.setOption('indentUnit', tabSize)
-    this.editor.setOption('tabSize', tabSize)
-    this.editor.setOption('indentWithTabs', indentUsingTab)
-
-    const wrapperElement = this.editor.getWrapperElement()
-    wrapperElement.style.fontFamily = fontFamily
-    const scrollElement = wrapperElement.querySelector('.CodeMirror-scroll')
-    scrollElement.style.maxHeight = '300px'
-    const FileList = this.refs.fileList
-    scrollElement.style.minHeight = `${FileList.clientHeight}px`
-    this.editor.refresh()
-  }
-
-  componentWillReceiveProps (props) {
-    this.applyEditorStyle(props)
   }
 
   renderHeader () {
@@ -205,7 +110,7 @@ export default class SnippetItemMultiFiles extends React.Component {
   }
 
   handleSaveChangesClick () {
-    const { tags, name, description } = this.refs
+    const { tags, name, description, editor } = this.refs
     const { snippet, store } = this.props
     const { editingFiles } = this.state
     const nameChanged = snippet.name !== name.value
@@ -223,20 +128,22 @@ export default class SnippetItemMultiFiles extends React.Component {
     this.setState({ isEditing: false }, () => {
       this.resetSnippetHeight()
     })
-    this.editor.setOption('readOnly', true)
+    editor.setOption('readOnly', true)
   }
 
   handleEditButtonClick () {
+    const { editor } = this.refs
     const { snippet } = this.props
     this.setState({ isEditing: true }, () => {
-      this.applyEditorStyle()
+      editor.applyEditorStyle()
       this.setState({ editingFiles: snippet.files })
-      this.editor.setOption('readOnly', false)
+      editor.setOption('readOnly', false)
     })
   }
 
   handleDiscardChangesClick () {
     const { snippet } = this.props
+    const { editor } = this.refs
     this.setState(
       {
         isEditing: false,
@@ -244,7 +151,7 @@ export default class SnippetItemMultiFiles extends React.Component {
         selectedFile: 0
       },
       () => {
-        this.editor.setOption('readOnly', true)
+        editor.setOption('readOnly', true)
         this.resetSnippetHeight()
       }
     )
@@ -365,6 +272,7 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   handleEditingFileNameChange (event, index) {
     const { editingFiles } = this.state
+    const { editor } = this.refs
     const newEditingFiles = toJS(editingFiles)
     const name = event.target.value
     newEditingFiles[index].name = name
@@ -375,14 +283,14 @@ export default class SnippetItemMultiFiles extends React.Component {
       const snippetMode = resultMode.mode
       if (snippetMode === 'htmlmixed') {
         require(`codemirror/mode/xml/xml`)
-        this.editor.setOption('mode', 'xml')
-        this.editor.setOption('htmlMode', true)
+        editor.setOption('mode', 'xml')
+        editor.setOption('htmlMode', true)
       } else {
         require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-        this.editor.setOption('mode', snippetMode)
+        editor.setOption('mode', snippetMode)
       }
     } else {
-      this.editor.setOption('mode', 'null')
+      editor.setOption('mode', 'null')
     }
     this.setState({ editingFiles: newEditingFiles })
   }
@@ -431,16 +339,18 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   resetSnippetHeight () {
     // reset height
+    const { editor } = this.refs
     this.refs.fileList.style.maxHeight = '0px'
-    this.applyEditorStyle()
+    editor.applyEditorStyle()
     setTimeout(() => {
       this.refs.fileList.style.maxHeight = '300px'
-      this.applyEditorStyle()
+      editor.applyEditorStyle()
     })
   }
 
   handleNewFileFocus () {
     const { editingFiles } = this.state
+    const { editor } = this.refs
     // make a clone of the current editing file list
     const newEditingFiles = toJS(editingFiles)
     // push a new file to the list
@@ -453,12 +363,13 @@ export default class SnippetItemMultiFiles extends React.Component {
       this.handleChangeFileClick(newEditingFiles.length - 1)
       input.focus()
     })
-    this.applyEditorStyle()
+    editor.applyEditorStyle()
   }
 
   handleChangeFileClick (index, useFileAtIndex, callback) {
     const { snippet } = this.props
     const { editingFiles, isEditing } = this.state
+    const { editor } = this.refs
     // set the new selected file index
     this.setState({ selectedFile: index }, () => {
       // if the snippet is in the editing mode, interact with the state instead
@@ -473,16 +384,16 @@ export default class SnippetItemMultiFiles extends React.Component {
           const snippetMode = resultMode.mode
           if (snippetMode === 'htmlmixed') {
             require(`codemirror/mode/xml/xml`)
-            this.editor.setOption('mode', 'xml')
-            this.editor.setOption('htmlMode', true)
+            editor.setOption('mode', 'xml')
+            editor.setOption('htmlMode', true)
           } else {
             require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-            this.editor.setOption('mode', snippetMode)
+            editor.setOption('mode', snippetMode)
           }
         } else {
-          this.editor.setOption('mode', 'null')
+          editor.setOption('mode', 'null')
         }
-        this.editor.setValue(file.value)
+        editor.setValue(file.value)
         this.resetSnippetHeight()
         if (callback && typeof callback === 'function') {
           callback()
@@ -493,14 +404,17 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   handleEditingFileValueChange () {
     const { isEditing, selectedFile, editingFiles } = this.state
+    const { editor } = this.refs
     if (isEditing) {
       const newEditingFiles = toJS(editingFiles)
-      newEditingFiles[selectedFile].value = this.editor.getValue()
+      newEditingFiles[selectedFile].value = editor.getValue()
       this.setState({ editingFiles: newEditingFiles })
     }
   }
 
   render () {
+    const { isEditing, selectedFile, editingFiles } = this.state
+    const { config, snippet } = this.props
     return (
       <div className="snippet-item-multi-files" ref="root">
         <ReactTooltip place="bottom" effect="solid" />
@@ -509,7 +423,20 @@ export default class SnippetItemMultiFiles extends React.Component {
         {this.renderDescription()}
         <div className="inline">
           {this.renderFileList()}
-          <div className="code" ref="editor" />
+          <CodeEditor
+            isEditing={isEditing}
+            selectedFile={selectedFile}
+            editingFiles={editingFiles}
+            config={config}
+            snippet={snippet}
+            handleChangeFileClick={() => this.handleChangeFileClick()}
+            handleEditingFileValueChange={() =>
+              this.handleEditingFileValueChange()
+            }
+            type="multi"
+            maxHeight="300px"
+            ref="editor"
+          />
         </div>
         {this.renderFooter()}
       </div>
