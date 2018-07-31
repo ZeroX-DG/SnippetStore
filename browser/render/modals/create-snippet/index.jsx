@@ -2,6 +2,7 @@ import React from 'react'
 import ModalSkeleton from '../modal-skeleton'
 import eventEmitter from 'lib/event-emitter'
 import i18n from 'render/lib/i18n'
+import TagInput from 'render/components/tag-input'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import 'codemirror/addon/display/autorefresh'
@@ -82,6 +83,8 @@ export default class CreateSnippetModal extends React.Component {
     const snippetName = this.refs.snippetName.value
     const snippetLang = this.refs.lang.value
     const snippetCode = this.editor.getValue()
+    // wrappedInstance is mobX wrapped instance of the original component
+    const snippetTags = this.tags.wrappedInstance.getTags()
     const snippetDescription = this.refs.description.value
 
     if (!snippetName || !snippetLang) {
@@ -95,13 +98,15 @@ export default class CreateSnippetModal extends React.Component {
       name: snippetName,
       lang: snippetLang,
       value: snippetCode,
+      tags: snippetTags,
       description: snippetDescription
     })
     eventEmitter.emit('modal:close')
   }
 
   render () {
-    i18n.setLocale(this.props.config.ui.language)
+    const { config } = this.props
+    i18n.setLocale(config.ui.language)
     return (
       <ModalSkeleton name={this.state.name}>
         <h2 className="modal-title">{i18n.__('Create snippet')}</h2>
@@ -120,6 +125,13 @@ export default class CreateSnippetModal extends React.Component {
                 </option>
               ))}
             </select>
+          </div>
+          <div className="code-input-group">
+            <label>{i18n.__('Tags')}</label>
+            <TagInput
+              ref={ref => (this.tags = ref)}
+              color={config.ui.tagColor}
+            />
           </div>
           <div className="code-input-group">
             <label>{i18n.__('Snippet description')}</label>

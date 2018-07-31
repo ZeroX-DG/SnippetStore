@@ -11,6 +11,7 @@ import TagItem from 'render/components/tag-item'
 import { toast } from 'react-toastify'
 import { toJS } from 'mobx'
 import CodeEditor from 'render/components/code-editor'
+import TagInput from 'render/components/tag-input'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import './snippet-detail-multi-file'
@@ -82,7 +83,7 @@ export default class SnippetDetailMultiFile extends React.Component {
     const { snippet, store } = this.props
     const { editingFiles } = this.state
     const nameChanged = snippet.name !== name.value
-    const newTags = tags.value.replace(/ /g, '').split(',')
+    const newTags = tags.wrappedInstance.getTags()
     const tagChanged = !_.isEqual(snippet.tags, newTags)
     const descriptionChanged = snippet.description !== description.value
     if (tagChanged || descriptionChanged || nameChanged) {
@@ -431,12 +432,12 @@ export default class SnippetDetailMultiFile extends React.Component {
     const { isEditing } = this.state
     const tags = snippet.tags.filter(tag => tag)
     return (
-      <p className="tags">
+      <div className="tags">
         <span className="icon">
           <FAIcon icon="tags" />
         </span>
         {isEditing ? (
-          <input type="text" ref="tags" defaultValue={tags.join(', ')} />
+          <TagInput ref="tags" color={config.ui.tagColor} defaultTags={tags} />
         ) : tags.length > 0 ? (
           tags.map((tag, index) => (
             <TagItem config={config} tag={tag} key={index} />
@@ -444,7 +445,7 @@ export default class SnippetDetailMultiFile extends React.Component {
         ) : (
           'No tag'
         )}
-      </p>
+      </div>
     )
   }
 

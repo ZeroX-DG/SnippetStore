@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route } from 'react-router-dom'
+import { Provider } from 'mobx-react'
+import SnippetStore from 'store/SnippetStore'
 
 import './render/lib/styles/reset'
 import './render/lib/styles/utility'
@@ -82,7 +84,9 @@ for (const binding in bindings) {
 
 ReactDOM.render(
   <BrowserRouter>
-    <Route path="/" component={Main} />
+    <Provider store={SnippetStore}>
+      <Route path="/" component={Main} />
+    </Provider>
   </BrowserRouter>,
   document.getElementById('app')
 )

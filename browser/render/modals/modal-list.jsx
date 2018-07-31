@@ -4,7 +4,9 @@ import CreateMultiFilesSnippetModal from './create-multi-files-snippet'
 import PickSnippetType from './pick-snippet-type'
 import SettingModal from './setting'
 import eventEmitter from 'lib/event-emitter'
+import { inject } from 'mobx-react'
 
+@inject('store')
 export default class ModalList extends React.Component {
   constructor (props) {
     super(props)

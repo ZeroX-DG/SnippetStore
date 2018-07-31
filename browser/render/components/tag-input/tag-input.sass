@@ -1,0 +1,30 @@
+.tag-input
+  width: 100%
+  border-radius: 5px
+  padding: 5px
+  font-family: 'Lato'
+  position: relative
+  input[type='text']
+    background: transparent!important
+    border: none
+    outline: none
+  &__tag
+    padding: 2px 10px
+    margin: 5px
+    border-radius: 20px
+    display: inline-block
+    .remove-button
+      margin-left: 5px
+      font-size: 12px
+      cursor: pointer
+  .tag-autocomplete
+    max-height: 200px
+    position: absolute
+    top: 100%
+    left: 0
+    z-index: 100
+    overflow-y: auto
+    li
+      width: 100%
+      padding: 5px 10px
+      cursor: pointer

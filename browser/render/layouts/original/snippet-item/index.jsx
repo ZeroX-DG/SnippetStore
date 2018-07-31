@@ -10,6 +10,7 @@ import isDevIconExists from 'lib/devicon-exists'
 import TagItem from 'render/components/tag-item'
 import i18n from 'render/lib/i18n'
 import CodeEditor from 'render/components/code-editor'
+import TagInput from 'render/components/tag-input'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import './snippet-item'
@@ -50,13 +51,12 @@ export default class SnippetItem extends React.Component {
     const newSnippetValue = editor.getValue()
     const newSnippetLang = lang.value
     const newSnippetName = name.value
-    const newSnippetTags = tags.value
+    const newSnippetTags = tags.wrappedInstance.getTags()
     const newSnippetDescription = description.value
     const valueChanged = snippet.value !== newSnippetValue
     const langChanged = snippet.lang !== newSnippetLang
     const nameChanged = snippet.name !== newSnippetName
-    const newTags = newSnippetTags.replace(/ /g, '').split(',')
-    const tagChanged = !_.isEqual(snippet.tags, newTags)
+    const tagChanged = !_.isEqual(snippet.tags, newSnippetTags)
     const descripChanged = snippet.description !== newSnippetDescription
     if (
       valueChanged ||
@@ -69,7 +69,7 @@ export default class SnippetItem extends React.Component {
       newSnippet.value = newSnippetValue
       newSnippet.lang = newSnippetLang
       newSnippet.name = newSnippetName
-      newSnippet.tags = newTags
+      newSnippet.tags = newSnippetTags
       newSnippet.description = newSnippetDescription
       if (langChanged) {
         const snippetMode = CodeMirror.findModeByName(newSnippet.lang).mode
@@ -215,12 +215,20 @@ export default class SnippetItem extends React.Component {
     const { isEditing } = this.state
     const tags = snippet.tags.filter(tag => tag)
     return (
-      <div className="tag-list">
+      <div
+        className="tag-list"
+        style={{ overflowY: isEditing ? 'initial' : 'hidden' }}
+      >
         <span className="icon">
           <FAIcon icon="tags" />
         </span>
         {isEditing ? (
-          <input type="text" ref="tags" defaultValue={tags.join(', ')} />
+          <TagInput
+            ref="tags"
+            color={config.ui.tagColor}
+            maxHeight="40px"
+            defaultTags={tags}
+          />
         ) : tags.length > 0 ? (
           tags.map((tag, index) => (
             <TagItem config={config} tag={tag} key={index} />
