@@ -33,7 +33,12 @@ export default class TagInput extends React.Component {
 
   getNextSuggestedTag (tag, direction) {
     const { suggestedTags } = this.state
-    const newIndex = suggestedTags.indexOf(tag) + (direction === 'up' ? -1 : 1)
+    let newIndex = suggestedTags.indexOf(tag) + (direction === 'up' ? -1 : 1)
+    if (newIndex < 0) {
+      newIndex = suggestedTags.length - 1
+    } else if (newIndex > suggestedTags.length - 1) {
+      newIndex = 0
+    }
     return suggestedTags[newIndex]
   }
 
