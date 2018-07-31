@@ -161,6 +161,10 @@ export default class TagInput extends React.Component {
     )
   }
 
+  getTags () {
+    return this.state.tags
+  }
+
   render () {
     return (
       <div className="tag-input" onClick={() => this.onTagInputFocus()}>

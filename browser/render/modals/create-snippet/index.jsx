@@ -83,6 +83,8 @@ export default class CreateSnippetModal extends React.Component {
     const snippetName = this.refs.snippetName.value
     const snippetLang = this.refs.lang.value
     const snippetCode = this.editor.getValue()
+    // wrappedInstance is mobX wrapped instance of the original component
+    const snippetTags = this.tags.wrappedInstance.getTags()
     const snippetDescription = this.refs.description.value
 
     if (!snippetName || !snippetLang) {
@@ -96,6 +98,7 @@ export default class CreateSnippetModal extends React.Component {
       name: snippetName,
       lang: snippetLang,
       value: snippetCode,
+      tags: snippetTags,
       description: snippetDescription
     })
     eventEmitter.emit('modal:close')
@@ -125,7 +128,10 @@ export default class CreateSnippetModal extends React.Component {
           </div>
           <div className="code-input-group">
             <label>{i18n.__('Tags')}</label>
-            <TagInput color={config.ui.tagColor} />
+            <TagInput
+              ref={ref => (this.tags = ref)}
+              color={config.ui.tagColor}
+            />
           </div>
           <div className="code-input-group">
             <label>{i18n.__('Snippet description')}</label>
