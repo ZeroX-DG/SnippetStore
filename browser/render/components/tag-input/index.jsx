@@ -1,12 +1,16 @@
 import React from 'react'
 import FAIcon from '@fortawesome/react-fontawesome'
+import { inject } from 'mobx-react'
 import './tag-input'
 
+@inject('store')
 export default class TagInput extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      tags: []
+      tags: [],
+      suggestedTags: [],
+      selectedSuggestedTag: ''
     }
   }
 
@@ -17,12 +21,20 @@ export default class TagInput extends React.Component {
   removeTag (removedTag) {
     const { tags } = this.state
     const newTags = tags.filter(tag => tag !== removedTag)
-    this.setState({ tags: newTags })
+    this.setState({ tags: newTags }, () => {
+      this.onTagInputChanged()
+    })
   }
 
-  getPreviousTag () {
+  getPreviousTag (tag) {
     const { tags } = this.state
     return tags[tags.length - 1]
+  }
+
+  getNextSuggestedTag (tag, direction) {
+    const { suggestedTags } = this.state
+    const newIndex = suggestedTags.indexOf(tag) + (direction === 'up' ? -1 : 1)
+    return suggestedTags[newIndex]
   }
 
   pushTag (tag) {
@@ -38,6 +50,13 @@ export default class TagInput extends React.Component {
   onTagInputChanged (e) {
     const input = this.refs.input
     const textLength = input.value.length
+    const { selectedSuggestedTag, tags } = this.state
+    const allTags = this.props.store.tagNames
+    let suggestedTags = input.value
+      ? allTags.filter(tag => tag.indexOf(input.value) !== -1)
+      : []
+    suggestedTags = suggestedTags.filter(tag => tags.indexOf(tag) === -1)
+    this.setState({ suggestedTags })
     if (e) {
       switch (e.which) {
         case 8: // BACKSPACE
@@ -52,6 +71,40 @@ export default class TagInput extends React.Component {
           e.preventDefault()
           if (input.value.trim()) {
             this.pushTag(input.value)
+          }
+          break
+        case 40: // DOWN ARROW
+          e.preventDefault()
+          if (!selectedSuggestedTag) {
+            this.setState({ selectedSuggestedTag: suggestedTags[0] })
+          } else {
+            const nextSuggestedTag = this.getNextSuggestedTag(
+              selectedSuggestedTag,
+              'down'
+            )
+            this.setState({
+              selectedSuggestedTag: nextSuggestedTag
+            })
+          }
+          break
+        case 38: // UP ARROW
+          e.preventDefault()
+          if (!selectedSuggestedTag) {
+            this.setState({ selectedSuggestedTag: suggestedTags[0] })
+          } else {
+            const nextSuggestedTag = this.getNextSuggestedTag(
+              selectedSuggestedTag,
+              'up'
+            )
+            this.setState({
+              selectedSuggestedTag: nextSuggestedTag
+            })
+          }
+          break
+        case 13: // ENTER KEY
+          e.preventDefault()
+          if (selectedSuggestedTag) {
+            this.pushTag(selectedSuggestedTag)
           }
           break
       }
@@ -85,12 +138,16 @@ export default class TagInput extends React.Component {
   }
 
   renderAutoCompleteTags () {
-    const tags = ['electron', 'element', 'delete']
+    const { selectedSuggestedTag, suggestedTags } = this.state
     return (
       <div className="tag-autocomplete" ref="autoComplete">
         <ul>
-          {tags.map((tag, index) => (
-            <li onClick={() => this.pushTag(tag)} key={index}>
+          {suggestedTags.map((tag, index) => (
+            <li
+              onClick={() => this.pushTag(tag)}
+              className={selectedSuggestedTag === tag ? 'selected' : ''}
+              key={index}
+            >
               {tag}
             </li>
           ))}
@@ -107,6 +164,7 @@ export default class TagInput extends React.Component {
           type="text"
           ref="input"
           onKeyDown={e => this.onTagInputChanged(e)}
+          onChange={e => this.onTagInputChanged(e)}
         />
         {this.renderAutoCompleteTags()}
       </div>
