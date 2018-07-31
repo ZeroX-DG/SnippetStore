@@ -3,6 +3,7 @@ import ModalSkeleton from '../modal-skeleton'
 import eventEmitter from 'lib/event-emitter'
 import i18n from 'render/lib/i18n'
 import FAIcon from '@fortawesome/react-fontawesome'
+import TagInput from 'render/components/tag-input'
 import _ from 'lodash'
 import { getExtension, generateKey } from 'lib/util'
 import CodeMirror from 'codemirror'
@@ -94,6 +95,8 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
   createSnippet () {
     const snippetName = this.refs.snippetName.value
     const snippetDescription = this.refs.description.value
+    // wrappedInstance is mobX wrapped instance of the original component
+    const snippetTags = this.tags.wrappedInstance.getTags()
     const { files } = this.state
 
     if (!snippetName) {
@@ -113,6 +116,7 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
     this.props.store.createSnippet({
       name: snippetName,
       description: snippetDescription,
+      tags: snippetTags,
       files
     })
     eventEmitter.emit('modal:close')
@@ -264,7 +268,8 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
   }
 
   render () {
-    i18n.setLocale(this.props.config.ui.language)
+    const { config } = this.props
+    i18n.setLocale(config.ui.language)
     return (
       <ModalSkeleton name={this.state.name}>
         <div className="create-multi-file-snippet">
@@ -274,6 +279,13 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
             <div className="input-group">
               <label>{i18n.__('Snippet name')}</label>
               <input type="text" ref="snippetName" />
+            </div>
+            <div className="code-input-group">
+              <label>{i18n.__('Tags')}</label>
+              <TagInput
+                ref={ref => (this.tags = ref)}
+                color={config.ui.tagColor}
+              />
             </div>
             <div className="code-input-group">
               <label>{i18n.__('Snippet description')}</label>
