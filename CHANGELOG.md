@@ -2,6 +2,12 @@
 
 Every notable changes in each version will be listed in this file.
 
+# 0.2.5
+
+## Features:
+
+- **Interface**: New tags input with tag auto complete
+
 # 0.2.4
 
 ## Features:
