@@ -8,7 +8,7 @@ export default class TagInput extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      tags: [],
+      tags: props.defaultTags || [],
       suggestedTags: [],
       selectedSuggestedTag: ''
     }
