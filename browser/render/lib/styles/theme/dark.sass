@@ -88,3 +88,12 @@ body[data-theme='dark']
           background: rgba(255, 255, 255, 0.1)
         li.selected
           background: rgba(0, 0, 0, 0.6)
+
+body[data-theme='dark']
+  .tag-input, .tag-autocomplete
+    background: map-get($input-tag-dark, background)
+    color: map-get($input-tag-dark, color)
+  .tag-autocomplete
+    background: lighten(map-get($input-tag-dark, background), 20)
+    li:hover
+      background: lighten(map-get($input-tag-dark, background), 10)
