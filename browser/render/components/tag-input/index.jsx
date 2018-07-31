@@ -6,7 +6,7 @@ export default class TagInput extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      tags: ['electron', 'code']
+      tags: []
     }
   }
 

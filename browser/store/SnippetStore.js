@@ -63,6 +63,19 @@ class SnippetStore {
     return tags
   }
 
+  @computed
+  get tagNames () {
+    const tags = []
+    this.rawSnippets.forEach(snippet => {
+      snippet.tags.filter(tag => tag).forEach(tag => {
+        if (tags.indexOf(tag) === -1) {
+          tags.push(tag)
+        }
+      })
+    })
+    return tags
+  }
+
   loadSnippets (snippets) {
     this.rawSnippets = snippets
   }
