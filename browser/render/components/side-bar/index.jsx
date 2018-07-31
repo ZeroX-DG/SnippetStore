@@ -5,7 +5,9 @@ import LanguageList from '../language-list'
 import SideBarToolBox from '../side-bar-toolbox'
 import TagList from '../tag-list'
 import ConfigManager from 'lib/config-manager'
+import { inject } from 'mobx-react'
 
+@inject('store')
 export default class SideBar extends React.Component {
   componentDidMount () {
     if (ConfigManager.get('ui->smallSidebar')) {

@@ -3,8 +3,10 @@ import SearchSnippetBar from '../search-snippet-bar'
 import SnippetList from '../snippet-list'
 import MainAreaToolBox from '../main-area-toolbox'
 import eventEmitter from 'lib/event-emitter'
+import { inject } from 'mobx-react'
 import './main-area'
 
+@inject('store')
 export default class MainArea extends React.Component {
   componentDidMount () {
     eventEmitter.on('sidebar:toggled', (event, newSize) => {
