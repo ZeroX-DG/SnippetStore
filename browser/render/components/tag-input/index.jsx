@@ -166,8 +166,15 @@ export default class TagInput extends React.Component {
   }
 
   render () {
+    const { maxHeight } = this.props
     return (
-      <div className="tag-input" onClick={() => this.onTagInputFocus()}>
+      <div
+        className="tag-input"
+        style={{
+          maxHeight: maxHeight || 'initial'
+        }}
+        onClick={() => this.onTagInputFocus()}
+      >
         {this.renderTags()}
         <input
           type="text"

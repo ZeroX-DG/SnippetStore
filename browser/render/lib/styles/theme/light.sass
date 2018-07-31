@@ -106,7 +106,7 @@ body[data-theme='light']
 
 body[data-theme='light']
   .tag-input, .tag-autocomplete
-    background: map-get($input-tag-light, background)
+    background: map-deep-get($snippet-item-light, input-tag, edit-background)
     color: map-get($input-tag-light, color)
   .tag-autocomplete
     background: lighten(map-get($input-tag-light, background), 5)
