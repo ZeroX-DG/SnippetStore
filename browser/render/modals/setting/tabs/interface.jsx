@@ -27,7 +27,9 @@ export default class InterfaceTab extends React.Component {
     ConfigManager.set(newSetting)
     this.refs.message.classList.remove('hide')
     setTimeout(() => {
-      this.refs.message.classList.add('hide')
+      if (this.refs.message) {
+        this.refs.message.classList.add('hide')
+      }
     }, 2000)
   }
 
