@@ -7,7 +7,7 @@ Every notable changes in each version will be listed in this file.
 ## Features:
 
 - **Interface**: New tags input with tag auto complete
-- **Core**: Save snippet with keyboard shortcut `ctrl + s`
+- **Core**: Save snippet with keyboard shortcut `ctrl + s` ([84f1e45](https://github.com/ZeroX-DG/SnippetStore/commit/84f1e45))
 
 ## Improvements:
 
