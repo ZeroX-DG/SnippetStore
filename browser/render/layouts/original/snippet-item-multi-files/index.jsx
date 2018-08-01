@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import { toJS } from 'mobx'
 import _ from 'lodash'
 import formatDate from 'lib/date-format'
+import eventEmitter from 'lib/event-emitter'
 import { getExtension, generateKey } from 'lib/util'
 import TagItem from 'render/components/tag-item'
 import CodeMirror from 'codemirror'
@@ -23,6 +24,14 @@ export default class SnippetItemMultiFiles extends React.Component {
       selectedFile: 0,
       editingFiles: []
     }
+  }
+
+  componentDidMount () {
+    eventEmitter.on('snippets:saveAll', () => {
+      if (this.state.isEditing) {
+        this.handleSaveChangesClick()
+      }
+    })
   }
 
   renderHeader () {

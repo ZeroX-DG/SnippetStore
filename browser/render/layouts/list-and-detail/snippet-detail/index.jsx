@@ -24,6 +24,12 @@ export default class SnippetDetail extends React.Component {
     }
   }
 
+  componentDidMount () {
+    eventEmitter.on('snippets:saveAll', () => {
+      this.handleSaveChangesClick()
+    })
+  }
+
   renderTopBar () {
     const { isEditing } = this.state
     return (

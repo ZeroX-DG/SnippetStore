@@ -11,6 +11,7 @@ import TagItem from 'render/components/tag-item'
 import i18n from 'render/lib/i18n'
 import CodeEditor from 'render/components/code-editor'
 import TagInput from 'render/components/tag-input'
+import eventEmitter from 'lib/event-emitter'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import './snippet-item'
@@ -21,6 +22,14 @@ export default class SnippetItem extends React.Component {
     this.state = {
       isEditing: false
     }
+  }
+
+  componentDidMount () {
+    eventEmitter.on('snippets:saveAll', () => {
+      if (this.state.isEditing) {
+        this.handleSaveChangesClick()
+      }
+    })
   }
 
   handleSnippetLangChange () {

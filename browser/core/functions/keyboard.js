@@ -28,6 +28,12 @@ const actions = [
     action: () => {
       eventEmitter.emit('modal:close')
     }
+  },
+  {
+    name: 'SaveAllSnippets',
+    action: () => {
+      eventEmitter.emit('snippets:saveAll')
+    }
   }
 ]
 

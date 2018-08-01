@@ -35,7 +35,8 @@ const DEFAULT_CONFIG = {
     createSnippet: OSX ? 'Cmd + N' : 'Ctrl + N',
     openSetting: OSX ? 'Cmd + ,' : 'Ctrl + ,',
     toggleSidebar: OSX ? 'Cmd + B' : 'Ctrl + B',
-    closeAllModals: 'Esc'
+    closeAllModals: 'Esc',
+    SaveAllSnippets: OSX ? 'Cmd + S' : 'Ctrl + S'
   }
 }
 

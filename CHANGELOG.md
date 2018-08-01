@@ -7,6 +7,7 @@ Every notable changes in each version will be listed in this file.
 ## Features:
 
 - **Interface**: New tags input with tag auto complete
+- **Core**: Save snippet with keyboard shortcut `ctrl + s`
 
 ## Improvements:
 

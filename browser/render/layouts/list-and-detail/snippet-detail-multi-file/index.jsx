@@ -22,13 +22,14 @@ export default class SnippetDetailMultiFile extends React.Component {
     this.state = {
       isEditing: false,
       selectedFile: 0,
-      editingFiles: []
+      editingFiles: props.snippet.files
     }
   }
 
   componentDidMount () {
-    const { snippet } = this.props
-    this.setState({ editingFiles: snippet.files })
+    eventEmitter.on('snippets:saveAll', () => {
+      this.handleSaveChangesClick()
+    })
   }
 
   renderTopBar () {

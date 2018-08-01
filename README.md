@@ -98,6 +98,7 @@ SnippetStore currently support 2 languages:
 | Open setting modal        | ctrl + , |
 | Toggle small sidebar mode | ctrl + b |
 | Close all modal           | esc      |
+| Save snippet              | ctrl + s |
 
 ## Tech Stack
 
