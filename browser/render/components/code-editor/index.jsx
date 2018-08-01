@@ -266,6 +266,10 @@ export default class CodeEditor extends React.Component {
     this.editor.setOption(option, value)
   }
 
+  hasFocus () {
+    return this.editor.hasFocus()
+  }
+
   render () {
     return <div className="code" ref="editor" />
   }

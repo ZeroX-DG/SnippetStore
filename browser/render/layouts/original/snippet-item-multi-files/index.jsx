@@ -28,12 +28,12 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   componentDidMount () {
     eventEmitter.on('snippets:saveAll', () => {
-      if (this.state.isEditing) {
+      if (this.state.isEditing && this.refs.editor.hasFocus()) {
         this.handleSaveChangesClick()
       }
     })
     eventEmitter.on('snippets:unSave', () => {
-      if (this.state.isEditing) {
+      if (this.state.isEditing && this.refs.editor.hasFocus()) {
         this.handleDiscardChangesClick()
       }
     })
