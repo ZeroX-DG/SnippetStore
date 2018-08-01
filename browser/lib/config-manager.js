@@ -37,7 +37,9 @@ const DEFAULT_CONFIG = {
     toggleSidebar: OSX ? 'Cmd + B' : 'Ctrl + B',
     closeAllModals: 'Esc',
     SaveAllSnippets: OSX ? 'Cmd + S' : 'Ctrl + S',
-    CancelEditSnippets: 'Esc'
+    CancelEditSnippets: 'Esc',
+    TogglePreviousSnippet: OSX ? 'Cmd + pageup' : 'Ctrl + pageup',
+    ToggleNextSnippet: OSX ? 'Cmd + pagedown' : 'Ctrl + pagedown'
   }
 }
 

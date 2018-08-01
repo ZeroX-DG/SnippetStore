@@ -25,16 +25,25 @@ export default class SnippetDetail extends React.Component {
   }
 
   componentDidMount () {
-    eventEmitter.on('snippets:saveAll', () => {
-      if (this.state.isEditing) {
-        this.handleSaveChangesClick()
-      }
-    })
-    eventEmitter.on('snippets:unSave', () => {
-      if (this.state.isEditing) {
-        this.handleDiscardChangesClick()
-      }
-    })
+    eventEmitter.on('snippets:saveAll', this.handleSaveChangesEvent)
+    eventEmitter.on('snippets:unSave', this.handleDiscardChangesEvent)
+  }
+
+  componentWillUnmount () {
+    eventEmitter.off('snippets:saveAll', this.handleSaveChangesEvent)
+    eventEmitter.off('snippets:unSave', this.handleDiscardChangesEvent)
+  }
+
+  handleSaveChangesEvent () {
+    if (this.state.isEditing) {
+      this.handleSaveChangesClick()
+    }
+  }
+
+  handleDiscardChangesEvent () {
+    if (this.state.isEditing) {
+      this.handleDiscardChangesClick()
+    }
   }
 
   renderTopBar () {

@@ -40,6 +40,18 @@ const actions = [
     action: () => {
       eventEmitter.emit('snippets:unSave')
     }
+  },
+  {
+    name: 'TogglePreviousSnippet',
+    action: () => {
+      eventEmitter.emit('snippet-list:previous')
+    }
+  },
+  {
+    name: 'ToggleNextSnippet',
+    action: () => {
+      eventEmitter.emit('snippet-list:next')
+    }
   }
 ]
 

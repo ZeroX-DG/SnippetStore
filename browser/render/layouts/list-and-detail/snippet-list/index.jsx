@@ -15,6 +15,42 @@ export default class SnippetList extends React.Component {
     eventEmitter.on('snippet-detail:edit-end', () => {
       this.refs.wall.style.display = 'none'
     })
+    eventEmitter.on('snippet-list:previous', () => {
+      const { snippets, selectedSnippet } = this.props.store
+      if (selectedSnippet) {
+        for (let i = 0; i < snippets.length; i++) {
+          if (snippets[i].key === selectedSnippet.key) {
+            // previous of the i-th snippet is i - 1
+            let previousIndex = i - 1
+            if (previousIndex < 0) {
+              previousIndex = snippets.length - 1
+            }
+            this.props.store.selectedSnippet = snippets[previousIndex]
+            break
+          }
+        }
+      } else {
+        this.props.store.selectedSnippet = snippets[0]
+      }
+    })
+    eventEmitter.on('snippet-list:next', () => {
+      const { snippets, selectedSnippet } = this.props.store
+      if (selectedSnippet) {
+        for (let i = 0; i < snippets.length; i++) {
+          if (snippets[i].key === selectedSnippet.key) {
+            // the next snippet of the i-th snippet is i + 1
+            let nextIndex = i + 1
+            if (nextIndex > snippets.length - 1) {
+              nextIndex = 0
+            }
+            this.props.store.selectedSnippet = snippets[nextIndex]
+            break
+          }
+        }
+      } else {
+        this.props.store.selectedSnippet = snippets[0]
+      }
+    })
   }
 
   renderSnippetList () {
