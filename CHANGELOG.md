@@ -8,6 +8,10 @@ Every notable changes in each version will be listed in this file.
 
 - **Interface**: New tags input with tag auto complete
 
+## Improvements:
+
+- **Development**: Added MobX provider so we can access store using `@inject` decorator
+
 # 0.2.4
 
 ## Features:
