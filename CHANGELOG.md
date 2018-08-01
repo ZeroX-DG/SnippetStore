@@ -10,6 +10,10 @@ Every notable changes in each version will be listed in this file.
 - **Core**: Save snippet with keyboard shortcut `ctrl + s` ([84f1e45](https://github.com/ZeroX-DG/SnippetStore/commit/84f1e45))
 - **Core**: Discard changes snippet with keyboard shortcut `esc` ([b0efd98](https://github.com/ZeroX-DG/SnippetStore/commit/b0efd98))
 
+## Bugfixes:
+
+- **Interface**: Fixed interface setting tab throw error ([d59ad3e](https://github.com/ZeroX-DG/SnippetStore/commit/d59ad3e))
+
 ## Improvements:
 
 - **Development**: Added MobX provider so we can access store using `@inject` decorator
