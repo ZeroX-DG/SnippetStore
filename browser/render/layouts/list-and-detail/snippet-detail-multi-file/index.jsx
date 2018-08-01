@@ -28,7 +28,14 @@ export default class SnippetDetailMultiFile extends React.Component {
 
   componentDidMount () {
     eventEmitter.on('snippets:saveAll', () => {
-      this.handleSaveChangesClick()
+      if (this.state.isEditing) {
+        this.handleSaveChangesClick()
+      }
+    })
+    eventEmitter.on('snippets:unSave', () => {
+      if (this.state.isEditing) {
+        this.handleDiscardChangesClick()
+      }
     })
   }
 

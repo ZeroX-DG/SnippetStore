@@ -30,6 +30,11 @@ export default class SnippetItem extends React.Component {
         this.handleSaveChangesClick()
       }
     })
+    eventEmitter.on('snippets:unSave', () => {
+      if (this.state.isEditing) {
+        this.handleDiscardChangesClick()
+      }
+    })
   }
 
   handleSnippetLangChange () {

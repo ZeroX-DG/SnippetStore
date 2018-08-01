@@ -34,6 +34,12 @@ const actions = [
     action: () => {
       eventEmitter.emit('snippets:saveAll')
     }
+  },
+  {
+    name: 'CancelEditSnippets',
+    action: () => {
+      eventEmitter.emit('snippets:unSave')
+    }
   }
 ]
 

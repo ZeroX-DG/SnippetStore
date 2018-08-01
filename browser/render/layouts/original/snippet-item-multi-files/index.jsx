@@ -32,6 +32,11 @@ export default class SnippetItemMultiFiles extends React.Component {
         this.handleSaveChangesClick()
       }
     })
+    eventEmitter.on('snippets:unSave', () => {
+      if (this.state.isEditing) {
+        this.handleDiscardChangesClick()
+      }
+    })
   }
 
   renderHeader () {
