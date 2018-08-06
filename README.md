@@ -121,4 +121,4 @@ Check out [contributing.md](contributing.md)
 
 ## Author & Maintainer
 
-- [Hung Nguyen](https://github.com/ZeroX-DG)
+- [Hung Nguyen](https://github.com/ZeroX-DG) ([twitter](https://twitter.com/ZeroX_Hung))
