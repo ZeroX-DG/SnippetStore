@@ -26,15 +26,26 @@ export default class SnippetItem extends React.Component {
 
   componentDidMount () {
     eventEmitter.on('snippets:saveAll', () => {
-      if (this.state.isEditing && this.refs.editor.hasFocus()) {
+      if (this.state.isEditing && this.hasFocus()) {
         this.handleSaveChangesClick()
       }
     })
     eventEmitter.on('snippets:unSave', () => {
-      if (this.state.isEditing && this.refs.editor.hasFocus()) {
+      if (this.state.isEditing && this.hasFocus()) {
         this.handleDiscardChangesClick()
       }
     })
+  }
+
+  hasFocus () {
+    const { editor, lang, name, tags, description } = this.refs
+    return (
+      editor.hasFocus() ||
+      lang === document.activeElement ||
+      name === document.activeElement ||
+      tags.wrappedInstance.hasFocus() ||
+      description === document.activeElement
+    )
   }
 
   handleSnippetLangChange () {

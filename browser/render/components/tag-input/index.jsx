@@ -165,6 +165,10 @@ export default class TagInput extends React.Component {
     return this.state.tags
   }
 
+  hasFocus () {
+    return this.refs.input === document.activeElement
+  }
+
   render () {
     const { maxHeight } = this.props
     return (
