@@ -11,7 +11,8 @@ export default class ModalList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      modal: ''
+      modal: '',
+      data: {}
     }
   }
 
@@ -23,16 +24,20 @@ export default class ModalList extends React.Component {
     eventEmitter.on('modal:close', () => {
       this.setState({ modal: '' })
     })
+
+    eventEmitter.on('modal:openWithData', (event, data) => {
+      this.setState({ modal: data.name, data: data.data })
+    })
   }
 
   render () {
     const { config, store } = this.props
-    const { modal } = this.state
+    const { modal, data } = this.state
     switch (modal) {
       case 'pickSnippetTypeModal':
         return <PickSnippetType config={config} store={store} />
       case 'createSnippetModal':
-        return <CreateSnippetModal config={config} store={store} />
+        return <CreateSnippetModal config={config} store={store} data={data} />
       case 'createMultiFilesSnippetModal':
         return <CreateMultiFilesSnippetModal config={config} store={store} />
       case 'settingModal':

@@ -18,7 +18,7 @@ const isSecondInstance = app.makeSingleInstance(function (
 })
 
 if (isSecondInstance) {
-  app.quit()
+  app.exit()
 }
 
 app.on('ready', () => {

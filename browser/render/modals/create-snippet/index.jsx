@@ -17,11 +17,15 @@ export default class CreateSnippetModal extends React.Component {
   }
 
   componentDidMount () {
+    const { data } = this.props
     this.editor = CodeMirror(this.refs.editor, {
       autoRefresh: true
     })
 
     this.editor.setSize('100%', '100%')
+    if (data && data.code) {
+      this.editor.setValue(data.code)
+    }
     this.applyEditorStyle()
   }
 
