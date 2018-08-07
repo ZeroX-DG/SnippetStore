@@ -15,6 +15,9 @@ import 'codemirror/mode/meta'
 import CodeEditor from 'render/components/code-editor'
 import TagInput from 'render/components/tag-input'
 import './snippet-item-multi-file'
+import exportSnippetAPI from 'core/API/snippet/export-snippet'
+import { remote } from 'electron'
+const { dialog } = remote
 
 export default class SnippetItemMultiFiles extends React.Component {
   constructor (props) {
@@ -50,6 +53,25 @@ export default class SnippetItemMultiFiles extends React.Component {
     )
   }
 
+  exportSnippet () {
+    const { snippet } = this.props
+    const exportSnippet = toJS(snippet)
+    dialog.showOpenDialog(
+      {
+        title: 'Pick export folder',
+        buttonLabel: 'Export',
+        properties: ['openDirectory']
+      },
+      paths => {
+        if (paths[0]) {
+          const folder = paths[0]
+          exportSnippetAPI(exportSnippet, folder)
+          toast.success('Snippet exported!')
+        }
+      }
+    )
+  }
+
   renderHeader () {
     const { isEditing } = this.state
     const { snippet } = this.props
@@ -63,6 +85,15 @@ export default class SnippetItemMultiFiles extends React.Component {
           )}
         </div>
         <div className="tools">
+          {!isEditing && (
+            <div
+              className="export-btn"
+              data-tip={i18n.__('Export JSON')}
+              onClick={this.exportSnippet.bind(this)}
+            >
+              <FAIcon icon="upload" />
+            </div>
+          )}
           {!isEditing && (
             <div
               className="copy-btn"
