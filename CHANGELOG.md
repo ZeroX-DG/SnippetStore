@@ -8,6 +8,10 @@ Every notable changes in each version will be listed in this file.
 
 - **Interface**: Import & Export all snippets or a specific snippet
 
+## Other:
+
+- **Integration**: Visual Studio Code integration
+
 # 0.2.5
 
 ## Features:
