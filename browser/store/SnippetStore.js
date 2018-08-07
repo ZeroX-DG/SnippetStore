@@ -1,4 +1,4 @@
-import { observable, computed } from 'mobx'
+import { observable, computed, toJS } from 'mobx'
 import SnippetAPI from 'core/API/snippet'
 import searchSnippet from 'core/API/search-snippet'
 import sortSnippet from 'core/API/sort-snippet'
@@ -16,6 +16,9 @@ class SnippetStore {
   constructor () {
     eventEmitter.on('snippet:import', (event, snippetFile) => {
       this.importSnippet(snippetFile)
+    })
+    eventEmitter.on('snippet:exportAll', (event, folder) => {
+      this.exportAllSnippet(folder)
     })
   }
 
@@ -94,9 +97,21 @@ class SnippetStore {
   }
 
   importSnippet (snippetFile) {
-    const newSnippet = SnippetAPI.importSnippet(snippetFile)
-    this.rawSnippets.push(newSnippet)
+    const newSnippetOrSnippetList = SnippetAPI.importSnippet(snippetFile)
+    if (Array.isArray(newSnippetOrSnippetList)) {
+      const newSnippetList = newSnippetOrSnippetList
+      this.rawSnippets = newSnippetList
+    } else {
+      const newSnippet = newSnippetOrSnippetList
+      this.rawSnippets.push(newSnippet)
+    }
     toast.success('Snippet imported!')
+  }
+
+  exportAllSnippet (folder) {
+    const allSnippets = toJS(this.rawSnippets)
+    SnippetAPI.exportSnippet(allSnippets, folder)
+    toast.success('All snippets exported!')
   }
 
   updateSnippet (snippet) {

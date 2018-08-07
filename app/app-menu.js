@@ -60,6 +60,25 @@ function getMenu (app, mainWindow) {
             }
           )
         }
+      },
+      {
+        label: 'Export all snippets',
+        click () {
+          dialog.showOpenDialog(
+            BrowserWindow.getFocusedWindow(),
+            {
+              title: 'Select folder to export',
+              properties: ['openDirectory'],
+              buttonLabel: 'Export'
+            },
+            paths => {
+              if (paths[0]) {
+                const folder = paths[0]
+                mainWindow.webContents.send('snippet:exportAll', folder)
+              }
+            }
+          )
+        }
       }
     ]
   }
