@@ -103,7 +103,22 @@ function getMenu (app, mainWindow) {
     ]
   }
 
-  return [file, snippet, help]
+  const edit = {
+    label: 'Edit',
+    submenu: [
+      { role: 'undo' },
+      { role: 'redo' },
+      { type: 'separator' },
+      { role: 'cut' },
+      { role: 'copy' },
+      { role: 'paste' },
+      { role: 'pasteandmatchstyle' },
+      { role: 'delete' },
+      { role: 'selectall' }
+    ]
+  }
+
+  return [file, edit, snippet, help]
 }
 
 module.exports = getMenu
