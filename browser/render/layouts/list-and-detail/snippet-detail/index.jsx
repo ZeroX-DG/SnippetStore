@@ -15,6 +15,10 @@ import TagInput from 'render/components/tag-input'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import './snippet-detail'
+import { toJS } from 'mobx'
+import exportSnippetAPI from 'core/API/snippet/export-snippet'
+import { remote } from 'electron'
+const { dialog } = remote
 
 export default class SnippetDetail extends React.Component {
   constructor (props) {
@@ -46,6 +50,25 @@ export default class SnippetDetail extends React.Component {
     }
   }
 
+  exportSnippet () {
+    const { snippet } = this.props
+    const exportSnippet = toJS(snippet)
+    dialog.showOpenDialog(
+      {
+        title: 'Pick export folder',
+        buttonLabel: 'Export',
+        properties: ['openDirectory']
+      },
+      paths => {
+        if (paths[0]) {
+          const folder = paths[0]
+          exportSnippetAPI(exportSnippet, folder)
+          toast.success('Snippet exported!')
+        }
+      }
+    )
+  }
+
   renderTopBar () {
     const { isEditing } = this.state
     return (
@@ -58,6 +81,15 @@ export default class SnippetDetail extends React.Component {
               data-tip={i18n.__('copy')}
             >
               <FAIcon icon="copy" />
+            </div>
+          )}
+          {!isEditing && (
+            <div
+              className="export-btn"
+              data-tip={i18n.__('Export JSON')}
+              onClick={this.exportSnippet.bind(this)}
+            >
+              <FAIcon icon="upload" />
             </div>
           )}
           {isEditing ? (
