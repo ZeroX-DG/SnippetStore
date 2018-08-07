@@ -1,5 +1,6 @@
 const electron = require('electron')
 const BrowserWindow = electron.BrowserWindow
+const dialog = electron.dialog
 
 function getMenu (app, mainWindow) {
   const macOS = process.platform === 'darwin'
@@ -38,6 +39,25 @@ function getMenu (app, mainWindow) {
           mainWindow.webContents.send(
             'modal:open',
             'createMultiFilesSnippetModal'
+          )
+        }
+      },
+      {
+        label: 'Import a snippet',
+        click () {
+          dialog.showOpenDialog(
+            BrowserWindow.getFocusedWindow(),
+            {
+              title: 'Select snippet JSON file to import',
+              properties: ['openFile'],
+              buttonLabel: 'Import'
+            },
+            paths => {
+              if (paths[0]) {
+                const file = paths[0]
+                mainWindow.webContents.send('snippet:import', file)
+              }
+            }
           )
         }
       }

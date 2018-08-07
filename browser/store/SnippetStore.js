@@ -2,6 +2,8 @@ import { observable, computed } from 'mobx'
 import SnippetAPI from 'core/API/snippet'
 import searchSnippet from 'core/API/search-snippet'
 import sortSnippet from 'core/API/sort-snippet'
+import eventEmitter from 'lib/event-emitter'
+import { toast } from 'react-toastify'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 
@@ -10,6 +12,12 @@ class SnippetStore {
   @observable filter = ''
   @observable sort = 'createTimeNewer'
   @observable selectedSnippet = null
+
+  constructor () {
+    eventEmitter.on('snippet:import', (event, snippetFile) => {
+      this.importSnippet(snippetFile)
+    })
+  }
 
   @computed
   get snippets () {
@@ -88,6 +96,7 @@ class SnippetStore {
   importSnippet (snippetFile) {
     const newSnippet = SnippetAPI.importSnippet(snippetFile)
     this.rawSnippets.push(newSnippet)
+    toast.success('Snippet imported!')
   }
 
   updateSnippet (snippet) {
