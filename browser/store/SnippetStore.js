@@ -85,6 +85,11 @@ class SnippetStore {
     this.rawSnippets.push(newSnippet)
   }
 
+  importSnippet (snippetFile) {
+    const newSnippet = SnippetAPI.importSnippet(snippetFile)
+    this.rawSnippets.push(newSnippet)
+  }
+
   updateSnippet (snippet) {
     // update using the snippet API
     const snippetIndex = SnippetAPI.updateSnippet(snippet)

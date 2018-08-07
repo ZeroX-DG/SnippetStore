@@ -10,6 +10,7 @@ import faCheck from '@fortawesome/fontawesome-free-solid/faCheck'
 import faTrashAlt from '@fortawesome/fontawesome-free-solid/faTrashAlt'
 import faTags from '@fortawesome/fontawesome-free-solid/faTags'
 import faFileCode from '@fortawesome/fontawesome-free-solid/faFileCode'
+import faUpload from '@fortawesome/fontawesome-free-solid/faUpload'
 
 fontawesome.library.add(
   faEdit,
@@ -21,5 +22,6 @@ fontawesome.library.add(
   faCheck,
   faTrashAlt,
   faTags,
-  faFileCode
+  faFileCode,
+  faUpload
 )
