@@ -1,4 +1,4 @@
-const { app, Menu } = require('electron')
+const { app, Menu, ipcMain } = require('electron')
 
 let mainWindow = null
 
@@ -24,6 +24,14 @@ if (isSecondInstance) {
 app.on('ready', () => {
   mainWindow = require('./app-window')(app)
   require('./app-tray')(app, mainWindow)
+  ipcMain.on('bringToFront', () => {
+    if (process.platform === 'win32') {
+      mainWindow.minimize()
+      mainWindow.restore()
+    }
+    mainWindow.show()
+    mainWindow.focus()
+  })
   const template = require('./app-menu')(app, mainWindow)
   const menu = Menu.buildFromTemplate(template)
   switch (process.platform) {

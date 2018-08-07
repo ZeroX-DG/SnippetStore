@@ -7,10 +7,18 @@ import eventEmitter from 'lib/event-emitter'
 import init from 'core/init'
 import applyShortcut from 'core/functions/keyboard'
 import i18n from 'render/lib/i18n'
-
+import { inject } from 'mobx-react'
+import { toJS } from 'mobx'
 import MainAreaOriginal from './layouts/original/main-area'
 import MainAreaListAndDetail from './layouts/list-and-detail/main-area'
 
+const messenger = require('messenger')
+const electron = require('electron')
+const { ipcRenderer } = electron
+
+const server = messenger.createListener(2041)
+
+@inject('store')
 export default class Main extends React.Component {
   constructor (props) {
     super(props)
@@ -30,6 +38,19 @@ export default class Main extends React.Component {
       this.setState({ config })
       document.body.setAttribute('data-theme', config.ui.theme)
       i18n.setLocale(config.ui.language)
+    })
+
+    server.on('transferCode', (message, data) => {
+      eventEmitter.emit('modal:openWithData', {
+        name: 'createSnippetModal',
+        data: { code: data.code }
+      })
+      ipcRenderer.send('bringToFront', true)
+    })
+
+    server.on('getSnippets', message => {
+      const snippets = toJS(this.props.store.rawSnippets)
+      message.reply({ snippets })
     })
   }
 
