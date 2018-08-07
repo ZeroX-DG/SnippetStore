@@ -33,7 +33,7 @@ SnippetStore is a application for developers to store their snippets and quickly
 
 ## Donate
 
-There are many request for macOS support and I'm sure many of you guys who are mac users will want
+There are many requests for macOS support and I'm sure many of you guys who are mac users will want
 SnippetStore to be available in homebrew and able to run on macOS too. But in order to do that, I need help from you guys to afford a mac to test & build this project and many more other projects in the future. It would be a huge help if you can buy me a coffee :smile:
 
 <a href="https://www.buymeacoffee.com/hQteV8A" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
