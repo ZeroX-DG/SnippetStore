@@ -2,6 +2,12 @@
 
 Every notable changes in each version will be listed in this file.
 
+# 0.2.6
+
+## Features:
+
+- **Interface**: Import & Export all snippets or a specific snippet
+
 # 0.2.5
 
 ## Features:
