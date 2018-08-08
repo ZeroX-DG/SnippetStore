@@ -23,8 +23,15 @@ export default class CreateSnippetModal extends React.Component {
     })
 
     this.editor.setSize('100%', '100%')
-    if (data && data.code) {
-      this.editor.setValue(data.code)
+    if (data) {
+      if (data.code) {
+        this.editor.setValue(data.code)
+      }
+      if (data.ext) {
+        const mode = CodeMirror.findModeByExtension(data.ext)
+        this.refs.lang.value = mode.name
+      }
+      this.refs.snippetName.focus()
     }
     this.applyEditorStyle()
   }

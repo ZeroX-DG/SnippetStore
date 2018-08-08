@@ -43,7 +43,7 @@ export default class Main extends React.Component {
     server.on('transferCode', (message, data) => {
       eventEmitter.emit('modal:openWithData', {
         name: 'createSnippetModal',
-        data: { code: data.code }
+        data
       })
       ipcRenderer.send('bringToFront', true)
     })
