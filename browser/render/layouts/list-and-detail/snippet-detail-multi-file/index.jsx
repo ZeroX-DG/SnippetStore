@@ -12,6 +12,8 @@ import { toast } from 'react-toastify'
 import { toJS } from 'mobx'
 import CodeEditor from 'render/components/code-editor'
 import TagInput from 'render/components/tag-input'
+import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
+import getDevIcon from 'lib/get-dev-icon.js'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import './snippet-detail-multi-file'
@@ -353,47 +355,77 @@ export default class SnippetDetailMultiFile extends React.Component {
     return (
       <div className="file-list" ref="fileList">
         <ul>
-          {files.map((file, index) => (
-            <li
-              key={file.key}
-              onClick={() => this.handleChangeFileClick(index)}
-              style={{
-                width: `${100 / files.length}%`
-              }}
-              className={index === selectedFile ? 'selected' : ''}
-            >
-              {isEditing ? (
-                <input
-                  type="text"
-                  className="fileName"
-                  onChange={e => this.handleEditingFileNameChange(e, index)}
-                  defaultValue={file.name}
-                />
-              ) : file.name ? (
-                file.name
-              ) : (
-                'untitled'
-              )}
-              <div className="tools">
-                {!isEditing && (
-                  <span
-                    className="icon"
-                    onClick={() => this.handleCopyFile(index)}
-                  >
-                    <FAIcon icon="copy" />
-                  </span>
-                )}
-                {
-                  <span
-                    className="icon"
-                    onClick={e => this.handleDeleteFile(e, index)}
-                  >
-                    <FAIcon icon="trash-alt" />
-                  </span>
+          {files.map((file, index) => {
+            const langMode = CodeMirror.findModeByExtension(
+              getExtension(file.name)
+            )
+            let languageIcon = (
+              <img
+                src={defaultLanguageIcon}
+                className="lang-icon"
+                data-tip={snippet.lang}
+              />
+            )
+            if (langMode) {
+              try {
+                const svgIcon = getDevIcon(
+                  `./${langMode.name.toLowerCase()}.svg`
+                )
+                if (svgIcon) {
+                  languageIcon = (
+                    <span
+                      className="lang-icon"
+                      dangerouslySetInnerHTML={{ __html: svgIcon }}
+                    />
+                  )
                 }
-              </div>
-            </li>
-          ))}
+              } catch (error) {
+                /* icon not found so fall back to default */
+              }
+            }
+            return (
+              <li
+                key={file.key}
+                onClick={() => this.handleChangeFileClick(index)}
+                style={{
+                  width: `${100 / files.length}%`
+                }}
+                className={index === selectedFile ? 'selected' : ''}
+              >
+                {isEditing ? (
+                  <input
+                    type="text"
+                    className="fileName"
+                    onChange={e => this.handleEditingFileNameChange(e, index)}
+                    defaultValue={file.name}
+                  />
+                ) : (
+                  <p className="file-info">
+                    {languageIcon}
+                    {file.name || 'Untitled'}
+                  </p>
+                )}
+                <div className="tools">
+                  {!isEditing && (
+                    <span
+                      className="icon"
+                      onClick={() => this.handleCopyFile(index)}
+                    >
+                      <FAIcon icon="copy" />
+                    </span>
+                  )}
+                  {
+                    <span
+                      className="icon"
+                      onClick={e => this.handleDeleteFile(e, index)}
+                    >
+                      <FAIcon icon="trash-alt" />
+                    </span>
+                  }
+                </div>
+              </li>
+            )
+          })}
           {isEditing && (
             <li
               className="add-file-btn"
