@@ -175,6 +175,7 @@ export default class CodeEditor extends React.Component {
 
     const wrapperElement = this.editor.getWrapperElement()
     wrapperElement.style.fontFamily = fontFamily
+    wrapperElement.style.flex = '1'
     if (this.props.maxHeight) {
       const wrapperElement = this.editor.getWrapperElement()
       wrapperElement.querySelector(
@@ -229,6 +230,7 @@ export default class CodeEditor extends React.Component {
 
     const wrapperElement = this.editor.getWrapperElement()
     wrapperElement.style.fontFamily = fontFamily
+    wrapperElement.style.flex = '1'
     if (this.props.maxHeight) {
       const wrapperElement = this.editor.getWrapperElement()
       wrapperElement.querySelector(

@@ -184,9 +184,7 @@ export default class SnippetItemMultiFiles extends React.Component {
       newSnippet.files = editingFiles
       store.updateSnippet(newSnippet)
     }
-    this.setState({ isEditing: false }, () => {
-      this.resetSnippetHeight()
-    })
+    this.setState({ isEditing: false })
     editor.setOption('readOnly', true)
   }
 
@@ -211,7 +209,6 @@ export default class SnippetItemMultiFiles extends React.Component {
       },
       () => {
         editor.setOption('readOnly', true)
-        this.resetSnippetHeight()
       }
     )
   }
@@ -439,17 +436,6 @@ export default class SnippetItemMultiFiles extends React.Component {
     }
   }
 
-  resetSnippetHeight () {
-    // reset height
-    const { editor } = this.refs
-    this.refs.fileList.style.maxHeight = '0px'
-    editor.applyEditorStyle()
-    setTimeout(() => {
-      this.refs.fileList.style.maxHeight = '300px'
-      editor.applyEditorStyle()
-    })
-  }
-
   handleNewFileFocus () {
     const { editingFiles } = this.state
     const { editor } = this.refs
@@ -470,8 +456,12 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   handleChangeFileClick (index, useFileAtIndex, callback) {
     const { snippet } = this.props
-    const { editingFiles, isEditing } = this.state
+    const { editingFiles, isEditing, selectedFile } = this.state
     const { editor } = this.refs
+    // don't do anything if the current file is clicked twice!
+    if (selectedFile === index) {
+      return
+    }
     // set the new selected file index
     this.setState({ selectedFile: index }, () => {
       // if the snippet is in the editing mode, interact with the state instead
@@ -496,7 +486,6 @@ export default class SnippetItemMultiFiles extends React.Component {
           editor.setOption('mode', 'null')
         }
         editor.setValue(file.value)
-        this.resetSnippetHeight()
         if (callback && typeof callback === 'function') {
           callback()
         }
