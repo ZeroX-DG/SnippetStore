@@ -7,6 +7,7 @@ Every notable changes in each version will be listed in this file.
 ## Features:
 
 - **Interface**: Import & Export all snippets or a specific snippet
+- **Interface**: New icon pack
 
 ## Other:
 
