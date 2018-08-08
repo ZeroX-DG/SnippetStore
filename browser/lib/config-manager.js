@@ -32,14 +32,14 @@ const DEFAULT_CONFIG = {
     highlightCurrentLine: true
   },
   keyboard: {
-    createSnippet: OSX ? 'Cmd + N' : 'Ctrl + N',
-    openSetting: OSX ? 'Cmd + ,' : 'Ctrl + ,',
-    toggleSidebar: OSX ? 'Cmd + B' : 'Ctrl + B',
+    createSnippet: OSX ? 'command + N' : 'Ctrl + N',
+    openSetting: OSX ? 'command + ,' : 'Ctrl + ,',
+    toggleSidebar: OSX ? 'command + B' : 'Ctrl + B',
     closeAllModals: 'Esc',
-    SaveAllSnippets: OSX ? 'Cmd + S' : 'Ctrl + S',
+    SaveAllSnippets: OSX ? 'command + S' : 'Ctrl + S',
     CancelEditSnippets: 'Esc',
-    TogglePreviousSnippet: OSX ? 'Cmd + pageup' : 'Ctrl + pageup',
-    ToggleNextSnippet: OSX ? 'Cmd + pagedown' : 'Ctrl + pagedown'
+    TogglePreviousSnippet: OSX ? 'command + pageup' : 'Ctrl + pageup',
+    ToggleNextSnippet: OSX ? 'command + pagedown' : 'Ctrl + pagedown'
   }
 }
 
