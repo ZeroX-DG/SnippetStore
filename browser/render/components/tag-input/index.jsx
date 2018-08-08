@@ -71,6 +71,11 @@ export default class TagInput extends React.Component {
           }
           break
         case 9: // TAB KEY
+          if (input.value.trim()) {
+            e.preventDefault()
+            this.pushTag(input.value)
+          }
+          break
         case 32: // SPACE KEY
           // prevent empty tag
           e.preventDefault()
