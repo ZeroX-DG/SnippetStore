@@ -7,7 +7,7 @@ import ReactTooltip from 'react-tooltip'
 import _ from 'lodash'
 import eventEmitter from 'lib/event-emitter'
 import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
-import isDevIconExists from 'lib/devicon-exists'
+import getDevIcon from 'lib/get-dev-icon.js'
 import TagItem from 'render/components/tag-item'
 import { toast } from 'react-toastify'
 import CodeEditor from 'render/components/code-editor'
@@ -30,12 +30,18 @@ export default class SnippetDetail extends React.Component {
 
   componentDidMount () {
     eventEmitter.on('snippets:saveAll', this.handleSaveChangesEvent.bind(this))
-    eventEmitter.on('snippets:unSave', this.handleDiscardChangesEvent.bind(this))
+    eventEmitter.on(
+      'snippets:unSave',
+      this.handleDiscardChangesEvent.bind(this)
+    )
   }
 
   componentWillUnmount () {
     eventEmitter.off('snippets:saveAll', this.handleSaveChangesEvent.bind(this))
-    eventEmitter.off('snippets:unSave', this.handleDiscardChangesEvent.bind(this))
+    eventEmitter.off(
+      'snippets:unSave',
+      this.handleDiscardChangesEvent.bind(this)
+    )
   }
 
   handleSaveChangesEvent () {
@@ -254,7 +260,6 @@ export default class SnippetDetail extends React.Component {
     const { snippet } = this.props
     const { isEditing } = this.state
     const langMode = CodeMirror.findModeByName(snippet.lang)
-    const snippetMode = langMode.mode
     let languageIcon = (
       <img
         src={defaultLanguageIcon}
@@ -262,28 +267,16 @@ export default class SnippetDetail extends React.Component {
         data-tip={snippet.lang}
       />
     )
-    if (langMode.alias) {
-      for (let i = 0; i < langMode.alias.length; i++) {
-        const alias = langMode.alias[i]
-        if (isDevIconExists(`devicon-${alias}-plain`)) {
-          languageIcon = (
-            <i
-              className={`devicon-${alias}-plain colored`}
-              data-tip={snippet.lang}
-            />
-          )
-          break
-        }
+    if (langMode) {
+      const svgIcon = getDevIcon(`./${langMode.name.toLowerCase()}.svg`)
+      if (svgIcon) {
+        languageIcon = (
+          <span
+            className="lang-icon"
+            dangerouslySetInnerHTML={{ __html: svgIcon }}
+          />
+        )
       }
-    }
-    // if it's not alias then maybe the mode name ?
-    if (isDevIconExists(`devicon-${snippetMode}-plain`)) {
-      languageIcon = (
-        <i
-          className={`devicon-${snippetMode}-plain colored`}
-          data-tip={snippet.lang}
-        />
-      )
     }
     return (
       <p className="snippet-name">
@@ -296,7 +289,7 @@ export default class SnippetDetail extends React.Component {
             defaultValue={snippet.name}
           />
         ) : (
-          snippet.name
+          <span>{snippet.name}</span>
         )}
         {isEditing && (
           <select

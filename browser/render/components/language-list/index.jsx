@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 import './language-list'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
-import isDevIconExists from 'lib/devicon-exists'
+import getDevIcon from 'lib/get-dev-icon.js'
 import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
 import eventEmitter from 'lib/event-emitter'
 import i18n from 'render/lib/i18n'
@@ -18,20 +18,14 @@ export default class LanguageList extends React.Component {
     let languageIcon = <img src={defaultLanguageIcon} className="lang-icon" />
     const langMode = CodeMirror.findModeByName(lang)
     if (langMode) {
-      const snippetMode = langMode.mode
-
-      if (langMode.alias) {
-        for (let i = 0; i < langMode.alias.length; i++) {
-          const alias = langMode.alias[i]
-          if (isDevIconExists(`devicon-${alias}-plain`)) {
-            languageIcon = <i className={`devicon-${alias}-plain colored`} />
-            break
-          }
-        }
-      }
-      // if it's not alias then maybe the mode name ?
-      if (isDevIconExists(`devicon-${snippetMode}-plain`)) {
-        languageIcon = <i className={`devicon-${snippetMode}-plain colored`} />
+      const svgIcon = getDevIcon(`./${langMode.name.toLowerCase()}.svg`)
+      if (svgIcon) {
+        languageIcon = (
+          <span
+            className="lang-icon"
+            dangerouslySetInnerHTML={{ __html: svgIcon }}
+          />
+        )
       }
     }
     return languageIcon
