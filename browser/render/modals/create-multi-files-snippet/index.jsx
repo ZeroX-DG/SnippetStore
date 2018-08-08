@@ -38,6 +38,12 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
         this.reset()
       }
     })
+
+    eventEmitter.on('snippets:saveAll', this.createSnippet.bind(this))
+  }
+
+  componentWillUnmount () {
+    eventEmitter.off('snippets:saveAll', this.createSnippet.bind(this))
   }
 
   componentWillReceiveProps (props) {

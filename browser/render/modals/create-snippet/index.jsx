@@ -33,7 +33,12 @@ export default class CreateSnippetModal extends React.Component {
       }
       this.refs.snippetName.focus()
     }
+    eventEmitter.on('snippets:saveAll', this.createSnippet.bind(this))
     this.applyEditorStyle()
+  }
+
+  componentWillUnmount () {
+    eventEmitter.off('snippets:saveAll', this.createSnippet.bind(this))
   }
 
   applyEditorStyle (props) {
