@@ -12,6 +12,7 @@ Every notable changes in each version will be listed in this file.
 ## Bugfixes:
 
 - **Interface**: Fixed flickering when switching snippets ([23a7e98](https://github.com/ZeroX-DG/SnippetStore/commit/23a7e98))
+- **Interface**: Fixed macOS keyboard shortcut bug ([347339b](https://github.com/ZeroX-DG/SnippetStore/commit/347339b))
 
 ## Other:
 
