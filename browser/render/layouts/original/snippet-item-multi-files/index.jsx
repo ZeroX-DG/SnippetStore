@@ -14,6 +14,8 @@ import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import CodeEditor from 'render/components/code-editor'
 import TagInput from 'render/components/tag-input'
+import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
+import getDevIcon from 'lib/get-dev-icon.js'
 import './snippet-item-multi-file'
 import exportSnippetAPI from 'core/API/snippet/export-snippet'
 import { remote } from 'electron'
@@ -292,34 +294,58 @@ export default class SnippetItemMultiFiles extends React.Component {
     return (
       <div className="file-list" ref="fileList">
         <ul>
-          {files.map((file, index) => (
-            <li
-              key={file.key}
-              onClick={() => this.handleChangeFileClick(index)}
-              className={index === selectedFile ? 'selected' : ''}
-            >
-              {isEditing ? (
-                <input
-                  type="text"
-                  className="fileName"
-                  onChange={e => this.handleEditingFileNameChange(e, index)}
-                  defaultValue={file.name}
-                />
-              ) : file.name ? (
-                file.name
-              ) : (
-                'untitled'
-              )}
-              {
-                <span
-                  className="icon"
-                  onClick={e => this.handleDeleteFile(e, index)}
-                >
-                  <FAIcon icon="trash-alt" />
-                </span>
+          {files.map((file, index) => {
+            const langMode = CodeMirror.findModeByExtension(
+              getExtension(file.name)
+            )
+            let languageIcon = (
+              <img
+                src={defaultLanguageIcon}
+                className="lang-icon"
+                data-tip={snippet.lang}
+              />
+            )
+            if (langMode) {
+              const svgIcon = getDevIcon(`./${langMode.name.toLowerCase()}.svg`)
+              if (svgIcon) {
+                languageIcon = (
+                  <span
+                    className="lang-icon"
+                    dangerouslySetInnerHTML={{ __html: svgIcon }}
+                  />
+                )
               }
-            </li>
-          ))}
+            }
+            return (
+              <li
+                key={file.key}
+                onClick={() => this.handleChangeFileClick(index)}
+                className={index === selectedFile ? 'selected' : ''}
+              >
+                {isEditing ? (
+                  <input
+                    type="text"
+                    className="fileName"
+                    onChange={e => this.handleEditingFileNameChange(e, index)}
+                    defaultValue={file.name}
+                  />
+                ) : (
+                  <p className="file-info">
+                    <span className="lang-icon">{languageIcon}</span>
+                    {file.name || 'Untitled'}
+                  </p>
+                )}
+                {
+                  <span
+                    className="icon"
+                    onClick={e => this.handleDeleteFile(e, index)}
+                  >
+                    <FAIcon icon="trash-alt" />
+                  </span>
+                }
+              </li>
+            )
+          })}
           {isEditing && (
             <li>
               <input
