@@ -27,7 +27,7 @@ export default class SnippetItemMultiFiles extends React.Component {
     this.state = {
       isEditing: false,
       selectedFile: 0,
-      editingFiles: []
+      editingFiles: props.snippet.files.slice()
     }
   }
 
@@ -306,14 +306,20 @@ export default class SnippetItemMultiFiles extends React.Component {
               />
             )
             if (langMode) {
-              const svgIcon = getDevIcon(`./${langMode.name.toLowerCase()}.svg`)
-              if (svgIcon) {
-                languageIcon = (
-                  <span
-                    className="lang-icon"
-                    dangerouslySetInnerHTML={{ __html: svgIcon }}
-                  />
+              try {
+                const svgIcon = getDevIcon(
+                  `./${langMode.name.toLowerCase()}.svg`
                 )
+                if (svgIcon) {
+                  languageIcon = (
+                    <span
+                      className="lang-icon"
+                      dangerouslySetInnerHTML={{ __html: svgIcon }}
+                    />
+                  )
+                }
+              } catch (error) {
+                /* icon not found so fall back to default */
               }
             }
             return (
@@ -326,7 +332,9 @@ export default class SnippetItemMultiFiles extends React.Component {
                   <input
                     type="text"
                     className="fileName"
-                    onChange={e => this.handleEditingFileNameChange(e, index)}
+                    onChange={e =>
+                      this.handleEditingFileNameChange(e.target.value, index)
+                    }
                     defaultValue={file.name}
                   />
                 ) : (
@@ -361,29 +369,32 @@ export default class SnippetItemMultiFiles extends React.Component {
     )
   }
 
-  handleEditingFileNameChange (event, index) {
-    const { editingFiles } = this.state
-    const { editor } = this.refs
-    const newEditingFiles = toJS(editingFiles)
-    const name = event.target.value
-    newEditingFiles[index].name = name
-    const fileExtension = getExtension(name)
-    const resultMode = CodeMirror.findModeByExtension(fileExtension)
-    // if the mode for that language exists then use it otherwise use text
-    if (resultMode) {
-      const snippetMode = resultMode.mode
-      if (snippetMode === 'htmlmixed') {
-        require(`codemirror/mode/xml/xml`)
-        editor.setOption('mode', 'xml')
-        editor.setOption('htmlMode', true)
+  handleEditingFileNameChange (newName, index) {
+    clearTimeout(this.inputFileNameTimeout)
+    this.inputFileNameTimeout = setTimeout(() => {
+      const { editingFiles } = this.state
+      const { editor } = this.refs
+      const newEditingFiles = toJS(editingFiles)
+      const name = newName
+      newEditingFiles[index].name = name
+      const fileExtension = getExtension(name)
+      const resultMode = CodeMirror.findModeByExtension(fileExtension)
+      // if the mode for that language exists then use it otherwise use text
+      if (resultMode) {
+        const snippetMode = resultMode.mode
+        if (snippetMode === 'htmlmixed') {
+          require(`codemirror/mode/xml/xml`)
+          editor.setOption('mode', 'xml')
+          editor.setOption('htmlMode', true)
+        } else {
+          require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+          editor.setOption('mode', snippetMode)
+        }
       } else {
-        require(`codemirror/mode/${snippetMode}/${snippetMode}`)
-        editor.setOption('mode', snippetMode)
+        editor.setOption('mode', 'null')
       }
-    } else {
-      editor.setOption('mode', 'null')
-    }
-    this.setState({ editingFiles: newEditingFiles })
+      this.setState({ editingFiles: newEditingFiles })
+    }, 200)
   }
 
   handleDeleteFile (event, fileIndex) {
