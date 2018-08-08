@@ -9,6 +9,10 @@ Every notable changes in each version will be listed in this file.
 - **Interface**: Import & Export all snippets or a specific snippet
 - **Interface**: New icon pack
 
+## Bugfixes:
+
+- **Interface**: Fixed flickering when switching snippets ([23a7e98](https://github.com/ZeroX-DG/SnippetStore/commit/23a7e98))
+
 ## Other:
 
 - **Integration**: Visual Studio Code integration
