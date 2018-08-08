@@ -154,14 +154,18 @@ export default class SnippetItem extends React.Component {
       />
     )
     if (langMode) {
-      const svgIcon = getDevIcon(`./${langMode.name.toLowerCase()}.svg`)
-      if (svgIcon) {
-        languageIcon = (
-          <span
-            className="lang-icon"
-            dangerouslySetInnerHTML={{ __html: svgIcon }}
-          />
-        )
+      try {
+        const svgIcon = getDevIcon(`./${langMode.name.toLowerCase()}.svg`)
+        if (svgIcon) {
+          languageIcon = (
+            <span
+              className="lang-icon"
+              dangerouslySetInnerHTML={{ __html: svgIcon }}
+            />
+          )
+        }
+      } catch (error) {
+        /* icon not found so fall back to default */
       }
     }
     return (
