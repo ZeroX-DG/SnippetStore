@@ -5,6 +5,7 @@ import i18n from 'render/lib/i18n'
 import Switch from 'render/components/switch'
 import ConfigManager from 'lib/config-manager'
 import { pageView } from 'lib/analytics'
+import donateButton from 'resources/image/donate.png'
 
 export default class About extends React.Component {
   componentDidMount () {
@@ -45,6 +46,17 @@ export default class About extends React.Component {
             </a>)
           </p>
           <p>Email: viethungax@gmail.com</p>
+          <h2 className="m-t-50">Donate</h2>
+          <p>
+            {i18n.__(
+              `If this app help you with your work and you wish to say thanks to me, you can donate me through Buy Me A Coffee. Your donation will be a huge motivation for me to continue to add more features and bugfixes in the future.`
+            )}
+            <br />
+            <br />
+            <a href="https://www.buymeacoffee.com/hQteV8A">
+              <img src={donateButton} alt="Buy Me A Coffee" />
+            </a>
+          </p>
           <h2 className="m-t-50">Analytics</h2>
           <p>
             {i18n.__(

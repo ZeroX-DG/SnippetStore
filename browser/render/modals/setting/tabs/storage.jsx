@@ -74,13 +74,13 @@ export default class StorageTab extends React.Component {
               className="m-l-10"
               onClick={() => this.browseFolderStorage()}
             >
-              Browse
+              {i18n.__('Browse')}
             </button>
             <button
               className="m-l-10"
               onClick={() => this.changeStorage(defaultStorage)}
             >
-              Use default
+              {i18n.__('Use default')}
             </button>
           </div>
         </div>

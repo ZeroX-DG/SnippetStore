@@ -71,5 +71,11 @@
   "Highlight current line": "Highlight current line",
   "Export JSON": "Export JSON",
   "SnippetStore collects anonymous data for only 1 reason-improve user experience. We will never collects your private information such as your code snippets. If you wish to know how it work, here is its source code:":
-    "SnippetStore collects anonymous data for only 1 reason-improve user experience. We will never collects your private information such as your code snippets. If you wish to know how it work, here is its source code:"
+    "SnippetStore collects anonymous data for only 1 reason-improve user experience. We will never collects your private information such as your code snippets. If you wish to know how it work, here is its source code:",
+  "If this app help you with your work and you wish to say thanks to me, you can donate me through Buy Me A Coffee. Your donation will be a huge motivation for me to continue to add more features and bugfixes in the future.":
+    "If this app help you with your work and you wish to say thanks to me, you can donate me through Buy Me A Coffee. Your donation will be a huge motivation for me to continue to add more features and bugfixes in the future.",
+  "Storage": "Storage",
+  "Snippet storage path:": "Snippet storage path:",
+  "Browse": "Browse",
+  "Use default": "Use default"
 }
