@@ -1,6 +1,6 @@
 import fs from 'fs'
 import fetchSnippets from './fetch-snippets'
-import { SNIPPET_INFO_FILE } from '../config'
+import { getSnippetFile } from '../config'
 import { generateKey } from 'lib/util'
 
 function importSnippet (snippetFile) {
@@ -19,7 +19,7 @@ function importSnippet (snippetFile) {
       }
       snippets.push(snippet)
     }
-    fs.writeFileSync(SNIPPET_INFO_FILE, JSON.stringify(snippets), {
+    fs.writeFileSync(getSnippetFile(), JSON.stringify(snippets), {
       encoding: 'utf-8'
     })
     return snippet || snippets

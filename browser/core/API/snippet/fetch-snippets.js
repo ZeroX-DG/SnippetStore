@@ -1,7 +1,8 @@
-import { SNIPPET_INFO_FILE } from '../config'
+import { getSnippetFile } from '../config'
 const sander = require('sander')
 
 function fetchSnippets () {
+  const SNIPPET_INFO_FILE = getSnippetFile()
   if (!sander.existsSync(SNIPPET_INFO_FILE)) {
     sander.writeFileSync(SNIPPET_INFO_FILE, '[]')
     return []

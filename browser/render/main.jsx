@@ -42,6 +42,10 @@ export default class Main extends React.Component {
       i18n.setLocale(config.ui.language)
     })
 
+    eventEmitter.on('storage:update', () => {
+      init()
+    })
+
     server.on('transferCode', (message, data) => {
       eventEmitter.emit('modal:openWithData', {
         name: 'createSnippetModal',

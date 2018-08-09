@@ -7,6 +7,7 @@ import InterfaceTab from './tabs/interface'
 import EditorTab from './tabs/editor'
 import HotKeysTab from './tabs/hotkeys'
 import About from './tabs/about'
+import StorageTab from './tabs/storage'
 
 export default class SettingModal extends React.Component {
   constructor (props) {
@@ -28,6 +29,8 @@ export default class SettingModal extends React.Component {
         return <HotKeysTab config={config} />
       case 'about':
         return <About config={config} />
+      case 'storage':
+        return <StorageTab config={config} />
     }
   }
 
@@ -62,6 +65,12 @@ export default class SettingModal extends React.Component {
           className={tab === 'about' ? 'active' : ''}
         >
           <div className="tab">{i18n.__('About')}</div>
+        </li>
+        <li
+          onClick={() => this.switchTab('storage')}
+          className={tab === 'storage' ? 'active' : ''}
+        >
+          <div className="tab">{i18n.__('Storage')}</div>
         </li>
       </ul>
     )

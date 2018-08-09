@@ -1,6 +1,6 @@
 import { findIndexObject } from 'lib/util'
 import fetchSnippets from './fetch-snippets'
-import { SNIPPET_INFO_FILE } from '../config'
+import { getSnippetFile } from '../config'
 const sander = require('sander')
 
 function deleteSnippet (snippet) {
@@ -13,7 +13,7 @@ function deleteSnippet (snippet) {
   }
 
   snippets.splice(snippetIndex, 1)
-  sander.writeFileSync(SNIPPET_INFO_FILE, JSON.stringify(snippets), {
+  sander.writeFileSync(getSnippetFile(), JSON.stringify(snippets), {
     encoding: 'utf-8'
   })
 

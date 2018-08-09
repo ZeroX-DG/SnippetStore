@@ -1,6 +1,6 @@
 import { findIndexObject } from 'lib/util'
 import fetchSnippets from './fetch-snippets'
-import { SNIPPET_INFO_FILE } from '../config'
+import { getSnippetFile } from '../config'
 const sander = require('sander')
 
 function updateSnippet (snippet) {
@@ -14,7 +14,7 @@ function updateSnippet (snippet) {
 
   snippet.updateAt = new Date().getTime()
   snippets[snippetIndex] = snippet
-  sander.writeFileSync(SNIPPET_INFO_FILE, JSON.stringify(snippets), {
+  sander.writeFileSync(getSnippetFile(), JSON.stringify(snippets), {
     encoding: 'utf-8'
   })
 
