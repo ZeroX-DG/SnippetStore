@@ -5,6 +5,7 @@ import i18n from 'render/lib/i18n'
 import ConfigManager from 'lib/config-manager'
 import { pageView, trackEvent } from 'lib/analytics'
 import eventEmitter from '../../../../lib/event-emitter'
+import { migrateSnippet } from 'core/API/snippet'
 
 const defaultStorage = path.join(remote.app.getPath('appData'), 'SnippetStore')
 const { dialog } = remote
@@ -39,13 +40,19 @@ export default class StorageTab extends React.Component {
       },
       paths => {
         if (paths && paths[0]) {
-          const path = paths[0]
-          this.refs.storage.value = path
-          this.saveSetting()
-          // confirm('Migrate your snippets to the new locations?')
+          this.changeStorage(paths[0])
         }
       }
     )
+  }
+
+  changeStorage (newPath) {
+    const oldPath = this.refs.storage.value || defaultStorage
+    this.refs.storage.value = newPath
+    this.saveSetting()
+    if (confirm('Migrate your snippets to the new locations?')) {
+      migrateSnippet(path.join(oldPath, 'snippets.json'))
+    }
   }
 
   render () {
@@ -60,6 +67,7 @@ export default class StorageTab extends React.Component {
               type="text"
               defaultValue={config.storage}
               placeholder={defaultStorage}
+              readOnly={true}
               ref="storage"
             />
             <button
@@ -67,6 +75,12 @@ export default class StorageTab extends React.Component {
               onClick={() => this.browseFolderStorage()}
             >
               Browse
+            </button>
+            <button
+              className="m-l-10"
+              onClick={() => this.changeStorage(defaultStorage)}
+            >
+              Use default
             </button>
           </div>
         </div>

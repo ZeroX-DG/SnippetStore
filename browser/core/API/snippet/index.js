@@ -4,5 +4,6 @@ module.exports = {
   updateSnippet: require('./update-snippet'),
   deleteSnippet: require('./delete-snippet'),
   exportSnippet: require('./export-snippet'),
-  importSnippet: require('./import-snippet')
+  importSnippet: require('./import-snippet'),
+  migrateSnippet: require('./migrate-snippet')
 }
