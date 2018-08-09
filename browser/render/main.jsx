@@ -61,10 +61,10 @@ export default class Main extends React.Component {
     const { layout } = config.ui
     switch (layout) {
       case 'original':
-        trackEvent('user layout', 'use', 'original')
+        trackEvent('user layout', 'use original')
         return <MainAreaOriginal config={config} />
       case 'list-and-detail':
-        trackEvent('user layout', 'use', 'list-and-detail')
+        trackEvent('user layout', 'use list-and-detail')
         return <MainAreaListAndDetail config={config} />
       default:
         return <MainAreaOriginal config={config} />
