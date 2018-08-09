@@ -40,7 +40,8 @@ const DEFAULT_CONFIG = {
     CancelEditSnippets: 'Esc',
     TogglePreviousSnippet: OSX ? 'command + pageup' : 'Ctrl + pageup',
     ToggleNextSnippet: OSX ? 'command + pagedown' : 'Ctrl + pagedown'
-  }
+  },
+  allowAnalytics: true
 }
 
 function get (option) {

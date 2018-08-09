@@ -2,6 +2,8 @@ import React from 'react'
 import logo from 'resources/icon/icon512.png'
 import { shell } from 'electron'
 import i18n from 'render/lib/i18n'
+import Switch from 'render/components/switch'
+import ConfigManager from 'lib/config-manager'
 
 export default class About extends React.Component {
   componentDidMount () {
@@ -14,7 +16,12 @@ export default class About extends React.Component {
     })
   }
 
+  onAnalyticsChange (checked) {
+    ConfigManager.set({ allowAnalytics: checked })
+  }
+
   render () {
+    const { config } = this.props
     return (
       <div className="about-tab">
         <h1 className="tab-title">{i18n.__('About')}</h1>
@@ -36,6 +43,20 @@ export default class About extends React.Component {
             </a>)
           </p>
           <p>Email: viethungax@gmail.com</p>
+          <h2 className="m-t-50">Analytics</h2>
+          <p>
+            SnippetStore collects anonymous data for only 1 reason-improve user
+            experience. We will never collects your private information such as
+            your code snippets. If you wish to know how it work, here is its
+            source code:&nbsp;
+            <a href="https://github.com/ZeroX-DG/SnippetStore">github</a>
+          </p>
+          <p>
+            <Switch
+              onChange={checked => this.onAnalyticsChange(checked)}
+              defaultValue={config.allowAnalytics}
+            />Enable analytics to help improve SnippetStore
+          </p>
         </div>
       </div>
     )
