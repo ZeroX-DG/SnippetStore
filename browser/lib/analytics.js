@@ -21,3 +21,9 @@ export function trackEvent (category, action, label, value) {
       .send()
   }
 }
+
+export function pageView (path) {
+  if (CM.get().allowAnalytics) {
+    user.pageview(path).send()
+  }
+}

@@ -4,6 +4,7 @@ import ConfigManager from 'lib/config-manager'
 import 'codemirror/mode/javascript/javascript'
 import consts from 'render/lib/consts'
 import i18n from 'render/lib/i18n'
+import { pageView, trackEvent } from 'lib/analytics'
 
 export default class EditorTab extends React.Component {
   componentDidMount () {
@@ -41,6 +42,7 @@ if (number == 1) {
     this.editor.getWrapperElement().style.fontFamily = fontFamily
 
     this.editor.setSize('100%', '100%')
+    pageView('/setting/editor')
   }
 
   previewEditorLineNumberChange () {
@@ -83,6 +85,7 @@ if (number == 1) {
     }
 
     ConfigManager.set(newSetting)
+    trackEvent('user interaction', 'save setting', 'editor')
     this.refs.message.classList.remove('hide')
     setTimeout(() => {
       this.refs.message.classList.add('hide')

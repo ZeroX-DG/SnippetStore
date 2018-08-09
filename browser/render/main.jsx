@@ -12,7 +12,7 @@ import { toJS } from 'mobx'
 import MainAreaOriginal from './layouts/original/main-area'
 import MainAreaListAndDetail from './layouts/list-and-detail/main-area'
 
-import { trackEvent } from 'lib/analytics'
+import { trackEvent, pageView } from 'lib/analytics'
 
 const messenger = require('messenger')
 const electron = require('electron')
@@ -54,6 +54,8 @@ export default class Main extends React.Component {
       const snippets = toJS(this.props.store.rawSnippets)
       message.reply({ snippets })
     })
+
+    pageView('/')
   }
 
   renderMainArea () {

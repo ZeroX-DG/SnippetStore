@@ -16,8 +16,6 @@ export default class SettingModal extends React.Component {
     }
   }
 
-  reset () {}
-
   renderTab () {
     const { tab } = this.state
     const { config } = this.props

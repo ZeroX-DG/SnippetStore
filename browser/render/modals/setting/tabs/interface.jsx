@@ -3,8 +3,13 @@ import { getLanguages } from 'render/lib/languages'
 import { getLayouts } from 'render/lib/layouts'
 import ConfigManager from 'lib/config-manager'
 import i18n from 'render/lib/i18n'
+import { pageView, trackEvent } from 'lib/analytics'
 
 export default class InterfaceTab extends React.Component {
+  componentDidMount () {
+    pageView('/setting/interface')
+  }
+
   saveSetting () {
     const newSetting = {
       ui: {
@@ -25,6 +30,7 @@ export default class InterfaceTab extends React.Component {
     }
 
     ConfigManager.set(newSetting)
+    trackEvent('user interaction', 'save setting', 'interface')
     this.refs.message.classList.remove('hide')
     setTimeout(() => {
       if (this.refs.message) {

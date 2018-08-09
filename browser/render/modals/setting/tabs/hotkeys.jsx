@@ -1,8 +1,13 @@
 import React from 'react'
 import ConfigManager from 'lib/config-manager'
 import i18n from 'render/lib/i18n'
+import { pageView, trackEvent } from 'lib/analytics'
 
 export default class HotKeysTab extends React.Component {
+  componentDidMount () {
+    pageView('/setting/hotkey')
+  }
+
   saveSetting () {
     const newSetting = {
       keyboard: {
@@ -13,6 +18,7 @@ export default class HotKeysTab extends React.Component {
     }
 
     ConfigManager.set(newSetting)
+    trackEvent('user interaction', 'save setting', 'hotkey')
     this.refs.message.classList.remove('hide')
     setTimeout(() => {
       this.refs.message.classList.add('hide')

@@ -4,6 +4,7 @@ import { shell } from 'electron'
 import i18n from 'render/lib/i18n'
 import Switch from 'render/components/switch'
 import ConfigManager from 'lib/config-manager'
+import { pageView } from 'lib/analytics'
 
 export default class About extends React.Component {
   componentDidMount () {
@@ -14,6 +15,7 @@ export default class About extends React.Component {
         shell.openExternal(link.href)
       })
     })
+    pageView('/setting/about')
   }
 
   onAnalyticsChange (checked) {
