@@ -3,6 +3,7 @@ import ModalSkeleton from '../modal-skeleton'
 import eventEmitter from 'lib/event-emitter'
 import i18n from 'render/lib/i18n'
 import TagInput from 'render/components/tag-input'
+import { trackEvent } from 'lib/analytics'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import 'codemirror/addon/display/autorefresh'
@@ -33,6 +34,7 @@ export default class CreateSnippetModal extends React.Component {
       }
       this.refs.snippetName.focus()
     }
+    trackEvent('user interaction', 'create snippet', 'single-file')
     eventEmitter.on('snippets:saveAll', this.createSnippet.bind(this))
     this.applyEditorStyle()
   }

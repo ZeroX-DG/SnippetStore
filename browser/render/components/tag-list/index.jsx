@@ -1,6 +1,7 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 import eventEmitter from 'lib/event-emitter'
+import { trackEvent } from 'lib/analytics'
 import i18n from 'render/lib/i18n'
 import './tag-list'
 
@@ -8,6 +9,7 @@ import './tag-list'
 export default class TagList extends React.Component {
   handleTagClick (tag) {
     eventEmitter.emit('taglist:pickTag', tag)
+    trackEvent('user interaction', 'use taglist')
   }
 
   render () {

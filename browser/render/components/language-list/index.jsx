@@ -6,12 +6,14 @@ import 'codemirror/mode/meta'
 import getDevIcon from 'lib/get-dev-icon.js'
 import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
 import eventEmitter from 'lib/event-emitter'
+import { trackEvent } from 'lib/analytics'
 import i18n from 'render/lib/i18n'
 
 @observer
 export default class LanguageList extends React.Component {
   handleLanguageClick (lang) {
     eventEmitter.emit('languageList:pickLang', lang)
+    trackEvent('user interaction', 'use languagelist')
   }
 
   getLanguageIcon (lang) {

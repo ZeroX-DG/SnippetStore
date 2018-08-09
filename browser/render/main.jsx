@@ -12,6 +12,8 @@ import { toJS } from 'mobx'
 import MainAreaOriginal from './layouts/original/main-area'
 import MainAreaListAndDetail from './layouts/list-and-detail/main-area'
 
+import { trackEvent } from 'lib/analytics'
+
 const messenger = require('messenger')
 const electron = require('electron')
 const { ipcRenderer } = electron
@@ -59,8 +61,10 @@ export default class Main extends React.Component {
     const { layout } = config.ui
     switch (layout) {
       case 'original':
+        trackEvent('user layout', 'use', 'original')
         return <MainAreaOriginal config={config} />
       case 'list-and-detail':
+        trackEvent('user layout', 'use', 'list-and-detail')
         return <MainAreaListAndDetail config={config} />
       default:
         return <MainAreaOriginal config={config} />

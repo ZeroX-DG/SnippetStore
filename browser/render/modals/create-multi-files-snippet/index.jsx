@@ -6,6 +6,7 @@ import FAIcon from '@fortawesome/react-fontawesome'
 import TagInput from 'render/components/tag-input'
 import _ from 'lodash'
 import { getExtension, generateKey } from 'lib/util'
+import { trackEvent } from 'lib/analytics'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import 'codemirror/addon/display/autorefresh'
@@ -38,7 +39,7 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
         this.reset()
       }
     })
-
+    trackEvent('user interaction', 'create snippet', 'single-file')
     eventEmitter.on('snippets:saveAll', this.createSnippet.bind(this))
   }
 

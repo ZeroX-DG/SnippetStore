@@ -86,7 +86,8 @@
     "react-toastify": "^4.0.2",
     "react-tooltip": "^3.6.0",
     "react-transition-group": "^2.3.1",
-    "sander": "^0.6.0"
+    "sander": "^0.6.0",
+    "universal-analytics": "^0.4.17"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
