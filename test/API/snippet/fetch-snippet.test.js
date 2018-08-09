@@ -1,7 +1,7 @@
 import SnippetAPI from 'core/API/snippet'
-import { SNIPPET_INFO_FILE } from 'core/API/config'
+import { getSnippetFile } from 'core/API/config'
 const sander = require('sander')
-
+const SNIPPET_INFO_FILE = getSnippetFile()
 describe('fetch snippet', () => {
   afterAll(() => {
     sander.rimraf(SNIPPET_INFO_FILE)

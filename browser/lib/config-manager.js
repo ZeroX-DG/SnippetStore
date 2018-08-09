@@ -1,8 +1,11 @@
 import eventEmiter from './event-emitter'
 import _ from 'lodash'
+const isTest = process.env.NODE_ENV === 'test'
 const Store = require('electron-store')
-const store = new Store({ name: 'SnippetStoreConf' })
-
+let store = null
+if (!isTest) {
+  store = new Store({ name: 'SnippetStoreConf' })
+}
 const OSX = global.process.platform === 'darwin'
 
 const DEFAULT_CONFIG = {

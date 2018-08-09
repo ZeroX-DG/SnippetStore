@@ -14,8 +14,11 @@ const getMainAppDataPath = () => {
   return customStorage || defaultStorage
 }
 
-const getAppDataPath = () =>
-  isTest ? path.join(os.tmpdir(), 'SnippetStore', 'test') : getMainAppDataPath()
+const getAppDataPath = () => {
+  return isTest
+    ? path.join(os.tmpdir(), 'SnippetStore', 'test')
+    : getMainAppDataPath()
+}
 
 const getSnippetFile = () => path.join(getAppDataPath(), 'snippets.json')
 

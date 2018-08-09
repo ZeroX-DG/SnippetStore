@@ -1,7 +1,7 @@
 import SnippetAPI from 'core/API/snippet'
-import { SNIPPET_INFO_FILE } from 'core/API/config'
+import { getSnippetFile } from 'core/API/config'
 const sander = require('sander')
-
+const SNIPPET_INFO_FILE = getSnippetFile()
 describe('update snippet', () => {
   afterAll(() => {
     sander.rimraf(SNIPPET_INFO_FILE)
@@ -15,9 +15,13 @@ describe('update snippet', () => {
 
     snippet.name = 'updated-name'
     const updatedIndex = SnippetAPI.updateSnippet(snippet)
-    const snippets = JSON.parse(sander.readFileSync(SNIPPET_INFO_FILE, { encoding: 'utf-8' }))
+    const snippets = JSON.parse(
+      sander.readFileSync(SNIPPET_INFO_FILE, { encoding: 'utf-8' })
+    )
 
     expect(typeof updatedIndex).toBe('number')
-    expect(typeof snippets.find(fsnippet => fsnippet.name === 'updated-name')).toBe('object')
+    expect(
+      typeof snippets.find(fsnippet => fsnippet.name === 'updated-name')
+    ).toBe('object')
   })
 })
