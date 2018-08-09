@@ -14,6 +14,10 @@ Every notable changes in each version will be listed in this file.
 - **Interface**: Fixed flickering when switching snippets ([23a7e98](https://github.com/ZeroX-DG/SnippetStore/commit/23a7e98))
 - **Interface**: Fixed macOS keyboard shortcut bug ([347339b](https://github.com/ZeroX-DG/SnippetStore/commit/347339b))
 
+## Improvements:
+
+- **Development**: Added analytics to improve user experience in the future
+
 ## Other:
 
 - **Integration**: Visual Studio Code integration
