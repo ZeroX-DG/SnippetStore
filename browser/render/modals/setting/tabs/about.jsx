@@ -47,10 +47,12 @@ export default class About extends React.Component {
           <p>Email: viethungax@gmail.com</p>
           <h2 className="m-t-50">Analytics</h2>
           <p>
-            SnippetStore collects anonymous data for only 1 reason-improve user
-            experience. We will never collects your private information such as
-            your code snippets. If you wish to know how it work, here is its
-            source code:&nbsp;
+            {i18n.__(
+              'SnippetStore collects anonymous data for only 1 reason' +
+                '-improve user experience. We will never collects your private ' +
+                'information such as your code snippets. If you wish to know ' +
+                'how it work, here is its source code:'
+            )}&nbsp;
             <a href="https://github.com/ZeroX-DG/SnippetStore">github</a>
           </p>
           <p>

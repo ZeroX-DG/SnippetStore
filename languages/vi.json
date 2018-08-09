@@ -67,5 +67,7 @@
   "Pick a snippet from list": "Chọn 1 snippet trong danh sách",
   "Snippet list layout": "Bố cục danh sách snippet",
   "Highlight current line": "Làm nổi dòng hiện tại",
-  "Export JSON": "Xuất file JSON"
+  "Export JSON": "Xuất file JSON",
+  "SnippetStore collects anonymous data for only 1 reason-improve user experience. We will never collects your private information such as your code snippets. If you wish to know how it work, here is its source code:":
+    "SnippetStore thu thập dữ liệu ẩn danh của người dùng với 1 mục đích duy nhất-cải thiện trải nghiệm người dùng. Chúng tôi sẽ không bao giờ thu thập những dữ liệu riêng tư của bạn như code snippet của bạn. Nếu bạn muốn biết cách hoạt động của nó, đây là mã nguồn của nó:"
 }

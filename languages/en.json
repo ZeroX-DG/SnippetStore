@@ -69,5 +69,7 @@
   "Pick a snippet from list": "Pick a snippet from list",
   "Snippet list layout": "Snippet list layout",
   "Highlight current line": "Highlight current line",
-  "Export JSON": "Export JSON"
+  "Export JSON": "Export JSON",
+  "SnippetStore collects anonymous data for only 1 reason-improve user experience. We will never collects your private information such as your code snippets. If you wish to know how it work, here is its source code:":
+    "SnippetStore collects anonymous data for only 1 reason-improve user experience. We will never collects your private information such as your code snippets. If you wish to know how it work, here is its source code:"
 }
