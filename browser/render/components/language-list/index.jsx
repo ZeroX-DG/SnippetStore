@@ -1,36 +1,16 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 import './language-list'
-import CodeMirror from 'codemirror'
-import 'codemirror/mode/meta'
-import getDevIcon from 'lib/get-dev-icon.js'
-import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
 import eventEmitter from 'lib/event-emitter'
 import { trackEvent } from 'lib/analytics'
 import i18n from 'render/lib/i18n'
+import getLanguageIcon from 'lib/getLangIcon'
 
 @observer
 export default class LanguageList extends React.Component {
   handleLanguageClick (lang) {
     eventEmitter.emit('languageList:pickLang', lang)
     trackEvent('user interaction', 'use languagelist')
-  }
-
-  getLanguageIcon (lang) {
-    let languageIcon = <img src={defaultLanguageIcon} className="lang-icon" />
-    const langMode = CodeMirror.findModeByName(lang)
-    if (langMode) {
-      const svgIcon = getDevIcon(`./${langMode.name.toLowerCase()}.svg`)
-      if (svgIcon) {
-        languageIcon = (
-          <span
-            className="lang-icon"
-            dangerouslySetInnerHTML={{ __html: svgIcon }}
-          />
-        )
-      }
-    }
-    return languageIcon
   }
 
   render () {
@@ -45,7 +25,7 @@ export default class LanguageList extends React.Component {
         </div>
         <ul className="languages">
           {Object.keys(languages).map((language, index) => {
-            const languageIcon = this.getLanguageIcon(language)
+            const languageIcon = getLanguageIcon(language)
             return (
               <li
                 key={index}

@@ -5,8 +5,6 @@ import ReactTooltip from 'react-tooltip'
 import { toast } from 'react-toastify'
 import Clipboard from 'core/functions/clipboard'
 import formatDate from 'lib/date-format'
-import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
-import getDevIcon from 'lib/get-dev-icon.js'
 import TagItem from 'render/components/tag-item'
 import i18n from 'render/lib/i18n'
 import CodeEditor from 'render/components/code-editor'
@@ -17,6 +15,7 @@ import 'codemirror/mode/meta'
 import './snippet-item'
 import { toJS } from 'mobx'
 import exportSnippetAPI from 'core/API/snippet/export-snippet'
+import getLanguageIcon from 'lib/getLangIcon'
 import { remote } from 'electron'
 const { dialog } = remote
 
@@ -145,29 +144,7 @@ export default class SnippetItem extends React.Component {
   renderHeader () {
     const { snippet } = this.props
     const { isEditing } = this.state
-    const langMode = CodeMirror.findModeByName(snippet.lang)
-    let languageIcon = (
-      <img
-        src={defaultLanguageIcon}
-        className="lang-icon"
-        data-tip={snippet.lang}
-      />
-    )
-    if (langMode) {
-      try {
-        const svgIcon = getDevIcon(`./${langMode.name.toLowerCase()}.svg`)
-        if (svgIcon) {
-          languageIcon = (
-            <span
-              className="lang-icon"
-              dangerouslySetInnerHTML={{ __html: svgIcon }}
-            />
-          )
-        }
-      } catch (error) {
-        /* icon not found so fall back to default */
-      }
-    }
+    const languageIcon = getLanguageIcon(snippet.lang)
     return (
       <div className="header">
         <div className="info">

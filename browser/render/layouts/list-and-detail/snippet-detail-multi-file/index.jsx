@@ -12,12 +12,11 @@ import { toast } from 'react-toastify'
 import { toJS } from 'mobx'
 import CodeEditor from 'render/components/code-editor'
 import TagInput from 'render/components/tag-input'
-import defaultLanguageIcon from 'resources/image/defaultLanguageIcon.png'
-import getDevIcon from 'lib/get-dev-icon.js'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import './snippet-detail-multi-file'
 import exportSnippetAPI from 'core/API/snippet/export-snippet'
+import getLanguageIcon from 'lib/getLangIcon'
 import { remote } from 'electron'
 const { dialog } = remote
 
@@ -359,30 +358,7 @@ export default class SnippetDetailMultiFile extends React.Component {
             const langMode = CodeMirror.findModeByExtension(
               getExtension(file.name)
             )
-            let languageIcon = (
-              <img
-                src={defaultLanguageIcon}
-                className="lang-icon"
-                data-tip={snippet.lang}
-              />
-            )
-            if (langMode) {
-              try {
-                const svgIcon = getDevIcon(
-                  `./${langMode.name.toLowerCase()}.svg`
-                )
-                if (svgIcon) {
-                  languageIcon = (
-                    <span
-                      className="lang-icon"
-                      dangerouslySetInnerHTML={{ __html: svgIcon }}
-                    />
-                  )
-                }
-              } catch (error) {
-                /* icon not found so fall back to default */
-              }
-            }
+            const languageIcon = getLanguageIcon(langMode.name)
             return (
               <li
                 key={file.key}
