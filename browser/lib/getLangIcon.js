@@ -11,6 +11,8 @@ export default function getLanguageIcon (lang) {
     let langName = langMode.name.toLowerCase()
     if (langName === 'c++') {
       langName = 'cpp'
+    } else if (langName === 'jsx') {
+      langName = 'react'
     }
     try {
       const svgIcon = getDevIcon(`./${langName}.svg`)
