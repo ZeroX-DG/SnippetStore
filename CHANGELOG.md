@@ -2,7 +2,7 @@
 
 Every notable changes in each version will be listed in this file.
 
-# 0.2.6 - [Unreleased]
+# 0.2.6
 
 ## Features:
 
