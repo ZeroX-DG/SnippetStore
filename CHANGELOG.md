@@ -4,6 +4,8 @@ Every notable changes in each version will be listed in this file.
 
 # 0.2.6
 
+https://medium.com/@nguynvithng_34102/snippet-store-v0-2-6-b4eb896b924d
+
 ## Features:
 
 - **Interface**: Import & Export all snippets or a specific snippet
