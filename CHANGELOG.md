@@ -2,6 +2,12 @@
 
 Every notable changes in each version will be listed in this file.
 
+# 0.2.7 - Unreleased
+
+## Bugfixes:
+
+- **Interface**: Fixed plain text mode bug ([3ad5c42](https://github.com/ZeroX-DG/SnippetStore/commit/3ad5c42))
+
 # 0.2.6
 
 https://medium.com/@nguynvithng_34102/snippet-store-v0-2-6-b4eb896b924d
