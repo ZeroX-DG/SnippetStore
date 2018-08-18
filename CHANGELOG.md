@@ -7,6 +7,7 @@ Every notable changes in each version will be listed in this file.
 ## Bugfixes:
 
 - **Interface**: Fixed plain text mode bug ([3ad5c42](https://github.com/ZeroX-DG/SnippetStore/commit/3ad5c42))
+- **Interface**: Fixed too many events bug ([0780dad](https://github.com/ZeroX-DG/SnippetStore/commit/0780dad))
 
 # 0.2.6
 
