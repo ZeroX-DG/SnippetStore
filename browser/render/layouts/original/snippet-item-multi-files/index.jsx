@@ -30,13 +30,30 @@ export default class SnippetItemMultiFiles extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentWillUnmount () {
+    this.unbindEvents()
+  }
+
+  bindEvents () {
     eventEmitter.on('snippets:saveAll', () => {
       if (this.state.isEditing && this.hasFocus()) {
         this.handleSaveChangesClick()
       }
     })
     eventEmitter.on('snippets:unSave', () => {
+      if (this.state.isEditing && this.hasFocus()) {
+        this.handleDiscardChangesClick()
+      }
+    })
+  }
+
+  unbindEvents () {
+    eventEmitter.off('snippets:saveAll', () => {
+      if (this.state.isEditing && this.hasFocus()) {
+        this.handleSaveChangesClick()
+      }
+    })
+    eventEmitter.off('snippets:unSave', () => {
       if (this.state.isEditing && this.hasFocus()) {
         this.handleDiscardChangesClick()
       }
@@ -185,6 +202,7 @@ export default class SnippetItemMultiFiles extends React.Component {
     }
     this.setState({ isEditing: false })
     editor.setOption('readOnly', true)
+    this.unbindEvents()
   }
 
   handleEditButtonClick () {
@@ -194,6 +212,7 @@ export default class SnippetItemMultiFiles extends React.Component {
       editor.applyEditorStyle()
       this.setState({ editingFiles: snippet.files })
       editor.setOption('readOnly', false)
+      this.bindEvents()
     })
   }
 
@@ -208,6 +227,7 @@ export default class SnippetItemMultiFiles extends React.Component {
       },
       () => {
         editor.setOption('readOnly', true)
+        this.unbindEvents()
       }
     )
   }

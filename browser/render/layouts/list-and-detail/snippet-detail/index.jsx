@@ -28,11 +28,16 @@ export default class SnippetDetail extends React.Component {
   }
 
   componentDidMount () {
-    eventEmitter.on('snippets:saveAll', this.handleSaveChangesEvent.bind(this))
-    eventEmitter.on(
-      'snippets:unSave',
-      this.handleDiscardChangesEvent.bind(this)
-    )
+    if (this.state.isEditing) {
+      eventEmitter.on(
+        'snippets:saveAll',
+        this.handleSaveChangesEvent.bind(this)
+      )
+      eventEmitter.on(
+        'snippets:unSave',
+        this.handleDiscardChangesEvent.bind(this)
+      )
+    }
   }
 
   componentWillUnmount () {

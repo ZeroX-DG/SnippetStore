@@ -27,17 +27,8 @@ export default class SnippetItem extends React.Component {
     }
   }
 
-  componentDidMount () {
-    eventEmitter.on('snippets:saveAll', () => {
-      if (this.state.isEditing && this.hasFocus()) {
-        this.handleSaveChangesClick()
-      }
-    })
-    eventEmitter.on('snippets:unSave', () => {
-      if (this.state.isEditing && this.hasFocus()) {
-        this.handleDiscardChangesClick()
-      }
-    })
+  componentWillUnmount () {
+    this.unbindEvents()
   }
 
   hasFocus () {
@@ -71,6 +62,33 @@ export default class SnippetItem extends React.Component {
     const { editor } = this.refs
     this.setState({ isEditing: true })
     editor.setOption('readOnly', false)
+    this.bindEvents()
+  }
+
+  bindEvents () {
+    eventEmitter.on('snippets:saveAll', () => {
+      if (this.state.isEditing && this.hasFocus()) {
+        this.handleSaveChangesClick()
+      }
+    })
+    eventEmitter.on('snippets:unSave', () => {
+      if (this.state.isEditing && this.hasFocus()) {
+        this.handleDiscardChangesClick()
+      }
+    })
+  }
+
+  unbindEvents () {
+    eventEmitter.off('snippets:saveAll', () => {
+      if (this.state.isEditing && this.hasFocus()) {
+        this.handleSaveChangesClick()
+      }
+    })
+    eventEmitter.off('snippets:unSave', () => {
+      if (this.state.isEditing && this.hasFocus()) {
+        this.handleDiscardChangesClick()
+      }
+    })
   }
 
   handleSaveChangesClick () {
@@ -109,6 +127,7 @@ export default class SnippetItem extends React.Component {
 
     this.setState({ isEditing: false })
     editor.setOption('readOnly', true)
+    this.unbindEvents()
   }
 
   handleDeleteClick () {
@@ -233,6 +252,7 @@ export default class SnippetItem extends React.Component {
     this.setState({ isEditing: false }, () => {
       editor.setOption('readOnly', true)
     })
+    this.unbindEvents()
   }
 
   renderTagList () {
