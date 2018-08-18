@@ -1,5 +1,5 @@
 const { app, Menu, ipcMain } = require('electron')
-const { pageView } = require('../browser/lib/analytics')
+// const { pageView } = require('../browser/lib/analytics')
 
 let mainWindow = null
 
@@ -23,7 +23,7 @@ if (isSecondInstance) {
 }
 
 app.on('ready', () => {
-  pageView('/main-process')
+  // pageView('/main-process')
   mainWindow = require('./app-window')(app)
   require('./app-tray')(app, mainWindow)
   ipcMain.on('bringToFront', () => {

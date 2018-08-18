@@ -19,7 +19,9 @@ export default class CodeEditor extends React.Component {
     if (snippet) {
       const { theme, showLineNumber, highlightCurrentLine } = config.editor
       const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
-      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+      if (snippetMode && snippetMode !== 'null') {
+        require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+      }
       const gutters = showLineNumber
         ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
         : []
@@ -64,7 +66,9 @@ export default class CodeEditor extends React.Component {
     let snippetMode = 'null'
     if (resultMode) {
       snippetMode = resultMode.mode
-      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+      if (snippetMode && snippetMode !== 'null') {
+        require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+      }
     }
 
     const gutters = showLineNumber
@@ -113,7 +117,9 @@ export default class CodeEditor extends React.Component {
   onUpdateSingleFileSnippet (props) {
     const { snippet } = props
     const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
-    require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+    if (snippetMode && snippetMode !== 'null') {
+      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+    }
     this.editor.setValue(snippet.value)
     this.editor.setOption('mode', snippetMode)
   }
@@ -129,7 +135,9 @@ export default class CodeEditor extends React.Component {
         let snippetMode = 'null'
         if (resultMode) {
           snippetMode = resultMode.mode
-          require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+          if (snippetMode && snippetMode !== 'null') {
+            require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+          }
         }
 
         this.editor.setOption('mode', snippetMode)
@@ -152,7 +160,9 @@ export default class CodeEditor extends React.Component {
     // only update codemirror mode if new props is passed
     if (props) {
       const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
-      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+      if (snippetMode && snippetMode !== 'null') {
+        require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+      }
     }
     const gutters = showLineNumber
       ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
@@ -208,7 +218,9 @@ export default class CodeEditor extends React.Component {
       let snippetMode = 'null'
       if (resultMode) {
         snippetMode = resultMode.mode
-        require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+        if (snippetMode && snippetMode !== 'null') {
+          require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+        }
       }
     }
 
