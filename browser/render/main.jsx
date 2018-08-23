@@ -59,6 +59,8 @@ export default class Main extends React.Component {
       message.reply({ snippets })
     })
 
+    this.setUpDropFile()
+
     pageView('/')
   }
 
@@ -77,10 +79,31 @@ export default class Main extends React.Component {
     }
   }
 
+  setUpDropFile () {
+    const holder = this.refs.wrapper
+
+    holder.ondragover = () => false
+
+    holder.ondragleave = () => false
+
+    holder.ondragend = () => false
+
+    holder.ondrop = e => {
+      e.preventDefault()
+      const files = e.dataTransfer.files
+      if (files && files[0]) {
+        const path = files[0].path
+        eventEmitter.emit('snippet:import', path)
+      }
+
+      return false
+    }
+  }
+
   render () {
     const { config } = this.state
     return (
-      <div className="wrapper">
+      <div className="wrapper" ref="wrapper">
         <ToastContainer />
         <ModalList config={config} />
         <SideBar config={config} />
