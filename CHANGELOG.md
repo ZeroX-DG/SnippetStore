@@ -4,6 +4,10 @@ Every notable changes in each version will be listed in this file.
 
 # 0.2.7 - Unreleased
 
+## Features:
+
+- **Interface**: Import snippet by drag & drop directly to the app
+
 ## Bugfixes:
 
 - **Interface**: Fixed plain text mode bug ([3ad5c42](https://github.com/ZeroX-DG/SnippetStore/commit/3ad5c42))
