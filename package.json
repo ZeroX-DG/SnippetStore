@@ -33,7 +33,7 @@
       "resources/**/*",
       "languages/**/*"
     ],
-    "asarUnpack": [
+    "extraResources": [
       "LICENSE",
       "THIRD-PARTY-LICENSES.txt"
     ],
