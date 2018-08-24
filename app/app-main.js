@@ -1,4 +1,3 @@
-require('babel-register')
 const { app, Menu, ipcMain } = require('electron')
 const { pageView } = require('../browser/lib/analytics')
 
