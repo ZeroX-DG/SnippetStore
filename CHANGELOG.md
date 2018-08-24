@@ -4,6 +4,8 @@ Every notable changes in each version will be listed in this file.
 
 # 0.2.7
 
+https://medium.com/@nguynvithng_34102/snippetstore-v0-2-7-is-out-aa934b1d25e7
+
 ## Features:
 
 - **Interface**: Import snippet by drag & drop directly to the app
