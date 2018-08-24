@@ -1,6 +1,6 @@
 {
   "name": "snippetstore",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "A snippet management app for developers",
   "main": "index.js",
   "scripts": {
