@@ -31,8 +31,11 @@
       "app/**/*",
       "node_modules/**/*",
       "resources/**/*",
-      "languages/**/*",
-      "LICENSE"
+      "languages/**/*"
+    ],
+    "asarUnpack": [
+      "LICENSE",
+      "THIRD-PARTY-LICENSES.txt"
     ],
     "dmg": {
       "contents": [
