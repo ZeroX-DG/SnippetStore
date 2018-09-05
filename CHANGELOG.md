@@ -2,6 +2,12 @@
 
 Every notable changes in each version will be listed in this file.
 
+# 0.2.8
+
+## Bugfixes:
+
+- **Interface**: Fixed search language that contain spaces ([8223abd](https://github.com/ZeroX-DG/SnippetStore/commit/8223abd))
+
 # 0.2.7
 
 https://medium.com/@nguynvithng_34102/snippetstore-v0-2-7-is-out-aa934b1d25e7
