@@ -9,7 +9,7 @@ import getLanguageIcon from 'lib/getLangIcon'
 @observer
 export default class LanguageList extends React.Component {
   handleLanguageClick (lang) {
-    eventEmitter.emit('languageList:pickLang', lang)
+    eventEmitter.emit('languageList:pickLang', lang.split(' ').join('_'))
     trackEvent('user interaction', 'use languagelist')
   }
 
