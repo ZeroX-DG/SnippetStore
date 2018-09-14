@@ -8,6 +8,10 @@ Every notable changes in each version will be listed in this file.
 
 - **Interface**: Fixed search language that contain spaces ([8223abd](https://github.com/ZeroX-DG/SnippetStore/commit/8223abd))
 
+## Others:
+
+- **License**: Change license to MIT
+
 # 0.2.7
 
 https://medium.com/@nguynvithng_34102/snippetstore-v0-2-7-is-out-aa934b1d25e7
