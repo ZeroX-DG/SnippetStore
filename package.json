@@ -17,6 +17,9 @@
     "dev": "cross-env NODE_ENV=dev concurrently --success first --kill-others \"npm run webpack\" \"npm run start-dev\"",
     "test": "cross-env NODE_ENV=test BABEL_ENV=test jest"
   },
+  "jest": {
+    "testURL": "http://localhost"
+  },
   "build": {
     "appId": "com.zerox-dg.snippetstore",
     "productName": "Snippet Store",
