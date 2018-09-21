@@ -8,6 +8,8 @@ Every notable changes in each version will be listed in this file.
 
 - **Interface**: Fixed search language that contain spaces ([8223abd](https://github.com/ZeroX-DG/SnippetStore/commit/8223abd))
 
+- **Interface**: Fixed multi-file snippet with empty file extension ([4a5c8b1](https://github.com/ZeroX-DG/SnippetStore/commit/4a5c8b1))
+
 ## Others:
 
 - **License**: Change license to MIT

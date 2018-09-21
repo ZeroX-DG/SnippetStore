@@ -375,7 +375,10 @@ export default class SnippetItemMultiFiles extends React.Component {
       // if the mode for that language exists then use it otherwise use text
       if (resultMode) {
         const snippetMode = resultMode.mode
-        if (snippetMode === 'htmlmixed') {
+        if (snippetMode === 'null') {
+          editor.setOption('mode', 'null')
+          editor.setOption('htmlMode', false)
+        } else if (snippetMode === 'htmlmixed') {
           require(`codemirror/mode/xml/xml`)
           editor.setOption('mode', 'xml')
           editor.setOption('htmlMode', true)
@@ -384,7 +387,7 @@ export default class SnippetItemMultiFiles extends React.Component {
           editor.setOption('mode', snippetMode)
         }
       } else {
-        editor.setOption('mode', 'null')
+        editor.setOption('mode', 'text')
       }
       this.setState({ editingFiles: newEditingFiles })
     }, 200)
@@ -470,7 +473,10 @@ export default class SnippetItemMultiFiles extends React.Component {
         // if the mode for that language exists then use it otherwise use text
         if (resultMode) {
           const snippetMode = resultMode.mode
-          if (snippetMode === 'htmlmixed') {
+          if (snippetMode === 'null') {
+            editor.setOption('mode', 'null')
+            editor.setOption('htmlMode', false)
+          } else if (snippetMode === 'htmlmixed') {
             require(`codemirror/mode/xml/xml`)
             editor.setOption('mode', 'xml')
             editor.setOption('htmlMode', true)
