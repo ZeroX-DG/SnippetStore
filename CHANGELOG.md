@@ -10,6 +10,8 @@ Every notable changes in each version will be listed in this file.
 
 - **Interface**: Fixed multi-file snippet with empty file extension ([4a5c8b1](https://github.com/ZeroX-DG/SnippetStore/commit/4a5c8b1))
 
+- **Interface**: Fixed icon is too big on MacOS ([e70c9c4](https://github.com/ZeroX-DG/SnippetStore/commit/e70c9c4))
+
 ## Others:
 
 - **License**: Change license to MIT
