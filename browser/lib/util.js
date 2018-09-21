@@ -29,7 +29,7 @@ export function getExtension (name) {
   if (indexOfExtension !== -1) {
     return name.substring(indexOfExtension + 1)
   } else {
-    return null
+    return 'txt'
   }
 }
 
