@@ -1,12 +1,13 @@
 const { Menu, Tray, nativeImage } = require('electron')
 const path = require('path')
-
+const isOSX = process.platform === 'darwin'
 let tray = null
 
 function createTray (app, mainWindow) {
+  const icon = isOSX ? 'icon18.png' : 'icon512.png'
   tray = new Tray(
     nativeImage.createFromPath(
-      path.join(__dirname, '..', 'resources', 'icon', 'icon512.png')
+      path.join(__dirname, '..', 'resources', 'icon', icon)
     )
   )
 
