@@ -2,6 +2,12 @@
 
 Every notable changes in each version will be listed in this file.
 
+# 0.2.9 - Unreleased
+
+## Improvement
+
+- **Development**: Improved dev script to fix blank screen on start ([920055c](https://github.com/ZeroX-DG/SnippetStore/commit/920055c))
+
 # 0.2.8
 
 ## Bugfixes:
