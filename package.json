@@ -4,9 +4,7 @@
   "description": "A snippet management app for developers",
   "main": "index.js",
   "scripts": {
-    "start-dev": "electron ./index.js --hot",
     "start": "electron ./index.js",
-    "webpack": "webpack-dev-server --hot --inline --config scripts/webpack.config.js --mode development --port 8000",
     "fix": "eslint . --fix",
     "lint": "eslint .",
     "build": "node scripts/build.js",
@@ -15,7 +13,7 @@
     "dist:mac": "npm run build && rimraf dist/ && electron-builder --mac",
     "dist:win:linux": "npm run build && rimraf dist/ && electron-builder --win --linux",
     "dist:all": "npm run build && rimraf dist/ && electron-builder --win --linux --mac",
-    "dev": "cross-env NODE_ENV=dev concurrently --success first --kill-others \"npm run webpack\" \"npm run start-dev\"",
+    "dev": "node scripts/dev.js",
     "test": "cross-env NODE_ENV=test BABEL_ENV=test jest"
   },
   "jest": {
@@ -132,6 +130,7 @@
     "rimraf": "^2.6.2",
     "sass-loader": "^7.0.1",
     "sass-resources-loader": "^1.3.3",
+    "signale": "^1.3.0",
     "style-loader": "^0.21.0",
     "svg-inline-loader": "^0.8.0",
     "webpack": "^4.6.0",

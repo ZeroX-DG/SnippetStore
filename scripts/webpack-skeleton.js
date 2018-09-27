@@ -2,8 +2,9 @@ const path = require('path')
 
 var config = {
   entry: {
-    main: path.join(__dirname, '../browser/index.jsx')
+    main: [path.join(__dirname, '../browser/index.jsx')]
   },
+  mode: 'development',
   module: {
     rules: [
       {
