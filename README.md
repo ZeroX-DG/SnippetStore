@@ -38,6 +38,12 @@ SnippetStore to be available in homebrew and able to run on macOS too. But in or
 
 <a href="https://www.buymeacoffee.com/hQteV8A" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
+A massive thank you to these donators
+
+| [Trevor Robertson]                                             |
+| -------------------------------------------------------------- |
+| ![](https://avatars1.githubusercontent.com/u/597601?s=150&v=4) |
+
 ## Download
 
 Currently SnippetStore only available for linux and windows.
@@ -121,3 +127,5 @@ Check out [contributing.md](contributing.md)
 ## License
 
 - [MIT](LICENSE)
+
+[trevor robertson]: https://github.com/onetrev
