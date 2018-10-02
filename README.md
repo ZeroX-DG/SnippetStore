@@ -38,6 +38,10 @@ SnippetStore to be available in homebrew and able to run on macOS too. But in or
 
 <a href="https://www.buymeacoffee.com/hQteV8A" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
+SnippetStore is also available on issuehunt
+
+[![issuehunt-image](https://github.com/BoostIO/issuehunt-materials/blob/master/issuehunt-badge@1x.png?raw=true)](https://issuehunt.io/repos/136717666)
+
 A massive thank you to these donators
 
 | [Trevor Robertson]                                             |
