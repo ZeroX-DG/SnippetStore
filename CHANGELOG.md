@@ -4,7 +4,11 @@ Every notable changes in each version will be listed in this file.
 
 # 0.2.9 - Unreleased
 
-## Improvement
+## Bugfixes:
+
+- **Interface**: Fixed bug when create new multi-files snippet ([0ba8601](https://github.com/ZeroX-DG/SnippetStore/commit/0ba8601))
+
+## Improvement:
 
 - **Development**: Improved dev script to fix blank screen on start ([920055c](https://github.com/ZeroX-DG/SnippetStore/commit/920055c))
 
