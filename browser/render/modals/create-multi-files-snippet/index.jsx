@@ -95,6 +95,11 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
     let snippetMode = 'null'
     if (resultMode) {
       snippetMode = resultMode.mode
+      if (snippetMode === 'null') {
+        this.editor.setOption('mode', 'null')
+        this.editor.setOption('htmlMode', false)
+        return
+      }
       require(`codemirror/mode/${snippetMode}/${snippetMode}`)
     }
   }
@@ -223,7 +228,10 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
     const resultMode = CodeMirror.findModeByExtension(fileExtension)
     if (resultMode) {
       const snippetMode = resultMode.mode
-      if (snippetMode === 'htmlmixed') {
+      if (snippetMode === 'null') {
+        this.editor.setOption('mode', 'null')
+        this.editor.setOption('htmlMode', false)
+      } else if (snippetMode === 'htmlmixed') {
         require(`codemirror/mode/xml/xml`)
         this.editor.setOption('mode', 'xml')
         this.editor.setOption('htmlMode', true)

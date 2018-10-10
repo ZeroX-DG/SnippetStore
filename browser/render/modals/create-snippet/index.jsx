@@ -84,7 +84,10 @@ export default class CreateSnippetModal extends React.Component {
   changeLang () {
     const snippetLang = this.refs.lang.value
     const snippetMode = CodeMirror.findModeByName(snippetLang).mode
-    if (snippetMode === 'htmlmixed') {
+    if (snippetMode === 'null') {
+      this.editor.setOption('mode', 'null')
+      this.editor.setOption('htmlMode', false)
+    } else if (snippetMode === 'htmlmixed') {
       require(`codemirror/mode/xml/xml`)
       this.editor.setOption('mode', 'xml')
       this.editor.setOption('htmlMode', true)
