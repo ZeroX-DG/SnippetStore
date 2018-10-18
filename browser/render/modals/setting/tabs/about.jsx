@@ -33,7 +33,7 @@ export default class About extends React.Component {
             <img src={logo} width="200px" />
             <div className="m-l-100">
               <h2>SnippetStore</h2>
-              <p>Version: 0.2.8</p>
+              <p>Version: 0.2.9</p>
               <p className="m-t-20">
                 {i18n.__('SnippetStore is a snippet management app developers')}
               </p>
