@@ -314,7 +314,7 @@ export default class SnippetItemMultiFiles extends React.Component {
             const langMode = CodeMirror.findModeByExtension(
               getExtension(file.name)
             )
-            const languageIcon = getLanguageIcon(langMode.name)
+            const languageIcon = getLanguageIcon(langMode ? langMode.name : 'null')
             return (
               <li
                 key={file.key}
