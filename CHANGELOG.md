@@ -10,7 +10,7 @@ Every notable changes in each version will be listed in this file.
 
 - **Interface**: Fixed bug when editing file name in multi-files snippet in original layout ([d5cb17c](https://github.com/ZeroX-DG/SnippetStore/commit/d5cb17c))
 
-- **Interface**: Fixed bug when editing file name in multi-files snippet in `list and detail` layout
+- **Interface**: Fixed bug when editing file name in multi-files snippet in `list and detail` layout ([0bbaaab](https://github.com/ZeroX-DG/SnippetStore/commit/0bbaaab))
 
 ## Improvement:
 
