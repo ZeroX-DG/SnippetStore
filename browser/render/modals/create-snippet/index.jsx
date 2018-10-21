@@ -82,6 +82,8 @@ export default class CreateSnippetModal extends React.Component {
   }
 
   changeLang () {
+    const { config } = this.props
+    const langConf = config.language
     const snippetLang = this.refs.lang.value
     const snippetMode = CodeMirror.findModeByName(snippetLang).mode
     if (snippetMode === 'null') {
@@ -94,6 +96,12 @@ export default class CreateSnippetModal extends React.Component {
     } else if (snippetMode === 'sql') {
       require(`codemirror/mode/${snippetMode}/${snippetMode}`)
       this.editor.setOption('mode', 'text/x-sql')
+    } else if (snippetMode === 'php') {
+      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+      this.editor.setOption('mode', {
+        name: 'php',
+        startOpen: !langConf.php.requireOpenTag
+      })
     } else {
       require(`codemirror/mode/${snippetMode}/${snippetMode}`)
       this.editor.setOption('mode', snippetMode)

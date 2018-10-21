@@ -8,6 +8,7 @@ import EditorTab from './tabs/editor'
 import HotKeysTab from './tabs/hotkeys'
 import About from './tabs/about'
 import StorageTab from './tabs/storage'
+import LanguageTab from './tabs/language'
 
 export default class SettingModal extends React.Component {
   constructor (props) {
@@ -31,6 +32,8 @@ export default class SettingModal extends React.Component {
         return <About config={config} />
       case 'storage':
         return <StorageTab config={config} />
+      case 'language':
+        return <LanguageTab config={config} />
     }
   }
 
@@ -71,6 +74,12 @@ export default class SettingModal extends React.Component {
           className={tab === 'storage' ? 'active' : ''}
         >
           <div className="tab">{i18n.__('Storage')}</div>
+        </li>
+        <li
+          onClick={() => this.switchTab('language')}
+          className={tab === 'language' ? 'active' : ''}
+        >
+          <div className="tab">{i18n.__('Language')}</div>
         </li>
       </ul>
     )

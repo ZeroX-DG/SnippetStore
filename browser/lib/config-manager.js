@@ -44,6 +44,11 @@ const DEFAULT_CONFIG = {
     TogglePreviousSnippet: OSX ? 'command + pageup' : 'Ctrl + pageup',
     ToggleNextSnippet: OSX ? 'command + pagedown' : 'Ctrl + pagedown'
   },
+  language: {
+    php: {
+      requireOpenTag: true
+    }
+  },
   allowAnalytics: true,
   storage: ''
 }

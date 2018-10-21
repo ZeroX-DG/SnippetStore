@@ -60,6 +60,7 @@ export default class CodeEditor extends React.Component {
       indentUsingTab,
       highlightCurrentLine
     } = config.editor
+    const langConf = config.language
     const file = snippet.files[selectedFile]
     const fileExtension = getExtension(file.name)
     const resultMode = CodeMirror.findModeByExtension(fileExtension)
@@ -68,6 +69,13 @@ export default class CodeEditor extends React.Component {
       snippetMode = resultMode.mode
       if (snippetMode && snippetMode !== 'null') {
         require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+      }
+    }
+
+    if (snippetMode === 'php') {
+      snippetMode = {
+        name: 'php',
+        startOpen: !langConf.php.requireOpenTag
       }
     }
 
@@ -115,17 +123,26 @@ export default class CodeEditor extends React.Component {
   }
 
   onUpdateSingleFileSnippet (props) {
-    const { snippet } = props
-    const snippetMode = CodeMirror.findModeByName(snippet.lang).mode
+    const { snippet, config } = props
+    const langConf = config.language
+    let snippetMode = CodeMirror.findModeByName(snippet.lang).mode
     if (snippetMode && snippetMode !== 'null') {
       require(`codemirror/mode/${snippetMode}/${snippetMode}`)
     }
     this.editor.setValue(snippet.value)
+    if (snippetMode === 'php') {
+      snippetMode = {
+        name: 'php',
+        startOpen: !langConf.php.requireOpenTag
+      }
+    }
     this.editor.setOption('mode', snippetMode)
   }
 
   onUpdateMultiFileSnippet () {
     const { snippet, selectedFile, isEditing } = this.props
+    const { config } = this.props
+    const langConf = config.language
 
     if (!isEditing) {
       const file = snippet.files[selectedFile]
@@ -139,7 +156,12 @@ export default class CodeEditor extends React.Component {
             require(`codemirror/mode/${snippetMode}/${snippetMode}`)
           }
         }
-
+        if (snippetMode === 'php') {
+          snippetMode = {
+            name: 'php',
+            startOpen: !langConf.php.requireOpenTag
+          }
+        }
         this.editor.setOption('mode', snippetMode)
         this.editor.setValue(file.value)
       }

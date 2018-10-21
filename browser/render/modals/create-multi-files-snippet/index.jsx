@@ -39,7 +39,7 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
         this.reset()
       }
     })
-    trackEvent('user interaction', 'create snippet', 'single-file')
+    trackEvent('user interaction', 'create snippet', 'multi-file')
     eventEmitter.on('snippets:saveAll', this.createSnippet.bind(this))
   }
 
@@ -224,6 +224,8 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
   }
 
   applyEditorLanguage (filename) {
+    const { config } = this.props
+    const langConf = config.language
     const fileExtension = getExtension(filename)
     const resultMode = CodeMirror.findModeByExtension(fileExtension)
     if (resultMode) {
@@ -238,6 +240,12 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
       } else if (snippetMode === 'sql') {
         require(`codemirror/mode/${snippetMode}/${snippetMode}`)
         this.editor.setOption('mode', 'text/x-sql')
+      } else if (snippetMode === 'php') {
+        require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+        this.editor.setOption('mode', {
+          name: 'php',
+          startOpen: !langConf.php.requireOpenTag
+        })
       } else {
         require(`codemirror/mode/${snippetMode}/${snippetMode}`)
         this.editor.setOption('mode', snippetMode)
