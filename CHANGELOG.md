@@ -2,6 +2,12 @@
 
 Every notable changes in each version will be listed in this file.
 
+# 0.2.10 - Unreleased
+
+## Feature:
+
+- **Language**: PHP open and close tag `<?php ?>` is now optional and can be configure in setting ([ffeca5b](https://github.com/ZeroX-DG/SnippetStore/commit/ffeca5b))
+
 # 0.2.9
 
 ## Bugfixes:
