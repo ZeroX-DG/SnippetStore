@@ -4,6 +4,10 @@ Every notable changes in each version will be listed in this file.
 
 # 0.2.10 - Unreleased
 
+## Bugfixes:
+
+- **Interface**: Fixed window not completely maximize when open ([afb19c6](https://github.com/ZeroX-DG/SnippetStore/commit/afb19c6))
+
 ## Feature:
 
 - **Language**: PHP open and close tag `<?php ?>` is now optional and can be configure in setting ([ffeca5b](https://github.com/ZeroX-DG/SnippetStore/commit/ffeca5b))
