@@ -31,6 +31,13 @@ function createWindow (app) {
   if (process.env.NODE_ENV === 'dev') {
     mainWindow.webContents.openDevTools()
   }
+  const screen = electron.screen.getPrimaryDisplay()
+  if (
+    windowSize.width >= screen.size.width &&
+    windowSize.height >= screen.size.height - 1
+  ) {
+    mainWindow.maximize()
+  }
   // prevent the app from quitting
   mainWindow.on('close', e => {
     if (!isQuitting) {
