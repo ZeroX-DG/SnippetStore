@@ -8,12 +8,15 @@ import './snippet-list'
 
 @observer
 export default class SnippetList extends React.Component {
+  state = {
+    isEditingOn: false
+  }
   componentDidMount () {
     eventEmitter.on('snippet-detail:edit-start', () => {
-      this.refs.wall.style.display = 'block'
+      this.setState({ isEditingOn: true })
     })
     eventEmitter.on('snippet-detail:edit-end', () => {
-      this.refs.wall.style.display = 'none'
+      this.setState({ isEditingOn: false })
     })
     eventEmitter.on('snippet-list:previous', () => {
       const { snippets, selectedSnippet } = this.props.store
@@ -53,12 +56,16 @@ export default class SnippetList extends React.Component {
     })
   }
 
-  renderSnippetList () {
+  render () {
+    const { isEditingOn } = this.state
     const { store, config } = this.props
     const { snippets, selectedSnippet } = store
     return (
       <div className="snippets list-and-detail">
-        <div className="wall" ref="wall" />
+        <div
+          className="wall"
+          style={{ display: `${isEditingOn ? 'block' : 'none'}` }}
+        />
         <SearchSnippetBar store={store} />
         <SortSnippetTool store={store} />
         <ul>
@@ -77,9 +84,5 @@ export default class SnippetList extends React.Component {
         </ul>
       </div>
     )
-  }
-
-  render () {
-    return this.renderSnippetList()
   }
 }
