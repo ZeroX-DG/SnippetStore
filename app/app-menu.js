@@ -43,7 +43,7 @@ function getMenu (app, mainWindow) {
         }
       },
       {
-        label: 'Import a snippet',
+        label: 'Import all snippets',
         click () {
           dialog.showOpenDialog(
             BrowserWindow.getFocusedWindow(),
