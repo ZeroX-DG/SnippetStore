@@ -10,6 +10,8 @@ Every notable changes in each version will be listed in this file.
 
 - **Interface**: Fixed snippet list still accessible in edit mode (`list-and-detail` layout) ([5fee622](https://github.com/ZeroX-DG/SnippetStore/commit/5fee622))
 
+- **Interface**: Fixed abort export snippet show error ([eb4b9d1](https://github.com/ZeroX-DG/SnippetStore/commit/eb4b9d1))
+
 ## Feature:
 
 - **Language**: PHP open and close tag `<?php ?>` is now optional and can be configure in setting ([ffeca5b](https://github.com/ZeroX-DG/SnippetStore/commit/ffeca5b))
