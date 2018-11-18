@@ -73,7 +73,7 @@ export default class SnippetDetailMultiFile extends React.Component {
         properties: ['openDirectory']
       },
       paths => {
-        if (paths[0]) {
+        if (paths && paths[0]) {
           const folder = paths[0]
           exportSnippetAPI(exportSnippet, folder)
           toast.success('Snippet exported!')

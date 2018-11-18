@@ -72,7 +72,7 @@ function getMenu (app, mainWindow) {
               buttonLabel: 'Export'
             },
             paths => {
-              if (paths[0]) {
+              if (paths && paths[0]) {
                 const folder = paths[0]
                 mainWindow.webContents.send('snippet:exportAll', folder)
               }
