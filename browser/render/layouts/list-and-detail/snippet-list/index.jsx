@@ -12,48 +12,63 @@ export default class SnippetList extends React.Component {
     isEditingOn: false
   }
   componentDidMount () {
-    eventEmitter.on('snippet-detail:edit-start', () => {
-      this.setState({ isEditingOn: true })
-    })
-    eventEmitter.on('snippet-detail:edit-end', () => {
-      this.setState({ isEditingOn: false })
-    })
-    eventEmitter.on('snippet-list:previous', () => {
-      const { snippets, selectedSnippet } = this.props.store
-      if (selectedSnippet) {
-        for (let i = 0; i < snippets.length; i++) {
-          if (snippets[i].key === selectedSnippet.key) {
-            // previous of the i-th snippet is i - 1
-            let previousIndex = i - 1
-            if (previousIndex < 0) {
-              previousIndex = snippets.length - 1
-            }
-            this.props.store.selectedSnippet = snippets[previousIndex]
-            break
+    eventEmitter.on('snippet-detail:edit-start', this.toggleEditOn)
+    eventEmitter.on('snippet-detail:edit-end', this.toggleEditOff)
+    eventEmitter.on('snippet-list:previous', this.goToPreviousSnippet)
+    eventEmitter.on('snippet-list:next', this.goToNextSnippet)
+  }
+
+  componentWillUnmount () {
+    eventEmitter.off('snippet-detail:edit-start', this.toggleEditOn)
+    eventEmitter.off('snippet-detail:edit-end', this.toggleEditOff)
+    eventEmitter.off('snippet-list:previous', this.goToPreviousSnippet)
+    eventEmitter.off('snippet-list:next', this.goToNextSnippet)
+  }
+
+  toggleEditOn = () => {
+    this.setState({ isEditingOn: true })
+  }
+
+  toggleEditOff = () => {
+    this.setState({ isEditingOn: false })
+  }
+
+  goToNextSnippet = () => {
+    const { snippets, selectedSnippet } = this.props.store
+    if (selectedSnippet) {
+      for (let i = 0; i < snippets.length; i++) {
+        if (snippets[i].key === selectedSnippet.key) {
+          // the next snippet of the i-th snippet is i + 1
+          let nextIndex = i + 1
+          if (nextIndex > snippets.length - 1) {
+            nextIndex = 0
           }
+          this.props.store.selectedSnippet = snippets[nextIndex]
+          break
         }
-      } else {
-        this.props.store.selectedSnippet = snippets[0]
       }
-    })
-    eventEmitter.on('snippet-list:next', () => {
-      const { snippets, selectedSnippet } = this.props.store
-      if (selectedSnippet) {
-        for (let i = 0; i < snippets.length; i++) {
-          if (snippets[i].key === selectedSnippet.key) {
-            // the next snippet of the i-th snippet is i + 1
-            let nextIndex = i + 1
-            if (nextIndex > snippets.length - 1) {
-              nextIndex = 0
-            }
-            this.props.store.selectedSnippet = snippets[nextIndex]
-            break
+    } else {
+      this.props.store.selectedSnippet = snippets[0]
+    }
+  }
+
+  goToPreviousSnippet = () => {
+    const { snippets, selectedSnippet } = this.props.store
+    if (selectedSnippet) {
+      for (let i = 0; i < snippets.length; i++) {
+        if (snippets[i].key === selectedSnippet.key) {
+          // previous of the i-th snippet is i - 1
+          let previousIndex = i - 1
+          if (previousIndex < 0) {
+            previousIndex = snippets.length - 1
           }
+          this.props.store.selectedSnippet = snippets[previousIndex]
+          break
         }
-      } else {
-        this.props.store.selectedSnippet = snippets[0]
       }
-    })
+    } else {
+      this.props.store.selectedSnippet = snippets[0]
+    }
   }
 
   render () {
