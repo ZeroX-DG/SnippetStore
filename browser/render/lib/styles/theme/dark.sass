@@ -9,12 +9,15 @@ body[data-theme='dark']
     background-color: rgba(0, 0, 0, 0.24)
     &:hover
       background-color: rgba(0, 0, 0, 0.7)
-  select
+  select, .select-input input, .select-input .options
     background: map-get($input-tag-dark, background)
     color: map-get($input-tag-dark, color)
   input[type='text'], input[type='number'], textarea
     background: map-get($input-tag-dark, background)
     color: map-get($input-tag-dark, color)
+
+  .select-input .option:hover
+    background: rgba(255, 255, 255, 0.1)
 
 body[data-theme='dark']
   .sidebar

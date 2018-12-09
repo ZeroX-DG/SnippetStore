@@ -3,10 +3,16 @@ import ModalSkeleton from '../modal-skeleton'
 import eventEmitter from 'lib/event-emitter'
 import i18n from 'render/lib/i18n'
 import TagInput from 'render/components/tag-input'
+import SelectInput from 'render/components/select-input'
 import { trackEvent } from 'lib/analytics'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/meta'
 import 'codemirror/addon/display/autorefresh'
+
+const languageOptions = CodeMirror.modeInfo.reduce((acc, mode) => {
+  acc.push({ value: mode.mode, label: mode.name })
+  return acc
+}, [])
 
 export default class CreateSnippetModal extends React.Component {
   constructor (props) {
@@ -84,8 +90,8 @@ export default class CreateSnippetModal extends React.Component {
   changeLang () {
     const { config } = this.props
     const langConf = config.language
-    const snippetLang = this.refs.lang.value
-    const snippetMode = CodeMirror.findModeByName(snippetLang).mode
+    const snippetLang = this.refs.snippetLang.value()
+    const snippetMode = snippetLang.value
     if (snippetMode === 'null') {
       this.editor.setOption('mode', 'null')
       this.editor.setOption('htmlMode', false)
@@ -110,7 +116,7 @@ export default class CreateSnippetModal extends React.Component {
 
   createSnippet () {
     const snippetName = this.refs.snippetName.value
-    const snippetLang = this.refs.lang.value
+    const snippetLang = this.refs.snippetLang.value().label
     const snippetCode = this.editor.getValue()
     // wrappedInstance is mobX wrapped instance of the original component
     const snippetTags = this.tags.wrappedInstance.getTags()
@@ -147,13 +153,11 @@ export default class CreateSnippetModal extends React.Component {
           </div>
           <div className="input-group">
             <label>{i18n.__('Snippet language')}</label>
-            <select ref="lang" onChange={this.changeLang.bind(this)}>
-              {CodeMirror.modeInfo.map((mode, index) => (
-                <option value={mode.name} key={index}>
-                  {mode.name}
-                </option>
-              ))}
-            </select>
+            <SelectInput
+              ref="snippetLang"
+              options={languageOptions}
+              onChange={this.changeLang.bind(this)}
+            />
           </div>
           <div className="code-input-group">
             <label>{i18n.__('Tags')}</label>
