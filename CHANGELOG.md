@@ -2,6 +2,12 @@
 
 Every notable changes in each version will be listed in this file.
 
+# 0.2.11
+
+## Features:
+
+- **Interface**: Added input select for faster language picking in create snippet modal ([2e83a62](https://github.com/ZeroX-DG/SnippetStore/commit/2e83a62))
+
 # 0.2.10
 
 ## Bugfixes:
