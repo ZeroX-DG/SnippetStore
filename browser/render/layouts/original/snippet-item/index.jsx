@@ -17,18 +17,28 @@ import { toJS } from 'mobx'
 import exportSnippetAPI from 'core/API/snippet/export-snippet'
 import getLanguageIcon from 'lib/getLangIcon'
 import { remote } from 'electron'
+import MarkdownPreview from '../../../components/markdown-preview/markdown-preview'
 const { dialog } = remote
 
 export default class SnippetItem extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isEditing: false
+      isEditing: false,
+      isPreview: false
     }
   }
 
   componentWillUnmount () {
     this.unbindEvents()
+  }
+
+  handlePreview () {
+    this.setState({ isPreview: true })
+  }
+
+  handleExitPreview () {
+    this.setState({ isPreview: false })
   }
 
   hasFocus () {
@@ -162,7 +172,7 @@ export default class SnippetItem extends React.Component {
 
   renderHeader () {
     const { snippet } = this.props
-    const { isEditing } = this.state
+    const { isEditing, isPreview } = this.state
     const languageIcon = getLanguageIcon(snippet.lang)
     return (
       <div className="header">
@@ -188,6 +198,28 @@ export default class SnippetItem extends React.Component {
                 </option>
               ))}
             </select>
+          )}
+          {!isEditing &&
+            !isPreview &&
+            snippet.lang === 'Markdown' && (
+            <div
+              className="preview-btn"
+              data-tip={i18n.__('Preview')}
+              onClick={this.handlePreview.bind(this)}
+            >
+              <FAIcon icon="eye" />
+            </div>
+          )}
+          {!isEditing &&
+            isPreview &&
+            snippet.lang === 'Markdown' && (
+            <div
+              className="unpreview-btn"
+              data-tip={i18n.__('Exit preview')}
+              onClick={this.handleExitPreview.bind(this)}
+            >
+              <FAIcon icon="eye-slash" />
+            </div>
           )}
           {!isEditing && (
             <div
@@ -327,6 +359,7 @@ export default class SnippetItem extends React.Component {
   }
 
   render () {
+    const { isPreview } = this.state
     const { config, snippet } = this.props
     return (
       <div className="snippet-item original">
@@ -334,13 +367,19 @@ export default class SnippetItem extends React.Component {
         {this.renderHeader()}
         {this.renderTagList()}
         {this.renderDescription()}
-        <CodeEditor
-          config={config}
-          type="single"
-          snippet={snippet}
-          ref="editor"
-          maxHeight="300px"
-        />
+        {snippet.lang === 'Markdown' && isPreview ? (
+          <div style={{ height: '300px' }}>
+            <MarkdownPreview markdown={snippet.value} />
+          </div>
+        ) : (
+          <CodeEditor
+            config={config}
+            type="single"
+            snippet={snippet}
+            ref="editor"
+            maxHeight="300px"
+          />
+        )}
         {this.renderFooter()}
       </div>
     )
