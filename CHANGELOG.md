@@ -9,6 +9,11 @@ Every notable changes in each version will be listed in this file.
 - **Interface**: Added input select for faster language picking in create snippet modal ([2e83a62](https://github.com/ZeroX-DG/SnippetStore/commit/2e83a62))
 - **Interface**: Added markdown preview for markdown snippets
 
+## Security
+
+- **Dependency update**: Updated `electron` to 1.8.8
+- **Dependency update**: Updated `universal-analytics` to latest version
+
 # 0.2.10
 
 ## Bugfixes:
