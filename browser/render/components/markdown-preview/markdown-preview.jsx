@@ -37,7 +37,10 @@ class MarkdownPreview extends React.Component {
   }
 
   render () {
-    return <iframe ref="preview" className="markdownPreview" />
+    const { style } = this.props
+    return (
+      <iframe ref="preview" style={style || {}} className="markdownPreview" />
+    )
   }
 }
 

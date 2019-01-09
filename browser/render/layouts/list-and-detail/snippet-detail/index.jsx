@@ -262,7 +262,10 @@ export default class SnippetDetail extends React.Component {
         {this.renderTagList()}
         {this.renderDescription()}
         {snippet.lang === 'Markdown' && isPreview ? (
-          <MarkdownPreview markdown={snippet.value} />
+          <MarkdownPreview
+            markdown={snippet.value}
+            style={{ height: 'calc(100% - 230px)' }}
+          />
         ) : (
           <CodeEditor
             config={config}
