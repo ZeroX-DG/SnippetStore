@@ -1,0 +1,48 @@
+a {
+  color: #61afef;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  color: #f8e8fd;
+}
+
+body,
+pre code {
+  color: #f0f0f0 !important;
+}
+
+code {
+  color: #90c378;
+}
+
+pre:not(.hljs),
+code > div {
+  background-color: #2c323c;
+}
+
+table > thead > tr > th {
+  border-color: #10151d !important;
+}
+
+h1,
+hr,
+table > tbody > tr + tr > td {
+  border-color: #10151d !important;
+}
+
+table td {
+  border-color: #10151d !important;
+}
+
+blockquote {
+  color: #5c6370;
+  font-style: italic;
+  background: transparent;
+  border-color: #2c323c;
+}

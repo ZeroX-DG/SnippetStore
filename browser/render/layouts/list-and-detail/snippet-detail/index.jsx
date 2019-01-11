@@ -17,13 +17,15 @@ import { toJS } from 'mobx'
 import exportSnippetAPI from 'core/API/snippet/export-snippet'
 import getLanguageIcon from 'lib/getLangIcon'
 import { remote } from 'electron'
+import MarkdownPreview from 'render/components/markdown-preview/markdown-preview'
 const { dialog } = remote
 
 export default class SnippetDetail extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      isEditing: false
+      isEditing: false,
+      isPreview: false
     }
   }
 
@@ -60,6 +62,14 @@ export default class SnippetDetail extends React.Component {
     }
   }
 
+  handlePreview () {
+    this.setState({ isPreview: true })
+  }
+
+  handleExitPreview () {
+    this.setState({ isPreview: false })
+  }
+
   exportSnippet () {
     const { snippet } = this.props
     const exportSnippet = toJS(snippet)
@@ -80,7 +90,8 @@ export default class SnippetDetail extends React.Component {
   }
 
   renderTopBar () {
-    const { isEditing } = this.state
+    const { isEditing, isPreview } = this.state
+    const { snippet } = this.props
     return (
       <div className="top-bar">
         <div className="left-tool">
@@ -126,6 +137,28 @@ export default class SnippetDetail extends React.Component {
               onClick={this.handleDiscardChangesClick.bind(this)}
             >
               <FAIcon icon="times" />
+            </div>
+          )}
+          {!isEditing &&
+            !isPreview &&
+            snippet.lang === 'Markdown' && (
+            <div
+              className="preview-btn"
+              data-tip={i18n.__('Preview')}
+              onClick={this.handlePreview.bind(this)}
+            >
+              <FAIcon icon="eye" />
+            </div>
+          )}
+          {!isEditing &&
+            isPreview &&
+            snippet.lang === 'Markdown' && (
+            <div
+              className="unpreview-btn"
+              data-tip={i18n.__('Exit preview')}
+              onClick={this.handleExitPreview.bind(this)}
+            >
+              <FAIcon icon="eye-slash" />
             </div>
           )}
         </div>
@@ -218,6 +251,7 @@ export default class SnippetDetail extends React.Component {
 
   renderSnippet () {
     const { config, snippet } = this.props
+    const { isPreview } = this.state
     return (
       <Fragment>
         {this.renderTopBar()}
@@ -227,12 +261,19 @@ export default class SnippetDetail extends React.Component {
         </div>
         {this.renderTagList()}
         {this.renderDescription()}
-        <CodeEditor
-          config={config}
-          type="single"
-          snippet={snippet}
-          ref="editor"
-        />
+        {snippet.lang === 'Markdown' && isPreview ? (
+          <MarkdownPreview
+            markdown={snippet.value}
+            style={{ height: 'calc(100% - 230px)' }}
+          />
+        ) : (
+          <CodeEditor
+            config={config}
+            type="single"
+            snippet={snippet}
+            ref="editor"
+          />
+        )}
       </Fragment>
     )
   }

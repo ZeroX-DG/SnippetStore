@@ -18,12 +18,14 @@ import './snippet-detail-multi-file'
 import exportSnippetAPI from 'core/API/snippet/export-snippet'
 import getLanguageIcon from 'lib/getLangIcon'
 import { remote } from 'electron'
+import MarkdownPreview from '../../../components/markdown-preview/markdown-preview'
 const { dialog } = remote
 
 export default class SnippetDetailMultiFile extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      isPreview: false,
       isEditing: false,
       selectedFile: 0,
       editingFiles: props.snippet.files
@@ -63,6 +65,14 @@ export default class SnippetDetailMultiFile extends React.Component {
     }
   }
 
+  handlePreview () {
+    this.setState({ isPreview: true })
+  }
+
+  handleExitPreview () {
+    this.setState({ isPreview: false })
+  }
+
   exportSnippet () {
     const { snippet } = this.props
     const exportSnippet = toJS(snippet)
@@ -83,7 +93,14 @@ export default class SnippetDetailMultiFile extends React.Component {
   }
 
   renderTopBar () {
-    const { isEditing } = this.state
+    const { isEditing, isPreview, selectedFile } = this.state
+    const { snippet } = this.props
+    const file = snippet.files[selectedFile]
+    let langName = ''
+    if (file) {
+      const langMode = CodeMirror.findModeByExtension(getExtension(file.name))
+      langName = langMode ? langMode.name : ''
+    }
     return (
       <div className="top-bar">
         <div className="left-tool">
@@ -120,6 +137,28 @@ export default class SnippetDetailMultiFile extends React.Component {
               onClick={this.handleDiscardChangesClick.bind(this)}
             >
               <FAIcon icon="times" />
+            </div>
+          )}
+          {!isEditing &&
+            !isPreview &&
+            langName === 'Markdown' && (
+            <div
+              className="preview-btn"
+              data-tip={i18n.__('Preview')}
+              onClick={this.handlePreview.bind(this)}
+            >
+              <FAIcon icon="eye" />
+            </div>
+          )}
+          {!isEditing &&
+            isPreview &&
+            langName === 'Markdown' && (
+            <div
+              className="unpreview-btn"
+              data-tip={i18n.__('Exit preview')}
+              onClick={this.handleExitPreview.bind(this)}
+            >
+              <FAIcon icon="eye-slash" />
             </div>
           )}
         </div>
@@ -173,13 +212,15 @@ export default class SnippetDetailMultiFile extends React.Component {
   }
 
   handleEditButtonClick () {
-    const { editor } = this.refs
-    const { snippet } = this.props
-    this.setState({ isEditing: true }, () => {
-      editor.applyEditorStyle()
-      this.setState({ editingFiles: snippet.files })
-      eventEmitter.emit('snippet-detail:edit-start')
-      editor.setOption('readOnly', false)
+    this.setState({ isPreview: false }, () => {
+      const { editor } = this.refs
+      const { snippet } = this.props
+      this.setState({ isEditing: true }, () => {
+        editor.applyEditorStyle()
+        this.setState({ editingFiles: snippet.files })
+        eventEmitter.emit('snippet-detail:edit-start')
+        editor.setOption('readOnly', false)
+      })
     })
   }
 
@@ -329,8 +370,14 @@ export default class SnippetDetailMultiFile extends React.Component {
   }
 
   renderSnippet () {
-    const { isEditing, selectedFile, editingFiles } = this.state
+    const { isEditing, selectedFile, editingFiles, isPreview } = this.state
     const { config, snippet } = this.props
+    const file = snippet.files[selectedFile]
+    let langName = ''
+    if (file) {
+      const langMode = CodeMirror.findModeByExtension(getExtension(file.name))
+      langName = langMode ? langMode.name : ''
+    }
     return (
       <Fragment>
         {this.renderTopBar()}
@@ -341,19 +388,26 @@ export default class SnippetDetailMultiFile extends React.Component {
         {this.renderTagList()}
         {this.renderDescription()}
         {this.renderFileList()}
-        <CodeEditor
-          isEditing={isEditing}
-          selectedFile={selectedFile}
-          editingFiles={editingFiles}
-          config={config}
-          snippet={snippet}
-          handleChangeFileClick={() => this.handleChangeFileClick()}
-          handleEditingFileValueChange={() =>
-            this.handleEditingFileValueChange()
-          }
-          type="multi"
-          ref="editor"
-        />
+
+        {langName === 'Markdown' && isPreview ? (
+          <div style={{ width: '100%', flex: '1', overflow: 'hidden' }}>
+            <MarkdownPreview markdown={file.value} />
+          </div>
+        ) : (
+          <CodeEditor
+            isEditing={isEditing}
+            selectedFile={selectedFile}
+            editingFiles={editingFiles}
+            config={config}
+            snippet={snippet}
+            handleChangeFileClick={() => this.handleChangeFileClick()}
+            handleEditingFileValueChange={() =>
+              this.handleEditingFileValueChange()
+            }
+            type="multi"
+            ref="editor"
+          />
+        )}
       </Fragment>
     )
   }
@@ -369,7 +423,9 @@ export default class SnippetDetailMultiFile extends React.Component {
             const langMode = CodeMirror.findModeByExtension(
               getExtension(file.name)
             )
-            const languageIcon = getLanguageIcon(langMode ? langMode.name : 'null')
+            const languageIcon = getLanguageIcon(
+              langMode ? langMode.name : 'null'
+            )
             return (
               <li
                 key={file.key}

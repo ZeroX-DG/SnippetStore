@@ -18,6 +18,7 @@ import './snippet-item-multi-file'
 import exportSnippetAPI from 'core/API/snippet/export-snippet'
 import getLanguageIcon from 'lib/getLangIcon'
 import { remote } from 'electron'
+import MarkdownPreview from '../../../components/markdown-preview/markdown-preview'
 const { dialog } = remote
 
 export default class SnippetItemMultiFiles extends React.Component {
@@ -25,6 +26,7 @@ export default class SnippetItemMultiFiles extends React.Component {
     super(props)
     this.state = {
       isEditing: false,
+      isPreview: false,
       selectedFile: 0,
       editingFiles: props.snippet.files.slice()
     }
@@ -32,6 +34,14 @@ export default class SnippetItemMultiFiles extends React.Component {
 
   componentWillUnmount () {
     this.unbindEvents()
+  }
+
+  handlePreview () {
+    this.setState({ isPreview: true })
+  }
+
+  handleExitPreview () {
+    this.setState({ isPreview: false })
   }
 
   bindEvents () {
@@ -91,8 +101,14 @@ export default class SnippetItemMultiFiles extends React.Component {
   }
 
   renderHeader () {
-    const { isEditing } = this.state
+    const { isEditing, isPreview, selectedFile } = this.state
     const { snippet } = this.props
+    const file = snippet.files[selectedFile]
+    let langName = ''
+    if (file) {
+      const langMode = CodeMirror.findModeByExtension(getExtension(file.name))
+      langName = langMode ? langMode.name : ''
+    }
     return (
       <div className="header">
         <div className="info">
@@ -103,6 +119,28 @@ export default class SnippetItemMultiFiles extends React.Component {
           )}
         </div>
         <div className="tools">
+          {!isEditing &&
+            !isPreview &&
+            langName === 'Markdown' && (
+            <div
+              className="preview-btn"
+              data-tip={i18n.__('Preview')}
+              onClick={this.handlePreview.bind(this)}
+            >
+              <FAIcon icon="eye" />
+            </div>
+          )}
+          {!isEditing &&
+            isPreview &&
+            langName === 'Markdown' && (
+            <div
+              className="unpreview-btn"
+              data-tip={i18n.__('Exit preview')}
+              onClick={this.handleExitPreview.bind(this)}
+            >
+              <FAIcon icon="eye-slash" />
+            </div>
+          )}
           {!isEditing && (
             <div
               className="export-btn"
@@ -206,13 +244,15 @@ export default class SnippetItemMultiFiles extends React.Component {
   }
 
   handleEditButtonClick () {
-    const { editor } = this.refs
-    const { snippet } = this.props
-    this.setState({ isEditing: true }, () => {
-      editor.applyEditorStyle()
-      this.setState({ editingFiles: snippet.files })
-      editor.setOption('readOnly', false)
-      this.bindEvents()
+    this.setState({ isPreview: false }, () => {
+      const { editor } = this.refs
+      const { snippet } = this.props
+      this.setState({ isEditing: true }, () => {
+        editor.applyEditorStyle()
+        this.setState({ editingFiles: snippet.files })
+        editor.setOption('readOnly', false)
+        this.bindEvents()
+      })
     })
   }
 
@@ -314,7 +354,9 @@ export default class SnippetItemMultiFiles extends React.Component {
             const langMode = CodeMirror.findModeByExtension(
               getExtension(file.name)
             )
-            const languageIcon = getLanguageIcon(langMode ? langMode.name : 'null')
+            const languageIcon = getLanguageIcon(
+              langMode ? langMode.name : 'null'
+            )
             return (
               <li
                 key={file.key}
@@ -506,8 +548,14 @@ export default class SnippetItemMultiFiles extends React.Component {
   }
 
   render () {
-    const { isEditing, selectedFile, editingFiles } = this.state
+    const { isEditing, selectedFile, editingFiles, isPreview } = this.state
     const { config, snippet } = this.props
+    const file = snippet.files[selectedFile]
+    let langName = ''
+    if (file) {
+      const langMode = CodeMirror.findModeByExtension(getExtension(file.name))
+      langName = langMode ? langMode.name : ''
+    }
     return (
       <div className="snippet-item-multi-files" ref="root">
         <ReactTooltip place="bottom" effect="solid" />
@@ -516,20 +564,26 @@ export default class SnippetItemMultiFiles extends React.Component {
         {this.renderDescription()}
         <div className="inline">
           {this.renderFileList()}
-          <CodeEditor
-            isEditing={isEditing}
-            selectedFile={selectedFile}
-            editingFiles={editingFiles}
-            config={config}
-            snippet={snippet}
-            handleChangeFileClick={() => this.handleChangeFileClick()}
-            handleEditingFileValueChange={() =>
-              this.handleEditingFileValueChange()
-            }
-            type="multi"
-            maxHeight="300px"
-            ref="editor"
-          />
+          {langName === 'Markdown' && isPreview ? (
+            <div style={{ height: '300px', width: '100%' }}>
+              <MarkdownPreview markdown={file.value} />
+            </div>
+          ) : (
+            <CodeEditor
+              isEditing={isEditing}
+              selectedFile={selectedFile}
+              editingFiles={editingFiles}
+              config={config}
+              snippet={snippet}
+              handleChangeFileClick={() => this.handleChangeFileClick()}
+              handleEditingFileValueChange={() =>
+                this.handleEditingFileValueChange()
+              }
+              type="multi"
+              maxHeight="300px"
+              ref="editor"
+            />
+          )}
         </div>
         {this.renderFooter()}
       </div>
