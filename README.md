@@ -40,7 +40,7 @@ SnippetStore to be available in homebrew and able to run on macOS too. But in or
 
 SnippetStore is also available on issuehunt
 
-[![issuehunt-image](https://github.com/BoostIO/issuehunt-materials/blob/master/issuehunt-badge@1x.png?raw=true)](https://issuehunt.io/repos/136717666)
+[![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/repos/136717666)
 
 A massive thank you to these donators
 
@@ -115,7 +115,7 @@ SnippetStore currently support 2 languages:
 
 - Framework: [Electron](https://electronjs.org/)
 - Bundler: [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [Electron-builder](https://github.com/electron-userland/electron-builder)
-- Language: [ES6](https://babeljs.io/learn-es2015/), [Sass](http://sass-lang.com/)
+- Language: [JavaScript(ES6)](https://babeljs.io/learn-es2015/), [Sass](http://sass-lang.com/)
 - Library: [React](https://reactjs.org/), [MobX](https://mobx.js.org/), [Mousetrap](https://craig.is/killing/mice), [react-toastify](https://fkhadra.github.io/react-toastify/), [react-tooltip](http://wwayne.com/react-tooltip/), [CodeMirror](https://github.com/codemirror/CodeMirror)
 - Lint: [ESLint](https://eslint.org/)
 - Test: [Jest](https://facebook.github.io/jest/)
