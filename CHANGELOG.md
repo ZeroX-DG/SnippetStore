@@ -9,6 +9,10 @@ Every notable changes in each version will be listed in this file.
 - **Interface**: Added input select for faster language picking in create snippet modal ([2e83a62](https://github.com/ZeroX-DG/SnippetStore/commit/2e83a62))
 - **Interface**: Added markdown preview for markdown snippets
 
+## Bugfixes:
+
+- **Interface**: Used `Lato` font for tooltip in `list-and-details` layout. ([a7f8ff4](https://github.com/ZeroX-DG/SnippetStore/commit/a7f8ff4))
+
 ## Security
 
 - **Dependency update**: Updated `electron` to 1.8.8
