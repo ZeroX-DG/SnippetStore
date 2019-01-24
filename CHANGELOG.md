@@ -11,7 +11,7 @@ Every notable changes in each version will be listed in this file.
 
 ## Bugfixes:
 
-- **Interface**: Used `Lato` font for tooltip in `list-and-details` layout.
+- **Interface**: Used `Lato` font for tooltip in `list-and-details` layout. ([a7f8ff4](https://github.com/ZeroX-DG/SnippetStore/commit/a7f8ff4))
 
 ## Security
 
