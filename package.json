@@ -28,10 +28,8 @@
     },
     "files": [
       "index.js",
-      "package.json",
       "compiled/**/*",
       "app/**/*",
-      "node_modules/**/*",
       "resources/**/*",
       "languages/**/*"
     ],
