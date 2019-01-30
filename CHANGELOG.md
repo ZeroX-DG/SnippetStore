@@ -8,6 +8,8 @@ Every notable changes in each version will be listed in this file.
 
 - **Interface**: Added input select for faster language picking in create snippet modal ([2e83a62](https://github.com/ZeroX-DG/SnippetStore/commit/2e83a62))
 - **Interface**: Added markdown preview for markdown snippets
+- **Interface**: Added about menu ([e298dfd](https://github.com/ZeroX-DG/SnippetStore/commit/e298dfd))
+- **Interface**: Added check for update in menu ([5f233cb](https://github.com/ZeroX-DG/SnippetStore/commit/5f233cb))
 
 ## Bugfixes:
 
