@@ -1,6 +1,19 @@
 const electron = require('electron')
+const os = require('os')
 const BrowserWindow = electron.BrowserWindow
 const dialog = electron.dialog
+
+function getAppInfo () {
+  const info = `
+Version: ${process.getVersion()}
+Commit: ${process.getCommit()}
+Electron: ${process.versions.electron}
+Chrome: ${process.versions.chrome}
+Node.js: ${process.versions.node}
+V8: ${process.versions.v8}
+OS: ${os.type()} ${os.arch()} ${os.release()}`
+  return info
+}
 
 function getMenu (app, mainWindow) {
   const macOS = process.platform === 'darwin'
@@ -98,6 +111,18 @@ function getMenu (app, mainWindow) {
         accelerator: macOS ? 'Command+Alt+R' : 'Control+Shift+R',
         click () {
           BrowserWindow.getFocusedWindow().reload()
+        }
+      },
+      {
+        label: 'About',
+        click () {
+          dialog.showMessageBox({
+            type: 'info',
+            title: 'Snippet Store',
+            message: 'Snippet Store',
+            detail: getAppInfo(),
+            buttons: ['OK']
+          })
         }
       }
     ]

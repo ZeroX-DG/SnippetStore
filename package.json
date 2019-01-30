@@ -8,6 +8,7 @@
     "fix": "eslint . --fix",
     "lint": "eslint .",
     "build": "node scripts/build.js",
+    "product": "node scripts/product.js",
     "dist:linux": "npm run build && rimraf dist/ && electron-builder --linux",
     "dist:win": "npm run build && rimraf dist/ && electron-builder --win",
     "dist:mac": "npm run build && rimraf dist/ && electron-builder --mac",
@@ -28,6 +29,7 @@
     },
     "files": [
       "index.js",
+      "product.json",
       "compiled/**/*",
       "app/**/*",
       "resources/**/*",
