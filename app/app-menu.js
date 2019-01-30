@@ -1,5 +1,6 @@
 const electron = require('electron')
 const os = require('os')
+const { checkForUpdate, downloadAndInstall } = require('./app-updator')
 const BrowserWindow = electron.BrowserWindow
 const dialog = electron.dialog
 
@@ -122,6 +123,38 @@ function getMenu (app, mainWindow) {
             message: 'Snippet Store',
             detail: getAppInfo(),
             buttons: ['OK']
+          })
+        }
+      },
+      {
+        label: 'Check for updates',
+        click () {
+          checkForUpdate().then(hasNewUpdate => {
+            if (hasNewUpdate) {
+              dialog.showMessageBox(
+                {
+                  type: 'info',
+                  title: 'Snippet Store',
+                  message: 'A new version is available!',
+                  detail:
+                    'A new version of SnippetStore is now available, please update to receive the latest bugfixes and features',
+                  buttons: ['Update', 'Later']
+                },
+                response => {
+                  if (response === 0) {
+                    downloadAndInstall()
+                  }
+                }
+              )
+            } else {
+              dialog.showMessageBox({
+                type: 'info',
+                title: 'Snippet Store',
+                message: 'No new version',
+                detail: "You're now on the latest version of SnippetStore",
+                buttons: ['OK']
+              })
+            }
           })
         }
       }
