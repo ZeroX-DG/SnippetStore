@@ -1,9 +1,8 @@
 const GhReleases = require('electron-gh-releases')
-const { app } = require('electron')
 
 const options = {
   repo: 'ZeroX-DG/SnippetStore',
-  currentVersion: app.getVersion()
+  currentVersion: process.getVersion()
 }
 
 const updater = new GhReleases(options)
