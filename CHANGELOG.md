@@ -11,6 +11,7 @@ Every notable changes in each version will be listed in this file.
 ## Bugfixes:
 
 - **Interface**: Fixed link not open in default browser when clicked in markdown preview (Fixed [#40](https://github.com/ZeroX-DG/SnippetStore/issues/40)) ([https://github.com/ZeroX-DG/SnippetStore/commit/4864b8b](4864b8b))
+- **Interface**: Fixed can't preview github flavored markdown (Fixed [#39](https://github.com/ZeroX-DG/SnippetStore/issues/39))([https://github.com/ZeroX-DG/SnippetStore/commit/9dec808](9dec808))
 
 # 0.2.11
 
