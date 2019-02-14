@@ -2,6 +2,16 @@
 
 Every notable changes in each version will be listed in this file.
 
+# 0.2.12 - Unreleased
+
+## Features:
+
+- **Interface**: New Turkish translation by [@zbahadir](https://github.com/zbahadir)
+
+## Bugfixes:
+
+- **Interface**: Fixed link not open in default browser when clicked in markdown preview (Fixed [#40](https://github.com/ZeroX-DG/SnippetStore/issues/40)) ([https://github.com/ZeroX-DG/SnippetStore/commit/4864b8b](4864b8b))
+
 # 0.2.11
 
 ## Features:
