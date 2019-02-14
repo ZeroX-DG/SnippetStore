@@ -92,6 +92,8 @@ export default class SnippetDetail extends React.Component {
   renderTopBar () {
     const { isEditing, isPreview } = this.state
     const { snippet } = this.props
+    const isMarkdown =
+      snippet.lang === 'Markdown' || snippet.lang === 'GitHub Flavored Markdown'
     return (
       <div className="top-bar">
         <div className="left-tool">
@@ -141,7 +143,7 @@ export default class SnippetDetail extends React.Component {
           )}
           {!isEditing &&
             !isPreview &&
-            snippet.lang === 'Markdown' && (
+            isMarkdown && (
             <div
               className="preview-btn"
               data-tip={i18n.__('Preview')}
@@ -152,7 +154,7 @@ export default class SnippetDetail extends React.Component {
           )}
           {!isEditing &&
             isPreview &&
-            snippet.lang === 'Markdown' && (
+            isMarkdown && (
             <div
               className="unpreview-btn"
               data-tip={i18n.__('Exit preview')}
@@ -252,6 +254,8 @@ export default class SnippetDetail extends React.Component {
   renderSnippet () {
     const { config, snippet } = this.props
     const { isPreview } = this.state
+    const isMarkdown =
+      snippet.lang === 'Markdown' || snippet.lang === 'GitHub Flavored Markdown'
     return (
       <Fragment>
         {this.renderTopBar()}
@@ -261,7 +265,7 @@ export default class SnippetDetail extends React.Component {
         </div>
         {this.renderTagList()}
         {this.renderDescription()}
-        {snippet.lang === 'Markdown' && isPreview ? (
+        {isMarkdown && isPreview ? (
           <MarkdownPreview
             markdown={snippet.value}
             style={{ height: 'calc(100% - 230px)' }}

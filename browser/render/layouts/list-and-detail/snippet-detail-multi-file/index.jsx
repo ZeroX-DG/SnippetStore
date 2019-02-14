@@ -101,6 +101,8 @@ export default class SnippetDetailMultiFile extends React.Component {
       const langMode = CodeMirror.findModeByExtension(getExtension(file.name))
       langName = langMode ? langMode.name : ''
     }
+    const isMarkdown =
+      langName === 'Markdown' || langName === 'GitHub Flavored Markdown'
     return (
       <div className="top-bar">
         <div className="left-tool">
@@ -141,7 +143,7 @@ export default class SnippetDetailMultiFile extends React.Component {
           )}
           {!isEditing &&
             !isPreview &&
-            langName === 'Markdown' && (
+            isMarkdown && (
             <div
               className="preview-btn"
               data-tip={i18n.__('Preview')}
@@ -152,7 +154,7 @@ export default class SnippetDetailMultiFile extends React.Component {
           )}
           {!isEditing &&
             isPreview &&
-            langName === 'Markdown' && (
+            isMarkdown && (
             <div
               className="unpreview-btn"
               data-tip={i18n.__('Exit preview')}
@@ -378,6 +380,8 @@ export default class SnippetDetailMultiFile extends React.Component {
       const langMode = CodeMirror.findModeByExtension(getExtension(file.name))
       langName = langMode ? langMode.name : ''
     }
+    const isMarkdown =
+      langName === 'Markdown' || langName === 'GitHub Flavored Markdown'
     return (
       <Fragment>
         {this.renderTopBar()}
@@ -389,7 +393,7 @@ export default class SnippetDetailMultiFile extends React.Component {
         {this.renderDescription()}
         {this.renderFileList()}
 
-        {langName === 'Markdown' && isPreview ? (
+        {isMarkdown && isPreview ? (
           <div style={{ width: '100%', flex: '1', overflow: 'hidden' }}>
             <MarkdownPreview markdown={file.value} />
           </div>
