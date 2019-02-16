@@ -9,7 +9,16 @@ const baseMarkdownCSS = require('!!css-loader!./github-markdown.css') // eslint-
 
 class MarkdownPreview extends React.Component {
   componentDidMount () {
+    this.init()
+  }
+
+  componentDidUpdate () {
+    this.init()
+  }
+
+  init () {
     const previewDoc = this.refs.preview.contentWindow.document
+    previewDoc.body.innerHTML = ''
     previewDoc.write(this.buildHTML())
     this.initActions(previewDoc)
   }
