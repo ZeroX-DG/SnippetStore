@@ -203,7 +203,7 @@ export default class SnippetDetail extends React.Component {
 
   handleEditButtonClick () {
     const { editor } = this.refs
-    this.setState({ isEditing: true })
+    this.setState({ isEditing: true, isPreview: false })
     eventEmitter.emit('snippet-detail:edit-start')
     editor.setOption('readOnly', false)
   }

@@ -70,7 +70,7 @@ export default class SnippetItem extends React.Component {
 
   handleEditButtonClick () {
     const { editor } = this.refs
-    this.setState({ isEditing: true })
+    this.setState({ isEditing: true, isPreview: false })
     editor.setOption('readOnly', false)
     this.bindEvents()
   }
