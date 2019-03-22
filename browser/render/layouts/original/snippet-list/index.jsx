@@ -22,7 +22,7 @@ export default class SnippetList extends React.Component {
   renderEmptyMessage () {
     const { config, store } = this.props
     if (store.rawSnippets.length > 0) {
-      return <h1 className="emptyMessage">{i18n.__('No snippet found !')}</h1>
+      return <h1 className="emptyMessage">{i18n.__('No snippet found!')}</h1>
     }
     return (
       <h1 className="emptyMessage">
