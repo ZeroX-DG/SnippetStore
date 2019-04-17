@@ -31,12 +31,14 @@ export default class CreateSnippetModal extends React.Component {
 
     this.editor.setSize('100%', '100%')
     if (data) {
+      console.log(data)
       if (data.code) {
         this.editor.setValue(data.code)
       }
       if (data.ext) {
         const mode = CodeMirror.findModeByExtension(data.ext)
-        this.refs.lang.value = mode.name
+        console.log(mode)
+        this.refs.snippetLang.value(mode.name)
       }
       this.refs.snippetName.focus()
     }
@@ -61,8 +63,11 @@ export default class CreateSnippetModal extends React.Component {
     } = config.editor
     // only update codemirror mode if new props is passed
     if (props) {
-      const snippetMode = CodeMirror.findModeByName(this.refs.lang.value).mode
-      require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+      const selectedLangValue = this.refs.snippetLang.value().value
+      if (selectedLangValue) {
+        const snippetMode = CodeMirror.findModeByName(selectedLangValue).mode
+        require(`codemirror/mode/${snippetMode}/${snippetMode}`)
+      }
     }
     const gutters = showLineNumber
       ? ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
@@ -92,7 +97,7 @@ export default class CreateSnippetModal extends React.Component {
     const langConf = config.language
     const snippetLang = this.refs.snippetLang.value()
     const snippetMode = snippetLang.value
-    if (snippetMode === 'null') {
+    if (snippetMode === 'null' || snippetMode === undefined) {
       this.editor.setOption('mode', 'null')
       this.editor.setOption('htmlMode', false)
     } else if (snippetMode === 'htmlmixed') {
