@@ -95,8 +95,9 @@ export default class SnippetDetail extends React.Component {
     const isMarkdown =
       snippet.lang === 'Markdown' || snippet.lang === 'GitHub Flavored Markdown'
     return (
-      <div className="top-bar">
-        <div className="left-tool">
+      <div className={`top-bar ${isEditing ? 'editing' : ''}`}>
+        <div className="left-tool">{this.renderSnippetName()}</div>
+        <div className="right-tool">
           {!isEditing && (
             <div
               className="copy-btn"
@@ -163,8 +164,6 @@ export default class SnippetDetail extends React.Component {
               <FAIcon icon="eye-slash" />
             </div>
           )}
-        </div>
-        <div className="right-tool">
           {!isEditing && (
             <div
               className="delete-btn"
@@ -259,10 +258,7 @@ export default class SnippetDetail extends React.Component {
     return (
       <Fragment>
         {this.renderTopBar()}
-        <div className="header">
-          {this.renderSnippetName()}
-          {this.renderOtherInfo()}
-        </div>
+        <div className="header">{this.renderOtherInfo()}</div>
         {this.renderTagList()}
         {this.renderDescription()}
         {isMarkdown && isPreview ? (

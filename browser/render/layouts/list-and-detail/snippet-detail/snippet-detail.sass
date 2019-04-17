@@ -7,44 +7,45 @@
   overflow: overlay
   .__react_component_tooltip
     font-family: 'Lato'
+  .snippet-name
+    width: 100%
+    font-size: 30px
+    font-family: 'Lato'
+    overflow: hidden
+    margin: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    .icon
+      margin-right: 15px
+      margin-right: 5px
+      vertical-align: middle
+      .lang-icon
+        display: inline-block
+        width: 30px
+        height: 30px
+    input[type='text']
+      height: 35px
+      width: calc(100% - 180px)
+      border: none
+      outline: none
+      font-size: 15px
+      border-radius: 5px
+      padding: 2px 5px
+      display: inline-block
+    .snippet-name-input
+      width: calc(100% - 180px)
+      margin-right: 20px
+    select
+      width: 150px
+      height: 35px
+      border: none
+      border-radius: 5px
+      outline: none
+      display: inline-block
+      padding-left: 5px
   .header
     width: 100%
     padding: 0 20px
-    .snippet-name
-      font-size: 30px
-      font-family: 'Lato'
-      display: -webkit-box
-      -webkit-line-clamp: 3
-      -webkit-box-orient: vertical
-      overflow: hidden
-      margin-top: 0px
-      .icon
-        margin-right: 15px
-        margin-right: 5px
-        vertical-align: middle
-        .lang-icon
-          display: inline-block
-          width: 30px
-          height: 30px
-      input[type='text']
-        height: 35px
-        border: none
-        outline: none
-        font-size: 15px
-        border-radius: 5px
-        padding: 2px 5px
-        display: inline-block
-      .snippet-name-input
-        width: calc(100% - 180px)
-        margin-right: 20px
-      select
-        width: 150px
-        height: 35px
-        border: none
-        border-radius: 5px
-        outline: none
-        display: inline-block
-        padding-left: 5px
     .info
       margin-right: 15px
   .description
@@ -96,3 +97,8 @@
       div[class*='-btn']
         margin-left: 25px
         cursor: pointer
+    &.editing
+      .left-tool
+        width: 90%
+      .right-tool
+        width: 10%

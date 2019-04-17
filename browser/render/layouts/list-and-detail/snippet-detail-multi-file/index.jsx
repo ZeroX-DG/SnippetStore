@@ -104,8 +104,9 @@ export default class SnippetDetailMultiFile extends React.Component {
     const isMarkdown =
       langName === 'Markdown' || langName === 'GitHub Flavored Markdown'
     return (
-      <div className="top-bar">
-        <div className="left-tool">
+      <div className={`top-bar ${isEditing ? 'editing' : ''}`}>
+        <div className="left-tool">{this.renderSnippetName()}</div>
+        <div className="right-tool">
           {isEditing ? (
             <div
               className="save-btn"
@@ -163,8 +164,6 @@ export default class SnippetDetailMultiFile extends React.Component {
               <FAIcon icon="eye-slash" />
             </div>
           )}
-        </div>
-        <div className="right-tool">
           {!isEditing && (
             <div
               className="delete-btn"
@@ -385,10 +384,7 @@ export default class SnippetDetailMultiFile extends React.Component {
     return (
       <Fragment>
         {this.renderTopBar()}
-        <div className="header">
-          {this.renderSnippetName()}
-          {this.renderOtherInfo()}
-        </div>
+        <div className="header">{this.renderOtherInfo()}</div>
         {this.renderTagList()}
         {this.renderDescription()}
         {this.renderFileList()}
