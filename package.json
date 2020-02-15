@@ -39,24 +39,10 @@
       "LICENSE",
       "THIRD-PARTY-LICENSES.txt"
     ],
-    "dmg": {
-      "contents": [
-        {
-          "x": 438,
-          "y": 275,
-          "type": "link",
-          "path": "/Applications"
-        },
-        {
-          "x": 192,
-          "y": 275,
-          "type": "file"
-        }
-      ]
-    },
     "mac": {
       "category": "public.app-category.developer-tools",
-      "icon": "resources/icon/icon512.png"
+      "icon": "resources/icon/icon512.png",
+      "target":"pkg"
     },
     "linux": {
       "category": "Development",
