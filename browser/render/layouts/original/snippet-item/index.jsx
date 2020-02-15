@@ -311,7 +311,7 @@ export default class SnippetItem extends React.Component {
             <TagItem config={config} tag={tag} key={index} />
           ))
         ) : (
-          'No tag'
+          i18n.__('No tag')
         )}
       </div>
     )
