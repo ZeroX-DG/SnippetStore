@@ -1,6 +1,7 @@
 import React from 'react'
 import FAIcon from '@fortawesome/react-fontawesome'
 import eventEmitter from 'lib/event-emitter'
+import i18n from 'render/lib/i18n'
 import './modal'
 
 export default class ModalSkeleton extends React.Component {
@@ -16,7 +17,7 @@ export default class ModalSkeleton extends React.Component {
           {closeBtn !== false && (
             <div className="close-btn" onClick={this.closeModal.bind(this)}>
               <FAIcon icon="times" />
-              <span className="text">ESC</span>
+              <span className="text">{i18n.__('ESC')}</span>
             </div>
           )}
           {this.props.children}
