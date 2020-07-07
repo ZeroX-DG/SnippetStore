@@ -115,7 +115,7 @@
     "cross-env": "^5.1.6",
     "css-loader": "^0.28.11",
     "del": "^3.0.0",
-    "electron": "^1.8.8",
+    "electron": "^7.2.4",
     "electron-builder": "^20.19.1",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
