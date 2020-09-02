@@ -18,7 +18,6 @@
   </script>
   <script type='text/javascript'>
     const electron = require('electron')
-    electron.webFrame.setZoomLevelLimits(1, 1)
     var scriptUrl = window._.find(electron.remote.process.argv, (a) => a === '--hot')
       ? 'http://localhost:8000/assets/main.js'
       : '../compiled/main.js'
