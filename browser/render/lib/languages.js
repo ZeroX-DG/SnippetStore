@@ -4,7 +4,9 @@ const languages = [
   // thanks @zbahadir for Turkish translation
   { name: 'Turkish', code: 'tr' },
   // thanks nickyg.pf for Italian translation
-  { name: 'Italian', code: 'it' }
+  { name: 'Italian', code: 'it' },
+
+  { name: 'Deutsch', code: 'de' }
 ]
 
 module.exports = {
