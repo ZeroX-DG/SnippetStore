@@ -17,7 +17,8 @@
   "Snippet language": "Ngôn ngữ snippet",
   "Snippet content": "Nội dung snippet",
   "About": "Giới thiệu",
-  "SnippetStore is a snippet management app developers": "SnippetStore là một ứng dụng quản lý snippet cho các lập trình viên",
+  "SnippetStore is a snippet management app developers":
+    "SnippetStore là một ứng dụng quản lý snippet cho các lập trình viên",
   "Show line number": "Hiển thị số dòng",
   "Theme": "Chủ đề",
   "Editor font family": "Phông chữ của bộ soạn thảo",
@@ -56,8 +57,10 @@
   "Create new snippet": "Tạo snippet mới",
   "Single-file snippet": "Snippet 1 file",
   "Multi-file snippet": "Snippet đa file",
-  "This is the type of snippet where you will only store 1 piece of code. This type of snippet is suitable for storing small functions": "Loại snippet này cho phép bạn tạo duy nhất 1 file. Loại snippet này thích hợp để chứa function nhỏ",
-  "This type of snippet can groups multiple files into 1 snippet and suitable for storing simple code snippet with more than 1 file": "Loại snippet này cho phép nhóm nhiều file trong 1 snippet và thích hợp chứa snippet cần nhiều file nhỏ",
+  "This is the type of snippet where you will only store 1 piece of code. This type of snippet is suitable for storing small functions":
+    "Loại snippet này cho phép bạn tạo duy nhất 1 file. Loại snippet này thích hợp để chứa function nhỏ",
+  "This type of snippet can groups multiple files into 1 snippet and suitable for storing simple code snippet with more than 1 file":
+    "Loại snippet này cho phép nhóm nhiều file trong 1 snippet và thích hợp chứa snippet cần nhiều file nhỏ",
   "The snippet must have at least 1 file": "Snippet phải có ít nhất 1 file",
   "discard changes": "Hủy thay đổi",
   "Are you sure to delete this file?": "Bạn có chắc muốn xóa file này?",
@@ -65,8 +68,10 @@
   "Snippet list layout": "Bố cục danh sách snippet",
   "Highlight current line": "Làm nổi dòng hiện tại",
   "Export JSON": "Xuất file JSON",
-  "SnippetStore collects anonymous data for only 1 reason-improve user experience. We will never collects your private information such as your code snippets. If you wish to know how it work, here is its source code:": "SnippetStore thu thập dữ liệu ẩn danh của người dùng với 1 mục đích duy nhất-cải thiện trải nghiệm người dùng. Chúng tôi sẽ không bao giờ thu thập những dữ liệu riêng tư của bạn như code snippet của bạn. Nếu bạn muốn biết cách hoạt động của nó, đây là mã nguồn của nó:",
-  "If this app help you with your work and you wish to say thanks to me, you can donate me through Buy Me A Coffee. Your donation will be a huge motivation for me to continue to add more features and bugfixes in the future.": "Nếu ứng dụng này giúp bạn với công việc của bạn và bạn muốn nói lời cảm ơn tới tôi, bạn có thể mua tặng tôi 1 ly coffee tại Buy Me A Coffee. Sự đóng góp của bạn sẽ là động lực to lớn để tôi tiếp tục thêm các chức năng và bản vá lỗi mới trong tương lai",
+  "SnippetStore collects anonymous data for only 1 reason-improve user experience. We will never collects your private information such as your code snippets. If you wish to know how it work, here is its source code:":
+    "SnippetStore thu thập dữ liệu ẩn danh của người dùng với 1 mục đích duy nhất-cải thiện trải nghiệm người dùng. Chúng tôi sẽ không bao giờ thu thập những dữ liệu riêng tư của bạn như code snippet của bạn. Nếu bạn muốn biết cách hoạt động của nó, đây là mã nguồn của nó:",
+  "If this app help you with your work and you wish to say thanks to me, you can donate me through Buy Me A Coffee. Your donation will be a huge motivation for me to continue to add more features and bugfixes in the future.":
+    "Nếu ứng dụng này giúp bạn với công việc của bạn và bạn muốn nói lời cảm ơn tới tôi, bạn có thể mua tặng tôi 1 ly coffee tại Buy Me A Coffee. Sự đóng góp của bạn sẽ là động lực to lớn để tôi tiếp tục thêm các chức năng và bản vá lỗi mới trong tương lai",
   "Storage": "Kho chứa",
   "Snippet storage path:": "Đường dẫn kho chứa",
   "Browse": "Duyệt",

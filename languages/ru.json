@@ -7,12 +7,18 @@
   "Create new snippet using ": "Создать новый фрагмент, используя ",
   "Create": "Создать",
   "SORT": "СОРТИРОВАТЬ",
-  "Sort by create time (newest)": "Сортировать по времени создания (самое новое)",
-  "Sort by create time (oldest)": "Сортировать по времени создания (самое старое)",
-  "Sort by update time (newest)": "Сортировать по времени обновления (самое новое)",
-  "Sort by update time (oldest)": "Сортировать по времени обновления (самое старое)",
-  "Sort by copy count (ascending)": "Сортировать по количеству копий (по возрастанию)",
-  "Sort by copy count (descending)": "Сортировать по количеству копий (по убыванию)",
+  "Sort by create time (newest)":
+    "Сортировать по времени создания (самое новое)",
+  "Sort by create time (oldest)":
+    "Сортировать по времени создания (самое старое)",
+  "Sort by update time (newest)":
+    "Сортировать по времени обновления (самое новое)",
+  "Sort by update time (oldest)":
+    "Сортировать по времени обновления (самое старое)",
+  "Sort by copy count (ascending)":
+    "Сортировать по количеству копий (по возрастанию)",
+  "Sort by copy count (descending)":
+    "Сортировать по количеству копий (по убыванию)",
   "Snippet name": "Имя фрагмента",
   "Snippet language": "Язык Фрагмента",
   "Snippet content": "Содержание фрагмента",
@@ -33,7 +39,8 @@
   "Hotkeys setting saved": "Настройки горячих клавиш сохранены",
   "Language": "Язык",
   "Show notification when copy": "Показывать уведомление при копировании",
-  "Show confirm dialog when delete": "Показывать диалог подтверждения при удалении",
+  "Show confirm dialog when delete":
+    "Показывать диалог подтверждения при удалении",
   "Show snippet create time": "Показать время создания фрагмента",
   "Show snippet update time": "Показать время обновления фрагмента",
   "Show snippet copy count": "Показать количество копий фрагмента",
@@ -65,7 +72,8 @@
   "The snippet must have at least 1 file":
     "Фрагмент должен содержать как минимум 1 файл",
   "discard changes": "отменить изменения",
-  "Are you sure to delete this file?": "Вы уверены, что хотите удалить этот файл?",
+  "Are you sure to delete this file?":
+    "Вы уверены, что хотите удалить этот файл?",
   "Pick a snippet from list": "Выберите фрагмент из списка",
   "Snippet list layout": "Макет списка фрагментов",
   "Highlight current line": "Выделить текущую строку",

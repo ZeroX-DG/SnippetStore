@@ -17,7 +17,8 @@
   "Snippet language": "Snippet dili",
   "Snippet content": "Snippet içeriği",
   "About": "Hakkında",
-  "SnippetStore is a snippet management app developers": "SnippetStore bir geliştirici snippet yönetim uygulamasıdır",
+  "SnippetStore is a snippet management app developers":
+    "SnippetStore bir geliştirici snippet yönetim uygulamasıdır",
   "Show line number": "Satır numaralarını göster",
   "Theme": "Tema",
   "Editor font family": "Editör yazıtipi ailesi",
@@ -32,7 +33,8 @@
   "Hotkeys setting saved": "Kısayol ayarları kaydedildi",
   "Language": "Dil",
   "Show notification when copy": "Kopyalandığında bildirimi göster",
-  "Show confirm dialog when delete": "Silme sırasında onayla iletişim kutusunu göster",
+  "Show confirm dialog when delete":
+    "Silme sırasında onayla iletişim kutusunu göster",
   "Show snippet create time": "Snippet oluşturma zamanını göster",
   "Show snippet update time": "Snippet güncelleme zamanını göster",
   "Show snippet copy count": "Snippet kopya sayısını göster",
@@ -49,24 +51,31 @@
   "edit": "Düzenle",
   "delete snippet": "Sil",
   "times": "kere",
-  "Are you sure to delete this snippet?": "Snippeti silmek istediğinize emin misiniz?",
+  "Are you sure to delete this snippet?":
+    "Snippeti silmek istediğinize emin misiniz?",
   "Copied to clipboard": "Arabelleğe Kopyala",
   "TAGS": "ETİKETLER",
   "Snippet description": "Snippet açıklaması",
   "Create new snippet": "Yeni snippet oluştur",
   "Single-file snippet": "Tek parçalı snippet",
   "Multi-file snippet": "Çok parçalı snippet",
-  "This is the type of snippet where you will only store 1 piece of code. This type of snippet is suitable for storing small functions": "Bu sadece 1 parça kod saklayacağınız snippet türüdür. Bu snippet türü, küçük kodları saklamak için uygundur",
-  "This type of snippet can groups multiple files into 1 snippet and suitable for storing simple code snippet with more than 1 file": "Bu snippet türü birden fazla kod parçasını 1 snippet'te gruplandırabilir ve basit kod snippet'ini 1'den fazla parçayla depolamak için uygun olabilir",
-  "The snippet must have at least 1 file": "Snippet en az bir parçalı içermelidir",
+  "This is the type of snippet where you will only store 1 piece of code. This type of snippet is suitable for storing small functions":
+    "Bu sadece 1 parça kod saklayacağınız snippet türüdür. Bu snippet türü, küçük kodları saklamak için uygundur",
+  "This type of snippet can groups multiple files into 1 snippet and suitable for storing simple code snippet with more than 1 file":
+    "Bu snippet türü birden fazla kod parçasını 1 snippet'te gruplandırabilir ve basit kod snippet'ini 1'den fazla parçayla depolamak için uygun olabilir",
+  "The snippet must have at least 1 file":
+    "Snippet en az bir parçalı içermelidir",
   "discard changes": "değişiklikleri at",
-  "Are you sure to delete this file?": "Bu kod parçasını silmek istediğinize emin misiniz?",
+  "Are you sure to delete this file?":
+    "Bu kod parçasını silmek istediğinize emin misiniz?",
   "Pick a snippet from list": "Listeden bir snippet seçin",
   "Snippet list layout": "Snippet liste düzeni",
   "Highlight current line": "Geçerli satırı vurgula",
   "Export JSON": "JSON olarak dışa aktar",
-  "SnippetStore collects anonymous data for only 1 reason-improve user experience. We will never collects your private information such as your code snippets. If you wish to know how it work, here is its source code:": "SnippetStore sadece kayıtsız kullanıcı deneyim bilgilerini toplar. Kişisel bilgilerinizi ve kod parçacıklarınızı asla toplamayacağız. Emin olmak isterseniz kaynak kodumuz buradadır:",
-  "If this app help you with your work and you wish to say thanks to me, you can donate me through Buy Me A Coffee. Your donation will be a huge motivation for me to continue to add more features and bugfixes in the future.": "Bu uygulama size yardımcı oluyorsa ve bana teşekkür etmek istiyorsanız, Bana Bir Kahve Al aracılığıyla bağış yapabilirsiniz. Bağışınız, gelecekte daha fazla özellik ekleme ve hata düzeltmelerine devam etmem için büyük bir motivasyon olacaktır.",
+  "SnippetStore collects anonymous data for only 1 reason-improve user experience. We will never collects your private information such as your code snippets. If you wish to know how it work, here is its source code:":
+    "SnippetStore sadece kayıtsız kullanıcı deneyim bilgilerini toplar. Kişisel bilgilerinizi ve kod parçacıklarınızı asla toplamayacağız. Emin olmak isterseniz kaynak kodumuz buradadır:",
+  "If this app help you with your work and you wish to say thanks to me, you can donate me through Buy Me A Coffee. Your donation will be a huge motivation for me to continue to add more features and bugfixes in the future.":
+    "Bu uygulama size yardımcı oluyorsa ve bana teşekkür etmek istiyorsanız, Bana Bir Kahve Al aracılığıyla bağış yapabilirsiniz. Bağışınız, gelecekte daha fazla özellik ekleme ve hata düzeltmelerine devam etmem için büyük bir motivasyon olacaktır.",
   "Storage": "Depolama",
   "Snippet storage path:": "Snippet depolama yolu:",
   "Browse": "Gözat",
