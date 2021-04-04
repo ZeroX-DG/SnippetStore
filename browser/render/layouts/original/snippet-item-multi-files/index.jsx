@@ -296,7 +296,7 @@ export default class SnippetItemMultiFiles extends React.Component {
             <TagItem config={config} tag={tag} key={index} />
           ))
         ) : (
-          'No tag'
+          i18n.__('No tag')
         )}
       </div>
     )
@@ -395,7 +395,7 @@ export default class SnippetItemMultiFiles extends React.Component {
                 type="text"
                 ref="newFile"
                 onFocus={this.handleNewFileFocus.bind(this)}
-                placeholder="New file"
+                placeholder={i18n.__('New file')}
               />
             </li>
           )}
