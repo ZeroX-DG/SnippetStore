@@ -79,7 +79,7 @@ export default class SettingModal extends React.Component {
           onClick={() => this.switchTab('language')}
           className={tab === 'language' ? 'active' : ''}
         >
-          <div className="tab">{i18n.__('Language')}</div>
+          <div className="tab">{i18n.__('Programming Language')}</div>
         </li>
       </ul>
     )

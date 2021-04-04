@@ -61,7 +61,7 @@ export default class SnippetItem extends React.Component {
               />
             ))
           ) : (
-            <span className="no-tag">No tag</span>
+            <span className="no-tag">{i18n.__('No tag')}</span>
           )}
         </div>
       </div>

@@ -80,5 +80,26 @@
   "Storage": "Archivia",
   "Snippet storage path:": "Percorso di archiviazione dello snippet:",
   "Browse": "Sfoglia",
-  "Use default": "Usato di default"
+  "Use default": "Usato di default",
+  "Tag color": "Tag color",
+  "Programming Language": "Programming Language",
+  "Enable analytics to help improve SnippetStore":
+    "Enable analytics to help improve SnippetStore",
+  "Donate": "Donate",
+  "Author": "Author",
+  "ESC": "ESC",
+  "Analytics": "Analytics",
+  "Search...": "Search...",
+  "Tags": "Tags",
+  "New file": "New file",
+  "No tag": "No tag",
+  "Choose new storage path": "Choose new storage path",
+  "Pick": "Pick",
+  "Migrate your snippets to the new locations?":
+    "Migrate your snippets to the new locations?",
+  "Require open tag": "Require open tag",
+  "Space": "Space",
+  "Tab": "Tab",
+  "original": "original",
+  "List and detail": "List and detail"
 }

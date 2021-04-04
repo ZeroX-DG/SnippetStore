@@ -169,7 +169,7 @@ export default class CreateMultiFilesSnippetModal extends React.Component {
                 type="text"
                 ref="newFile"
                 onFocus={this.handleNewFileFocus.bind(this)}
-                placeholder="New file"
+                placeholder={i18n.__('New file')}
               />
             </li>
           }

@@ -158,8 +158,8 @@ if (number == 1) {
               defaultValue={editorConf.indentUsingTab ? 'tab' : 'space'}
               ref="indentStyle"
             >
-              <option value="tab">Tab</option>
-              <option value="space">Space</option>
+              <option value="tab">{i18n.__('Tab')}</option>
+              <option value="space">{i18n.__('Space')}</option>
             </select>
           </div>
           <div className="input-group">

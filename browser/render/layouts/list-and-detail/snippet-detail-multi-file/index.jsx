@@ -577,7 +577,7 @@ export default class SnippetDetailMultiFile extends React.Component {
             <TagItem config={config} tag={tag} key={index} />
           ))
         ) : (
-          'No tag'
+          i18n.__('No tag')
         )}
       </div>
     )

@@ -41,13 +41,13 @@ export default class About extends React.Component {
               </p>
             </div>
           </div>
-          <h2 className="m-t-50">Author</h2>
+          <h2 className="m-t-50">{i18n.__('Author')}</h2>
           <p>
             Nguyen Viet Hung (
             <a href="https://github.com/ZeroX-DG">@ZeroX-DG</a>)
           </p>
           <p>Email: viethungax@gmail.com</p>
-          <h2 className="m-t-50">Donate</h2>
+          <h2 className="m-t-50">{i18n.__('Donate')}</h2>
           <p>
             {i18n.__(
               `If this app help you with your work and you wish to say thanks to me, you can donate me through Buy Me A Coffee. Your donation will be a huge motivation for me to continue to add more features and bugfixes in the future.`
@@ -58,7 +58,7 @@ export default class About extends React.Component {
               <img src={donateButton} alt="Buy Me A Coffee" />
             </a>
           </p>
-          <h2 className="m-t-50">Analytics</h2>
+          <h2 className="m-t-50">{i18n.__('Analytics')}</h2>
           <p>
             {i18n.__(
               'SnippetStore collects anonymous data for only 1 reason' +
@@ -67,14 +67,16 @@ export default class About extends React.Component {
                 'how it work, here is its source code:'
             )}
             &nbsp;
-            <a href="https://github.com/ZeroX-DG/SnippetStore">github</a>
+            <a href="https://github.com/ZeroX-DG/SnippetStore">Github</a>
           </p>
           <p>
             <Switch
               onChange={checked => this.onAnalyticsChange(checked)}
               defaultValue={config.allowAnalytics}
             />
-            Enable analytics to help improve SnippetStore
+            {i18n.__(
+              'Enable analytics to help improve SnippetStore'
+            )}
           </p>
         </div>
       </div>
