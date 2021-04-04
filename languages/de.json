@@ -93,6 +93,16 @@
   "Analytics": "Analytics",
   "Search...": "Suchen...",
   "Tags": "Tags",
-  "New file": "NEue Datei",
-  "No tag": "Kein Tag"
+  "New file": "Neue Datei",
+  "No tag": "Kein Tag",
+  "Choose new storage path": "Wähle einen neuen Speicherort",
+  "Pick": "Auswählen",
+  "Migrate your snippets to the new locations?":
+    "Ihre Snippets an den neuen Speicherort migrieren?",
+  "Require open tag": "Benötige öffnenden Tag",
+  "Space":"Leertaste",
+  "Tab":"Tabulator",
+  "original":"Original",
+  "List and detail":"Liste und Details"
+  
 }

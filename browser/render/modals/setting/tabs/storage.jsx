@@ -34,8 +34,8 @@ export default class StorageTab extends React.Component {
   browseFolderStorage () {
     dialog.showOpenDialog(
       {
-        title: 'Choose new storage path',
-        buttonLabel: 'Pick',
+        title: i18n.__('Choose new storage path'),
+        buttonLabel: i18n.__('Pick'),
         properties: ['openDirectory']
       },
       paths => {
@@ -50,7 +50,7 @@ export default class StorageTab extends React.Component {
     const oldPath = this.refs.storage.value || defaultStorage
     this.refs.storage.value = newPath
     this.saveSetting()
-    if (confirm('Migrate your snippets to the new locations?')) {
+    if (confirm(i18n.__('Migrate your snippets to the new locations?'))) {
       migrateSnippet(path.join(oldPath, 'snippets.json'))
     }
   }
