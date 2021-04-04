@@ -81,8 +81,20 @@
     "SnippetStore collecte des données anonymes pour une seule et même raison d’expérience utilisateur. Nous ne collecterons jamais vos informations personnelles telles que vos extraits de code. Si vous souhaitez savoir comment cela fonctionne, voici son code source:",
   "If this app help you with your work and you wish to say thanks to me, you can donate me through Buy Me A Coffee. Your donation will be a huge motivation for me to continue to add more features and bugfixes in the future.":
     "Si cette application vous aide dans votre travail et si vous souhaitez me remercier, vous pouvez me faire un don via Buy Me A Coffee. Votre don sera une motivation énorme pour moi de continuer à ajouter davantage de fonctionnalités et de corrections de bugs dans le futur.",
-  "Stockage": "Storage",
+  "Storage": "Storage",
   "Snippet storage path:": "Chemin de stockage des extraits:",
   "Browse": "Parcourir",
-  "Use default": "Utiliser par défaut"
+  "Use default": "Utiliser par défaut",
+  "Tag color": "Tag color",
+  "Programming Language": "Programming Language",
+  "Enable analytics to help improve SnippetStore":
+    "Enable analytics to help improve SnippetStore",
+  "Donate": "Donate",
+  "Author": "Author",
+  "ESC": "ESC",
+  "Analytics": "Analytics",
+  "Search...": "Search...",
+  "Tags": "Tags",
+  "New file": "New file",
+  "No tag": "No tag"
 }

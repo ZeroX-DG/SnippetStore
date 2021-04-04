@@ -82,5 +82,17 @@
   "Storage": "Speicherung",
   "Snippet storage path:": "Snippet-Speicherpfad:",
   "Browse": "Durchsuchen",
-  "Use default": "Standard verwenden"
+  "Use default": "Standard verwenden",
+  "Tag color": "Tag Farbe",
+  "Programming Language": "Programmiersprache",
+  "Enable analytics to help improve SnippetStore":
+    "Aktivieren Sie Analytics, um SnippetStore zu verbessern",
+  "Donate": "Spenden",
+  "Author": "Author",
+  "ESC": "ESC",
+  "Analytics": "Analytics",
+  "Search...": "Suchen...",
+  "Tags": "Tags",
+  "New file": "NEue Datei",
+  "No tag": "Kein Tag"
 }

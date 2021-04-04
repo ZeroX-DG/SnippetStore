@@ -23,7 +23,7 @@
   "Snippet language": "Язык Фрагмента",
   "Snippet content": "Содержание фрагмента",
   "About": "Около",
-  "SnippetStore - разработчик приложения для управления сниппетом":
+  "SnippetStore is a snippet management app developers":
     "SnippetStore - разработчик приложения для управления сниппетом",
   "Show line number": "Показать номер строки",
   "Theme": "Тема",
@@ -85,5 +85,17 @@
   "Storage": "Место хранения",
   "Snippet storage path:": "Путь хранения фрагмента:",
   "Browse": "Просматривать",
-  "Use default": "По умолчанию"
+  "Use default": "По умолчанию",
+  "Tag color": "Tag color",
+  "Programming Language": "Programming Language",
+  "Enable analytics to help improve SnippetStore":
+    "Enable analytics to help improve SnippetStore",
+  "Donate": "Donate",
+  "Author": "Author",
+  "ESC": "ESC",
+  "Analytics": "Analytics",
+  "Search...": "Search...",
+  "Tags": "Tags",
+  "New file": "New file",
+  "No tag": "No tag"
 }

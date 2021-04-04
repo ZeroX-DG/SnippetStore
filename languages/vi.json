@@ -75,5 +75,17 @@
   "Storage": "Kho chứa",
   "Snippet storage path:": "Đường dẫn kho chứa",
   "Browse": "Duyệt",
-  "Use default": "Mặc định"
+  "Use default": "Mặc định",
+  "Tag color": "Tag color",
+  "Programming Language": "Programming Language",
+  "Enable analytics to help improve SnippetStore":
+    "Enable analytics to help improve SnippetStore",
+  "Donate": "Donate",
+  "Author": "Author",
+  "ESC": "ESC",
+  "Analytics": "Analytics",
+  "Search...": "Search...",
+  "Tags": "Tags",
+  "New file": "New file",
+  "No tag": "No tag"
 }

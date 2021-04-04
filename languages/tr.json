@@ -79,5 +79,17 @@
   "Storage": "Depolama",
   "Snippet storage path:": "Snippet depolama yolu:",
   "Browse": "Gözat",
-  "Use default": "Varsayılanı Kullan"
+  "Use default": "Varsayılanı Kullan",
+  "Tag color": "Tag color",
+  "Programming Language": "Programming Language",
+  "Enable analytics to help improve SnippetStore":
+    "Enable analytics to help improve SnippetStore",
+  "Donate": "Donate",
+  "Author": "Author",
+  "ESC": "ESC",
+  "Analytics": "Analytics",
+  "Search...": "Search...",
+  "Tags": "Tags",
+  "New file": "New file",
+  "No tag": "No tag"
 }

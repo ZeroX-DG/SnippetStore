@@ -77,5 +77,17 @@
   "Storage": "Storage",
   "Snippet storage path:": "Snippet storage path:",
   "Browse": "Browse",
-  "Use default": "Use default"
+  "Use default": "Use default",
+  "Tag color": "Tag color",
+  "Programming Language": "Programming Language",
+  "Enable analytics to help improve SnippetStore":
+    "Enable analytics to help improve SnippetStore",
+  "Donate": "Donate",
+  "Author": "Author",
+  "ESC": "ESC",
+  "Analytics": "Analytics",
+  "Search...": "Search...",
+  "Tags": "Tags",
+  "New file": "New file",
+  "No tag": "No tag"
 }

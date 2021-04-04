@@ -83,5 +83,17 @@
   "Storage": "भंडारण",
   "Snippet storage path:": "स्निपेट संग्रहण पथ:",
   "Browse": "ब्राउज",
-  "Use default": "पूर्व निर्धारित उपयोग करें"
+  "Use default": "पूर्व निर्धारित उपयोग करें",
+  "Tag color": "Tag color",
+  "Programming Language": "Programming Language",
+  "Enable analytics to help improve SnippetStore":
+    "Enable analytics to help improve SnippetStore",
+  "Donate": "Donate",
+  "Author": "Author",
+  "ESC": "ESC",
+  "Analytics": "Analytics",
+  "Search...": "Search...",
+  "Tags": "Tags",
+  "New file": "New file",
+  "No tag": "No tag"
 }
