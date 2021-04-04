@@ -94,10 +94,16 @@ SnippetStore currently support 2 snippet list layout:
 
 ## Internalization
 
-SnippetStore currently support 2 languages:
+SnippetStore currently support 8 languages:
 
 - English
 - Vietnamese
+- Turkish
+- 简体中文
+- Italian
+- Deutsch
+- Française
+- Pусский
 
 ## Shortcut
 
