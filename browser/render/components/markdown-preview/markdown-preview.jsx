@@ -1,14 +1,36 @@
 import React from 'react'
 import marked from 'marked'
+import _ from 'lodash'
 import CM from 'lib/config-manager'
 import './markdown-preview.sass'
+import { shell } from 'electron'
 
 const baseMarkdownCSS = require('!!css-loader!./github-markdown.css') // eslint-disable-line
 
 class MarkdownPreview extends React.Component {
   componentDidMount () {
+    this.init()
+  }
+
+  componentDidUpdate () {
+    this.init()
+  }
+
+  init () {
     const previewDoc = this.refs.preview.contentWindow.document
+    previewDoc.body.innerHTML = ''
     previewDoc.write(this.buildHTML())
+    this.initActions(previewDoc)
+  }
+
+  initActions (previewDoc) {
+    const links = previewDoc.getElementsByTagName('a')
+    _.forEach(links, link => {
+      link.onclick = e => {
+        e.preventDefault()
+        shell.openExternal(link.href)
+      }
+    })
   }
 
   getMarkdownCSSTheme () {

@@ -5,27 +5,29 @@
   flex-direction: column
   vertical-align: top
   overflow: overlay
+  .__react_component_tooltip
+    font-family: 'Lato'
+  .snippet-name
+    width: 100%
+    font-size: 30px
+    font-family: 'Lato'
+    overflow: hidden
+    margin: 0
+    text-overflow: ellipsis
+    white-space: nowrap
+    input[type='text']
+      height: 35px
+      border: none
+      outline: none
+      font-size: 15px
+      border-radius: 5px
+      padding: 2px 5px
+      display: inline-block
+    .snippet-name-input
+      width: calc(100% - 10px)
   .header
     width: 100%
     padding: 0 20px
-    .snippet-name
-      font-size: 30px
-      font-family: 'Lato'
-      display: -webkit-box
-      -webkit-line-clamp: 3
-      -webkit-box-orient: vertical
-      overflow: hidden
-      margin-top: 0px
-      input[type='text']
-        height: 35px
-        border: none
-        outline: none
-        font-size: 15px
-        border-radius: 5px
-        padding: 2px 5px
-        display: inline-block
-      .snippet-name-input
-        width: calc(100% - 10px)
     .info
       margin-right: 15px
   .description
@@ -77,6 +79,11 @@
       div[class*='-btn']
         margin-left: 25px
         cursor: pointer
+    &.editing
+      .left-tool
+        width: 90%
+      .right-tool
+        width: 10%
   .file-list
     width: 100%
     ul

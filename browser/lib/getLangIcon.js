@@ -13,6 +13,8 @@ export default function getLanguageIcon (lang) {
       langName = 'cpp'
     } else if (langName === 'jsx') {
       langName = 'react'
+    } else if (langName === 'github flavored markdown') {
+      langName = 'markdown'
     }
     try {
       const svgIcon = getDevIcon(`./${langName}.svg`)

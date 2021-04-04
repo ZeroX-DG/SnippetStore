@@ -1,11 +1,13 @@
 import React from 'react'
 import logo from 'resources/icon/icon512.png'
-import { shell } from 'electron'
+import { shell, remote } from 'electron'
 import i18n from 'render/lib/i18n'
 import Switch from 'render/components/switch'
 import ConfigManager from 'lib/config-manager'
 import { pageView } from 'lib/analytics'
 import donateButton from 'resources/image/donate.png'
+
+const { app } = remote
 
 export default class About extends React.Component {
   componentDidMount () {
@@ -33,7 +35,7 @@ export default class About extends React.Component {
             <img src={logo} width="200px" />
             <div className="m-l-100">
               <h2>SnippetStore</h2>
-              <p>Version: 0.2.10</p>
+              <p>Version: {app.getVersion()}</p>
               <p className="m-t-20">
                 {i18n.__('SnippetStore is a snippet management app developers')}
               </p>
@@ -41,9 +43,8 @@ export default class About extends React.Component {
           </div>
           <h2 className="m-t-50">{i18n.__('Author')}</h2>
           <p>
-            Nguyen Viet Hung (<a href="https://github.com/ZeroX-DG">
-              @ZeroX-DG
-            </a>)
+            Nguyen Viet Hung (
+            <a href="https://github.com/ZeroX-DG">@ZeroX-DG</a>)
           </p>
           <p>Email: viethungax@gmail.com</p>
           <h2 className="m-t-50">{i18n.__('Donate')}</h2>

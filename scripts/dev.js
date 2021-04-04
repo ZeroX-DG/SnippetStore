@@ -12,15 +12,14 @@ const options = {
   publicPath: config.output.publicPath,
   hot: true,
   inline: true,
-  quiet: true
+  quiet: true,
+  sockHost: 'localhost',
+  sockPort: port
 }
 
 function startServer () {
   config.plugins.push(new webpack.HotModuleReplacementPlugin())
-  config.entry.main.unshift(
-    `webpack-dev-server/client?http://localhost:${port}/`,
-    'webpack/hot/dev-server'
-  )
+  config.entry.main.unshift('webpack/hot/dev-server')
   const compiler = webpack(config)
   server = new WebpackDevServer(compiler, options)
 
@@ -44,7 +43,10 @@ function startServer () {
 }
 
 function startElectron () {
-  spawn(electron, ['--hot', './index.js'])
+  spawn(electron, ['--hot', './index.js'], {
+    stdio: 'inherit',
+    windowsHide: false
+  })
     .on('close', () => {
       server.close()
     })

@@ -70,7 +70,7 @@ export default class SnippetItem extends React.Component {
 
   handleEditButtonClick () {
     const { editor } = this.refs
-    this.setState({ isEditing: true })
+    this.setState({ isEditing: true, isPreview: false })
     editor.setOption('readOnly', false)
     this.bindEvents()
   }
@@ -174,6 +174,8 @@ export default class SnippetItem extends React.Component {
     const { snippet } = this.props
     const { isEditing, isPreview } = this.state
     const languageIcon = getLanguageIcon(snippet.lang)
+    const isMarkdown =
+      snippet.lang === 'Markdown' || snippet.lang === 'GitHub Flavored Markdown'
     return (
       <div className="header">
         <div className="info">
@@ -201,7 +203,7 @@ export default class SnippetItem extends React.Component {
           )}
           {!isEditing &&
             !isPreview &&
-            snippet.lang === 'Markdown' && (
+            isMarkdown && (
             <div
               className="preview-btn"
               data-tip={i18n.__('Preview')}
@@ -212,7 +214,7 @@ export default class SnippetItem extends React.Component {
           )}
           {!isEditing &&
             isPreview &&
-            snippet.lang === 'Markdown' && (
+            isMarkdown && (
             <div
               className="unpreview-btn"
               data-tip={i18n.__('Exit preview')}
@@ -361,13 +363,15 @@ export default class SnippetItem extends React.Component {
   render () {
     const { isPreview } = this.state
     const { config, snippet } = this.props
+    const isMarkdown =
+      snippet.lang === 'Markdown' || snippet.lang === 'GitHub Flavored Markdown'
     return (
       <div className="snippet-item original">
         <ReactTooltip place="bottom" effect="solid" />
         {this.renderHeader()}
         {this.renderTagList()}
         {this.renderDescription()}
-        {snippet.lang === 'Markdown' && isPreview ? (
+        {isMarkdown && isPreview ? (
           <div style={{ height: '300px' }}>
             <MarkdownPreview markdown={snippet.value} />
           </div>

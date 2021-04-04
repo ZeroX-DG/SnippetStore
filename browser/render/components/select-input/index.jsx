@@ -21,7 +21,21 @@ class SelectInput extends React.PureComponent {
     })
   }
 
-  value () {
+  value (newValue) {
+    if (newValue) {
+      const { onChange } = this.props
+      const selected = this.filteredOptions().find(
+        option => option.label === newValue
+      )
+      if (!selected) return
+      this.setState({ selected, isFocus: false }, () => {
+        this.refs.input.value = selected.label
+        if (typeof onChange === 'function') {
+          onChange(selected)
+        }
+      })
+      return
+    }
     return this.state.selected
   }
 

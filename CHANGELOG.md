@@ -2,12 +2,36 @@
 
 Every notable changes in each version will be listed in this file.
 
-# 0.2.11 - Unreleased
+# 0.2.12
+
+## Features:
+
+- **Interface**: New Turkish translation by [@zbahadir](https://github.com/zbahadir)
+
+## Bugfixes:
+
+- **Interface**: Fixed link not open in default browser when clicked in markdown preview (Fixed [#40](https://github.com/ZeroX-DG/SnippetStore/issues/40)) ([4864b8b](https://github.com/ZeroX-DG/SnippetStore/commit/4864b8b))
+- **Interface**: Fixed can't preview github flavored markdown (Fixed [#39](https://github.com/ZeroX-DG/SnippetStore/issues/39))([9dec808](https://github.com/ZeroX-DG/SnippetStore/commit/9dec808))
+- **Interface**: Fixed MarkdownPreview not update when changing snippet (Fixed [#38](https://github.com/ZeroX-DG/SnippetStore/issues/38))([0d3ab7d](https://github.com/ZeroX-DG/SnippetStore/commit/0d3ab7d))
+- **Interface**: Fixed snippet not exiting preview mode when in edit mode (Fixed [#37](https://github.com/ZeroX-DG/SnippetStore/issues/37))([64b74cc](https://github.com/ZeroX-DG/SnippetStore/commit/64b74cc))
+- **Interface**: Fixed blank page when transfering snippet from vscode (Fixed [#49](https://github.com/ZeroX-DG/SnippetStore/issues/49))([052a8fc](https://github.com/ZeroX-DG/SnippetStore/commit/052a8fc))
+
+## Improvement
+
+- **Interface**: Improved UI for `list-and-detail` layout (Fixed [#43](https://github.com/ZeroX-DG/SnippetStore/issues/43))([c3e02ab](https://github.com/ZeroX-DG/SnippetStore/commit/c3e02ab))
+
+# 0.2.11
 
 ## Features:
 
 - **Interface**: Added input select for faster language picking in create snippet modal ([2e83a62](https://github.com/ZeroX-DG/SnippetStore/commit/2e83a62))
 - **Interface**: Added markdown preview for markdown snippets
+- **Interface**: Added about menu ([e298dfd](https://github.com/ZeroX-DG/SnippetStore/commit/e298dfd))
+- **Interface**: Added check for update in menu ([5f233cb](https://github.com/ZeroX-DG/SnippetStore/commit/5f233cb))
+
+## Bugfixes:
+
+- **Interface**: Used `Lato` font for tooltip in `list-and-details` layout. ([a7f8ff4](https://github.com/ZeroX-DG/SnippetStore/commit/a7f8ff4))
 
 ## Security
 
