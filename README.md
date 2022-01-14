@@ -3,6 +3,9 @@
 <i>:tada: A snippet management app for developers :rocket:</i>
 </p>
 <p align='center'>
+<b>:warning: This project is no longer maintained, see <a href='https://github.com/ZeroX-DG/SnippetStore/issues/74'>#74</a> :warning:</b>
+</p>
+<p align='center'>
   <a href='https://twitter.com/intent/tweet?text=Wow!&hashtags=SnippetStore&url=https%3A%2F%2Fgithub.com%2FZeroX-DG%2FSnippetStore'>
     <img src="https://img.shields.io/twitter/url/https/github.com/ZeroX-DG/SnippetStore.svg?style=for-the-badge" alt="twitter">
   </a>
